@@ -222,19 +222,40 @@ body .fire .logs:before {
   opacity: 0;
   max-width: 0;
 }
-
-.profile-wrapper {
-  width: 20rem;
-  height: 25rem;
+.slide-container-box {
   position: relative;
-  margin-bottom : 4rem
+}
+.sliderBox {
+  border: 1px solid red;
+  display: flex;
+  overflow: hidden;
+}
+.profile_box {
+  display: flex;
+  transform: translateX(-426px);
 }
 
-.profile{
+.profile-wrapper {
+  min-width: 426px;
+  min-height: 25rem;
   position: relative;
-  width: 100%;
-  height: 100%;
-  /*transform: translate(-50%, -50%);*/
+  //border: 1px solid blue;
+}
+@keyframes slidingToRight {
+  from {transform: translateX(-426px);}
+  to {transform: translateX(-852px);}
+}
+@keyframes slidingToLeft {
+  from {transform: translateX(-426px);}
+  to {transform: translateX(0);}  
+}
+.profile{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 20rem;
+  min-height: 90%;
+  transform: translate(-50%, -50%);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 5px 18px rgba(0,0,0,0.6);
@@ -265,7 +286,103 @@ body .fire .logs:before {
   transform: translateY(-75px);
   transition: all 0.9s;
 }
-
+@media only screen and (max-width: 1500px) {
+  .slide-container-box {
+    position: relative;
+    width: 852px;
+  }
+  .sliderBox {
+    display: flex;
+    overflow: hidden;
+    width: 852px;
+  }
+  .profile_box {
+    display: flex;
+    transform: translateX(-426px);
+  }
+}
+@media only screen and (max-width: 993px) {
+  .slide-container-box {
+    position: relative;
+    width: 426px;
+    margin: auto;
+  }
+  .sliderBox {
+    display: flex;
+    overflow: hidden;
+    width: 426px;
+  }
+  .profile_box {
+    display: flex;
+    transform: translateX(-426px);
+  }
+}
+@media only screen and (max-width: 450px) {
+  .slide-container-box {
+    position: relative;
+    width: 20rem;
+    margin: auto;
+  }
+  .sliderBox {
+    display: flex;
+    overflow: hidden;
+    width: 20rem;
+  }
+  .profile_box {
+    display: flex;
+    transform: translateX(-20rem);
+  }
+  .profile-wrapper {
+    min-width: 20rem;
+    min-height: 25rem;
+    position: relative;
+    //border: 1px solid blue;
+  }
+  .profile{
+    min-width: 20rem;
+  }
+  @keyframes slidingToRight {
+    from {transform: translateX(-20rem);}
+    to {transform: translateX(-40rem);}
+  }
+  @keyframes slidingToLeft {
+    from {transform: translateX(-20rem);}
+    to {transform: translateX(0);}  
+  }
+}
+@media only screen and (max-width: 360px) {
+  .slide-container-box {
+    position: relative;
+    width: 15rem;
+    margin: auto;
+  }
+  .sliderBox {
+    display: flex;
+    overflow: hidden;
+    width: 15rem;
+  }
+  .profile_box {
+    display: flex;
+    transform: translateX(-15rem);
+  }
+  .profile-wrapper {
+    min-width: 15rem;
+    min-height: 25rem;
+    position: relative;
+    //border: 1px solid blue;
+  }
+  .profile{
+    min-width: 15rem;
+  }
+  @keyframes slidingToRight {
+    from {transform: translateX(-15rem);}
+    to {transform: translateX(-30rem);}
+  }
+  @keyframes slidingToLeft {
+    from {transform: translateX(-15rem);}
+    to {transform: translateX(0);}  
+  }
+}
 /***** Social Icons ****/
 .social-icons {
   position : absolute;
@@ -421,11 +538,6 @@ label {
   transform : translate(40%, 0) rotate(15deg);
   width : 20rem;
 }
-.slider{
-  position: relative;
-  width: 1400px;
-  margin: 10rem auto;
-}
 
 .fas {
   position: absolute;
@@ -435,17 +547,16 @@ label {
   cursor: pointer;
   transition: .1s;
   z-index: 10;
+  top: 50%;
 }
 .fas:hover{
   color: #999;
 }
 .fas.fa-angle-left{
-  top: 45%;
-  left: -120px;
+  left: -60px;
 }
 .fas.fa-angle-right{
-  right: -140px;
-  top: 45%;
+  right: -60px;
 }
 
 .review-card{
@@ -501,4 +612,8 @@ label {
   box-sizing: border-box;
   padding : 1rem;
   padding-top: 0;
+}
+
+.slider .row {
+  display: flex;
 }
