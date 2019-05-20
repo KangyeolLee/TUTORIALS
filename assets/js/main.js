@@ -33,7 +33,20 @@ var container = document.querySelector('.row');
 var btnRight = document.querySelector('.fa-angle-right');
 var btnLeft = document.querySelector('.fa-angle-left');
 
+const bannerText = document.querySelector('#bannerText');
 
+document.addEventListener('DOMContentLoaded', function() {
+  window.onscroll = function() {
+    var scroll = window.scrollY;
+    if(scroll >= 30) {
+      bannerText.classList.remove('hidden');
+    } else {
+      bannerText.classList.add('hidden');
+    }
+  }
+});
+
+/*
 $(function() {
   var text = $(".bannerText");
   $(window).scroll(function() {
@@ -46,3 +59,4 @@ $(function() {
     }
   });
 });
+*/
