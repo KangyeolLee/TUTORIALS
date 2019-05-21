@@ -287,37 +287,31 @@ Card Effects in TabUI Contents
 }
 .sliderBox {
   border: 1px solid red;
-  display: flex;
+  position: relative;
   overflow: hidden;
 }
-.profile_box {
+.profile-box {
   display: flex;
-  transform: translateX(-426px);
+  border: 1px solid black;
 }
 .profile-wrapper {
-  min-width: 100%;
+  width: 100%;
+  min-width: 15rem;
   min-height: 25rem;
   position: relative;
   border: 1px solid blue;
-}
-@keyframes slidingToRight {
-  from {transform: translateX(-426px);}
-  to {transform: translateX(-852px);}
-}
-@keyframes slidingToLeft {
-  from {transform: translateX(-426px);}
-  to {transform: translateX(0);}  
 }
 .profile{
   position: absolute;
   top: 50%;
   left: 50%;
-  min-width: 20rem;
+  width: 100%;
+  max-width: 20rem;
+  min-width: 15rem;
   min-height: 90%;
   transform: translate(-50%, -50%);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 5px 18px rgba(0,0,0,0.6);
   cursor: pointer;
   transition: 0.5s;
 }
@@ -345,22 +339,24 @@ Card Effects in TabUI Contents
   transform: translateY(-75px);
   transition: all 0.9s;
 }
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 600px) {
+  /*
   .slide-container-box {
     position: relative;
     width: 852px;
   }
   .sliderBox {
-    display: flex;
-    overflow: hidden;
-    width: 852px;
+    display: block;
   }
-  .profile_box {
-    display: flex;
-    transform: translateX(-426px);
+  
+  .profile-box {
+    display: block;
+    float: left;
   }
+  */
 }
 @media only screen and (max-width: 993px) {
+  /*
   .slide-container-box {
     position: relative;
     width: 426px;
@@ -375,8 +371,10 @@ Card Effects in TabUI Contents
     display: flex;
     transform: translateX(-426px);
   }
+  */
 }
 @media only screen and (max-width: 450px) {
+  /*
   .slide-container-box {
     position: relative;
     width: 20rem;
@@ -408,8 +406,10 @@ Card Effects in TabUI Contents
     from {transform: translateX(-20rem);}
     to {transform: translateX(0);}  
   }
+  */
 }
 @media only screen and (max-width: 360px) {
+  /*
   .slide-container-box {
     position: relative;
     width: 15rem;
@@ -441,6 +441,27 @@ Card Effects in TabUI Contents
     from {transform: translateX(-15rem);}
     to {transform: translateX(0);}  
   }
+  */
+}
+/***** Slider Button ****/
+.fas {
+  position: absolute;
+  font-size : 50px;
+  color: black;
+  background: none;
+  cursor: pointer;
+  transition: .1s;
+  z-index: 10;
+  top: 50%;
+}
+.fas:hover{
+  color: #999;
+}
+.fas.fa-angle-left{
+  left: 10px;
+}
+.fas.fa-angle-right{
+  right: 10px;
 }
 /***** Social Icons ****/
 .social-icons {
@@ -451,7 +472,6 @@ Card Effects in TabUI Contents
   z-index: 3;
   display : flex;
 }
-
 .social-icons li{
   list-style: none;
 }
@@ -471,12 +491,10 @@ Card Effects in TabUI Contents
   transform: translateY(200px);
   opacity: 0;
 }
-
 .profile:hover .social-icons li a {
   transform: translateY(0px);
   opacity: 1;
 }
-
 .social-icons li a:hover{
   background: #000;
   transition: 0.2s;
@@ -484,7 +502,6 @@ Card Effects in TabUI Contents
 .social-icons li a:hover .fab{
   color: #fff;
 }
-
 .social-icons li a .fab{
   transition: 0.8s;
 }
@@ -492,7 +509,6 @@ Card Effects in TabUI Contents
   transform: rotateY(360deg);
   color: #fff;
 }
-
 .profile:hover li:nth-child(1) a{
   transition-delay: 0.1s;
 }
@@ -529,6 +545,7 @@ Card Effects in TabUI Contents
   font-weight: 300;
   display: block;
 }
+
 input{
   visibility: hidden;
 }
@@ -596,26 +613,6 @@ label {
   positon: absolute;
   transform : translate(40%, 0) rotate(15deg);
   width : 20rem;
-}
-
-.fas {
-  position: absolute;
-  font-size : 50px;
-  color: black;
-  background: none;
-  cursor: pointer;
-  transition: .1s;
-  z-index: 10;
-  top: 50%;
-}
-.fas:hover{
-  color: #999;
-}
-.fas.fa-angle-left{
-  left: -60px;
-}
-.fas.fa-angle-right{
-  right: -60px;
 }
 
 .review-card{
