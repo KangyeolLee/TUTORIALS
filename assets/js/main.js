@@ -26,7 +26,10 @@ const elemsTooltips = document.querySelectorAll('.tooltipped');
 const instanceTooltips = M.Tooltip.init(elemsTooltips);
 
 const elemsModals = document.querySelectorAll('.modal');
-const instacneModal = M.Modal.init(elemsModals);
+const instanceModal = M.Modal.init(elemsModals);
+
+const elemsSidenav = document.querySelectorAll('.sidenav');
+const instanceSidenav = M.Sidenav.init(elemsSidenav);
 
 var countCard = document.querySelectorAll('.card-wrapper').length;
 var container = document.querySelector('.row');
