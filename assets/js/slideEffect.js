@@ -9,6 +9,11 @@ var direction;
 document.addEventListener('DOMContentLoaded', function() {
     infiniteSlider(allProfiles.length);
 
+    window.addEventListener('resize', function() {
+        var currentWidth = document.querySelector('.profile-box .col');
+        arrangeSlider(currentWidth);
+    })
+
     sliding_btnLeft.addEventListener('click', function() {
         profileBox.style.animation = 'slidingToLeft .6s forwards';
         direction = -1;
