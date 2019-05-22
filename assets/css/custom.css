@@ -286,20 +286,20 @@ Card Effects in TabUI Contents
   position: relative;
 }
 .sliderBox {
-  border: 1px solid red;
   position: relative;
   overflow: hidden;
 }
 .profile-box {
   display: flex;
-  border: 1px solid black;
+}
+.profile-box .col {
+  flex: none;
 }
 .profile-wrapper {
   width: 100%;
-  min-width: 15rem;
+  min-width: 17rem;
   min-height: 25rem;
   position: relative;
-  border: 1px solid blue;
 }
 .profile{
   position: absolute;
