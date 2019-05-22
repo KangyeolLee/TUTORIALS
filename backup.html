@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!-- JQuery PlugIn added -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+
+      <!-- font awesome -->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+      crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+      <link rel="stylesheet" href="assets/css/custom.css">
+      <link rel="stylesheet" href="assets/css/materialize.css">
+      <link rel="stylesheet" href="assets/css/fonts.css">
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+
+      <title>Until Burnout</title>
+      <style>
+        header{
+          background-color : white;
+          background-size : cover;
+          background-position : center;
+          min-height : 700px;
+        }
+        .section{
+          padding-top: 4vw;
+          padding-bottom : 4vw;
+        }
+        .tabs .indicator{
+          background-color: black;
+        }
+        .tabs .tab a:focus, .tabs .tab a:focus.active{
+          background: transparent;
+        }
+        @media screen and (max-width: 670px){
+          header{
+            min-height : 500px;
+          }
+        }
+      </style>
+    </head>
+
+    <body>
+      <!-- DROPDOWN -->
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a href="https://www.instagram.com/u.bo_official/" class = "black-text"><i class="fab fa-instagram "></i></a></li>
+        <li><a href="https://www.facebook.com/%EB%AA%A8%EB%9E%8C%EB%A7%88%EB%A3%A8-970537829959858/" class = "black-text">
+          <i class="fab fa-facebook-square"></i></a></li>
+        <li><a href="https://blog.naver.com/untilburnout" class = "black-text"><i class="fab fa-blogger-b"></i></a></li>
+      </ul>
+
+      <header>
+        <!-- navbar -->
+        <div class="navbar-fixed">
+        <nav style = "padding : 0.5rem; height :90px; background-color : rgba(255,255,255,0.5)"class="nav-wrapper">
+            <div class="fire" style = "width:0 height:0">
+                <div class="flames">
+                  <div class="flame"></div>
+                  <div class="flame"></div>
+                  <div class="flame"></div>
+                  <div class="flame"></div>
+                </div>
+               <div class="logs"></div>
+            </div>
+            <!-- <a href="" style = "left : 7rem; font-size : 3.5rem" class="brand-logo left black-text text-lighten-4">Until Burnout</a> -->
+            <ul id="nav-mobile" class = "right hide-on-med-and-down">
+              <li><a href="#About" style = "font-size : 1.5rem" class="black-text">About</a></li>
+              <li><a href="#Programs"  style = "font-size : 1.5rem" class="black-text">Programs</a></li>
+              <li><a href="#Contact"  style = "font-size : 1.5rem" class="black-text">Contact</a></li>
+              <li><a href="https://www.instagram.com/u.bo_official/" class = "tooltipped btn-floating btn-small black darken-4" data-tooltip="This is Instagram"><i class="fab fa-instagram "></i></a></li>
+              <li><a href="https://www.facebook.com/%EB%AA%A8%EB%9E%8C%EB%A7%88%EB%A3%A8-970537829959858/" class = "tooltipped btn-floating btn-small black darken-4" data-tooltip="This is Facebook">
+                <i class="fab fa-facebook-square"></i></a></li>
+              <li><a href="https://blog.naver.com/untilburnout" class = "tooltipped btn-floating btn-small black darken-4" data-tooltip="This is Blog"><i class="fab fa-blogger-b"></i></a></li>
+            </ul>
+            <ul id="nav-mobile" class="right hide-on-large-only">
+              <li><a href="#" class = "dropdown-trigger btn-flat" data-target = "dropdown1"><i class="material-icons large right">menu</i></a></li>
+            </ul>
+          </div>
+        </nav>
+        </div>
+
+          <ul id="bannerText" class="hidden hide-on-small-only">
+            <li>U</li>
+            <li class="ghost">n</li>
+            <li class="ghost">t</li>
+            <li class="ghost">i</li>
+            <li class="ghost">l</li>
+            <li class="spaced">B</li>
+            <li class="ghost">u</li>
+            <li class="ghost">r</li>
+            <li class="ghost">n</li>
+            <li>o</li>
+            <li class="ghost">u</li>
+            <li class="ghost">t</li>
+          </ul>
+          <ul class="bannerText hide-on-med-and-up">
+            <li>U</li>
+            <li>B</li>
+            <li>O</li>
+          </ul>
+
+        <!-- <div class="threeD">
+          Until Burnout
+        </div>-->
+      </header>
+      <!-- 소개글 -->
+
+      <section class="container scrollspy" id="About">
+        <div class="cotainer">
+          <h3 class="jejumyeongjo center-align">Until Burnout은</h3>
+          <h5 class="jejumyeongjo center-align">불편한 점을이어 선을 베푸는 기업</h5>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="row">
+          <!--
+          <div class="col l12 center-align">
+          <input type="radio" name="choice" id="spaces" checked="checked" />
+          <input type="radio" name="choice" id="tabs" />
+          <label for="tabs"></label><label for="spaces"></label>
+          <div class="intro-card">
+            <div class="intro-card__content"> 불편한 점을 이어 나온 선을 나누다</div>
+            <footer class="intro-card__footer"><img src=""http://blog.codepen.io/wp-content/uploads/2012/06/Button-White-Small.png"" alt=""><span>Cards Against Developers</span></footer>
+          </div>
+          <div class="intro-card intro-card--answer intro-card--tabs">
+            <div class="intro-card__content">부모 모임</div>
+            <footer class="intro-card__footer"><img src="http://blog.codepen.io/wp-content/uploads/2012/06/Button-Black-Small.png" alt=""><span>Cards Against Developers</span></footer>
+          </div>
+          <div class="intro-card intro-card--answer intro-card--spaces">
+            <div class="intro-card__content">학생 모임</div>
+            <footer class="intro-card__footer"><img src="http://blog.codepen.io/wp-content/uploads/2012/06/Button-Black-Small.png" alt=""><span>Cards Against Developers</span></footer>
+          </div>
+          </div>
+        -->
+
+          <div class="col s12 l4 pull-l2">
+            <h3 class="jejumyeongjo center-align">청소년</h3>
+            <br>
+            <h5 class="jejumyeongjo center-align underlined underlined--thick">청소년을 위한 모임입니다.</h5>
+            <p class="jejumyeongjo">하늘 천 땅지 검을현 누를황 아브라카타브라 울랄라세션 버스커버스커 봄바람 휘날리면 흩날리는 벚꽃잎에 울려퍼질 이거리를 둘이 걸어요 별빛이 내린다 샤라랄라랄랄랄 샤라라라라랄라라랄 아무내용 집어넣기 테스트용입니다. 우와 의미없는 문장들이다 읽는건 시간버리는 일인것만 같아.</p>
+          </div>
+          <div class="col s12 l4">
+            <h3 class="jejumyeongjo center-align">부모</h3>
+            <br>
+            <h5 class="jejumyeongjo center-align underlined underlined--thick">부모를 위한 모임입니다.</h5>
+            <p class="jejumyeong
+            +-jo">하늘 천 땅지 검을현 누를황 아브라카타브라 울랄라세션 버스커버스커 봄바람 휘날리면 흩날리는 벚꽃잎에 울려퍼질 이거리를 둘이 걸어요 별빛이 내린다 샤라랄라랄랄랄 샤라라라라랄라라랄 아무내용 집어넣기 테스트용입니다. 우와 의미없는 문장들이다 읽는건 시간버리는 일인것만 같아.</p>
+          </div>
+          <div class="col s12 l4 push-l2">
+            <h3 class="jejumyeongjo center-align">아무나</h3>
+            <br>
+            <h5 class="jejumyeongjo center-align underlined underlined--thick">아무나를 위한 모임입니다.</h5>
+            <p class="jejumyeongjo">하늘 천 땅지 검을현 누를황 아브라카타브라 울랄라세션 버스커버스커 봄바람 휘날리면 흩날리는 벚꽃잎에 울려퍼질 이거리를 둘이 걸어요 별빛이 내린다 샤라랄라랄랄랄 샤라라라라랄라라랄 아무내용 집어넣기 테스트용입니다. 우와 의미없는 문장들이다 읽는건 시간버리는 일인것만 같아.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="divider"></div>
+      <!-- 프로그램 영역 -->
+      <section class="container scrollspy nanum" id="Programs">
+        <div class="row">
+        <div class="col s6"></div>
+        <ul class="tabs">
+          <li class="tab col s6">
+            <a href="#parents" class="nanum black-text">모람마루</a>
+          </li>
+          <li class="tab col s6">
+            <a href="#children" class="nanum black-text">자람마루</a>
+          </li>
+        </ul>
+        </div>
+        </div>
+        <div class="col s12" id="parents">
+          <div class="row">
+            <div class="col l6 pull-l1">
+              <div class="card introducingCard" style= "background-color : rgb(242, 225, 195)">
+                <div class="card-image">
+                  <img src="assets/img/doorbanner.jpeg" class="responsive-img"></a>
+                </div>
+                <div class="card-text">
+                  <div class="card-text-wrapper">
+                    <h6 class="jejumyeongjo card-text-dek">모람마루</h6>
+                    <h3 class="card-text-title jejumyeongjo">우리아들 방문여는 법</h3>
+                    <h3 class="jejumyeong red-text">진행 완료</h3>
+                    <br><br><br>
+                    <a href="#modal2" class="waves-effect waves-light btn modal-trigger black"><i class="material-icons left">add</i>More</a>
+                  </div>
+                </div>
+              </div>
+              <div class="modal modal-fixed-footer" id="modal2">
+                <div class="modal-content">
+                  <div class="row">
+                    <div class="col">
+                      <img src="assets/img/poster2.png" class="responsive-img">
+                      <p class="hangeulnuri flow-text">대학 갈 때가 되었나 봄 </p>
+                      <div class="divider"></div>
+                      <p class="goyang">모임 소개</p>
+                      <p class="jejumyeongjo">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고
+                      주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <a href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn yellow indigo-text disabled"><i class="material-icons left">send</i>신청마감</a>
+                </div>
+              </div>
+            </div>
+            <div class="col l6 push-l1">
+              <div class="card">
+                <div class="card-image">
+                  <img src="assets/img/choibanner.jpeg" class="hoverable">
+                </div>
+                <div class="card-text">
+                  <div class="card-text-wrapper">
+                    <h6 class="jejumyeongjo card-text-dek white-text">최영인 작가</h6>
+                    <h3 class="card-text-title jejumyeongjo white-text">사춘기 자녀와 통하기</h3>
+                    <br><br><br>
+                    <a href="#modal3" class="waves-effect waves-light btn modal-trigger white black-text"><i class="material-icons left">add</i>More</a>
+                  </div>
+                </div>
+              </div>
+              <div class="modal modal-fixed-footer" id="modal3">
+                <div class="modal-content">
+                  <div class="row">
+                    <div class="col">
+                      <img src="assets/img/poster5.jpeg" alt="" class="responsive-img">
+                      <p class="hangeulnuri flow-text">사춘기 자녀와 통하기 </p>
+                      <div class="divider"></div>
+                      <p class="goyang">모임 소개</p>
+                      <p class="jejumyeongjo">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고
+                      주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
+                      <div class="divider"></div>
+                      <p class="goyang">연사 소개</p>
+                      <p class="jejumyeong">최영인</p>
+                      <div class="divider"></div>
+                      <p class="goyang">장소 및 시간</p>
+                      <p class="jejumyongjo">장소 : 양재역 인근</p>
+                      <p class="jejumyongjo">시간 : 5/25 </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <a href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn yellow indigo-text"><i class="material-icons left">send</i>신청하기</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="col s12" id="children">
+        <div class="row">
+          <div class="col l6 pull-l1">
+            <div class="card" style ="background-color : rgb(38, 56, 79)">
+              <div class="card-image">
+                <img src="assets/img/hasoyeonbanner.jpeg" class="hoverable responsive-img">
+              </div>
+              <div class="card-text">
+                <div class="card-text-wrapper">
+                  <h6 class="jejumyeongjo card-text-dek white-text">언틸번아웃</h6>
+                  <h3 class="jejumyeongjo card-text-title white-text">하소연 해우소</h3>
+                  <br><br><br>
+                  <a href="#modal1" class="waves-effect waves-light btn modal-trigger white black-text"><i class="material-icons left">add</i>More</a>
+                </div>
+              </div>
+            </div>
+            <div class="modal modal-fixed-footer" id="modal1">
+              <div class="modal-content">
+                <div class="row">
+                  <div class="col">
+                    <img src="assets/img/poster4.png" class="responsive-img">
+                    <p class="hangeulnuri flow-text">대학 갈 때가 되었나 봄 </p>
+                    <div class="divider"></div>
+                    <p class="goyang">모임 소개</p>
+                    <p class="jejumyeongjo">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고
+                    주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn indigo yellow-text"><i class="material-icons left">send</i>신청하기</a>
+              </div>
+            </div>
+          </div>
+          <div class="col l6 push-l1">
+            <div class="card" style = "background-color : rgb(194, 223, 144)">
+              <div class="card-image">
+                <img src="assets/img/collegebanner.jpeg" class="hoverable">
+              </div>
+              <div class="card-text">
+                <div class="card-text-wrapper">
+                  <h6 class="jejumyeongjo card-text-dek">Until Burnout</h6>
+                  <h3 class="jejumyeongjo card-text-title">대학 갈 때가 되었나 봄</h3>
+                  <br><br><br>
+                  <a href="#modal4" class="waves-effect waves-light btn modal-trigger black"><i class="material-icons left">add</i>More</a>
+                </div>
+              </div>
+            </div>
+            <div class="modal modal-fixed-footer" id="modal4">
+              <div class="modal-content">
+                <div class="row">
+                  <div class="col">
+                    <img src="assets/img/poster3.jpg" class="responsive-img">
+                    <p class="hangeulnuri flow-text">대학 갈 때가 되었나 봄 </p>
+                    <div class="divider"></div>
+                    <p class="goyang">모임 소개</p>
+                    <p class="jejumyeongjo">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고
+                    주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn green red-text"><i class="material-icons left">send</i>신청하기</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <div class="divider"></div>
+    <!-- 리뷰 -->
+    <section class="container">
+      <h3 class="jejumyeongjo center-align">모임/강연 후기</h3>
+      <br><br><br><br>
+      <div class="row">
+        <div class="col s12 l6 pull-l1">
+          <div class="review-card">
+            <div class="user-card">
+              <img src="assets/img/misun.jpeg" alt="" class="responsive-img circle">
+              <div class="user-title review-center">
+                진호맘
+              </div>
+            </div>
+
+            <div class="general">
+              <h5 class="center-align underlined underlined--thick">"우리아들 방문여는 법"</h5>
+              <p class="jejumyeongjo">신선한 모임이고 많은 도움이 되었습니다.
+              이런 기회가 많았으면 좋겠고 어른이고 학부모인 입장에서 대화를 나누고 눈높이를 맞춰서 공통주제를 가지고 이야기를 나눌 수 있어서 좋았습니다.
+              다음에는 부부나 아이와 함께 참여하는 시간이 있었으면 좋겠습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+      <!-- 함께하는 사람들 -->
+    <div class="divider"></div>
+      <section class="section container scrollspy" id="Contact" style = >
+        <h3 class="jejumyeongjo center-align">함께 하는 사람들</h3>
+        <br><br><br><br>
+
+        
+        <div class='slide-container-box'>  
+          <div class="fas fa-angle-left"></div>
+          <div class="fas fa-angle-right"></div>
+        <div class="row sliderBox" style = 'position: relative; border: 1px solid black;'>
+          <!--<div class="sliderBox">-->
+            <div class="profile_box">
+              <div class="profile-wrapper" href ="#two!">
+                <div class="profile">
+                  <div class="profile-image">
+                    <img src="assets/img/kg.jpg">
+                  </div>
+                  <ul class="social-icons">
+                    <li>
+                      <a href="#!"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-dribbble"></i></a></li>
+                  </ul>
+                  <div class="details">
+                    <p class="profile-name jejumyeongjo">최강열</p>
+                    <p class="job-title center-align jejumyeongjo"> 프로 Developer</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="profile-wrapper" href ="#one!">
+                  <div class="profile">
+                    <div class="profile-image">
+                      <img src="assets/img/choi.jpg">
+                    </div>
+                    <ul class="social-icons">
+                      <li>
+                        <a href="#!"><i class="fab fa-facebook-f"></i></a>
+                      </li>
+                      <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                      <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                      <li><a href="#!"><i class="fab fa-dribbble"></i></a></li>
+                    </ul>
+                    <div class="details">
+                      <p class = "profile-name jejumyeongjo"> 김영인 </p>
+                      <p class = "job-title center-align jejumyeongjo">작가</p>
+                    </div>
+                  </div>
+                </div>
+
+              <div class="profile-wrapper">
+                  <div class="profile">
+                    <div class="profile-image">
+                      <img src="assets/img/terry.jpeg" style = "transform: rotateZ(270deg)">
+                    </div>
+                    <ul class="social-icons">
+                      <li>
+                        <a href="#!"><i class="fab fa-facebook-f"></i></a>
+                      </li>
+                      <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                      <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                      <li><a href="#!"><i class="fab fa-dribbble"></i></a></li>
+                    </ul>
+                    <div class="details">
+                      <p class="profile-name jejumyeongjo">이한결</p>
+                      <p class="job-title center-align jejumyeongjo"> 프로 Developer</p>
+                    </div>
+                  </div>
+                </div>
+
+              <div class="profile-wrapper" href ="#four!">
+                <div class="profile">
+                  <div class="profile-image">
+                    <img src="assets/img/bokkrice.jpeg" style = 'transform: rotateX(180deg)'>
+                  </div>
+                  <ul class="social-icons">
+                    <li>
+                      <a href="#!"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-dribbble"></i></a></li>
+                  </ul>
+                  <div class="details">
+                    <p class="profile-name jejumyeongjo">이승복</p>
+                    <p class="job-title center-align jejumyeongjo">가만튀 전문가</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!--</div>-->
+        </div>
+        </div>
+
+      </section>
+
+      <!-- footer -->
+      <div class="divider"></div>
+      <footer class="page-footer black-text grey lighten-3 jejumyeongjo">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 l6 pull-l1">
+              <p>이용약관</p>
+              <p>개인정보 처리방침</p>
+              <a href="#!"><p>사업자정보확인</p></a>
+              <p>입금정보 KB국민은행 </p>
+            </div>
+            <div class="col s12 l6 push-l1">
+              <p>Contact</p>
+              <p>대표번호 : 010-5050-6912</p>
+              <p>이메일 : untilburnout@naver.com</p>
+              <p>오시는 곳 : 서울시 강남구 언주로98길 25, 청담빌딩 5층</p>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="row">
+            <div class="col s12 l6">
+              dsafasf
+            </div>
+          </div>
+        </div>
+      </footer>
+
+
+
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="assets/js/main.js"></script>
+      <script src="assets/js/sliding.js"></script>
+    </body>
+  </html>
