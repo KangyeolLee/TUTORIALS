@@ -1,35 +1,47 @@
-const sliderBox = document.querySelector('.sliderBox');
-const profileBox = document.querySelector('.profile-box');
-const allProfiles = document.querySelectorAll('.profile-box .col');
-const sliding_btnLeft = document.querySelector('.fas.fa-angle-left');
-const sliding_btnRight = document.querySelector('.fas.fa-angle-right');
-const sibling = profileBox.cloneNode(true);
+const sliderOutline = document.querySelectorAll('.slider-outline');
+const sliderBox = document.querySelectorAll('.slider-box');
+const allSliders = document.querySelectorAll('.slider-box .col');
+const sliding_btnLeft = document.querySelectorAll('.fas.fa-angle-left');
+const sliding_btnRight = document.querySelectorAll('.fas.fa-angle-right');
+//const sibling = sliderBox.cloneNode(true);
 var direction;
 
 document.addEventListener('DOMContentLoaded', function() {
-    infiniteSlider(allProfiles.length);
+    sliderBox.forEach((v, i) => {
+        var len = v.childElementCount;
+        infiniteSlider(len, v, i);
+    });
 
     window.addEventListener('resize', function() {
-        var currentWidth = document.querySelector('.profile-box .col');
-        arrangeSlider(currentWidth);
+        sliderBox.forEach((v) => {
+            arrangeSlider(v);
+        });
     })
 
-    sliding_btnLeft.addEventListener('click', function() {
-        profileBox.style.animation = 'slidingToLeft .6s forwards';
-        direction = -1;
+    sliding_btnLeft.forEach((v)=> {
+        v.addEventListener('click', function() {
+            var curSliderBox = v.parentElement.querySelector('.slider-box');
+            curSliderBox.style.animation = 'slidingToLeft'+ curSliderBox.id +' .6s forwards';
+            direction = -1;
+        });
     });
-    sliding_btnRight.addEventListener('click', function() {
-        profileBox.style.animation = 'slidingToRight .6s forwards';
-        direction = 1;
+    sliding_btnRight.forEach((v)=> {
+        v.addEventListener('click', function() {
+            var curSliderBox = v.parentElement.querySelector('.slider-box');
+            curSliderBox.style.animation = 'slidingToRight'+ curSliderBox.id +' .6s forwards';
+            direction = 1;
+        });
     });
-    profileBox.addEventListener('animationend', function() {
-        if(direction === 1) {
-            profileBox.appendChild(profileBox.firstElementChild);
-            profileBox.style.animation = 'none';
-        } else {
-            profileBox.prepend(profileBox.lastElementChild);
-            profileBox.style.animation = 'none';
-        }
+    sliderBox.forEach((v) => {
+        v.addEventListener('animationend', function() {
+            if(direction === 1) {
+                v.appendChild(v.firstElementChild);
+                v.style.animation = 'none';
+            } else {
+                v.prepend(v.lastElementChild);
+                v.style.animation = 'none';
+            }
+        });
     });
 });
 
@@ -46,23 +58,25 @@ function insertStyleSheetRule(ruleText) {
     sheet.insertRule(ruleText, sheet.rules ? sheet.rules.length : sheet.cssRules.length);
 }
 /* Infinitize the Slider */
-function infiniteSlider(amount) {
+function infiniteSlider(amount, parentElement, index) {
     if(amount < 3) {
-        sliding_btnLeft.style.display = 'none';
-        sliding_btnRight.style.display = 'none';
-        sliderBox.style.justifyContent = 'center';
+        sliding_btnLeft[index].style.display = 'none';
+        sliding_btnRight[index].style.display = 'none';
+        sliderOutline[index].style.justifyContent = 'center';
     } else if(amount < 5) {
-        for(let i = 0; i < allProfiles.length; i++) {
-            profileBox.appendChild(sibling.children[0]);
+        for(let i = 0; i < amount; i++) {
+            sliderBox.forEach((v) => {
+                v.appendChild(v.cloneNode(true).children[i]);
+            });
         }
-        arrangeSlider(allProfiles[0]);
+        arrangeSlider(parentElement);
     } else {
-        arrangeSlider(allProfiles[0]);
+        arrangeSlider(parentElement);
     }
 }
 /* Arrange the Slider On Screen Size */
-function arrangeSlider(curWidth) {
-    profileBox.style.transform = 'translateX('+ -(curWidth.offsetWidth) +'px)';
-    insertStyleSheetRule("@keyframes slidingToRight { 0% { transform: translateX("+ -(curWidth.offsetWidth) +"px); } 100% { transform: translateX("+ -(curWidth.offsetWidth * 2) +"px); } }");
-    insertStyleSheetRule("@keyframes slidingToLeft { 0% { transform: translateX("+ -(curWidth.offsetWidth) +"px); } 100% { transform: translateX(0); } }");      
+function arrangeSlider(curSlider) {
+    curSlider.style.transform = 'translateX('+ -(curSlider.firstElementChild.offsetWidth) +'px)';
+    insertStyleSheetRule("@keyframes slidingToRight"+ curSlider.id +" { 0% { transform: translateX("+ -(curSlider.firstElementChild.offsetWidth) +"px); } 100% { transform: translateX("+ -(curSlider.firstElementChild.offsetWidth * 2) +"px); } }");
+    insertStyleSheetRule("@keyframes slidingToLeft"+ curSlider.id +" { 0% { transform: translateX("+ -(curSlider.firstElementChild.offsetWidth) +"px); } 100% { transform: translateX(0); } }");      
 }

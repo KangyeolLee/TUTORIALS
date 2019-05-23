@@ -236,17 +236,14 @@ Card Effects in TabUI Contents
 /******************************
 ------ Slider Css Option ------
 *******************************/
-.slide-container-box {
-  position: relative;
-}
-.sliderBox {
+.slider-outline {
   position: relative;
   overflow: hidden;
 }
-.profile-box {
+.slider-box {
   display: flex;
 }
-.profile-box .col {
+.slider-box .col {
   flex: none;
 }
 .profile-wrapper {
@@ -303,6 +300,7 @@ Card Effects in TabUI Contents
   transition: .1s;
   z-index: 10;
   top: 50%;
+  transform: translateY(-50%);
 }
 .fas:hover{
   color: #999;
