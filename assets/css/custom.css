@@ -246,6 +246,31 @@ Card Effects in TabUI Contents
 .slider-box .col {
   flex: none;
 }
+/***** Slider Button ****/
+.fas {
+  position: absolute;
+  font-size : 50px;
+  color: black;
+  //background-color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: .1s;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.fas:hover{
+  color: #999;
+}
+.fas.fa-angle-left{
+  left: 0;
+}
+.fas.fa-angle-right{
+  right: 0;
+}
+
+/*****************************
+----- Profile Css Option -----
+*****************************/
 .profile-wrapper {
   width: 100%;
   min-width: 17rem;
@@ -285,31 +310,9 @@ Card Effects in TabUI Contents
   opacity: 0.4;
   transition: 0.5s;
 }
-
 .profile:hover .profile-image{
   transform: translateY(-75px);
   transition: all 0.9s;
-}
-/***** Slider Button ****/
-.fas {
-  position: absolute;
-  font-size : 50px;
-  color: black;
-  background-color: rgba(255,255,255,0.4);
-  cursor: pointer;
-  transition: .1s;
-  z-index: 10;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.fas:hover{
-  color: #999;
-}
-.fas.fa-angle-left{
-  left: 0;
-}
-.fas.fa-angle-right{
-  right: 0;
 }
 /***** Social Icons ****/
 .social-icons {
