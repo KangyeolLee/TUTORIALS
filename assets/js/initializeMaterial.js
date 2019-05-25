@@ -20,7 +20,9 @@ const elemsDatepicker = document.querySelectorAll('.datepicker');
 const instanceDatepicker = M.Datepicker.init(elemsDatepicker);
 
 const elemsScrollspy = document.querySelectorAll('.scrollspy');
-const instanceScrollspy = M.ScrollSpy.init(elemsScrollspy);
+const instanceScrollspy = M.ScrollSpy.init(elemsScrollspy, {
+  scrollOffset: 0,
+});
 
 const elemsTooltips = document.querySelectorAll('.tooltipped');
 const instanceTooltips = M.Tooltip.init(elemsTooltips);
@@ -32,22 +34,16 @@ const elemsSidenav = document.querySelectorAll('.sidenav');
 const instanceSidenav = M.Sidenav.init(elemsSidenav);
 const pluginSidenav = M.Sidenav.getInstance(elemsSidenav[0]);
 
-const bannerText = document.querySelector('#bannerText');
 const sideNavbarBtns = document.querySelectorAll('#slide-out li a');
 
 document.addEventListener('DOMContentLoaded', function() {
-  window.onscroll = function() {
-    var scroll = window.scrollY;
-    if(scroll >= 30) {
-      bannerText.classList.remove('hidden');
-    } else {
-      bannerText.classList.add('hidden');
-    }
-  }
   /* Close the Sidebar on Click */
   sideNavbarBtns.forEach((v)=> {
     v.addEventListener('click', function() {
-      pluginSidenav.close();
+      var scrollSpyId = v.getAttribute('name');
+      var scrollPoint = document.querySelector(scrollSpyId);
+      scrollPoint.scrollIntoView({behavior:'smooth'});
+      pluginSidenav.close();  
     });
   });
 });

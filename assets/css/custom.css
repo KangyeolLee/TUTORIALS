@@ -1,3 +1,16 @@
+/*******************************
+------ OnePage Css Option ------
+*******************************/
+.onePage-section {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden; /* Test Option in Mobile */
+}
+.onePage-section .container {
+  border: 1px solid black;
+}
+
 /******************************
 ------- Fire Css Option -------
 *******************************/
@@ -149,12 +162,11 @@
 }
 
 /******************************
-bannerText Scrolling CSS Option
+BannerText Scrolling CSS Option
 *******************************/
 #bannerText {
   display: flex;
   justify-content: center;
-  margin-top: 10rem;
   list-style: none;
 }
 #bannerText li {
@@ -314,7 +326,7 @@ Card Effects in TabUI Contents
   transform: translateY(-75px);
   transition: all 0.9s;
 }
-/***** Social Icons ****/
+/***** Social Icons *****/
 .social-icons {
   position : absolute;
   top: 50%;
@@ -342,6 +354,7 @@ Card Effects in TabUI Contents
   transform: translateY(200px);
   opacity: 0;
 }
+/***** hover Effects *****/
 .profile:hover .social-icons li a {
   transform: translateY(0px);
   opacity: 1;
@@ -372,7 +385,7 @@ Card Effects in TabUI Contents
 .profile:hover li:nth-child(4) a{
   transition-delay: 0.4s;
 }
-/***** Personal Details ****/
+/***** Personal Details *****/
 .details{
   position : absolute;
   bottom: 0;

@@ -3462,7 +3462,6 @@ section.container{
 .section {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  height: 100vh;
 }
 
 .section.no-pad {
@@ -4472,7 +4471,7 @@ nav .input-field label.active i {
 }
 
 .navbar-fixed {
-  position: relative;
+  position: absolute;
   height: 56px;
   z-index: 997;
 }
