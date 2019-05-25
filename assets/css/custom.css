@@ -1,3 +1,13 @@
+/******************************
+--- Loading Page Css Option ---
+*******************************/
+.loading-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 /*******************************
 ------ OnePage Css Option ------
 *******************************/

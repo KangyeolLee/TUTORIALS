@@ -15,13 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('animation delayed...');
       return;
     }
-  
     if (delta < 0) {
       upScroll();
     } else {
       downScroll();
     }
-  
     lastAnimation = timeNow;
   }) 
 
