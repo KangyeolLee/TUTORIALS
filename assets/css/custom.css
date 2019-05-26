@@ -42,25 +42,25 @@ main {
 .preloader-bigSquare {
   position: relative;
   display: inline-block;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   overflow: hidden;
   transform-origin: bottom left;
   animation: schrink 1s linear infinite;
 }
 .square {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   background: #0AE;
 }
 .square.first {
   left: 0px;
-  top: 20px;
+  top: 25px;
 }
 .square.second {
-  left: 20px;
-  top: 20px;
+  left: 25px;
+  top: 25px;
   animation: drop2 1s linear infinite;
 }
 .square.third {
@@ -69,7 +69,7 @@ main {
   animation: drop3 1s linear infinite;
 }
 .square.fourth {
-  left: 20px;
+  left: 25px;
   top: 0px;
   animation: drop4 1s linear infinite;
 }
