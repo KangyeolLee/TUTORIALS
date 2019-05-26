@@ -284,7 +284,7 @@ main {
 }
 
 /******************************
-BannerText Scrolling CSS Option
+---- BannerText CSS Option ----
 *******************************/
 #bannerText {
   display: flex;
@@ -297,7 +297,7 @@ BannerText Scrolling CSS Option
   font-size: 5rem;
   color: black;
   opacity: 1;
-  transition: all 0.5s ease-in-out;
+  transition: all 1.5s ease-in-out;
   max-width: 5rem;
 }
 #bannerText.hidden li.spaced {
@@ -310,7 +310,8 @@ BannerText Scrolling CSS Option
   opacity: 0;
   max-width: 0;
 }
-@media only screen and (max-width:600px) {  /* bannerText in Mobile CSS Option */
+/* bannerText in Mobile CSS Option */
+@media only screen and (max-width:600px) {  
   #bannerText {
     margin-top: 3rem;
   }

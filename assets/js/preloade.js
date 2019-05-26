@@ -16,6 +16,7 @@ function fadeOut(element) {
         this.style.display = 'none';
         fadeIn(fixedNavbar);
         fadeIn(firstPage);
+        presentBanner();
     });
 }
 
@@ -25,4 +26,8 @@ function noneScreen(element) {
 
 function fadeIn(element) {
     element.style.animation = 'fadeIn 1.5s forwards';
+}
+
+function presentBanner() {
+    firstPage.querySelector('#bannerText').classList.remove('hidden');
 }
