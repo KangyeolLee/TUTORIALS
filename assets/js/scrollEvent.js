@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
       index : i
     }
   });
-
-  document.addEventListener('wheel', event => {
+  /* Mouse Wheel Event Handler */
+  main.addEventListener('wheel', event => {
     var delta = event.wheelDelta;
     var timeNow = new Date().getTime();
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     lastAnimation = timeNow;
   });
-
+  /* Touch on Screen Event Handler */
   main.addEventListener('touchstart', function(e) {
     pageY1 = e.targetTouches[0].pageY;
   });
@@ -52,30 +52,40 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function downScroll() {
-  if(index > 10) return;
-  if(index < 5 && index >= 0) index++;
+  if(document.querySelector('.modal-overlay') !== null) return;
+  if(index === onePage_section.length - 1) return;
+  //if(index < 5 && index >= 0) index++;
   
   onePage_section.forEach((section, i) => {
     if (i === index) {
+      section.style.transform = 'translateY(-100%)';
+      /*
       section.scrollIntoView({behavior: "smooth"});
       setTimeout(function() {
         section.style.animation = 'fadeIn 1.5s forwards';
       }, 500);
+      */
     }
-  })
+  });
+  if(index < 5 && index >= 0) index++;
 }
 function upScroll() {
-  if(index < 1) return;
-  if(index < 5 && index >= 0) index--;
+  //if(index < 1) return;
+  if(document.querySelector('.modal-overlay') !== null) return;
   
   onePage_section.forEach((section, i) => {
     if (i === index) {
+      if(section.previousElementSibling === null) return;
+      section.previousElementSibling.style.transform = 'translateY(0px)';
+      /*
       section.scrollIntoView({behavior: "smooth"});
       setTimeout(function() {
         section.style.animation = 'fadeIn 1.5s forwards';
       }, 800);
+      */
     }
   });
+  if(index <= 5 && index > 0) index--;
 }
 
 function touchScrollMove(event) {
@@ -85,20 +95,22 @@ function touchScrollMove(event) {
     pageY2 = 0;
     return;
   }
-  if(pageY1 > pageY2) {                                   
-    var movepoint = point.nextElementSibling;             //
-    index++;                                              //  onePage-section 클래스 간에
-  } else if(pageY2 > pageY1) {                            //  divider 등과 같은 다른 클래스 및
-    var movepoint = point.previousElementSibling;         //  태그요소가 존재하지 않을 경우 작동
-    index--;                                              //  
+
+  if(pageY1 > pageY2 && index !== onePage_section.length - 1) {                                   
+    point.style.transform = 'translateY(-100%)';                          //
+    if(index < 5 && index >= 0) index++;                                  //  onePage-section 클래스 간에
+  } else if(pageY2 > pageY1 && point.previousElementSibling !== null) {   //  divider 등과 같은 다른 클래스 및
+    point.previousElementSibling.style.transform = 'translateY(0px)';     //  태그요소가 존재하지 않을 경우 작동
+    if(index <= 5 && index > 0) index--;                                  //  
   } else return;                                            
                                                           
-  if(movepoint === null) return;
-  movepoint.scrollIntoView({behavior:'smooth'});
   pageY1 = 0;
   pageY2 = 0;
 }
 
+function preventScrollOnModal() {
+
+}
 /*
 function checkOnePage_scrollDown(section) {
   if(section.nextElementSibling.className === 'onePage-section') {
