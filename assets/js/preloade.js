@@ -5,7 +5,7 @@ const firstPage = document.querySelector('.onePage-section');
 window.addEventListener('load', function() {
     //setTimeout(afterPreload, 3000);
     console.log('completed load');
-    setTimeout(afterPreload, 1000);
+    setTimeout(afterPreload, 3000);
 });
 
 function afterPreload() {
