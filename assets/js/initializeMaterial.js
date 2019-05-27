@@ -40,10 +40,20 @@ document.addEventListener('DOMContentLoaded', function() {
   /* Close the Sidebar on Click */
   sideNavbarBtns.forEach((v, i)=> {
     v.addEventListener('click', function() {
+      if(i > index) {
+        for(let count = index; count < i; count++) {
+          onePage_section[count].style.transform = 'translateY(-100%)';
+        }
+      } else {
+        for(let count = index; count >= i; count--) {
+          onePage_section[count].style.transform = 'translateY(0px)';
+        }
+      }
       var scrollSpyId = v.getAttribute('name');
       var scrollPoint = document.querySelector(scrollSpyId);
       scrollPoint.scrollIntoView({behavior:'smooth'});
       index = i;
+      
       setTimeout(function() {
         scrollPoint.style.animation = 'fadeIn 1.5s forwards';
       }, 500);
