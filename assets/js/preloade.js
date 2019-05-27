@@ -3,7 +3,6 @@ const fixedNavbar = document.querySelector('#navbar');
 const firstPage = document.querySelector('.onePage-section');
 
 window.addEventListener('load', function() {
-    //setTimeout(afterPreload, 3000);
     console.log('completed load');
     setTimeout(afterPreload, 3000);
 });
