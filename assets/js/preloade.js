@@ -5,6 +5,7 @@ const firstPage = document.querySelector('.onePage-section');
 window.addEventListener('load', function() {
     //setTimeout(afterPreload, 3000);
     console.log('completed load');
+    firstPage.style.background = 'black';
 });
 
 function afterPreload() {
