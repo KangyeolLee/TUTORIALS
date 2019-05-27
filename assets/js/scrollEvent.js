@@ -6,7 +6,7 @@ let lastAnimation = 0;
 let index = 0;
 
 const main = document.querySelector('main');
-var pageY1, pageY2;
+let pageY1, pageY2;
 
 document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('wheel', event => {
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })
   main.addEventListener('touchend', function(e) {
     var timeNow = new Date().getTime();
+
     if(timeNow - lastAnimation < idlePeriod + animationDuration) {
       console.log('animation delayed...');
       return;
@@ -66,7 +67,11 @@ function downScroll() {
 
 function touchScrollMove(event) {
   var point = event.target.closest('.onePage-section');
-
+  if(pageY1 === 0 || pageY2 === 0) {
+    pageY1 = 0;
+    pageY2 = 0;
+    return;
+  }
   if(pageY1 > pageY2) {                                   
     var movepoint = point.nextElementSibling;             //
     index++;                                              //  onePage-section 클래스 간에
