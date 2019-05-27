@@ -4,7 +4,7 @@ const allSliders = document.querySelectorAll('.slider-box .col');
 const sliding_btnLeft = document.querySelectorAll('.fas.fa-angle-left');
 const sliding_btnRight = document.querySelectorAll('.fas.fa-angle-right');
 //const sibling = sliderBox.cloneNode(true);
-var direction;
+let direction;
 
 document.addEventListener('DOMContentLoaded', function() {
     sliderBox.forEach((v, i) => {

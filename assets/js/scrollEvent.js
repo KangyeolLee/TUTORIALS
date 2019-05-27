@@ -2,6 +2,7 @@ const bannerText = document.querySelector('#bannerText');
 const onePage_section = document.querySelectorAll('.onePage-section');
 const animationDuration = 1000;
 const idlePeriod = 100;
+let pageArray = [];
 let lastAnimation = 0;
 let index = 0;
 
@@ -9,6 +10,12 @@ const main = document.querySelector('main');
 let pageY1, pageY2;
 
 document.addEventListener('DOMContentLoaded', function() {
+  onePage_section.forEach((v,i)=>{
+    pageArray[i] = {
+      index : i
+    }
+  });
+
   document.addEventListener('wheel', event => {
     var delta = event.wheelDelta;
     var timeNow = new Date().getTime();
@@ -18,12 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     if (delta < 0) {
-      upScroll();
-    } else {
       downScroll();
+    } else {
+      upScroll();
     }
     lastAnimation = timeNow;
-  }) ;
+  });
 
   main.addEventListener('touchstart', function(e) {
     pageY1 = e.targetTouches[0].pageY;
@@ -44,23 +51,29 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-function upScroll() {
-  if(index > 10) {
-    return;
-  }
-  index++;
+function downScroll() {
+  if(index > 10) return;
+  if(index < 5 && index >= 0) index++;
+  
   onePage_section.forEach((section, i) => {
     if (i === index) {
       section.scrollIntoView({behavior: "smooth"});
+      setTimeout(function() {
+        section.style.animation = 'fadeIn 1.5s forwards';
+      }, 500);
     }
   })
 }
-function downScroll() {
-  if (index < 1) return;
-  index--;
+function upScroll() {
+  if(index < 1) return;
+  if(index < 5 && index >= 0) index--;
+  
   onePage_section.forEach((section, i) => {
     if (i === index) {
       section.scrollIntoView({behavior: "smooth"});
+      setTimeout(function() {
+        section.style.animation = 'fadeIn 1.5s forwards';
+      }, 800);
     }
   });
 }
