@@ -90,6 +90,7 @@ function upScroll() {
 
 function touchScrollMove(event) {
   var point = event.target.closest('.onePage-section');
+  if(document.querySelector('.modal-overlay') !== null) return;
   if(pageY1 === 0 || pageY2 === 0) {
     pageY1 = 0;
     pageY2 = 0;
