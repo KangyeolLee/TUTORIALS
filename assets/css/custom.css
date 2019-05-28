@@ -1,14 +1,13 @@
 /******************************
 ------------ MAIN ------------
 *******************************/
-html {
-  overflow: hidden;
-}
 body {
   height: 100vh;
   overflow: hidden;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+  transition: height 1000000s ease;
+  -webkit-transition: height 1000000s ease;
+  -moz-transition: height 1000000s ease;
+  -o-transition: height 1000000s ease;
 }
 main {
   height: 100vh;
