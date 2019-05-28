@@ -132,9 +132,13 @@ main {
   transition: all 1s ease-in-out;
   -webkit-overflow-scrolling: touch;
   position: absolute;
+  background: linear-gradient(90deg, #bad3fc 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
+  background-size: 200px 150px;
 }
 .onePage-section .container {
   border: 1px solid black;
+  background: linear-gradient(90deg, #76a7f7 149px, transparent 1%) center, linear-gradient(#76a7f7 150px, transparent 1%) center, white;
+  background-size: 150px 150px;
 }
 
 /*******************************
@@ -322,7 +326,7 @@ main {
   max-width: 0;
 }
 /* bannerText in Mobile CSS Option */
-@media only screen and (max-width:600px) {  
+@media only screen and (max-width:600px) {
   #bannerText {
     margin-top: 3rem;
   }
