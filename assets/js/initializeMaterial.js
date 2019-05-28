@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
           onePage_section[count].style.transform = 'translateY(0px)';
         }
       }
+      index = i;
       /* --- DECLARED IN 27.05.19 BY New OnePage Scroll Function ---
       var scrollSpyId = v.getAttribute('name');
       var scrollPoint = document.querySelector(scrollSpyId);
