@@ -1,22 +1,14 @@
 /******************************
 ------------ MAIN ------------
 *******************************/
-html {
-  transition: height 1000000s ease;
-  -webkit-transition: height 1000000s ease;
-  -moz-transition: height 1000000s ease;
-  -o-transition: height 1000000s ease;
-}
 body {
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
-  transition: height 1000000s ease;
-  -webkit-transition: height 1000000s ease;
-  -moz-transition: height 1000000s ease;
-  -o-transition: height 1000000s ease;
 }
 main {
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
 }
 
@@ -28,6 +20,7 @@ main {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 }
 .loading-page.hidden {
   animation: fadeOut 1.5s forwards;
@@ -138,10 +131,9 @@ main {
   align-items: center;
   width: 100%;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden; /* Test Option in Mobile */
-  
-  -webkit-transition: height 1000000s, transform 1s ease-in-out;
-  transition: height 1000000s, transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
   position: absolute;
 }
 .onePage-section .container {
