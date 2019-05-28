@@ -1,6 +1,12 @@
 /******************************
 ------------ MAIN ------------
 *******************************/
+html {
+  transition: height 1000000s ease;
+  -webkit-transition: height 1000000s ease;
+  -moz-transition: height 1000000s ease;
+  -o-transition: height 1000000s ease;
+}
 body {
   height: 100vh;
   overflow: hidden;
