@@ -10,6 +10,8 @@ main {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 /******************************
@@ -135,6 +137,8 @@ main {
   overflow: hidden; /* Test Option in Mobile */
   transition: transform 1s ease-in-out;
   position: absolute;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 .onePage-section .container {
   border: 1px solid black;
