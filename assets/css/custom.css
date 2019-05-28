@@ -130,6 +130,7 @@ main {
   height: 100vh;
   overflow: hidden; /* Test Option in Mobile */
   transition: all 1s ease-in-out;
+  -webkit-overflow-scrolling: touch;
   position: absolute;
 }
 .onePage-section .container {
