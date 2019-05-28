@@ -10,10 +10,11 @@ main {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
+}
+.prevent-iPhone-overscroll {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
-
 /******************************
 --- Loading Page Css Option ---
 *******************************/
@@ -135,6 +136,7 @@ main {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden; /* Test Option in Mobile */
+  -webkit-overflow-scrolling: touch;
   transition: transform 1s ease-in-out;
   position: absolute;
   background: linear-gradient(90deg, #bad3fc 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
