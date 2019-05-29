@@ -142,7 +142,19 @@ main {
   -webkit-overflow-scrolling: touch;
   transition: transform 1s ease-in-out;
   position: absolute;
-  background: linear-gradient(90deg, #ffe364 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
+  background: linear-gradient(90deg, #cde4f7 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
+  background-size: 200px 150px;
+}
+.background-yellow{
+  background: linear-gradient(90deg, #fff9bc 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
+  background-size: 200px 150px;
+}
+.background-pink{
+  background: linear-gradient(90deg, #eeceff 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
+  background-size: 200px 150px;
+}
+.background-orange{
+  background: linear-gradient(90deg, #f9c3a9 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
   background-size: 200px 150px;
 }
 .onePage-section .container {
