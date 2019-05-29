@@ -83,12 +83,13 @@ function wheelEnd(delta) {
   marker = true;
   counter1 = 0;
   counter2 = 0;
-  
+
   var timeNow = new Date().getTime();
   if(timeNow-lastAnimation < idlePeriod + animationDuration) {
     console.log('animation delayed...');
     return;
   }
+  
   if(delta < 0) {downScroll();} else {upScroll();}
   lastAnimation = timeNow;
 }
