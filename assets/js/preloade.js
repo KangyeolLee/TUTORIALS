@@ -17,13 +17,8 @@ function fadeOut(element) {
     element.addEventListener('animationend', function() {
         this.style.display = 'none';
         fadeIn(fixedNavbar);
-        fadeIn(firstPage);
         presentBanner();
     });
-}
-
-function noneScreen(element) {
-    element.style.display = 'none';
 }
 
 function fadeIn(element) {

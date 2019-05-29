@@ -78,7 +78,7 @@ function directScroll(delta) {
     console.log('animation delayed');
     return;
   }
-  if(delta < 0) { downScroll(); } else { upScroll(); }
+  if(delta < 0) { upScroll(); } else { downScroll(); }
   lastAnimation = timeNow;
 }
 function downScroll() {
