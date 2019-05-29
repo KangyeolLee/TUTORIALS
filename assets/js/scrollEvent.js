@@ -19,23 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   /* Mouse Wheel Event Handler */
   main.addEventListener('wheel', wheel);
-  /*
-  main.addEventListener('wheel', event => {
-    var delta = event.wheelDelta;
-    var timeNow = new Date().getTime();
-
-    if(timeNow - lastAnimation < idlePeriod + animationDuration) {
-      console.log('animation delayed...');
-      return;
-    }
-    if (delta < 0) {
-      downScroll();
-    } else {
-      upScroll();
-    }
-    lastAnimation = timeNow;
-  });
-  */
+ 
   /* Touch on Screen Event Handler */
   main.addEventListener('touchstart', function(e) {
     pageY1 = e.targetTouches[0].pageY;
@@ -67,70 +51,60 @@ function wheel(e) {
 }
 function wheelStart(delta) {
   marker = false;
-  wheelAct(delta);
+  directScroll(delta);
+  wheelAct();
+  console.log('start the wheel');
 }
-function wheelAct(delta) {
+function wheelAct() {
   counter2 = counter1;
   setTimeout(function() {
     if(counter2 == counter1) {
-      wheelEnd(delta);
+      wheelEnd();
     } else {
-      wheelAct(delta);
+      wheelAct();
     }
   }, 100);
 }
-function wheelEnd(delta) {
+function wheelEnd() {
   marker = true;
   counter1 = 0;
   counter2 = 0;
-
-  var timeNow = new Date().getTime();
-  if(timeNow-lastAnimation < idlePeriod + animationDuration) {
-    console.log('animation delayed...');
-    return;
-  }
-  
-  if(delta < 0) {downScroll();} else {upScroll();}
-  lastAnimation = timeNow;
 }
 
+/* Mouse Wheel Event on Scrolling */
+function directScroll(delta) {
+  var timeNow = new Date().getTime();
+  if(timeNow-lastAnimation < idlePeriod + animationDuration) {
+    console.log('animation delayed');
+    return;
+  }
+  if(delta < 0) { downScroll(); } else { upScroll(); }
+  lastAnimation = timeNow;
+}
 function downScroll() {
   if(document.querySelector('.modal-overlay') !== null) return;
   if(index === onePage_section.length - 1) return;
-  //if(index < 5 && index >= 0) index++;
   
   onePage_section.forEach((section, i) => {
     if (i === index) {
       section.style.transform = 'translateY(-100%)';
-      /*
-      section.scrollIntoView({behavior: "smooth"});
-      setTimeout(function() {
-        section.style.animation = 'fadeIn 1.5s forwards';
-      }, 500);
-      */
     }
   });
   if(index < 5 && index >= 0) index++;
 }
 function upScroll() {
-  //if(index < 1) return;
   if(document.querySelector('.modal-overlay') !== null) return;
   
   onePage_section.forEach((section, i) => {
     if (i === index) {
       if(section.previousElementSibling === null) return;
       section.previousElementSibling.style.transform = 'translateY(0px)';
-      /*
-      section.scrollIntoView({behavior: "smooth"});
-      setTimeout(function() {
-        section.style.animation = 'fadeIn 1.5s forwards';
-      }, 800);
-      */
     }
   });
   if(index <= 5 && index > 0) index--;
 }
 
+/* Touch Event on Scrolling */
 function touchScrollMove(event) {
   var point = event.target.closest('.onePage-section');
   if(document.querySelector('.modal-overlay') !== null) return;
