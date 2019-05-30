@@ -19,7 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   /* Mouse Wheel Event Handler */
   main.addEventListener('wheel', wheel);
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 8d678c4d14a6b5be4dbfb81a25880af47ac8e67f
   /* Touch on Screen Event Handler */
   main.addEventListener('touchstart', function(e) {
     pageY1 = e.targetTouches[0].pageY;
@@ -84,7 +88,11 @@ function directScroll(delta) {
 function downScroll() {
   if(document.querySelector('.modal-overlay') !== null) return;
   if(index === onePage_section.length - 1) return;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 8d678c4d14a6b5be4dbfb81a25880af47ac8e67f
   onePage_section.forEach((section, i) => {
     if (i === index) {
       section.style.transform = 'translateY(-100%)';

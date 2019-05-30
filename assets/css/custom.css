@@ -142,25 +142,81 @@ main {
   -webkit-overflow-scrolling: touch;
   transition: transform 1s ease-in-out;
   position: absolute;
-  background: linear-gradient(90deg, #cde4f7 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
-  background-size: 200px 150px;
 }
-.background-yellow{
-  background: linear-gradient(90deg, #fff9bc 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
-  background-size: 200px 150px;
-}
-.background-pink{
-  background: linear-gradient(90deg, #eeceff 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
-  background-size: 200px 150px;
+.background-red {
+  background-color: #ef5350;
+  background-image:
+    linear-gradient(#ca2b2b9c 1px, transparent 1px),
+    linear-gradient(90deg, #ca2b2b9c 1px, transparent 1px);
+  background-size: 180px 400px;
+  background-position: -1px -1px;
 }
 .background-orange{
+  /*
+  background: linear-gradient(90deg, #eeceff 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
+  background-size: 200px 150px;
+  */
+  background-color: #f57c00;
+  background-image:
+    linear-gradient(#d36900b6 1px, transparent 1px),
+    linear-gradient(90deg, #d36900b6 1px, transparent 1px);
+  background-size: 180px 400px;
+  background-position: -1px -1px;
+}
+.background-yellow{
+  /*
   background: linear-gradient(90deg, #f9c3a9 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
   background-size: 200px 150px;
+  */
+  background-color: #fbc02d;
+  background-image:
+    linear-gradient(#e0a307c7 1px, transparent 1px),
+    linear-gradient(90deg, #e0a307c7 1px, transparent 1px);
+  background-size: 180px 400px;
+  background-position: -1px -1px;
+}
+.background-green{
+  /*
+  background: linear-gradient(90deg, #fff9bc 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
+  background-size: 200px 150px;
+  */
+  background-color: #43a047;
+  background-image:
+    linear-gradient(#2e8532d7 1px, transparent 1px),
+    linear-gradient(90deg, #2e8532d7 1px, transparent 1px);
+  background-size: 180px 400px;
+  background-position: -1px -1px;
+}
+.background-blue{
+  background-color: #0277bd;
+  background-image:
+    linear-gradient(#025483cc 1px, transparent 1px),
+    linear-gradient(90deg, #025483cc 1px, transparent 1px);
+  background-size: 180px 400px;
+  background-position: -1px -1px;
+}
+.background-indigo{
+  background-color: #283593;
+  background-image:
+    linear-gradient(#1b2679d3 1px, transparent 1px),
+    linear-gradient(90deg, #1b2679d3 1px, transparent 1px);
+  background-size: 180px 400px;
+  background-position: -1px -1px;
+}
+.background-purple{
+  background-color: #4527a0;
+  background-image:
+    linear-gradient(#2e157ad3 1px, transparent 1px),
+    linear-gradient(90deg, #2e157ad3 1px, transparent 1px);
+  background-size: 180px 400px;
+  background-position: -1px -1px;
 }
 .onePage-section .container {
-  border: 1px solid black;
+  //border: 1px solid black;
+  /*
   background: linear-gradient(90deg, #76a7f7 149px, transparent 1%) center, linear-gradient(#76a7f7 150px, transparent 1%) center, white;
   background-size: 150px 150px;
+  */
 }
 
 /*******************************
