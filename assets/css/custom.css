@@ -163,6 +163,10 @@ main {
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
+.background-test{
+  background-image: url("/assets/img/wooden.jpg");
+  background-color: white;
+}
 .background-yellow{
   /*
   background: linear-gradient(90deg, #f9c3a9 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
