@@ -3,6 +3,8 @@ const onePage_section = document.querySelectorAll('.onePage-section');
 const animationDuration = 1000;
 const idlePeriod = 100;
 let pageArray = [];
+let counter1=0, counter2;
+let marker = true;
 let lastAnimation = 0;
 let index = 0;
 
@@ -16,21 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   /* Mouse Wheel Event Handler */
-  main.addEventListener('wheel', event => {
-    var delta = event.wheelDelta;
-    var timeNow = new Date().getTime();
+  main.addEventListener('wheel', wheel);
 
-    if(timeNow - lastAnimation < idlePeriod + animationDuration) {
-      console.log('animation delayed...');
-      return;
-    }
-    if (delta < 0) {
-      downScroll();
-    } else {
-      upScroll();
-    }
-    lastAnimation = timeNow;
-  });
   /* Touch on Screen Event Handler */
   main.addEventListener('touchstart', function(e) {
     pageY1 = e.targetTouches[0].pageY;
@@ -51,43 +40,71 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+/* Wheel Event Custom */
+function wheel(e) {
+  counter1 += 1;
+  e = e||window.event;
+  var delta = e.deltaY||e.detail||e.wheelDelta;
+
+  if(marker) wheelStart(delta);
+  return false;
+}
+function wheelStart(delta) {
+  marker = false;
+  directScroll(delta);
+  wheelAct();
+  console.log('start the wheel');
+}
+function wheelAct() {
+  counter2 = counter1;
+  setTimeout(function() {
+    if(counter2 == counter1) {
+      wheelEnd();
+    } else {
+      wheelAct();
+    }
+  }, 100);
+}
+function wheelEnd() {
+  marker = true;
+  counter1 = 0;
+  counter2 = 0;
+}
+
+/* Mouse Wheel Event on Scrolling */
+function directScroll(delta) {
+  var timeNow = new Date().getTime();
+  if(timeNow-lastAnimation < idlePeriod + animationDuration) {
+    console.log('animation delayed');
+    return;
+  }
+  if(delta < 0) { upScroll(); } else { downScroll(); }
+  lastAnimation = timeNow;
+}
 function downScroll() {
   if(document.querySelector('.modal-overlay') !== null) return;
   if(index === onePage_section.length - 1) return;
-  //if(index < 5 && index >= 0) index++;
 
   onePage_section.forEach((section, i) => {
     if (i === index) {
       section.style.transform = 'translateY(-100%)';
-      /*
-      section.scrollIntoView({behavior: "smooth"});
-      setTimeout(function() {
-        section.style.animation = 'fadeIn 1.5s forwards';
-      }, 500);
-      */
     }
   });
   if(index < 5 && index >= 0) index++;
 }
 function upScroll() {
-  //if(index < 1) return;
   if(document.querySelector('.modal-overlay') !== null) return;
 
   onePage_section.forEach((section, i) => {
     if (i === index) {
       if(section.previousElementSibling === null) return;
       section.previousElementSibling.style.transform = 'translateY(0px)';
-      /*
-      section.scrollIntoView({behavior: "smooth"});
-      setTimeout(function() {
-        section.style.animation = 'fadeIn 1.5s forwards';
-      }, 800);
-      */
     }
   });
   if(index <= 5 && index > 0) index--;
 }
 
+/* Touch Event on Scrolling */
 function touchScrollMove(event) {
   var point = event.target.closest('.onePage-section');
   if(document.querySelector('.modal-overlay') !== null) return;
@@ -109,9 +126,6 @@ function touchScrollMove(event) {
   pageY2 = 0;
 }
 
-function preventScrollOnModal() {
-
-}
 /*
 function checkOnePage_scrollDown(section) {
   if(section.nextElementSibling.className === 'onePage-section') {
