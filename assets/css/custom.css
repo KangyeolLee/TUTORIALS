@@ -374,6 +374,9 @@ main {
   padding: 30px;
   text-align: left;
 }
+.intro .col h4 {
+  margin-top: 4rem;
+}
 @media only screen and (max-width: 1300px) {
   .intro .col p {
     padding: 10px;
@@ -416,7 +419,13 @@ main {
     font-size: 3rem;
   }
 }
-
+/******************************
+Review Cards Section
+*******************************/
+#reviews span{
+  display: block;
+  margin-bottom: 5rem;
+}
 /******************************
 Card Effects in TabUI Contents
 *******************************/
@@ -573,6 +582,11 @@ Card Effects in TabUI Contents
   transition: 0.4s;
   transform: translateY(200px);
   opacity: 0;
+}
+#joiner span{
+  display:block;
+  margin-bottom: 5rem;
+  font-size: 4rem;
 }
 /***** hover Effects *****/
 .profile:hover .social-icons li a {
