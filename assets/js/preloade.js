@@ -4,7 +4,6 @@ const firstPage = document.querySelector('.onePage-section');
 
 window.addEventListener('load', function() {
     console.log('completed load');
-    //setTimeout(afterPreload, 100);
     afterPreload();
 });
 

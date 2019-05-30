@@ -107,6 +107,7 @@ function upScroll() {
 /* Touch Event on Scrolling */
 function touchScrollMove(event) {
   var point = event.target.closest('.onePage-section');
+  if(Math.abs(pageY1 - pageY2) < 100) return;
   if(document.querySelector('.modal-overlay') !== null) return;
   if(pageY1 === 0 || pageY2 === 0) {
     pageY1 = 0;

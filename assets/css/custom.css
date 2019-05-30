@@ -24,16 +24,16 @@ main {
 .loading-page {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-content: center;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
 }
 .loading-page.hidden {
-  animation: fadeOut 1.5s forwards;
+  animation: fadeOut 3.5s forwards;
 }
 @keyframes fadeOut {
   100% {
-    opacity: 0;
+    background-color: #ef5350;
     visibility: hidden;
   }
 }
@@ -48,6 +48,21 @@ main {
   }
 }
 /***** Preloader Animation *****/
+.page-preloader-wrapper {
+  width: 50px;
+  height: 50px;
+}
+.page-preloader-wrapper .fire {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 20vw;
+  width: 20vw;
+}
+.page-preloader-wrapper .fire .flames .flame {
+  border-radius: 1vw;
+}
 .preloader-bigSquare {
   position: relative;
   display: inline-block;
@@ -139,7 +154,7 @@ main {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden; /* Test Option in Mobile */
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch; /* option for iPhone */
   transition: transform 1s ease-in-out;
   position: absolute;
 }
@@ -216,7 +231,6 @@ main {
   background-position: -1px -1px;
 }
 .onePage-section .container {
-  //border: 1px solid black;
   /*
   background: linear-gradient(90deg, #76a7f7 149px, transparent 1%) center, linear-gradient(#76a7f7 150px, transparent 1%) center, white;
   background-size: 150px 150px;
