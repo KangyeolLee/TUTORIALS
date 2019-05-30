@@ -55,7 +55,7 @@ function downScroll() {
   if(document.querySelector('.modal-overlay') !== null) return;
   if(index === onePage_section.length - 1) return;
   //if(index < 5 && index >= 0) index++;
-  
+
   onePage_section.forEach((section, i) => {
     if (i === index) {
       section.style.transform = 'translateY(-100%)';
@@ -72,7 +72,7 @@ function downScroll() {
 function upScroll() {
   //if(index < 1) return;
   if(document.querySelector('.modal-overlay') !== null) return;
-  
+
   onePage_section.forEach((section, i) => {
     if (i === index) {
       if(section.previousElementSibling === null) return;
@@ -97,14 +97,14 @@ function touchScrollMove(event) {
     return;
   }
 
-  if(pageY1 > pageY2 && index !== onePage_section.length - 1) {                                   
+  if(pageY1 > pageY2 && index !== onePage_section.length - 1) {
     point.style.transform = 'translateY(-100%)';                          //
     if(index < 5 && index >= 0) index++;                                  //  onePage-section 클래스 간에
   } else if(pageY2 > pageY1 && point.previousElementSibling !== null) {   //  divider 등과 같은 다른 클래스 및
     point.previousElementSibling.style.transform = 'translateY(0px)';     //  태그요소가 존재하지 않을 경우 작동
-    if(index <= 5 && index > 0) index--;                                  //  
-  } else return;                                            
-                                                          
+    if(index <= 5 && index > 0) index--;                                  //
+  } else return;
+
   pageY1 = 0;
   pageY2 = 0;
 }
