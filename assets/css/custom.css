@@ -226,7 +226,7 @@ body .fire .logs:before {
   position: relative;
 }
 .sliderBox {
-  border: 1px solid red;
+  //border: 1px solid red;
   display: flex;
   overflow: hidden;
 }
@@ -247,7 +247,7 @@ body .fire .logs:before {
 }
 @keyframes slidingToLeft {
   from {transform: translateX(-426px);}
-  to {transform: translateX(0);}  
+  to {transform: translateX(0);}
 }
 .profile{
   position: absolute;
@@ -347,7 +347,7 @@ body .fire .logs:before {
   }
   @keyframes slidingToLeft {
     from {transform: translateX(-20rem);}
-    to {transform: translateX(0);}  
+    to {transform: translateX(0);}
   }
 }
 @media only screen and (max-width: 360px) {
@@ -380,7 +380,7 @@ body .fire .logs:before {
   }
   @keyframes slidingToLeft {
     from {transform: translateX(-15rem);}
-    to {transform: translateX(0);}  
+    to {transform: translateX(0);}
   }
 }
 /***** Social Icons ****/
