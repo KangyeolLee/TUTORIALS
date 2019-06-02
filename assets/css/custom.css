@@ -18,6 +18,7 @@ main {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
+
 /******************************
 --- Loading Page Css Option ---
 *******************************/
@@ -27,14 +28,23 @@ main {
   align-content: center;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
+  background-color: #455a64;
 }
 .loading-page.hidden {
-  animation: fadeOut 3.5s forwards;
+  animation: fadeOut 5s forwards;
 }
 @keyframes fadeOut {
   100% {
     background-color: #ef5350;
-    visibility: hidden;
+  }
+}
+.loading-page.screenout {
+  background-color: #ef5350;
+  animation: screenOut 5s forwards;
+}
+@keyframes screenOut {
+  100% {
+    opacity: 0;
   }
 }
 .fade-in-effect {
@@ -48,21 +58,86 @@ main {
   }
 }
 /***** Preloader Animation *****/
+#nav-preloader {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  box-shadow: none;
+}
+#nav-preloader.hidden {
+  animation: brandlogonize-position 3.5s forwards;
+}
+@keyframes brandlogonize-position {
+  100% {
+    top: 0;
+    transform: translateY(0);
+  }
+}
 .page-preloader-wrapper {
-  width: 50px;
-  height: 50px;
+  position: relative;
 }
 .page-preloader-wrapper .fire {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  height: 20vw;
-  width: 20vw;
+  height: 150px;
+  width: 150px;
+}
+.page-preloader-wrapper .fire.hidden {
+  animation: brandlogonize-size 3.5s forwards;
+}
+@keyframes brandlogonize-size {
+  100% {
+    left: 0;
+    transform: translate(0, -25%);
+    height: 30px;
+    width: 30px;
+  }
 }
 .page-preloader-wrapper .fire .flames .flame {
-  border-radius: 1vw;
+  border-radius: 3px;
 }
+/***** Progressbar Animation *****/
+.progress-container {
+  width: 300px;
+  position: absolute;
+  top: 75%;
+}
+.progress-container.hidden {
+  animation: progressOut 2.5s forwards;
+}
+@keyframes progressOut {
+  100% {
+    opacity: 0;
+  }
+}
+.progressive {
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+}
+.progress-bar {
+  height: 18px;
+  border-radius: 30px;
+  background-color: #EF476F;
+  background-image: 
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+  animation: progressAnimation 6s;
+}
+@keyframes progressAnimation {
+  0% {
+    width: 5%;
+    background-color: #F9BCCA;
+  }
+  100% {
+    width: 100%;
+    background-color: #EF476F;
+  }
+}
+/***** Square Animation *****/
 .preloader-bigSquare {
   position: relative;
   display: inline-block;
