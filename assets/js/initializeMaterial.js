@@ -55,15 +55,16 @@ document.addEventListener('DOMContentLoaded', function() {
       var scrollPoint = document.querySelector(scrollSpyId);
       scrollPoint.scrollIntoView({behavior:'smooth'});
       index = i;
-      
+
       setTimeout(function() {
         scrollPoint.style.animation = 'fadeIn 1.5s forwards';
       }, 500);
       */
-      pluginSidenav.close();  
+      pluginSidenav.close();
     });
   });
 });
+
 
 /*
 $(function() {
