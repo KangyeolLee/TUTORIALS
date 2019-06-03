@@ -21,28 +21,38 @@
 
 <body>
   <!-- Preloader Setting -->
-  <div class="loading-page onePage-section" style = "z-index: 10">
-    <nav id="nav-preloader">
-      <div class="page-preloader-wrapper nav-wrapper container">
-        <div class="fire">
-          <div class="flames">
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-            <div class="flame"></div>
-          </div>
-          <div class="logs"></div>
+  <div class="loading-page blue-grey darken-2">
+    <!--
+    /**** circle-preloader maden by MATERIALL.CSS ****/
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left"><div class="circle"></div></div>
+        <div class="gap-patch"><div class="circle"></div></div>
+        <div class="circle-clipper right"><div class="circle"></div></div>
+      </div>
+    </div>
+  -->
+    <div class="page-preloader-wrapper">
+      <!--
+      /**** square-preloader maden by KGLEE ****/
+      <div class="preloader-bigSquare">
+        <div class="square first"></div>
+        <div class="square second"></div>
+        <div class="square third"></div>
+        <div class="square fourth"></div>
+      </div>
+      -->
+      <div class="fire">
+        <div class="flames">
+          <div class="flame"></div>
+          <div class="flame"></div>
+          <div class="flame"></div>
+          <div class="flame"></div>
         </div>
+        <div class="logs"></div>
       </div>
-    </nav>
-    <div class='progress-container'>
-      <div class="progressive">
-        <div class='progress-bar'></div>
-      </div>
-      <div id="loading-text" class="white-text center scorelt"> LOADING ... </div>
     </div>
   </div>
-
   <!-- SideNavbar Setting -->
   <ul id="slide-out" class="sidenav">
     <li>
@@ -59,7 +69,7 @@
   </ul>
   <!-- Navbar Setting -->
   <div class="navbar-fixed">
-    <nav id="navbar" class="fade-in-effect">
+    <nav id="navbar" class="fade-in-effecte">
       <div class="nav-wrapper container">
         <!-- Fire Effect in HTML -->
         <div class="fire">
@@ -133,6 +143,9 @@
     <!-- Contents in TabUI Setting -->
     <div id="contents" class="onePage-section background-yellow" style="z-index: 4;">
       <div class="container">
+        <div class="row">
+          <p class="scorehvy center-align" style="font-size:4rem;">불편한 모임</p>
+        </div>
         <!-- TabUI Setting -->
         <div class="row">
           <ul class="col s12 tabs">
@@ -441,9 +454,10 @@
               </div>
               <div class="input-field col">
                 <i class="material-icons prefix">mode_edit</i>
-                <textarea id="message" cols="60" rows="10" class="materialize-textarea"></textarea>
+                <textarea id="message" cols="60" rows="10" class="materialize-textarea" data-length="250"></textarea>
                 <label for="message">메시지</label>
               </div>
+              <button></button>
             </div>
           </form>
 
@@ -463,35 +477,15 @@
   <script src="assets/js/initializeMaterial.js"></script>
   <script src="assets/js/slideEffect.js"></script>
   <script src="assets/js/scrollEvent.js"></script>
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 
 </body>
 
 </html>
 
-<!-- 
-/**** SNS ToolTip ****/
+<!-- *** SNS ToolTip ***
 <li class="hide-on-med-and-down"><a href="https://www.instagram.com/u.bo_official/" class="tooltipped btn-floating btn-small black darken-4" data-tooltip="This is Instagram"><i class="fab fa-instagram"></i></a></li>
 <li class="hide-on-med-and-down"><a href="https://www.facebook.com/%EB%AA%A8%EB%9E%8C%EB%A7%88%EB%A3%A8-970537829959858/" class="tooltipped btn-floating btn-small black darken-4" data-tooltip="This is Facebook"><i class="fab fa-facebook-square"></i></a></li>
 <li class="hide-on-med-and-down"><a href="https://blog.naver.com/untilburnout" class="tooltipped btn-floating btn-small black darken-4" data-tooltip="This is Blog"><i class="fab fa-blogger-b"></i></a></li>
--->
-
-<!--
-/**** circle-preloader maden by MATERIALL.CSS ****/
-<div class="preloader-wrapper big active">
-  <div class="spinner-layer spinner-blue-only">
-    <div class="circle-clipper left"><div class="circle"></div></div>
-    <div class="gap-patch"><div class="circle"></div></div>
-    <div class="circle-clipper right"><div class="circle"></div></div>
-  </div>
-</div>
--->
-
-<!--
-/**** square-preloader maden by KGLEE ****/
-<div class="preloader-bigSquare">
-  <div class="square first"></div>
-  <div class="square second"></div>
-  <div class="square third"></div>
-  <div class="square fourth"></div>
-</div>
 -->
