@@ -100,7 +100,15 @@ textarea{
   }
 }
 .page-preloader-wrapper .fire .flames .flame {
-  border-radius: 3px;
+  border-radius: 15px;
+}
+.page-preloader-wrapper .fire .flames .flame.hidden {
+  animation: border-radius-optimize 3.5s forwards;
+}
+@keyframes border-radius-optimize {
+  100% {
+    border-radius: 3px;
+  }
 }
 /***** Progressbar Animation *****/
 .progress-container {
