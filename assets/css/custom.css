@@ -125,7 +125,7 @@ textarea{
 .progress-bar {
   height: 18px;
   border-radius: 30px;
-  background-color: #EF476F;
+  background-color: rgb(245, 127, 31);
   background-image: 
     linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
   animation: progressAnimation 6s;
@@ -133,11 +133,11 @@ textarea{
 @keyframes progressAnimation {
   0% {
     width: 5%;
-    background-color: #F9BCCA;
+    background-color: rgb(240, 176, 123);
   }
   100% {
     width: 100%;
-    background-color: #EF476F;
+    background-color: rgb(245, 127, 31);
   }
 }
 #loading-text {
