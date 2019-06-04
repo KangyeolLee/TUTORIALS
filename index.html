@@ -21,7 +21,7 @@
 
 <body>
   <!-- Preloader Setting -->
-  <div class="loading-page onePage-section" style = "z-index: 10">
+  <!-- <div class="loading-page onePage-section" style = "z-index: 10">
     <nav id="nav-preloader">
       <div class="page-preloader-wrapper nav-wrapper container">
         <div class="fire">
@@ -42,7 +42,7 @@
       <div id="loading-text" class="white-text center scorelt"> LOADING ... </div>
     </div>
   </div>
-
+-->
   <!-- SideNavbar Setting -->
   <ul id="slide-out" class="sidenav">
     <li>
@@ -441,8 +441,21 @@
               </div>
               <div class="input-field col">
                 <i class="material-icons prefix">mode_edit</i>
-                <textarea id="message" cols="60" rows="10" class="materialize-textarea"></textarea>
-                <label for="message">메시지</label>
+                <textarea id="message" cols="60" rows="10" class="materialize-textarea modal-trigger" href="#modalEmail"></textarea>
+              </div>
+              <!-- Email Text Input Modal Structure -->
+              <div id="modalEmail" class="modal">
+                <div class="modal-content">
+                  <textarea id="modalMessage" cols="100" rows="20"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" id="inputMessage" class="modal-close waves-effect btn"><i class="material-icons left">close</i>입력완료</a>
+                </div>
+              </div>
+              <div class="col push-l6">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                  <i class="material-icons left">send</i>
+                </button>
               </div>
             </div>
           </form>
@@ -463,12 +476,13 @@
   <script src="assets/js/initializeMaterial.js"></script>
   <script src="assets/js/slideEffect.js"></script>
   <script src="assets/js/scrollEvent.js"></script>
+  <script src="assets/js/modal.js"></script>
 
 </body>
 
 </html>
 
-<!-- 
+<!--
 /**** SNS ToolTip ****/
 <li class="hide-on-med-and-down"><a href="https://www.instagram.com/u.bo_official/" class="tooltipped btn-floating btn-small black darken-4" data-tooltip="This is Instagram"><i class="fab fa-instagram"></i></a></li>
 <li class="hide-on-med-and-down"><a href="https://www.facebook.com/%EB%AA%A8%EB%9E%8C%EB%A7%88%EB%A3%A8-970537829959858/" class="tooltipped btn-floating btn-small black darken-4" data-tooltip="This is Facebook"><i class="fab fa-facebook-square"></i></a></li>
