@@ -14,18 +14,23 @@ const elemsMaterialboxed = document.querySelectorAll('.materialboxed');
 const instanceMaterialboxed = M.Materialbox.init(elemsMaterialboxed);
 
 const elemsTabs = document.querySelectorAll('.tabs');
-const instacneTabs = M.Tabs.init(elemsTabs);
+const instacneTabs = M.Tabs.init(elemsTabs, {
+  //swipeable : true
+});
 
 const elemsDatepicker = document.querySelectorAll('.datepicker');
 const instanceDatepicker = M.Datepicker.init(elemsDatepicker);
 
 const elemsScrollspy = document.querySelectorAll('.scrollspy');
 const instanceScrollspy = M.ScrollSpy.init(elemsScrollspy, {
-  scrollOffset: 0,
+  scrollOffset: 0
 });
 
 const elemsTooltips = document.querySelectorAll('.tooltipped');
 const instanceTooltips = M.Tooltip.init(elemsTooltips);
+
+const elemsFeatureDiscovery = document.querySelectorAll('.tap-target');
+const instanceFeatureDiscovery = M.TapTarget.init(elemsFeatureDiscovery);
 
 const elemsModals = document.querySelectorAll('.modal');
 const instanceModal = M.Modal.init(elemsModals);
