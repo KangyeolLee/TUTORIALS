@@ -73,7 +73,6 @@ function infiniteSlider(amount, parentElement, index) {
         sliding_btnRight[index].style.display = 'none';
         sliderOutline[index].style.justifyContent = 'center';
     } else if(amount < 5) {
-        console.log('jaram, moram, review');
         for(let i = 0; i < amount; i++) {
             sliderBox.forEach((v, cur) => {
                 if(cur === index) {
@@ -83,7 +82,6 @@ function infiniteSlider(amount, parentElement, index) {
         }
         arrangeSlider(parentElement);
     } else {
-        console.log('joiner');
         arrangeSlider(parentElement);
     }
 }
