@@ -134,7 +134,7 @@ textarea{
   height: 18px;
   border-radius: 30px;
   background-color: rgb(245, 127, 31);
-  background-image: 
+  background-image:
     linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
   animation: progressAnimation 6s;
 }
@@ -846,6 +846,12 @@ Card Effects in TabUI Contents
     margin-right: 0;
     padding-right: 0;
   }
+}
+/******************************
+-- Input Modal CSS Form --
+*******************************/
+textarea .trigger:hover{
+  box-shadow: 0 0.875rem 1.75rem rgba(0,0,0, 0.25), 0 0.625rem 0.625rem rgba(0, 0, 0, 0.22);
 }
 
 /*
