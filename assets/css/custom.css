@@ -652,7 +652,7 @@ Card Effects in TabUI Contents
 *******************************/
 .slider-outline {
   position: relative;
-  overflow: hidden;
+  //overflow: hidden;
 }
 .slider-container {
   position: relative;
