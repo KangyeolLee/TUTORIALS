@@ -90,7 +90,7 @@ function downScroll() {
       section.style.transform = 'translateY(-100%)';
     }
   });
-  if(index < 5 && index >= 0) index++;
+  if(index < 6 && index >= 0) index++;
 }
 function upScroll() {
   if(document.querySelector('.modal-overlay') !== null) return;
@@ -101,7 +101,7 @@ function upScroll() {
       section.previousElementSibling.style.transform = 'translateY(0px)';
     }
   });
-  if(index <= 5 && index > 0) index--;
+  if(index <= 6 && index > 0) index--;
 }
 
 /* Touch Event on Scrolling */

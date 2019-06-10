@@ -320,18 +320,18 @@ textarea{
   background-position: -1px -1px;
 }
 .background-indigo{
-  background-color: #283593;
+  background-color: #172066;
   background-image:
-    linear-gradient(#1b2679d3 1px, transparent 1px),
-    linear-gradient(90deg, #1b2679d3 1px, transparent 1px);
+    linear-gradient(#131a50cc 1px, transparent 1px),
+    linear-gradient(90deg, #131a50cc 1px, transparent 1px);
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
 .background-purple{
-  background-color: #4527a0;
+  background-color: #5c096d;
   background-image:
-    linear-gradient(#2e157ad3 1px, transparent 1px),
-    linear-gradient(90deg, #2e157ad3 1px, transparent 1px);
+    linear-gradient(#3b0c44d2 1px, transparent 1px),
+    linear-gradient(90deg, #3b0c44d2 1px, transparent 1px);
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
@@ -538,8 +538,62 @@ textarea{
     font-size: 3rem;
   }
 }
+
 /******************************
-Review Cards Section
+------ TabUI CSS Option ------
+*******************************/
+#tab-container {
+  position: absolute;
+  z-index: 1;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+}
+#moram, #jaram {
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+#moram.active, #jaram.active {
+  z-index: auto;
+}
+#moram .container, #jaram .container {
+  padding-top: 25vh;
+}
+#custom-tabs {
+  background-color: inherit !important;
+}
+#custom-tabs .tab {
+  border: 1px solid black !important;
+  border-radius: 30px !important;
+}
+#custom-tabs .indicator {
+  display: none !important;
+}
+#custom-tabs .tab a {
+  border-radius: 30px !important;
+  color: black;
+}
+#custom-tabs .tab a:focus, #custom-tab .tab a:focus.active {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+#custom-tabs .tab a.active {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  color: white;
+}
+/***** More Buttom CSS *****/
+#btnMore {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+/******************************
+---- Review Cards Section ----
 *******************************/
 #reviews span{
   display: block;
@@ -600,6 +654,9 @@ Card Effects in TabUI Contents
   position: relative;
   overflow: hidden;
 }
+.slider-container {
+  position: relative;
+}
 .slider-box {
   display: flex;
 }
@@ -607,25 +664,39 @@ Card Effects in TabUI Contents
   flex: none;
 }
 /***** Slider Button *****/
-.fas {
+.leftArrow {
   position: absolute;
-  font-size : 50px;
-  color: black;
-  //background-color: rgba(255,255,255,0.4);
-  cursor: pointer;
-  transition: .1s;
+  left: 0.75rem;
   z-index: 10;
+  cursor: pointer;
   top: 50%;
   transform: translateY(-50%);
+  transition: .1s;
+  height: 50px;
+  background-color: rgba(0,0,0,0.1);
+  color: rgba(255, 255, 255, 0.705);
 }
-.fas:hover{
+.rightArrow {
+  position: absolute;
+  right: 0.75rem;
+  z-index: 10;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: .1s;
+  height: 50px;
+  background-color: rgba(0,0,0,0.1);
+  color: rgba(255, 255, 255, 0.705);
+}
+
+.rightArrow:hover, .leftArrow:hover {
   color: #999;
 }
-.fas.fa-angle-left{
-  left: 0;
+.leftArrow > i{
+  margin-top: 10px;
 }
-.fas.fa-angle-right{
-  right: 0;
+.rightArrow > i{
+  margin-top: 10px;
 }
 
 /*****************************
@@ -642,7 +713,6 @@ Card Effects in TabUI Contents
   top: 50%;
   left: 50%;
   width: 100%;
-  max-width: 20rem;
   min-width: 15rem;
   min-height: 90%;
   transform: translate(-50%, -50%);
@@ -782,6 +852,10 @@ Card Effects in TabUI Contents
 *******************************/
 textarea .trigger:hover{
   box-shadow: 0 0.875rem 1.75rem rgba(0,0,0, 0.25), 0 0.625rem 0.625rem rgba(0, 0, 0, 0.22);
+}
+#counting{
+  color: black;
+  float: right;
 }
 
 /*
