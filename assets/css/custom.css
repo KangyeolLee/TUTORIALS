@@ -433,11 +433,6 @@ main {
     font-size: 3rem;
   }
 }
-<<<<<<< HEAD
-.sliderBox {
-  //border: 1px solid red;
-  display: flex;
-=======
 /******************************
 Review Cards Section
 *******************************/
@@ -450,7 +445,6 @@ Card Effects in TabUI Contents
 *******************************/
 .card.introducingCard {
   background-color: rgb(28, 43, 61);      /* [수정] 자동으로 배경색 구할 수 있는지 검토 필요 */
->>>>>>> c0208e96e7966d410effb6ba4661dd0dffa6364d
   overflow: hidden;
 }
 .card.introducingCard:after {
@@ -537,18 +531,6 @@ Card Effects in TabUI Contents
   min-width: 17rem;
   min-height: 25rem;
   position: relative;
-<<<<<<< HEAD
-  //border: 1px solid blue;
-}
-@keyframes slidingToRight {
-  from {transform: translateX(-426px);}
-  to {transform: translateX(-852px);}
-}
-@keyframes slidingToLeft {
-  from {transform: translateX(-426px);}
-  to {transform: translateX(0);}
-=======
->>>>>>> c0208e96e7966d410effb6ba4661dd0dffa6364d
 }
 .profile{
   position: absolute;
@@ -587,108 +569,7 @@ Card Effects in TabUI Contents
   transform: translateY(-75px);
   transition: all 0.9s;
 }
-<<<<<<< HEAD
-@media only screen and (max-width: 1500px) {
-  .slide-container-box {
-    position: relative;
-    width: 852px;
-  }
-  .sliderBox {
-    display: flex;
-    overflow: hidden;
-    width: 852px;
-  }
-  .profile_box {
-    display: flex;
-    transform: translateX(-426px);
-  }
-}
-@media only screen and (max-width: 993px) {
-  .slide-container-box {
-    position: relative;
-    width: 426px;
-    margin: auto;
-  }
-  .sliderBox {
-    display: flex;
-    overflow: hidden;
-    width: 426px;
-  }
-  .profile_box {
-    display: flex;
-    transform: translateX(-426px);
-  }
-}
-@media only screen and (max-width: 450px) {
-  .slide-container-box {
-    position: relative;
-    width: 20rem;
-    margin: auto;
-  }
-  .sliderBox {
-    display: flex;
-    overflow: hidden;
-    width: 20rem;
-  }
-  .profile_box {
-    display: flex;
-    transform: translateX(-20rem);
-  }
-  .profile-wrapper {
-    min-width: 20rem;
-    min-height: 25rem;
-    position: relative;
-    //border: 1px solid blue;
-  }
-  .profile{
-    min-width: 20rem;
-  }
-  @keyframes slidingToRight {
-    from {transform: translateX(-20rem);}
-    to {transform: translateX(-40rem);}
-  }
-  @keyframes slidingToLeft {
-    from {transform: translateX(-20rem);}
-    to {transform: translateX(0);}
-  }
-}
-@media only screen and (max-width: 360px) {
-  .slide-container-box {
-    position: relative;
-    width: 15rem;
-    margin: auto;
-  }
-  .sliderBox {
-    display: flex;
-    overflow: hidden;
-    width: 15rem;
-  }
-  .profile_box {
-    display: flex;
-    transform: translateX(-15rem);
-  }
-  .profile-wrapper {
-    min-width: 15rem;
-    min-height: 25rem;
-    position: relative;
-    //border: 1px solid blue;
-  }
-  .profile{
-    min-width: 15rem;
-  }
-  @keyframes slidingToRight {
-    from {transform: translateX(-15rem);}
-    to {transform: translateX(-30rem);}
-  }
-  @keyframes slidingToLeft {
-    from {transform: translateX(-15rem);}
-    to {transform: translateX(0);}
-  }
-}
-/***** Social Icons ****/
-=======
 /***** Social Icons *****/
->>>>>>> c0208e96e7966d410effb6ba4661dd0dffa6364d
 .social-icons {
   position : absolute;
   top: 50%;
@@ -919,8 +800,6 @@ label {
 .slider .row {
   display: flex;
 }
-<<<<<<< HEAD
-=======
 
 .threeD {
   color: black;
@@ -979,4 +858,3 @@ label {
   background-image: linear-gradient(to right, yellow 0, yellow 100%);
 }
 */
->>>>>>> c0208e96e7966d410effb6ba4661dd0dffa6364d
