@@ -537,6 +537,12 @@ textarea{
   #bannerText li {
     font-size: 3rem;
   }
+  #intro .col{
+    margin-bottom : 3.5rem;
+  }
+  #intro .col h4{
+    margin-top: 2rem;
+  }
 }
 
 /******************************
