@@ -433,7 +433,7 @@
                   </ul>
                   <div class="details">
                     <p class="profile-name">최영인</p>
-                    <p class="job-title center-align">Developer</p>
+                    <p class="job-title center-align">작가</p>
                   </div>
                 </div>
               </div>
@@ -451,7 +451,7 @@
                   </ul>
                   <div class="details">
                     <p class="profile-name">이승복</p>
-                    <p class="job-title center-align">Developer</p>
+                    <p class="job-title center-align">마케팅</p>
                   </div>
                 </div>
               </div>
@@ -469,7 +469,7 @@
                       </ul>
                       <div class="details">
                           <p class="profile-name">이한결</p>
-                          <p class="job-title center-align">Developer</p>
+                          <p class="job-title center-align">프로그램 기획자</p>
                       </div>
                   </div>
               </div>
@@ -511,22 +511,25 @@
             </a>
             <p>입금정보 KB국민은행 </p>
           </div>
-          <form class="col m6" action="">
+          <form class="col m6" method ="post" action="assets/php/contact_form.php">
             <div class="row">
               <div class="input-field col">
                 <i class="material-icons prefix">account_circle</i>
-                <input type="text" class="validate" id="name">
+                <input name="name" type="text" class="validate" id="name">
                 <label for="name">이름</label>
               </div>
               <div class="input-field col">
                 <i class="material-icons prefix">email</i>
-                <input type="email" id="email" class="validate">
+                <input name="email" type="email" id="email" class="validate">
                 <label for="email">이메일</label>
-                <span class="helper-text" data-error="올바른 이메일 양식이 아닙니다." data-success="입력완료">입력해주신 이메일로 답장해드리겠습니다.</span>
+                <span class="helper-text white-text" data-error="올바른 이메일 양식이 아닙니다." data-success="입력완료">입력해주신 이메일로 답장해드리겠습니다.</span>
               </div>
               <div class="input-field col">
                 <i class="material-icons prefix">mode_edit</i>
-                <textarea id="message" cols="60" rows="10" class="materialize-textarea modal-trigger" href="#modalEmail"></textarea>
+                <textarea name="message" id="message" cols="60" rows="10" class="materialize-textarea modal-trigger" href="#modalEmail"></textarea>
+                <button class="btn waves-effect waves-light emailBtn" type="submit" name="action">Submit
+                  <i class="material-icons left">send</i>
+                </button>
               </div>
               <!-- Email Text Input Modal Structure -->
               <div id="modalEmail" class="modal">
@@ -537,11 +540,6 @@
                 <div class="modal-footer">
                   <a href="#!" id="inputMessage" class="modal-close waves-effect btn"><i class="material-icons left">close</i>입력완료</a>
                 </div>
-              </div>
-              <div class="col push-l6">
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                  <i class="material-icons left">send</i>
-                </button>
               </div>
             </div>
           </form>
