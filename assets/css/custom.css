@@ -537,6 +537,9 @@ textarea{
   #bannerText li {
     font-size: 3rem;
   }
+  #intro .col {
+    margin-bottom: 5rem;
+  }
 }
 
 /******************************
@@ -595,9 +598,8 @@ textarea{
 /******************************
 ---- Review Cards Section ----
 *******************************/
-#reviews span{
-  display: block;
-  margin-bottom: 5rem;
+#reviews #reviewSlider .card-reveal {
+  background: rgba(0, 0, 0, 0.82) !important;
 }
 /******************************
 Card Effects in TabUI Contents
@@ -771,11 +773,6 @@ Card Effects in TabUI Contents
   transition: 0.4s;
   transform: translateY(200px);
   opacity: 0;
-}
-#joiner span{
-  display:block;
-  margin-bottom: 5rem;
-  font-size: 4rem;
 }
 /***** hover Effects *****/
 .profile:hover .social-icons li a {
