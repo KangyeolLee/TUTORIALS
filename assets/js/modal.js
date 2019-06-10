@@ -4,4 +4,5 @@ const message = document.querySelector('#message');
 inputMessage.addEventListener('click', () => {
   const m = modalMessage.value;
   message.value = m;
+  console.log(m.length);
 })

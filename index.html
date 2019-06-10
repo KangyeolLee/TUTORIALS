@@ -442,11 +442,12 @@
               <div class="input-field col">
                 <i class="material-icons prefix">mode_edit</i>
                 <textarea id="message" cols="60" rows="10" class="materialize-textarea modal-trigger" href="#modalEmail"></textarea>
+                <div class="charcter-count">0/120</div>
               </div>
               <!-- Email Text Input Modal Structure -->
               <div id="modalEmail" class="modal">
                 <div class="modal-content">
-                  <textarea id="modalMessage" cols="100" rows="20"></textarea>
+                  <textarea id="modalMessage" cols="100" rows="40" class="active"></textarea>
                 </div>
                 <div class="modal-footer">
                   <a href="#!" id="inputMessage" class="modal-close waves-effect btn"><i class="material-icons left">close</i>입력완료</a>
@@ -477,6 +478,14 @@
   <script src="assets/js/slideEffect.js"></script>
   <script src="assets/js/scrollEvent.js"></script>
   <script src="assets/js/modal.js"></script>
+  <!--
+  <script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('textarea#message').characterCounter();
+    });
+  </script>
+-->
 
 </body>
 
