@@ -1,12 +1,21 @@
 const sliderOutline = document.querySelectorAll('.slider-outline');
 const sliderBox = document.querySelectorAll('.slider-box');
 const allSliders = document.querySelectorAll('.slider-box .col');
-const sliding_btnLeft = document.querySelectorAll('.fas.fa-angle-left');
-const sliding_btnRight = document.querySelectorAll('.fas.fa-angle-right');
+const sliding_btnLeft = document.querySelectorAll('.leftArrow');
+const sliding_btnRight = document.querySelectorAll('.rightArrow');
+const customTAB = document.querySelector('#custom-tabs');
 //const sibling = sliderBox.cloneNode(true);
 let direction;
 
 document.addEventListener('DOMContentLoaded', function() {
+    customTAB.addEventListener('click', (e)=> {
+        if(e.target.tagName === 'A') {
+            sliderBox.forEach(v=> {
+                arrangeSlider(v);
+            })
+        }
+    })
+
     sliderBox.forEach((v, i) => {
         var len = v.childElementCount;
         infiniteSlider(len, v, i);
@@ -65,8 +74,10 @@ function infiniteSlider(amount, parentElement, index) {
         sliderOutline[index].style.justifyContent = 'center';
     } else if(amount < 5) {
         for(let i = 0; i < amount; i++) {
-            sliderBox.forEach((v) => {
-                v.appendChild(v.cloneNode(true).children[i]);
+            sliderBox.forEach((v, cur) => {
+                if(cur === index) {
+                    v.appendChild(v.cloneNode(true).children[i]);
+                }
             });
         }
         arrangeSlider(parentElement);
