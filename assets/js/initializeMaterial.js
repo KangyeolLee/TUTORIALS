@@ -40,6 +40,7 @@ const instanceSidenav = M.Sidenav.init(elemsSidenav);
 const pluginSidenav = M.Sidenav.getInstance(elemsSidenav[0]);
 
 const sideNavbarBtns = document.querySelectorAll('#slide-out li a');
+const navbarBtnsOnPC = document.querySelectorAll('#nav-mobile .hide-on-small-only a');
 
 document.addEventListener('DOMContentLoaded', function() {
   /* Close the Sidebar on Click */
@@ -68,6 +69,20 @@ document.addEventListener('DOMContentLoaded', function() {
       pluginSidenav.close();
     });
   });
+  navbarBtnsOnPC.forEach((v,i)=> {
+    v.addEventListener('click', function() {
+      if(i > index) {
+        for(let count = index; count < i; count++) {
+          onePage_section[count].style.transform = 'translateY(-100%)';
+        }
+      } else {
+        for(let count = index; count >= i; count--) {
+          onePage_section[count].style.transform = 'translateY(0px)';
+        }
+      }
+      index = i;
+    });
+  })
 });
 
 

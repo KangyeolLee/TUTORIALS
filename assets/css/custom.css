@@ -335,12 +335,6 @@ textarea{
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
-.onePage-section .container {
-  /*
-  background: linear-gradient(90deg, #76a7f7 149px, transparent 1%) center, linear-gradient(#76a7f7 150px, transparent 1%) center, white;
-  background-size: 150px 150px;
-  */
-}
 
 /*******************************
 ------ Navbar Css Option ------
@@ -486,6 +480,7 @@ textarea{
     bottom: 150%;
   }
 }
+
 /*******************************
 --- Intro Padding CSS Option ---
 *******************************/
@@ -499,6 +494,17 @@ textarea{
 @media only screen and (max-width: 1300px) {
   .intro .col p {
     padding: 10px;
+  }
+}
+@media only screen and (max-width:600px) {
+  #intro .row {
+    margin-top: 80px;
+  }
+  #intro .col{
+    margin-bottom : 3.5rem;
+  }
+  #intro .col h4{
+    margin-top: 2rem;
   }
 }
 
@@ -537,12 +543,6 @@ textarea{
   #bannerText li {
     font-size: 3rem;
   }
-  #intro .col{
-    margin-bottom : 3.5rem;
-  }
-  #intro .col h4{
-    margin-top: 2rem;
-  }
 }
 
 /******************************
@@ -551,7 +551,7 @@ textarea{
 #tab-container {
   position: absolute;
   z-index: 1;
-  top: 10%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -20%);
 }
@@ -565,7 +565,7 @@ textarea{
   z-index: auto;
 }
 #moram .container, #jaram .container {
-  padding-top: 25vh;
+  padding-top: 35vh;
 }
 #custom-tabs {
   background-color: inherit !important;
@@ -604,6 +604,7 @@ textarea{
 #reviews #reviewSlider .card-reveal {
   background: rgba(0, 0, 0, 0.82) !important;
 }
+
 /******************************
 Card Effects in TabUI Contents
 *******************************/
