@@ -41,8 +41,8 @@
       </div>
       <div id="loading-text" class="white-text center scorelt"> LOADING ... </div>
     </div>
-  </div>
--->
+  </div>-->
+
   <!-- SideNavbar Setting -->
   <ul id="slide-out" class="sidenav">
     <li>
@@ -131,177 +131,224 @@
     <!-- <div class="divider"></div> -->
 
     <!-- Contents in TabUI Setting -->
-    <div id="contents" class="onePage-section background-yellow" style="z-index: 4;">
-      <div class="container">
+    <div id="contents" class="onePage-section" style="z-index: 4;">
+      <div id="tab-container" class="container">
         <!-- TabUI Setting -->
         <div class="row">
-          <ul class="col s12 tabs">
-            <li class="tab col s6"><a href="#moram">모람마루</a></li>
-            <li class="tab col s6"><a href="#jaram">자람마루</a></li>
-          </ul>
-        </div>
-        <!-- Moram Tab -->
-        <div class="row" id="moram">
-          <div class="col s12 m6">
-            <div class="card introducingCard" style="background-color: rgb(242, 225, 195)">
-              <div class="card-image">
-                <img src="assets/img/doorbanner.jpeg" class="">
-              </div>
-              <div class="card-text card-content">
-                <div class="card-text-wrapper">
-                  <h6>모람마루</h6>
-                  <span class="card-title">우리아들 방문여는 법</span>
-                  <!-- Modal Trigger Option -->
-                  <a class="waves-effect waves-light btn modal-trigger black" href="#modal1"><i class="material-icons left black">add</i>More</a>
-                </div>
-              </div>
-            </div>
-            <!-- Modal#1 Structure -->
-            <div id="modal1" class="modal modal-fixed-footer">
-              <div class="modal-content">
-                <img src="assets/img/poster2.png" class="responsive-img center">
-                <p class="flow-text">대학 갈 때가 되었나 봄 </p>
-                <div class="divider"></div>
-                <p class="">모임 소개</p>
-                <p class="">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
-              </div>
-              <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect btn"><i class="material-icons left">close</i>close</a>
-                <a target="_black" href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn yellow indigo-text disabled"><i class="material-icons left">send</i>신청마감</a>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m6">
-            <div class="card introducingCard">
-              <div class="card-image">
-                <img src="assets/img/choibanner.jpeg" class="">
-              </div>
-              <div class="card-text card-content">
-                <div class="card-text-wrapper">
-                  <h6>최영인 작가</h6>
-                  <span class="card-title">사춘기 자녀와 통하기</span>
-                  <!-- Modal Trigger Option -->
-                  <a class="waves-effect waves-light btn modal-trigger black" href="#modal2"><i class="material-icons left black">add</i>More</a>
-                </div>
-              </div>
-            </div>
-            <!-- Modal#2 Structure -->
-            <div id="modal2" class="modal modal-fixed-footer">
-              <div class="modal-content">
-                <img src="assets/img/poster5.jpeg" alt="" class="responsive-img">
-                <p class="flow-text">사춘기 자녀와 통하기 </p>
-                <div class="divider"></div>
-                <p class="">모임 소개</p>
-                <p class="">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
-                <div class="divider"></div>
-                <p class="">연사 소개</p>
-                <p class="">최영인</p>
-                <div class="divider"></div>
-                <p class="">장소 및 시간</p>
-                <p class="">장소 : 양재역 인근</p>
-                <p class="">시간 : 5/25 </p>
-              </div>
-              <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect btn"><i class="material-icons left">close</i>close</a>
-                <a target="_black" href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn yellow indigo-text"><i class="material-icons left">send</i>신청하기</a>
-              </div>
-            </div>
+          <div class='col s12 m12'>
+            <ul class="tabs" id="custom-tabs">
+              <li class="tab col s6 m3"><a href="#moram" class="flow-text scorehvy">모람마루</a></li>
+              <li class="tab col s6 m3 offset-m6"><a href="#jaram" class="flow-text scorehvy">자람마루</a></li>
+            </ul>
           </div>
         </div>
-        <div class="row" id="jaram">
-          <div class="col s12 m6">
-            <div class="card introducingCard" style="background-color: rgb(38, 56, 79)">
-              <div class="card-image">
-                <img src="assets/img/hasoyeonbanner.jpeg" class="">
-              </div>
-              <div class="card-text card-content">
-                <div class="card-text-wrapper">
-                  <h6>언틸번아웃</h6>
-                  <span class="card-title">하소연 해우소</span>
-                  <!-- Modal Trigger Option -->
-                  <a class="waves-effect waves-light btn modal-trigger black" href="#modal3"><i class="material-icons black left">add</i>More</a>
-                </div>
-              </div>
-            </div>
-            <!-- Modal#3 Structure -->
-            <div id="modal3" class="modal modal-fixed-footer">
-              <div class="modal-content">
-                <img src="assets/img/poster4.png" class="responsive-img">
-                <p class="hangeulnuri flow-text">대학 갈 때가 되었나 봄 </p>
-                <div class="divider"></div>
-                <p class="goyang">모임 소개</p>
-                <p class="jejumyeongjo">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
-              </div>
-              <div class="modal-footer">
-                <a target="_black" href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn indigo yellow-text"><i class="material-icons left">send</i>신청하기</a>
-              </div>
-            </div>
+      </div>
+      <!-- Moram Tab -->
+      <div id='moram' class="background-yellow">
+        <!-- Modal Structures must be in out of the container -->
+        <!-- Modal#1 -->
+        <div id="modal1" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <img src="assets/img/poster2.png" class="responsive-img center">
+            <p class="flow-text">대학 갈 때가 되었나 봄 </p>
+            <div class="divider"></div>
+            <p class="">모임 소개</p>
+            <p class="">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
           </div>
-          <div class="col s12 m6">
-            <div class="card introducingCard" style="background-color: rgb(194, 223, 144)">
-              <div class="card-image">
-                <img src="assets/img/collegebanner.jpeg" class="">
-              </div>
-              <div class="card-text card-content">
-                <div class="card-text-wrapper">
-                  <h6>Until Burnout</h6>
-                  <span class="card-title">대학갈 때가 되었나 봄</span>
-                  <!-- Modal Trigger Option -->
-                  <a href="#!" class="modal-close waves-effect btn"><i class="material-icons left">close</i>close</a>
-                  <a class="waves-effect waves-light btn modal-trigger black" href="#modal4"><i class="material-icons black left">add</i>More</a>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect btn"><i class="material-icons left">close</i>close</a>
+            <a target="_black" href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn yellow indigo-text disabled"><i class="material-icons left">send</i>신청마감</a>
+          </div>
+        </div>
+        <!-- Modal#2 -->
+        <div id="modal2" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <img src="assets/img/poster5.jpeg" alt="" class="responsive-img">
+            <p class="flow-text">사춘기 자녀와 통하기 </p>
+            <div class="divider"></div>
+            <p class="">모임 소개</p>
+            <p class="">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
+            <div class="divider"></div>
+            <p class="">연사 소개</p>
+            <p class="">최영인</p>
+            <div class="divider"></div>
+            <p class="">장소 및 시간</p>
+            <p class="">장소 : 양재역 인근</p>
+            <p class="">시간 : 5/25 </p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect btn"><i class="material-icons left">close</i>close</a>
+            <a target="_black" href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn yellow indigo-text"><i class="material-icons left">send</i>신청하기</a>
+          </div>
+        </div>
+
+        <!-- Exposure Area on the Screen -->
+        <div class="container slider-outline">
+          <div class="slider-container">
+            <div class="leftArrow"><i class="material-icons small">keyboard_arrow_left</i></div>
+            <div class="rightArrow"><i class="material-icons small">keyboard_arrow_right</i></div>
+            <div id="moramSlider" class="row slider-box">
+              <div class="col s12 m6">TEIL TEST</div>
+              <!-- #1 Content in Moram -->
+              <div class="col s12 m6">
+                <div class="card introducingCard" style="background-color: rgb(242, 225, 195)">
+                  <div class="card-image">
+                    <img src="assets/img/doorbanner.jpeg" class="">
+                  </div>
+                  <div class="card-text card-content">
+                    <div class="card-text-wrapper">
+                      <h6>모람마루</h6>
+                      <span class="card-title">우리아들 방문여는 법</span>
+                      <!-- Modal Trigger Option -->
+                      <a class="waves-effect waves-light btn modal-trigger black" href="#modal1"><i class="material-icons left black">add</i>More</a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- Modal#4 Structure -->
-            <div id="modal4" class="modal modal-fixed-footer">
-              <div class="modal-content">
-                <img src="assets/img/poster3.jpg" class="responsive-img">
-                <p class="hangeulnuri flow-text">대학 갈 때가 되었나 봄 </p>
-                <div class="divider"></div>
-                <p class="goyang">모임 소개</p>
-                <p class="jejumyeongjo">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고
-                  주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
-              </div>
-              <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect btn"><i class="material-icons left">close</i>close</a>
-                <a target="_black" href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn green red-text"><i class="material-icons left">send</i>신청하기</a>
+              <!-- #2 Content in Moram -->
+              <div class="col s12 m6">
+                <div class="card introducingCard">
+                  <div class="card-image">
+                    <img src="assets/img/choibanner.jpeg" class="">
+                  </div>
+                  <div class="card-text card-content">
+                    <div class="card-text-wrapper">
+                      <h6>최영인 작가</h6>
+                      <span class="card-title">사춘기 자녀와 통하기</span>
+                      <!-- Modal Trigger Option -->
+                      <a class="waves-effect waves-light btn modal-trigger black" href="#modal2"><i class="material-icons left black">add</i>More</a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Jaram Tab -->
+      <div id='jaram' class="background-green">
+        <!-- Modal Structures must be in out of the container -->
+        <!-- Modal#3 -->
+        <div id="modal3" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <img src="assets/img/poster4.png" class="responsive-img">
+            <p class="hangeulnuri flow-text">대학 갈 때가 되었나 봄 </p>
+            <div class="divider"></div>
+            <p class="goyang">모임 소개</p>
+            <p class="jejumyeongjo">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
+          </div>
+          <div class="modal-footer">
+            <a target="_black" href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn indigo yellow-text"><i class="material-icons left">send</i>신청하기</a>
+          </div>
+        </div>
+        <!-- Modal#4 -->
+        <div id="modal4" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <img src="assets/img/poster3.jpg" class="responsive-img">
+            <p class="hangeulnuri flow-text">대학 갈 때가 되었나 봄 </p>
+            <div class="divider"></div>
+            <p class="goyang">모임 소개</p>
+            <p class="jejumyeongjo">고등학교도 왔는데 공부해서 대학은 가아겠는데 공부가 잘안된다. 무조건 좋은 대학가야지 성공한다는 말만 들었지 내가 어떤 대학에 무슨과에 진학해야할지에 대한 목표를 세워야되지 않을까? 학교 선생님들이나 부모님은 너무 오래전에 대학을 나와서 잘모를 것 같고
+              주변에 물어볼 사람이 마땅히 없는데 어떡하지?</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect btn"><i class="material-icons left">close</i>close</a>
+            <a target="_black" href="https://forms.gle/emctNGV1sAmsXfEU8" class="waves-effect waves-light btn green red-text"><i class="material-icons left">send</i>신청하기</a>
+          </div>
+        </div>
+
+        <!-- Exposure Area on the Screen -->
+        <div class="container slider-outline">
+            <div class="slider-container">
+            <div class="leftArrow"><i class="material-icons small">keyboard_arrow_left</i></div>
+            <div class="rightArrow"><i class="material-icons small">keyboard_arrow_right</i></div>
+            <div id="jaramSlider" class="row slider-box">
+              <div class="col s12 m6">TEIL TEST</div>
+              <!-- #1 Content in Jaram -->
+              <div class="col s12 m6">
+                <div class="card introducingCard" style="background-color: rgb(38, 56, 79)">
+                  <div class="card-image">
+                    <img src="assets/img/hasoyeonbanner.jpeg" class="">
+                  </div>
+                  <div class="card-text card-content">
+                    <div class="card-text-wrapper">
+                      <h6>언틸번아웃</h6>
+                      <span class="card-title">하소연 해우소</span>
+                      <!-- Modal Trigger Option -->
+                      <a class="waves-effect waves-light btn modal-trigger black" href="#modal3"><i class="material-icons black left">add</i>More</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- #2 Content in Jaram -->
+              <div class="col s12 m6">
+                <div class="card introducingCard" style="background-color: rgb(194, 223, 144)">
+                  <div class="card-image">
+                    <img src="assets/img/collegebanner.jpeg" class="">
+                  </div>
+                  <div class="card-text card-content">
+                    <div class="card-text-wrapper">
+                      <h6>Until Burnout</h6>
+                      <span class="card-title">대학갈 때가 되었나 봄</span>
+                      <!-- Modal Trigger Option -->
+                      <a class="waves-effect waves-light btn modal-trigger black" href="#modal4"><i class="material-icons black left">add</i>More</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--
+      <i id="btnMore" class="medium material-icons">add_circle_outline</i>
+      <div class="tap-target" data-target="btnMore">
+        <div class="tap-target-content"></div>
+      </div>
+      -->
     </div>
 
     <!-- <div class="divider"></div> -->
 
     <!-- Review Card Setting -->
-    <div id="reviews" class="onePage-section background-green" style="z-index: 3;">
+    <div id="reviews" class="onePage-section background-blue" style="z-index: 3;">
       <div class="container center slider-outline">
-        <div class="fas fa-angle-left"></div>
-        <div class="fas fa-angle-right"></div>
         <span class="flow-text scorehvy" style="font-size:4rem;">어땠을까</span>
-        <div id="reviewSlider" class="row slider-box">
-          <div class="col s12 m6 l6">
-            <div class="card blue-grey darken-1">
-              <div class="card-content white-text">
-                <span class="card-title">Review1</span>
-                <p>와. 역시 백수단 선배님. 완전히 무대를 뒤집어 놓으셨다.</p>
+        <div class="slider-container">
+          <div class="leftArrow"><i class="material-icons small">keyboard_arrow_left</i></div>
+          <div class="rightArrow"><i class="material-icons small">keyboard_arrow_right</i></div>
+          <div id="reviewSlider" class="row slider-box">
+            <div class="col s12 m6 l6">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title">Review1</span>
+                  <p>와. 역시 백수단 선배님. 완전히 무대를 뒤집어 놓으셨다.</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col s12 m6 l6">
-            <div class="card blue-grey darken-1">
-              <div class="card-content white-text left-align">
-                <span class="card-title">Review2</span>
-                <p>와. 역시 백수단 선배님. 완전히 무대를 뒤집어 놓으셨다.</p>
+            <div class="col s12 m6 l6">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text left-align">
+                  <span class="card-title">Review2</span>
+                  <p>와. 역시 백수단 선배님. 완전히 무대를 뒤집어 놓으셨다.</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col s12 m6 l6">
-            <div class="card blue-grey darken-1">
-              <div class="card-content white-text left-align">
-                <span class="card-title">Review3</span>
-                <p>와. 역시 백수단 선배님. 완전히 무대를 뒤집어 놓으셨다.</p>
+            <div class="col s12 m6 l6">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text left-align">
+                  <span class="card-title">Review3</span>
+                  <p>와. 역시 백수단 선배님. 완전히 무대를 뒤집어 놓으셨다.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m6 l6">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text left-align">
+                  <span class="card-title">Review4</span>
+                  <p>와. 역시 백수단 선배님. 완전히 무대를 뒤집어 놓으셨다.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -312,100 +359,102 @@
     <!-- <div class="divider"></div> -->
 
     <!-- Joiner in Slider Setting -->
-    <div id="joiner" class="onePage-section background-blue" style="z-index: 2;">
+    <div id="joiner" class="onePage-section background-indigo" style="z-index: 2;">
       <div class="container center slider-outline">
-        <div class="fas fa-angle-left"></div>
-        <div class="fas fa-angle-right"></div>
         <span class="flow-text scorehvy">함께하는</span>
-        <div id="joinerSlider" class="row slider-box">
-          <div class="col s12 m6 l4">
-            <div class="profile-wrapper">
-              <div class="profile">
-                <div class="profile-image">
-                  <img src="assets/img/kg.jpg" class="responsive-img">
-                </div>
-                <ul class="social-icons">
-                  <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                  <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                  <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                </ul>
-                <div class="details">
-                  <p class="profile-name">이강열</p>
-                  <p class="job-title center-align">Developer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m6 l4">
-            <div class="profile-wrapper">
-              <div class="profile">
-                <div class="profile-image">
-                  <img src="assets/img/choi.jpg" class="responsive-img">
-                </div>
-                <ul class="social-icons">
-                  <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                  <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                  <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                </ul>
-                <div class="details">
-                  <p class="profile-name">최영인</p>
-                  <p class="job-title center-align">Developer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m6 l4">
-            <div class="profile-wrapper">
-              <div class="profile">
-                <div class="profile-image">
-                  <img src="assets/img/bokkrice.jpeg" class="responsive-img">
-                </div>
-                <ul class="social-icons">
-                  <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                  <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                  <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                </ul>
-                <div class="details">
-                  <p class="profile-name">이승복</p>
-                  <p class="job-title center-align">Developer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 m6 l4">
-            <div class="profile-wrapper">
+        <div class="slider-container">
+          <div class="leftArrow"><i class="material-icons small">keyboard_arrow_left</i></div>
+          <div class="rightArrow"><i class="material-icons small">keyboard_arrow_right</i></div>
+          <div id="joinerSlider" class="row slider-box">
+            <div class="col s12 m6 l4">
+              <div class="profile-wrapper">
                 <div class="profile">
-                    <div class="profile-image">
-                        <img src="assets/img/terry.jpeg" class="responsive-img">
-                    </div>
-                    <ul class="social-icons">
-                        <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                    </ul>
-                    <div class="details">
-                        <p class="profile-name">이한결</p>
-                        <p class="job-title center-align">Developer</p>
-                    </div>
+                  <div class="profile-image">
+                    <img src="assets/img/kg.jpg" class="responsive-img">
+                  </div>
+                  <ul class="social-icons">
+                    <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                  </ul>
+                  <div class="details">
+                    <p class="profile-name">이강열</p>
+                    <p class="job-title center-align">Developer</p>
+                  </div>
                 </div>
+              </div>
             </div>
-          </div>
-          <div class="col s12 m6 l4">
-            <div class="profile-wrapper">
+            <div class="col s12 m6 l4">
+              <div class="profile-wrapper">
                 <div class="profile">
-                    <div class="profile-image">
-                        <img src="assets/img/hwang.png" class="responsive-img">
-                    </div>
-                    <ul class="social-icons">
-                        <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                    </ul>
-                    <div class="details">
-                        <p class="profile-name">황제홍</p>
-                        <p class="job-title center-align">Developer</p>
-                    </div>
+                  <div class="profile-image">
+                    <img src="assets/img/choi.jpg" class="responsive-img">
+                  </div>
+                  <ul class="social-icons">
+                    <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                  </ul>
+                  <div class="details">
+                    <p class="profile-name">최영인</p>
+                    <p class="job-title center-align">Developer</p>
+                  </div>
                 </div>
+              </div>
+            </div>
+            <div class="col s12 m6 l4">
+              <div class="profile-wrapper">
+                <div class="profile">
+                  <div class="profile-image">
+                    <img src="assets/img/bokkrice.JPG" class="responsive-img">
+                  </div>
+                  <ul class="social-icons">
+                    <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                  </ul>
+                  <div class="details">
+                    <p class="profile-name">이승복</p>
+                    <p class="job-title center-align">Developer</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m6 l4">
+              <div class="profile-wrapper">
+                  <div class="profile">
+                      <div class="profile-image">
+                          <img src="assets/img/terry.PNG" class="responsive-img">
+                      </div>
+                      <ul class="social-icons">
+                          <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                          <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                          <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                      </ul>
+                      <div class="details">
+                          <p class="profile-name">이한결</p>
+                          <p class="job-title center-align">Developer</p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col s12 m6 l4">
+              <div class="profile-wrapper">
+                  <div class="profile">
+                      <div class="profile-image">
+                          <img src="assets/img/hwang.png" class="responsive-img">
+                      </div>
+                      <ul class="social-icons">
+                          <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                          <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                          <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                      </ul>
+                      <div class="details">
+                          <p class="profile-name">황제홍</p>
+                          <p class="job-title center-align">Developer</p>
+                      </div>
+                  </div>
+              </div>
             </div>
           </div>
         </div>
@@ -415,7 +464,7 @@
     <!-- <div class="divider"></div> -->
 
     <!-- Footer Page Setting -->
-    <div id="contact" class="page-footer onePage-section background-indigo" style="z-index: 1">
+    <div id="contact" class="page-footer onePage-section background-purple" style="z-index: 1">
       <div class="container">
         <div class="row">
           <div class="col m6">
@@ -426,37 +475,35 @@
             </a>
             <p>입금정보 KB국민은행 </p>
           </div>
-          <form class="col m6" action="">
+          <form class="col m6" method ="post" action="assets/php/contact_form.php">
             <div class="row">
               <div class="input-field col">
                 <i class="material-icons prefix">account_circle</i>
-                <input type="text" class="validate" id="name">
+                <input name="name" type="text" class="validate" id="name">
                 <label for="name">이름</label>
               </div>
               <div class="input-field col">
                 <i class="material-icons prefix">email</i>
-                <input type="email" id="email" class="validate">
+                <input name="email" type="email" id="email" class="validate">
                 <label for="email">이메일</label>
-                <span class="helper-text" data-error="올바른 이메일 양식이 아닙니다." data-success="입력완료">입력해주신 이메일로 답장해드리겠습니다.</span>
+                <span class="helper-text white-text" data-error="올바른 이메일 양식이 아닙니다." data-success="입력완료">입력해주신 이메일로 답장해드리겠습니다.</span>
               </div>
               <div class="input-field col">
                 <i class="material-icons prefix">mode_edit</i>
-                <textarea id="message" cols="60" rows="10" class="materialize-textarea modal-trigger" href="#modalEmail"></textarea>
-                <div class="charcter-count" charlength="120"></div>
+                <textarea name="message" id="message" cols="60" rows="10" class="materialize-textarea modal-trigger" href="#modalEmail"></textarea>
+                <button class="btn waves-effect waves-light emailBtn" type="submit" name="action">Submit
+                  <i class="material-icons left">send</i>
+                </button>
               </div>
               <!-- Email Text Input Modal Structure -->
               <div id="modalEmail" class="modal">
                 <div class="modal-content">
-                  <textarea id="modalMessage" cols="100" rows="40" class="active"></textarea>
+                  <textarea id="modalMessage" cols="100" rows="20"></textarea>
+                  <div id="counting" charlength ="200"></div>
                 </div>
                 <div class="modal-footer">
                   <a href="#!" id="inputMessage" class="modal-close waves-effect btn"><i class="material-icons left">close</i>입력완료</a>
                 </div>
-              </div>
-              <div class="col push-l6">
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                  <i class="material-icons left">send</i>
-                </button>
               </div>
             </div>
           </form>
@@ -477,15 +524,7 @@
   <script src="assets/js/initializeMaterial.js"></script>
   <script src="assets/js/slideEffect.js"></script>
   <script src="assets/js/scrollEvent.js"></script>
-  <script src="assets/js/modal.js"></script>
-  <!--
-  <script src = "http://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('textarea#message').characterCounter();
-    });
-  </script>
--->
+  <script src="assets/js/emailForm.js"></script>
 
 </body>
 
