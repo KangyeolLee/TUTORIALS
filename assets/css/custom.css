@@ -340,8 +340,7 @@ textarea{
 ------ Navbar Css Option ------
 *******************************/
 #navbar {
-  //background-color: rgba(255, 255, 255, 0.5);
-  background-color:inherit;
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 
@@ -589,6 +588,21 @@ textarea{
 #custom-tabs .tab a.active {
   background-color: rgba(0, 0, 0, 0.6) !important;
   color: white;
+}
+/******************************
+------ ModalContent CSS Option ------
+*******************************/
+#moram .modal-content p{
+  padding: 0 0.8rem 0 0.8rem;
+  line-height: 1.7rem;
+  margin:0;
+}
+#moram .modal-content h5{
+  margin-bottom: 20px;
+  color: salmon;
+}
+#moram .divider{
+  margin : 30px;
 }
 /***** More Buttom CSS *****/
 #btnMore {
