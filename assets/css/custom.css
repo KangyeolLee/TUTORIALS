@@ -596,10 +596,12 @@ textarea{
   padding: 0 0.8rem 0 0.8rem;
   line-height: 1.7rem;
   margin:0;
+  font-family: GoyangIlsan, sans-serif;
 }
 #moram .modal-content h5{
   margin-bottom: 20px;
   color: salmon;
+  font-family: S-CoreDream-8Heavy, sans-serif;
 }
 #moram .divider{
   margin : 30px;
@@ -608,10 +610,12 @@ textarea{
   padding: 0 0.8rem 0 0.8rem;
   line-height: 1.7rem;
   margin:0;
+  font-family: GoyangIlsan, sans-serif;
 }
 #jaram .modal-content h5{
   margin-bottom: 20px;
   color: salmon;
+  font-family: S-CoreDream-8Heavy, sans-serif;
 }
 #jaram .divider{
   margin : 30px;
