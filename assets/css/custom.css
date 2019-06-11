@@ -923,7 +923,8 @@ textarea .trigger:hover{
 
 }
 #modalEmail .modal-content{
-  padding: 5% !important;
+  padding: 5%;
+  padding-bottom: 0;
 }
 #modalMessage{
   width: 100%;
@@ -931,7 +932,6 @@ textarea .trigger:hover{
   padding: 2%;
   line-height: 1.4rem;
 }
-
 #modalMessage:focus{
   outline:none;
 }
