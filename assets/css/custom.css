@@ -544,6 +544,13 @@ textarea{
   #bannerText li {
     font-size: 3rem;
   }
+  .modal{
+    max-height: 88%;
+    height: 100%;
+  }
+  .modal.modal-fixed-footer{
+    height: 88%;
+  }
 }
 
 /******************************
