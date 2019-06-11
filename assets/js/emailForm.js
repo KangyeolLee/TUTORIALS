@@ -9,6 +9,11 @@ inputMessage.addEventListener('click', () => {
 
 
 //const textarea = document.querySelector('#modalMessage');
+const text = modalMessage.value;
+const length = text.length;
+charlength = document.querySelector(`div[charlength]`);
+const value = charlength.getAttribute('charlength');
+document.getElementById('counting').innerHTML= length + "/"+ value;
 modalMessage.addEventListener('keyup', ()=>{
   const text = modalMessage.value;
   const length = text.length;
