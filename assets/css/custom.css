@@ -547,6 +547,7 @@ textarea{
   .modal{
     max-height: 88%;
     height: 100%;
+    width: 95%;
   }
   .modal.modal-fixed-footer{
     height: 88%;
