@@ -553,9 +553,9 @@ textarea{
 #tab-container {
   position: absolute;
   z-index: 1;
-  top: 20%;
+  top: 15%;
   left: 50%;
-  transform: translate(-50%, -20%);
+  transform: translateX(-50%);
 }
 #moram, #jaram {
   z-index: 0;
@@ -603,8 +603,20 @@ textarea{
 /******************************
 ---- Review Cards Section ----
 *******************************/
+#reviews .slider-outline {
+  margin-top: 10rem;
+}
+#reviews > h3 {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
 #reviews #reviewSlider .card-reveal {
   background: rgba(0, 0, 0, 0.82) !important;
+}
+#reviews #reviewSlider .card-content {
+  padding: 15px !important;
 }
 
 /******************************
@@ -710,6 +722,16 @@ Card Effects in TabUI Contents
 /*****************************
 ----- Profile Css Option -----
 *****************************/
+/**** JOINER CSS OPTION ****/
+#joiner > h3 {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#joiner .slider-outline {
+  margin-top: 10rem;
+}
 .profile-wrapper {
   width: 100%;
   min-width: 17rem;
