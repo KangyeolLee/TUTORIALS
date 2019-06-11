@@ -4589,7 +4589,7 @@ small {
 
 @media only screen and (min-width: 360px) {
   .flow-text {
-    font-size: 1.2rem !important; 
+    font-size: 1.2rem !important;
   }
 }
 
@@ -6701,8 +6701,8 @@ textarea.materialize-textarea {
   padding: .8rem .8rem .8rem .8rem;
   /* prevents text jump on Enter keypress */
   resize: none;
-  min-height: 12rem;
-  max-height: 12rem;
+  min-height: 14rem;
+  max-height: 14rem;
   border: 1px solid;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
