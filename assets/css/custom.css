@@ -936,7 +936,6 @@ textarea .trigger:hover{
 #counting{
   color: black;
   float: right;
-  margin-top: 23px;
 }
 #counting:after{
   content:"";
@@ -948,15 +947,16 @@ textarea .trigger:hover{
   right: 0.75rem;
   color: black;
   background: white;
-
 }
 #modalEmail .modal-content{
   padding: 5%;
   padding-bottom: 0;
 }
+#modalEmail .modal-footer{
+  clear:both;
+}
 #inputMessage{
-  float: left;
-  margin-left: 3%;
+  margin-right: 4.2%;
 }
 #modalMessage{
   width: 100%;
@@ -966,6 +966,15 @@ textarea .trigger:hover{
 }
 #modalMessage:focus{
   outline:none;
+}
+@media only screen and (max-width:600px) {
+  #counting{
+    margin-top: 23px;
+  }
+  #inputMessage{
+    float: left;
+    margin-left: 3%;
+  }
 }
 
 /*
