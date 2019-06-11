@@ -914,6 +914,7 @@ textarea .trigger:hover{
 #counting{
   color: black;
   float: right;
+  margin-top: 23px;
 }
 #counting:after{
   content:"";
@@ -931,8 +932,9 @@ textarea .trigger:hover{
   padding: 5%;
   padding-bottom: 0;
 }
-#modalEmail .modal-footer{
-  clear:both;
+#inputMessage{
+  float: left;
+  margin-left: 3%;
 }
 #modalMessage{
   width: 100%;
