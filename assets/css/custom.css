@@ -642,29 +642,25 @@ textarea{
 /******************************
 ------ ModalFooter CSS Option ------
 *******************************/
-#moram .modal .modal-footer .close-btn{
+.modal-footer .close-btn{
   float: right;
   right: 2rem;
   background-color: rgb(239, 244, 255);
   color: black;
 }
-#moram .modal .modal-footer .send-btn{
+.modal-footer .send-btn{
   float: left;
   left: 2rem;
   background-color: rgb(239, 244, 255);
   color: black;
 }
-#jaram .modal .modal-footer .close-btn{
-  float: right;
-  right: 2rem;
-  background-color: rgb(239, 244, 255);
-  color: black;
-}
-#jaram .modal .modal-footer .send-btn{
-  float: left;
-  left: 2rem;
-  background-color: rgb(239, 244, 255);
-  color: black;
+@media only screen and (max-width:600px){
+  .modal-footer .close-btn{
+    right: 0;
+  }
+  .modal-footer .send-btn{
+    left: 0;
+  }
 }
 /***** More Buttom CSS *****/
 #btnMore {
