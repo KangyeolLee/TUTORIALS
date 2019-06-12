@@ -955,6 +955,9 @@ textarea .trigger:hover{
   color: black;
   background: white;
 }
+.emailBtn:hover{
+  background-color: lightyellow;
+}
 #modalEmail .modal-content{
   padding: 5%;
   padding-bottom: 0;
@@ -977,6 +980,9 @@ textarea .trigger:hover{
 @media only screen and (max-width:600px) {
   #counting{
     margin-top: 23px;
+  }
+  #modalEmail .modal-footer{
+    clear:none;
   }
   #inputMessage{
     float: left;
