@@ -639,6 +639,33 @@ textarea{
     height: 88%;
   }
 }
+/******************************
+------ ModalFooter CSS Option ------
+*******************************/
+#moram .modal .modal-footer .close-btn{
+  float: right;
+  right: 2rem;
+  background-color: rgb(239, 244, 255);
+  color: black;
+}
+#moram .modal .modal-footer .send-btn{
+  float: left;
+  left: 2rem;
+  background-color: rgb(239, 244, 255);
+  color: black;
+}
+#jaram .modal .modal-footer .close-btn{
+  float: right;
+  right: 2rem;
+  background-color: rgb(239, 244, 255);
+  color: black;
+}
+#jaram .modal .modal-footer .send-btn{
+  float: left;
+  left: 2rem;
+  background-color: rgb(239, 244, 255);
+  color: black;
+}
 /***** More Buttom CSS *****/
 #btnMore {
   position: absolute;
@@ -714,6 +741,10 @@ Card Effects in TabUI Contents
   position: absolute;
   top:50%;
   transform: translate(-24px, -50%);
+}
+.card-text .card-text-wrapper .btn{
+  margin-top: 2rem;
+  background-color: rgba(148,158,170,0.9);
 }
 
 /******************************
