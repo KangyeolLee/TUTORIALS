@@ -739,7 +739,7 @@ Card Effects in TabUI Contents
   transform: translate(-24px, -50%);
 }
 .card-text .card-text-wrapper .btn{
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   background-color: rgba(148,158,170,0.9);
 }
 
@@ -801,7 +801,7 @@ Card Effects in TabUI Contents
 /**** JOINER CSS OPTION ****/
 #joiner > h3 {
   position: absolute;
-  top: 10%;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
 }
