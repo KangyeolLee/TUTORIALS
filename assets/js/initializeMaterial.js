@@ -14,7 +14,7 @@ const elemsMaterialboxed = document.querySelectorAll('.materialboxed');
 const instanceMaterialboxed = M.Materialbox.init(elemsMaterialboxed);
 
 const elemsTabs = document.querySelectorAll('.tabs');
-const instacneTabs = M.Tabs.init(elemsTabs, {
+const instanceTabs = M.Tabs.init(elemsTabs, {
   //swipeable : true
 });
 

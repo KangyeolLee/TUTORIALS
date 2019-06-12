@@ -267,10 +267,10 @@ textarea{
   position: absolute;
 }
 .background-red {
-  background-color: #ef5350;
+  background-color: #a5d6a7;
   background-image:
-    linear-gradient(#ca2b2b9c 1px, transparent 1px),
-    linear-gradient(90deg, #ca2b2b9c 1px, transparent 1px);
+    linear-gradient(#72af7467 1px, transparent 1px),
+    linear-gradient(90deg, #72af7467 1px, transparent 1px);
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
@@ -279,10 +279,10 @@ textarea{
   background: linear-gradient(90deg, #eeceff 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
   background-size: 200px 150px;
   */
-  background-color: #f57c00;
+  background-color: #81c784;
   background-image:
-    linear-gradient(#d36900b6 1px, transparent 1px),
-    linear-gradient(90deg, #d36900b6 1px, transparent 1px);
+    linear-gradient(#609e63b4 1px, transparent 1px),
+    linear-gradient(90deg, #609e63b4 1px, transparent 1px);
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
@@ -295,10 +295,10 @@ textarea{
   background: linear-gradient(90deg, #f9c3a9 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
   background-size: 200px 150px;
   */
-  background-color: #fbc02d;
+  background-color: #66bb6a;
   background-image:
-    linear-gradient(#e0a307c7 1px, transparent 1px),
-    linear-gradient(90deg, #e0a307c7 1px, transparent 1px);
+    linear-gradient(#4b884fc5 1px, transparent 1px),
+    linear-gradient(90deg, #4b884fc5 1px, transparent 1px);
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
@@ -307,7 +307,7 @@ textarea{
   background: linear-gradient(90deg, #fff9bc 199px, transparent 1%) center, linear-gradient(rgba(255,255,255,0.2) 150px, transparent 1%) center, #9393f9;
   background-size: 200px 150px;
   */
-  background-color: #43a047;
+  background-color: #4caf50;
   background-image:
     linear-gradient(#2e8532d7 1px, transparent 1px),
     linear-gradient(90deg, #2e8532d7 1px, transparent 1px);
@@ -315,26 +315,26 @@ textarea{
   background-position: -1px -1px;
 }
 .background-blue{
-  background-color: #0277bd;
+  background-color: #a1887f;
   background-image:
-    linear-gradient(#025483cc 1px, transparent 1px),
-    linear-gradient(90deg, #025483cc 1px, transparent 1px);
+    linear-gradient(#795d539c 1px, transparent 1px),
+    linear-gradient(90deg, #795d539c 1px, transparent 1px);
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
 .background-indigo{
-  background-color: #172066;
+  background-color: #8d6e63;
   background-image:
-    linear-gradient(#131a50cc 1px, transparent 1px),
-    linear-gradient(90deg, #131a50cc 1px, transparent 1px);
+    linear-gradient(#72554ba9 1px, transparent 1px),
+    linear-gradient(90deg, #72554ba9 1px, transparent 1px);
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
 .background-purple{
-  background-color: #5c096d;
+  background-color: #795548;
   background-image:
-    linear-gradient(#3b0c44d2 1px, transparent 1px),
-    linear-gradient(90deg, #3b0c44d2 1px, transparent 1px);
+    linear-gradient(#5f413698 1px, transparent 1px),
+    linear-gradient(90deg, #5f413698 1px, transparent 1px);
   background-size: 180px 400px;
   background-position: -1px -1px;
 }
@@ -785,8 +785,8 @@ Card Effects in TabUI Contents
   transform: translateY(-50%);
   transition: .1s;
   height: 50px;
-  background-color: rgba(0,0,0,0.1);
-  color: rgba(255, 255, 255, 0.705);
+  background-color: rgba(0,0,0,0.31);
+  color: rgba(255, 255, 255, 0.895);
 }
 .rightArrow {
   position: absolute;
@@ -797,8 +797,8 @@ Card Effects in TabUI Contents
   transform: translateY(-50%);
   transition: .1s;
   height: 50px;
-  background-color: rgba(0,0,0,0.1);
-  color: rgba(255, 255, 255, 0.705);
+  background-color: rgba(0,0,0,0.31);
+  color: rgba(255, 255, 255, 0.895);
 }
 
 .rightArrow:hover, .leftArrow:hover {
@@ -983,6 +983,9 @@ Card Effects in TabUI Contents
 #email {
   max-width: 410px;
 }
+#message {
+  overflow: auto !important;
+}
 
 textarea .trigger:hover{
   box-shadow: 0 0.875rem 1.75rem rgba(0,0,0, 0.25), 0 0.625rem 0.625rem rgba(0, 0, 0, 0.22);
@@ -1039,8 +1042,7 @@ textarea .trigger:hover{
     margin-left: 3%;
   }
 }
-
-
+/***** only for Mobile *****/
 #subinfos-mobile {
   position: absolute;
   bottom: 20px;
@@ -1051,6 +1053,8 @@ textarea .trigger:hover{
 #subinfos-mobile .col p {
   margin: 0 !important;
 }
+
+
 /*
 input{
   visibility: hidden;

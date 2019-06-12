@@ -1,5 +1,7 @@
 const bannerText = document.querySelector('#bannerText');
 const onePage_section = document.querySelectorAll('.onePage-section');
+const textareaMessage = document.querySelector('#message');
+const inputField = document.querySelectorAll('input');
 const animationDuration = 1000;
 const idlePeriod = 100;
 let pageArray = [];
@@ -83,7 +85,11 @@ function directScroll(delta) {
 }
 function downScroll() {
   if(document.querySelector('.modal-overlay') !== null) return;
+  if(document.activeElement === textareaMessage || document.activeElement === inputField[0] || document.activeElement === inputField[1]) return;
   if(index === onePage_section.length - 1) return;
+  instanceTooltips.forEach(v=> {
+    v.close();
+  });
 
   onePage_section.forEach((section, i) => {
     if (i === index) {
@@ -94,6 +100,10 @@ function downScroll() {
 }
 function upScroll() {
   if(document.querySelector('.modal-overlay') !== null) return;
+  if(document.activeElement === textareaMessage || document.activeElement === inputField[0] || document.activeElement === inputField[1]) return;
+  instanceTooltips.forEach(v=> {
+    v.close();
+  });
 
   onePage_section.forEach((section, i) => {
     if (i === index) {
@@ -109,6 +119,11 @@ function touchScrollMove(event) {
   var point = event.target.closest('.onePage-section');
   if(Math.abs(pageY1 - pageY2) < 100) return;
   if(document.querySelector('.modal-overlay') !== null) return;
+  if(document.activeElement === textareaMessage || document.activeElement === inputField[0] || document.activeElement === inputField[1]) return;
+  instanceTooltips.forEach(v=> {
+    v.close();
+  });
+
   if(pageY1 === 0 || pageY2 === 0) {
     pageY1 = 0;
     pageY2 = 0;
