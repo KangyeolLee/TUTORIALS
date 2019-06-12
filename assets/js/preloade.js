@@ -10,7 +10,9 @@ const bannerTextElement = document.querySelector('#bannerText');
 
 window.addEventListener('load', function() {
     console.log('completed load');
-    doneProgressbar()
+    //doneProgressbar() /* Preloader Funtion declared for Loading Speed improvement */
+    bannerTextElement.classList.remove('hidden');
+    fadeIn(fixedNavbar);
 });
 
 function doneProgressbar() {
