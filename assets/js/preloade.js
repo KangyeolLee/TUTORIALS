@@ -45,10 +45,6 @@ function fadeOut(element) {
 
 function fadeIn(element) {
     element.style.animation = 'fadeIn 1.5s forwards';
-    element.addEventListener('animationend', function() {
-        preLoader.classList.add('screenout');
-        presentBanner();
-    });
 }
 
 function presentBanner() {
