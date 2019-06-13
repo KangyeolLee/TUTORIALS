@@ -247,10 +247,28 @@ textarea{
     transform: translate(0);
   }
 }
+/*******************************
+---- Pagination Css Option ----
+*******************************/
+#pagination {
+  position: absolute;
+  top: 50%;
+  right: .75rem;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+#pagination li {
+  border: 1px solid black;
+  margin-bottom: 1rem;
+  width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+}
 
 /*******************************
 ------ Sidenav Css Option ------
 *******************************/
+
 
 /*******************************
 ------ OnePage Css Option ------
@@ -977,8 +995,9 @@ Card Effects in TabUI Contents
     padding-right: 0;
   }
 }
+
 /******************************
--- Input Modal CSS Form --
+---- Input Modal CSS Form ----
 *******************************/
 #name {
   max-width: 150px;
@@ -1057,7 +1076,29 @@ textarea .trigger:hover{
   margin: 0 !important;
 }
 
+/******************************
+----- Scrollbar CSS Form -----
+*******************************/
+/* width */
+::-webkit-scrollbar {
+  width: 5.5px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #795548; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 /*
 input{
   visibility: hidden;
