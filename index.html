@@ -502,31 +502,35 @@
     <!-- <div class="divider"></div> -->
 
     <!-- Footer Page Setting -->
-    <div id="contact" class="page-footer onePage-section background-purple" style="z-index: 1">
+    <div id="contact" class="onePage-section background-purple" style="z-index: 1">
       <div class="container">
         <div class="row">
-          <div class="col s12 m12 l6 hide-on-small-only">
-            <p class="col m6 l12">이용약관</p>
-            <p class="col m6 l12">개인정보 처리방침</p>
-            <a href="#!" class="col m6 l12">
-              <p>사업자정보확인</p>
-            </a>
-            <p class="col m6 l12">입금정보 KB국민은행 </p>
+          <div id="subInfos" class="col s12 m12 l6">
+            <div class="col s12 m6 l12">
+              <p class="col s12 m12 l12"><a href="https://www.facebook.com/%EB%AA%A8%EB%9E%8C%EB%A7%88%EB%A3%A8-970537829959858/" target="_blank" class="scorelt"><i class="fab fa-facebook-square small"></i>페이스북 바로가기</a></p>
+              <p class="col s12 m12 l12"><a href="https://www.instagram.com/u.bo_official/" target="_blank" class="scorelt"><i class="fab fa-instagram small"></i>인스타그램 바로가기</a></p>
+              <p class="col s12 m12 l12"><a href="https://blog.naver.com/untilburnout" target="_blank" class="scorelt"><i class="fab fa-blogger small"></i>네이버블로그 바로가기</a></p>    
+            </div>
+            <div class="col s12 m6 l12">
+              <p class="col s12 m12 l12"><a href="tel:010-9218-1633" target="_blank" class="scorelt"><i class="fas fa-phone-square small"></i>전화하기</a></p>
+              <p class="col s12 m12 l12"><a href="sms:010-9218-1633" target="_blank" class="scorelt"><i class="fas fa-comment-dots small"></i>문자하기</a></p>
+            </div>
           </div>
-          <form class="row" method ="post" action="assets/php/contact_form.php">
-            <div class="col s12 m12 l6">
-              <div class="input-field">
+          <form class="col s12 m12 l6" method ="post" action="assets/php/contact_form.php">
+            <div class="col s12 m12 l12">
+              <span class="col s12 m12 l12 scorehvy">메일로 문의하기</span>
+              <div class="input-field col s12 m12 l12">
                 <i class="material-icons prefix">account_circle</i>
                 <input name="name" type="text" class="validate" id="name">
                 <label for="name">이름</label>
               </div>
-              <div class="input-field">
+              <div class="input-field col s12 m12 l12">
                 <i class="material-icons prefix">email</i>
                 <input name="email" type="email" id="email" class="validate">
                 <label for="email">이메일</label>
                 <span class="helper-text" data-error="올바른 이메일 양식이 아닙니다." data-success="입력완료"></span>
               </div>
-              <div class="input-field">
+              <div class="input-field col s12 m12 l12">
                 <i class="material-icons prefix">mode_edit</i>
                 <textarea name="message" placeholder="하고픈 말" id="message" cols="60" rows="10" class="materialize-textarea modal-trigger" href="#modalEmail"></textarea>
                 <button class="btn waves-effect waves-light emailBtn" type="submit" name="action">Submit
@@ -545,14 +549,7 @@
               </div>-->
             </div>
           </form>
-          <div id="subinfos-mobile" class="col s12 hide-on-med-and-up">
-            <p class="col s6">이용약관</p>
-            <p class="col s6">개인정보 처리방침</p>
-            <a href="#!" class="col s6">
-              <p>사업자정보확인</p>
-            </a>
-            <p class="col s6">입금정보 KB국민은행 </p>
-          </div>
+          
 
             <!-- <p>Contact</p>
             <p>대표번호 : 010-5050-6912</p>
@@ -560,6 +557,22 @@
             <p>오시는 곳 : 서울시 강남구 언주로98길 25, 청담빌딩 5층</p> -->
           </div>
         </div>
+        <footer id="footer" class="page-footer">
+          <div class="container">
+            <div class="row center">
+              <div class="col s12 m6 l6">
+                <p>이용약관</p>
+                <p>개인정보 처리방침</p>
+                <p>사업자 정보확인</p>
+              </div>
+              <div class="col s12 m6 l6">
+                <p>입금정보 KB국민은행</p>
+                <p>오시는 길</p>
+                <p>서울시 강남구 언주로98길 25, 청담빌딩 5층</p>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   </div></main>

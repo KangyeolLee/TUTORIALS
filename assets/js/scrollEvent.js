@@ -25,12 +25,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   /* Touch on Screen Event Handler */
   main.addEventListener('touchstart', function(e) {
+    if(e.target.id === 'message') return;
     pageY1 = e.targetTouches[0].pageY;
   });
   main.addEventListener('touchmove', function(e) {
+    if(e.target.id === 'message') return;
     pageY2 = e.targetTouches[0].pageY;
   })
   main.addEventListener('touchend', function(e) {
+    if(e.target.id === 'message') return;
     var timeNow = new Date().getTime();
 
     if(timeNow - lastAnimation < idlePeriod + animationDuration) {
@@ -123,6 +126,7 @@ function touchScrollMove(event) {
   if(Math.abs(pageY1 - pageY2) < 100) return;
   if(document.querySelector('.modal-overlay') !== null) return;
   if(document.activeElement === textareaMessage || document.activeElement === inputField[0] || document.activeElement === inputField[1]) return;
+  if(scrollAblePage.scrollTop !== 0) return;
   instanceTooltips.forEach(v=> {
     v.close();
   });

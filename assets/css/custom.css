@@ -285,7 +285,13 @@ textarea{
   position: absolute;
 }
 .onePage-section:last-child {
-  position: static;
+  display: block !important;
+  position: static !important;
+  color: white;
+  height: auto;
+  overflow: unset;
+  //height: calc(100vh + 20vh);
+  //align-items: unset !important;
 }
 .background-red {
   background-color: #a5d6a7;
@@ -1008,6 +1014,37 @@ Card Effects in TabUI Contents
 #message {
   overflow: auto !important;
 }
+#contact .row .col {
+  padding: 0 !important;
+}
+#contact .hide-on-small-only a {
+  color: white !important;
+}
+#contact .hide-on-small-only a i {
+  margin-right: 2rem;
+}
+#contact > .container {
+  height: auto;
+}
+#contact > .container > .row {
+  padding: 50% 0;
+}
+
+#subInfos{
+  margin-bottom: 3rem;
+}
+#subInfos a {
+  color: white;
+}
+#subInfos a i {
+  margin-right: 2rem;
+}
+#subInfos div:last-child {
+  margin-bottom: 3rem;
+}
+form > div > span {
+  font-size: 2.5rem;
+}
 
 textarea .trigger:hover{
   box-shadow: 0 0.875rem 1.75rem rgba(0,0,0, 0.25), 0 0.625rem 0.625rem rgba(0, 0, 0, 0.22);
@@ -1064,16 +1101,12 @@ textarea .trigger:hover{
     margin-left: 3%;
   }
 }
-/***** only for Mobile *****/
-#subinfos-mobile {
-  position: absolute;
-  bottom: 20px;
-}
-#subinfos-mobile .col {
-  margin: 0 !important;
-}
-#subinfos-mobile .col p {
-  margin: 0 !important;
+
+/******************************
+------- Footer CSS Form -------
+*******************************/
+#footer {
+  height: 100%;
 }
 
 /******************************
@@ -1082,11 +1115,12 @@ textarea .trigger:hover{
 /* width */
 ::-webkit-scrollbar {
   width: 5.5px;
+  background: transparent;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #795548; 
+  display: none;
 }
  
 /* Handle */
@@ -1095,6 +1129,9 @@ textarea .trigger:hover{
   border-radius: 3px;
 }
 
+::-webkit-scrollbar-track-piece {
+  display: none;
+}
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
