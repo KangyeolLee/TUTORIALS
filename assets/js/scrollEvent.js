@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if(timeNow - lastAnimation < idlePeriod + animationDuration) {
       console.log('animation delayed...');
+      pageY1 = 0;
+      pageY2 = 0;
       return;
     } else {
       touchScrollMove(e);
@@ -123,19 +125,18 @@ function upScroll() {
 /* Touch Event on Scrolling */
 function touchScrollMove(event) {
   var point = event.target.closest('.onePage-section');
-  if(Math.abs(pageY1 - pageY2) < 100) return;
+  if(Math.abs(pageY1 - pageY2) < 100 || pageY1 === 0 || pageY2 === 0) {
+    pageY1 = 0;
+    pageY2 = 0;
+    return;
+  }
+
   if(document.querySelector('.modal-overlay') !== null) return;
   if(document.activeElement === textareaMessage || document.activeElement === inputField[0] || document.activeElement === inputField[1]) return;
   if(scrollAblePage.scrollTop !== 0) return;
   instanceTooltips.forEach(v=> {
     v.close();
   });
-
-  if(pageY1 === 0 || pageY2 === 0) {
-    pageY1 = 0;
-    pageY2 = 0;
-    return;
-  }
 
   if(pageY1 > pageY2 && index !== onePage_section.length - 1) {
     point.style.transform = 'translateY(-100%)';                          //

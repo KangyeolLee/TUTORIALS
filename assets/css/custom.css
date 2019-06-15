@@ -853,7 +853,6 @@ Card Effects in TabUI Contents
 }
 .profile-wrapper {
   width: 100%;
-  min-width: 17rem;
   min-height: 25rem;
   position: relative;
 }
@@ -1024,10 +1023,15 @@ Card Effects in TabUI Contents
   margin-right: 2rem;
 }
 #contact > .container {
-  height: auto;
+  height: 100vh;
 }
 #contact > .container > .row {
-  padding: 50% 0;
+  padding: 30% 0 50% 0;
+}
+@media only screen and (max-width:600px) {
+  #contact > .container {
+    height: auto;
+  }
 }
 
 #subInfos{
