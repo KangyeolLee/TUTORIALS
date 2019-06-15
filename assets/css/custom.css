@@ -771,16 +771,12 @@ Card Effects in TabUI Contents
   margin-right: 2rem;
 }
 #contact > .container {
-  height: 100vh;
+  height: auto;
 }
 #contact > .container > .row {
-  padding: 30% 0 50% 0;
+  padding: 30% 0 40% 0;
 }
-@media only screen and (max-width:600px) {
-  #contact > .container {
-    height: auto;
-  }
-}
+
 
 #subInfos{
   margin-bottom: 3rem;
@@ -859,6 +855,7 @@ textarea .trigger:hover{
 *******************************/
 #footer {
   height: 100%;
+  margin: 0 -100%;
 }
 
 /******************************
