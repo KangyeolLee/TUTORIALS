@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
     pageY2 = e.targetTouches[0].pageY;
   })
   main.addEventListener('touchend', function(e) {
-    if(e.target.id === 'message') return;
     var timeNow = new Date().getTime();
 
+    if(e.target.id === 'message') return;
     if(timeNow - lastAnimation < idlePeriod + animationDuration) {
       console.log('animation delayed...');
       pageY1 = 0;
@@ -84,12 +84,6 @@ function wheelEnd() {
 /* Mouse Wheel Event on Scrolling */
 function directScroll(delta) {
   var timeNow = new Date().getTime();
-
-  if(index === 5) {
-    contactPage.style.position = 'unset';
-  } else {
-    contactPage.style.position = 'absolute';
-  }
   
   if(timeNow-lastAnimation < idlePeriod + animationDuration) {
     console.log('animation delayed');
@@ -106,6 +100,8 @@ function downScroll() {
     v.close();
   });
 
+  if (index === 4) contactPage.style.position = 'unset';
+
   onePage_section.forEach((section, i) => {
     if (i === index) {
       section.style.transform = 'translateY(-100%)';
@@ -120,6 +116,8 @@ function upScroll() {
   instanceTooltips.forEach(v=> {
     v.close();
   });
+  
+  if(index === 5) contactPage.style.position = 'absolute';
 
   onePage_section.forEach((section, i) => {
     if (i === index) {
@@ -133,11 +131,6 @@ function upScroll() {
 /* Touch Event on Scrolling */
 function touchScrollMove(event) {
   var point = event.target.closest('.onePage-section');
-  if(index === 5) {
-    contactPage.style.position = 'unset';
-  } else {
-    contactPage.style.position = 'absolute';
-  }
 
   if(Math.abs(pageY1 - pageY2) < 100 || pageY1 === 0 || pageY2 === 0) {
     pageY1 = 0;
@@ -153,10 +146,12 @@ function touchScrollMove(event) {
   });
 
   if(pageY1 > pageY2 && index !== onePage_section.length - 1) {
-    point.style.transform = 'translateY(-100%)';                          //
+    point.style.transform = 'translateY(-100%)';   
+    if (index === 4) contactPage.style.position = 'unset';                //
     if(index < 5 && index >= 0) index++;                                  //  onePage-section 클래스 간에
   } else if(pageY2 > pageY1 && point.previousElementSibling !== null) {   //  divider 등과 같은 다른 클래스 및
     point.previousElementSibling.style.transform = 'translateY(0px)';     //  태그요소가 존재하지 않을 경우 작동
+    if (index === 5) contactPage.style.position = 'absolute';                //  
     if(index <= 5 && index > 0) index--;                                  //
   } else return;
 
