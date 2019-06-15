@@ -284,6 +284,7 @@ textarea{
   transition: transform 1s ease-in-out;
   position: absolute;
 }
+/*
 .onePage-section:last-child {
   display: block !important;
   position: static !important;
@@ -293,6 +294,7 @@ textarea{
   //height: calc(100vh + 20vh);
   //align-items: unset !important;
 }
+*/
 .background-red {
   background-color: #a5d6a7;
   background-image:
