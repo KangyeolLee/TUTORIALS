@@ -19,7 +19,7 @@ textarea{
   height: 100vh;
   width: 100vw;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: auto;
 }
 
 /******************************
@@ -284,17 +284,14 @@ textarea{
   transition: transform 1s ease-in-out;
   position: absolute;
 }
-/*
+
 .onePage-section:last-child {
   display: block !important;
   position: static !important;
   color: white;
   height: auto;
-  overflow: unset;
-  //height: calc(100vh + 20vh);
-  //align-items: unset !important;
 }
-*/
+
 .background-red {
   background-color: #a5d6a7;
   background-image:
