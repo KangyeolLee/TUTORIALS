@@ -8,6 +8,7 @@ const idlePeriod = 100;
 let pageArray = [];
 let counter1=0, counter2;
 let marker = true;
+
 let lastAnimation = 0;
 let index = 0;
 
@@ -82,6 +83,12 @@ function wheelEnd() {
 
 /* Mouse Wheel Event on Scrolling */
 function directScroll(delta) {
+  if(index === 5) {
+    scrollAblePage.style.overflowY = 'scroll';
+  } else {
+    scrollAblePage.style.overflowY = 'unset';
+  }
+
   var timeNow = new Date().getTime();
   if(timeNow-lastAnimation < idlePeriod + animationDuration) {
     console.log('animation delayed');
@@ -124,6 +131,12 @@ function upScroll() {
 
 /* Touch Event on Scrolling */
 function touchScrollMove(event) {
+  if(index === 5) {
+    scrollAblePage.style.overflowY = 'scroll';
+  } else {
+    scrollAblePage.style.overflowY = 'unset';
+  }
+  
   var point = event.target.closest('.onePage-section');
   if(Math.abs(pageY1 - pageY2) < 100 || pageY1 === 0 || pageY2 === 0) {
     pageY1 = 0;

@@ -18,8 +18,8 @@ textarea{
 .prevent-iPhone-overscroll {
   height: 100vh;
   width: 100vw;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: auto;
+  overflow-y: unset;
+  -webkit-overflow-scrolling: touch;
 }
 
 /******************************
