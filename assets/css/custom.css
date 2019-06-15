@@ -290,6 +290,7 @@ textarea{
   position: static !important;
   color: white;
   height: auto;
+  overflow-y: scroll;
 }
 
 .background-red {
