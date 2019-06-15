@@ -11,12 +11,13 @@ main {
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
   position: fixed;
+  overflow-y: scroll;
 }
 textarea{
   resize: none;
 }
 .prevent-iPhone-overscroll {
-  height: 100vh;
+  //height: 100vh;
   width: 100vw;
   //overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
