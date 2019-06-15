@@ -9,9 +9,8 @@ body {
 main {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
-  overflow: hidden;
+  //overflow: hidden;
   position: fixed;
-  overflow-y: scroll;
 }
 textarea{
   resize: none;
