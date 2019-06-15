@@ -1,6 +1,7 @@
 const bannerText = document.querySelector('#bannerText');
 const scrollAblePage = document.querySelector('.prevent-iPhone-overscroll');
 const onePage_section = document.querySelectorAll('.onePage-section');
+const contactPage = document.querySelector('#contact');
 const textareaMessage = document.querySelector('#message');
 const inputField = document.querySelectorAll('input');
 const animationDuration = 1000;
@@ -83,6 +84,13 @@ function wheelEnd() {
 /* Mouse Wheel Event on Scrolling */
 function directScroll(delta) {
   var timeNow = new Date().getTime();
+
+  if(index === 5) {
+    contactPage.style.position = 'unset';
+  } else {
+    contactPage.style.position = 'absolute';
+  }
+  
   if(timeNow-lastAnimation < idlePeriod + animationDuration) {
     console.log('animation delayed');
     return;
@@ -125,6 +133,12 @@ function upScroll() {
 /* Touch Event on Scrolling */
 function touchScrollMove(event) {
   var point = event.target.closest('.onePage-section');
+  if(index === 5) {
+    contactPage.style.position = 'unset';
+  } else {
+    contactPage.style.position = 'absolute';
+  }
+
   if(Math.abs(pageY1 - pageY2) < 100 || pageY1 === 0 || pageY2 === 0) {
     pageY1 = 0;
     pageY2 = 0;

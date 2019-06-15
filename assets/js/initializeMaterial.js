@@ -56,6 +56,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
       index = i;
+
+      if(index === 5) {
+        contactPage.style.position = 'unset';
+      } else {
+        contactPage.style.position = 'absolute';
+      }
       /* --- DECLARED IN 27.05.19 BY New OnePage Scroll Function ---
       var scrollSpyId = v.getAttribute('name');
       var scrollPoint = document.querySelector(scrollSpyId);
@@ -81,6 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
       index = i;
+
+      if(index === 5) {
+        contactPage.style.position = 'unset';
+      } else {
+        contactPage.style.position = 'absolute';
+      }
     });
   })
 });
