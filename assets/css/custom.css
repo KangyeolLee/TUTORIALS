@@ -19,7 +19,7 @@ textarea{
   height: 100vh;
   width: 100vw;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: auto;
 }
 
 /*******************************
@@ -812,6 +812,7 @@ textarea .trigger:hover{
 .emailBtn{
   position: absolute;
   right: 0;
+  bottom: -2.75rem;
   color: black;
   background: white;
 }

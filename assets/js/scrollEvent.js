@@ -151,7 +151,7 @@ function touchScrollMove(event) {
     if(index < 5 && index >= 0) index++;                                  //  onePage-section 클래스 간에
   } else if(pageY2 > pageY1 && point.previousElementSibling !== null) {   //  divider 등과 같은 다른 클래스 및
     point.previousElementSibling.style.transform = 'translateY(0px)';     //  태그요소가 존재하지 않을 경우 작동
-    if (index === 5) contactPage.style.position = 'absolute';                //  
+    if (index === 5) contactPage.style.position = 'absolute';             //  
     if(index <= 5 && index > 0) index--;                                  //
   } else return;
 
