@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+$boxShadowDefault: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+$fontDefault: 'Noto Sans KR', sans-serif;
+$plusColor: #2ecc71;
+$minusColor: #c0392b;
+
+:root {
+  box-shadow: $boxShadowDefault;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: $fontDefault;
+}
+
+.title {
+  text-align: center;
+}
+
+.helper-text {
+  font-size: 14px;
+}
+
+.container {
+  margin: 30px auto;
+  width: 350px;
+
+  h1 {
+    letter-spacing: 1px;
+    margin: 0;
+  }
+
+  h3 {
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 10px;
+    margin: 40px 0 10px;
+  }
+
+  h4 {
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .inc-exp-container {
+    background-color: #fff;
+    box-shadow: $boxShadowDefault;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+
+    div {
+      flex: 1;
+      text-align: center;
+    }
+
+    &:first-of-type {
+      border-right: 1px solid #dedede;
+    }
+
+    .money {
+      font-size: 20px;
+      letter-spacing: 1px;
+      margin: 5px 0;
+
+      &.plus {
+        color: $plusColor;
+      }
+
+      &.minus {
+        color: $minusColor;
+      }
+    }
+  }
+
+  .list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 40px;
+
+    li {
+      background-color: #fff;
+      box-shadow: $boxShadowDefault;
+      color: #333;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      padding: 10px;
+      margin: 10px 0;
+
+      &.plus {
+        border-right: 5px solid $plusColor;
+      }
+      &.minus {
+        border-right: 5px solid $minusColor;
+      }
+
+      .btn {
+        cursor: pointer;
+        background-color: transparent;
+        border: 0;
+        font-size: 20px;
+        line-height: 20px;
+        position: absolute;
+        top: 50%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        &.delete-btn {
+          left: 0;
+          padding-right: 10px;
+          transform: translate(-100%, -50%);
+          color: #cf5143;
+
+          &:hover {
+            opacity: 0.855;
+          }
+        }
+        &.update-btn {
+          padding-left: 15px;
+          right: 0;
+          transform: translate(100%, -50%);
+
+          &:hover {
+            opacity: 0.855;
+          }
+        }
+
+        &:focus {
+          outline: 0;
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.755;
+
+        .btn {
+          opacity: 1;
+        }
+      }
+    }
+
+    .no-tranactions-wrapper {
+      position: relative;
+
+      .no-transactions {
+        margin: 100px 0;
+        text-align: center;
+      }
+    }
+  }
+
+  label {
+    display: inline-block;
+    margin: 10px 0;
+  }
+
+  input[type='text'],
+  input[type='number'] {
+    border: 1px solid #dedede;
+    border-radius: 2px;
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.edit-page {
+  padding: 0 2rem;
+
+  .edit-title {
+    text-align: center;
+    margin-top: 15px;
+  }
+}
+
+.btn-add {
+  cursor: pointer;
+  background-color: #9c88ff;
+  box-shadow: $boxShadowDefault;
+  color: #fff;
+  border: 0;
+  display: block;
+  font-size: 16px;
+  margin: 30px 0 30px;
+  padding: 10px;
+  width: 100%;
+
+  &:hover {
+    opacity: 0.875;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &:active {
+    background-color: darken($color: #9c88ff, $amount: 5%);
+  }
+}
+
+.btn-edit {
+  cursor: pointer;
+  background-color: #9c88ff;
+  box-shadow: $boxShadowDefault;
+  color: #fff;
+  border: 0;
+  display: block;
+  font-size: 16px;
+  margin: 30px 0 30px;
+  padding: 10px;
+  width: 100%;
+
+  &:hover {
+    opacity: 0.875;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &:active {
+    background-color: darken($color: #9c88ff, $amount: 5%);
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.loading-spinner {
+  color: #9c88ff;
+  margin: 100px auto;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  animation: load-spinner 1.3s infinite linear;
+  transform: translateZ(0);
+}
+
+@keyframes load-spinner {
+  0%,
+  100% {
+    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em,
+      0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+  }
+  12.5% {
+    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em,
+      0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+  }
+  25% {
+    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0,
+      0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+  }
+  37.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em,
+      0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+  }
+  50% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em,
+      0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+  }
+  62.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+      0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+  }
+  75% {
+    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em,
+      0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+      0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+  }
+}
