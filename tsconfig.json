@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "module": "esnext",
+    "jsx": "react-native",
+    "lib": ["ES2020", "dom", "esnext"],
+    "moduleResolution": "Node",
+    "target": "ES5",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "strict": true
+  }
+}
