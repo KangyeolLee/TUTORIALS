@@ -24,8 +24,10 @@
 
 ## Description
 
-Nest 관련 기본적인 개념 위주 학습 진행
+- Nest 관련 기본적인 개념 위주 학습 진행
 
-DI(Dependency Injection), Decorator Pattern 등에 대한 개념 학습
+- DI(Dependency Injection), Decorator Pattern 등에 대한 개념 학습
 
-Swagger API 문서 자동 생성 관련 기능 
+- Swagger API 문서 자동 생성 관련 기능 
+
+- Typescript 적용
