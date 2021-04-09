@@ -24,10 +24,10 @@
 
 ## Description
 
-Nest를 이용해 백엔드 구성 + GraphQl 연동 기본 설정 튜토리얼 진행
+- Nest를 이용해 백엔드 구성 + GraphQl 연동 기본 설정 튜토리얼 진행
 
-Nest CLI 학습 
+- Nest CLI 학습 
 
-Nest 기본적인 개념들 위주 학습 진행
+- Nest 기본적인 개념들 위주 학습 진행
 
-Typescript 적용 
+- Typescript 적용 
