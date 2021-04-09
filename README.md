@@ -1,34 +1,17 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Nextjs 기본 튜토리얼
 
-First, run the development server:
+- 기존 CSR 방식 SPA에 SSR 적용을 위한 Next 프레임워크 기본 사용방법 학습
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- 코드 스플리팅 자동 지원
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 이미지 최적화
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- SSR과 SSG를 지원하는 pre-rendering 전략
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- _document.js를 이용한 meta 태그 수정 용이
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- 에러페이지 핸들링
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 참고 강의: https://www.youtube.com/watch?v=Ujjdn2wMIew
