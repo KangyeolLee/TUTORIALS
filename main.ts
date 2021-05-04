@@ -277,3 +277,37 @@ toArrayGeneric<string>("1", "2");
 // 타입 추론 활용 가능
 toArrayGeneric(1, 2);
 toArrayGeneric("1", "2");
+
+// --------------- Constraints --------------- //
+/**
+ * 인터페이스 또는 타입 별칭을 사용하는 제너릭 작성 가능
+ */
+
+// 1. 별도의 제약 조건이 없는 경우 - 모든 타입 허용
+interface MyType<T> {
+  name: string;
+  value: T;
+}
+
+const dataA: MyType<string> = {
+  name: "KG",
+  value: "hello world",
+};
+
+const dataB: MyType<number> = {
+  name: "HG",
+  value: 12345,
+};
+
+const dataC: MyType<number[]> = {
+  name: "SJ",
+  value: [1, 2, 3, 4, 5],
+};
+
+// 2. 제약 조건은 extends 를 이용해 추가 가능
+// Ex. 제너릭변수 T가 string 과 number 일때만 허용하는 경우
+
+interface MyTypeConstranints<T extends string | number> {
+  name: string;
+  value: T;
+}
