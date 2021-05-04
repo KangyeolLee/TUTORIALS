@@ -346,3 +346,126 @@ function addOverload(a: any, b: any): any {
   // 구현부
   return a + b;
 }
+
+// --------------- Class --------------- //
+/**
+ * 클래스의 생성자(constructor)와 일반 메소드 멤버와는 다르게
+ * 클래스 속성(Properties)은 클래스 바디에 별도로 타입을 선언
+ */
+
+class Aniaml {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+class MyCat extends Aniaml {
+  getName(): string {
+    return `Cat name is ${this.name}`;
+  }
+}
+
+let myCat: MyCat = new MyCat("Lucy");
+console.log(myCat.getName());
+
+/**
+ * 3가지 접근 제어자 지원
+ * 1. public : 어디서나 자유롭게 접근 가능 (생략가능)
+ * 2. protected : 나와 파생된 후손 클래스 내에서 접근 가능
+ * 3. private : 내 클래스에서만 접근 가능
+ * 최근 ECMA 스펙 stage3에 JS 자체에서 '#'을 통해 private 접근 제어자 기능 제공
+ * 접근 제어자와 같이 쓸 수 있는 수식어
+ * 1. static : 정적으로 사용
+ * 2. readonly : 읽기전용으로 사용 (속성값에만 할당 가능)
+ */
+
+class PrivateAnimal {
+  private name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+class PrivateCat extends PrivateAnimal {
+  getName(): string {
+    return `Cat name is ${this.name}`; // Error - TS2341
+  }
+}
+
+let privateCat = new PrivateCat("Lucy");
+console.log(privateCat.getName());
+console.log(privateCat.name); // Error - TS2341
+
+// 생성자에서 인수 타입 선언과 동시에 접근 제어자를 사용하면
+// 바로 속성 멤버로 정의할 수 있다.
+
+class AutoCat {
+  constructor(public name: string, protected age: number) {}
+  getName() {
+    return this.name;
+  }
+
+  getAge() {
+    return this.age;
+  }
+}
+
+let autoCat = new AutoCat("Neo", 2);
+console.log(autoCat.getName());
+console.log(autoCat.getAge());
+
+// 접근제어자 + 수식어 순서로 작성 가능
+
+class Test {
+  public readonly name: string;
+  protected static eyes: number;
+  constructor(n: string) {
+    this.name = n;
+    // static 값은 클래스 바디에서 초기화가 불가하기에
+    // 생성자 혹은 메소드에서 초기화 필요
+    Test.eyes = 2;
+  }
+
+  private static getLeg() {
+    return 5;
+  }
+}
+
+/**
+ * 추상 클래스
+ * 인터페이스와 굉장히 유사
+ * 클래스뿐만 아니라 속성과 메소드에서도 사용 가능
+ * 직접 인스턴스 생성이 불가하기 때문에
+ * 파생된 후손 클래스에서 인스턴스 생성 필요
+ */
+
+abstract class Abstract {
+  abstract name: string; // 파생된 클래스에서 구현되어야 함
+  abstract getName(): string; // 파생된 클래스에서 구현되어야 함
+}
+
+class ACat extends Abstract {
+  constructor(public name: string) {
+    super();
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+const aCat = new ACat("Lucy");
+console.log(aCat.getName());
+
+interface IAnimal {
+  name: string;
+  getName(): string;
+}
+
+class Dog implements IAnimal {
+  constructor(public name: string) {}
+  getName() {
+    return this.name;
+  }
+}
