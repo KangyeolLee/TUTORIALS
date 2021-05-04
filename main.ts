@@ -145,3 +145,25 @@ const getUser: IGetUser = function (n) {
 };
 
 console.log(getUser("Socra"));
+
+// --------------- construct signature --------------- //
+
+interface ICat {
+  name: string;
+}
+
+interface ICatConstructor {
+  // new 키워드를 사용하여 Constructor Signature Interface 생성
+  new (name: string): ICat;
+}
+
+class Cat implements ICat {
+  constructor(public name: string) {}
+}
+
+function makeKitten(c: ICatConstructor, n: string) {
+  return new c(n);
+}
+
+const kitten = makeKitten(Cat, "Lucy");
+console.log(kitten);
