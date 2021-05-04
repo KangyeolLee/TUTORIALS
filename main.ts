@@ -311,3 +311,22 @@ interface MyTypeConstranints<T extends string | number> {
   name: string;
   value: T;
 }
+
+// --------------- Conditional Types --------------- //
+/**
+ * 제약 조건과 다르게 '타입 구현' 영역에서 사용하는 extends는
+ * 삼항연산자 사용 가능 => 조건부 타입
+ */
+type U = string | number | boolean;
+type MyTypeEx<T> = T extends U ? string : never;
+
+interface MyInterEx<T> {
+  name: string;
+  age: T extends U ? number : never;
+}
+
+interface MyUser<T extends boolean> {
+  name: string;
+  // T의 타입이 true면 string, false인 경우 number 반환
+  age: T extends true ? string : number;
+}
