@@ -217,3 +217,29 @@ country = "US";
 let values: ICountries[keyof ICountries]; // ICountries['KR' | 'US' | 'DE' ]
 values = "대한민국";
 values = "미국";
+
+// --------------- Type --------------- //
+/**
+ * interface vs type
+ * 과거 버전에서는 type의 경우는 implements 혹은 extends 와 같은 확장 옵션 사용 불가
+ * 최근 버전에서는 union이 사용된경우를 제외하고 extends, implements 모두 interface와 동일하게 동작
+ * interface는 같은 이름으로 여러 번 선언해도 컴파일 시점에서 하나의 단위로 합쳐지지만
+ * type의 경우는 같은 이름을 여러 번 선언 불가
+ * interface로 표현할 수 없는 형태이거나 union 또는 tuple 을 이용해야 하는 경우엔 type 추천
+ */
+
+type TUser =
+  | {
+      name: string;
+      age: number;
+      isValid: boolean;
+    }
+  | [string, number, boolean];
+
+let userA: TUser = {
+  name: "KG",
+  age: 18,
+  isValid: true,
+};
+
+let userB: TUser = ["SJ", 29, false];
