@@ -497,3 +497,18 @@ if (foo && foo.bar && foo.bar.baz) {
 if (foo?.bar?.baz) {
   console.log(1);
 }
+
+// --------------- Nullish coalescing operator --------------- //
+/**
+ * 일반적으로 논리 연산자 || 를 사용하여 Falsy 체크를 진행
+ * 이때 0이나 ''와 같은 값을 유효 값으로 사용하면 원치 않은 결과 리턴 가능
+ * Nullish 병합 연산자 ?? 를 사용하여 해결 가능
+ * JS에서도 ES2020에 추가됨
+ * 왼쪽 피연산자가 null 또는 undefined 일때 오른쪽 피연산자를 반환하고,
+ * 그렇지 않으면 왼쪽 피연산자를 반환
+ */
+
+const test1 = null ?? "default string";
+const test2 = 0 ?? 42;
+
+console.log(test1, test2);
