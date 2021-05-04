@@ -49,3 +49,24 @@ let str: string = null;
 let und: undefined = null;
 let nul: null = undefined;
 let voi: void = undefined;
+
+// --------------- union & intersection --------------- //
+
+let union: string | number;
+union = "Hello World";
+union = 123;
+
+interface IUser {
+  name: string;
+  age: number;
+}
+
+interface IValidation {
+  isValid: boolean;
+}
+
+const neo: IUser & IValidation = {
+  name: "Neo",
+  age: 85,
+  isValid: true,
+};
