@@ -128,3 +128,20 @@ function check(val: string | number) {
     val.split("");
   }
 }
+
+// --------------- functional Interface --------------- //
+
+interface IUser2 {
+  name: string;
+}
+
+interface IGetUser {
+  (name: string): IUser2;
+}
+
+const getUser: IGetUser = function (n) {
+  const user: IUser2 = { name: n };
+  return user;
+};
+
+console.log(getUser("Socra"));
