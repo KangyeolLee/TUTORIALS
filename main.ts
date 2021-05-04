@@ -100,3 +100,12 @@ function someFunc(val: string | number, isNumber: boolean) {
     (<number>val).toFixed(2);
   }
 }
+
+function fnE(x: number | null | undefined) {
+  // return (x as number).toFixed(2);
+
+  // non-null 단언 연산자(!)를 통해 해결 가능
+  // 특히 컴파일 환경에서 체크하기 어려운 DOM 사용에서 유용
+  const str = x!.toFixed(2);
+  document.querySelector(".menu-item")!.innerHTML;
+}
