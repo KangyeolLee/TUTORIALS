@@ -70,3 +70,13 @@ const neo: IUser & IValidation = {
   age: 85,
   isValid: true,
 };
+
+// --------------- function in 2 ways --------------- //
+
+function first(num: number): void {
+  console.log(num);
+}
+
+const second = (num: number): void => {
+  console.log(num);
+};
