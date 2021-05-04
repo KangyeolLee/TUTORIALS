@@ -109,3 +109,22 @@ function fnE(x: number | null | undefined) {
   const str = x!.toFixed(2);
   document.querySelector(".menu-item")!.innerHTML;
 }
+
+// --------------- Type Guard --------------- //
+/**
+ * 타입을 매번 보장하기 위해 타입 단언을 여러 번 사용하게 되는 경우
+ * 타입 가드를 제공하면 타입스크립트가 추론 가능한 특정 범위에서 타입을 보장 가능
+ * Ex. NAME is TyYPE 형태
+ */
+
+function isNumber(val: string | number): val is number {
+  return typeof val === "number";
+}
+
+function check(val: string | number) {
+  if (isNumber(val)) {
+    val.toFixed(2);
+  } else {
+    val.split("");
+  }
+}
