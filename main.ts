@@ -167,3 +167,53 @@ function makeKitten(c: ICatConstructor, n: string) {
 
 const kitten = makeKitten(Cat, "Lucy");
 console.log(kitten);
+
+// --------------- index signature --------------- //
+/**
+ * 인덱싱에 사용할 인덱서(Indexer)의 이름과 타입 그리고 인덱싱 결과의 반환 값 지정
+ * 타입은 string 또는 number 만 지정 가능
+ */
+
+interface IItem {
+  [itemIndex: number]: string;
+}
+
+let item: IItem = ["a", "b", "c"];
+console.log(item[0]);
+console.log(item[1]);
+// console.log(item["0"]);  Error - TS7015: ... index expression is not of type 'number'
+
+interface IUser3 {
+  // union 을 활용해 반환타입 지정 가능
+  [userProp: string]: string | boolean;
+}
+let user2: IUser3 = {
+  name: "Neo",
+  email: "thesecon@gamil.com",
+  isValid: true,
+  0: false,
+};
+
+console.log(user2["name"]);
+console.log(user2["email"]);
+console.log(user2["isValid"]);
+
+/**
+ * keyof 를 사용하여 속성 이름을 타입으로 사용 가능
+ * 인덱싱 가능 타입의 속성 이름들이 유니온 타입으로 적용
+ */
+
+interface ICountries {
+  KR: "대한민국";
+  US: "미국";
+  DE: "독일";
+}
+
+let country: keyof ICountries; // 'KR' | 'US' | 'DE'
+country = "KR";
+country = "US";
+// country = 'RS' Error - TS2322
+
+let values: ICountries[keyof ICountries]; // ICountries['KR' | 'US' | 'DE' ]
+values = "대한민국";
+values = "미국";
