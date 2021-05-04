@@ -243,3 +243,37 @@ let userA: TUser = {
 };
 
 let userB: TUser = ["SJ", 29, false];
+
+// --------------- Generics --------------- //
+/**
+ * Generic은 재사용 목적으로 함수 또는 클래스 선언 시점이 아닌,
+ * 사용 시점에 타입을 선언할 수 있는 방법을 제공 (타입을 인자로 받아서 사용하는것과 유사)
+ */
+
+function toArray(a: number, b: number): number[] {
+  return [a, b];
+}
+toArray(1, 2);
+// toArray('1', '2')  Error - TS2345
+
+// union 을 이용해 해결할 수 있지만
+// 1. 가독성이 떨어지고
+// 2. 3번의 호출처럼 의도치 않은 경우 발생 가능
+function toArrayExtend(
+  a: number | string,
+  b: number | string
+): (number | string)[] {
+  return [a, b];
+}
+toArrayExtend(1, 2);
+toArrayExtend("1", "2");
+toArrayExtend(1, "2");
+
+function toArrayGeneric<T>(a: T, b: T) {
+  return [a, b];
+}
+toArrayGeneric<number>(1, 2);
+toArrayGeneric<string>("1", "2");
+// 타입 추론 활용 가능
+toArrayGeneric(1, 2);
+toArrayGeneric("1", "2");
