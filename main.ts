@@ -469,3 +469,31 @@ class Dog implements IAnimal {
     return this.name;
   }
 }
+
+// --------------- Optional Chaining --------------- //
+/**
+ * 기존 Type Assertion 등으로 해결하던 문제를
+ * 체이닝으로 간단히 해결할 수 있다
+ * && 연산자를 사용해 각 속성을 Nullish 체크하는 부분에서 특히 유용
+ */
+
+function toString(str: string | undefined) {
+  return (str as string).toString();
+}
+
+function toStringOptionalChaining(str?: string) {
+  return str?.toString();
+}
+const foo = {
+  bar: {
+    baz: "hello world",
+  },
+};
+
+if (foo && foo.bar && foo.bar.baz) {
+  console.log(1);
+}
+
+if (foo?.bar?.baz) {
+  console.log(1);
+}
