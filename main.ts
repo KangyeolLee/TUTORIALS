@@ -330,3 +330,19 @@ interface MyUser<T extends boolean> {
   // T의 타입이 true면 string, false인 경우 number 반환
   age: T extends true ? string : number;
 }
+
+// --------------- function overload --------------- //
+/**
+ * 함수의 이름은 같지만 매개변수 타입과 반환 타입이 다른
+ * 여러 함수를 가질 수 있는 것
+ * 여러개의 선언부와 1개의 구현부
+ * 함수 선언부와 구현부의 매개변수 개수는 동일해야 함
+ * 함수 구현부에는 주로 any 사용
+ */
+
+function addOverload(a: string, b: string): string; // 선언부
+function addOverload(a: number, b: number): number; // 선언부
+function addOverload(a: any, b: any): any {
+  // 구현부
+  return a + b;
+}
