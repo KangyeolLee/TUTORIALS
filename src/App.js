@@ -5,7 +5,8 @@ import kakaopayConfig from "./kakaopay.config";
 
 function App() {
   const { params } = kakaopayConfig;
-  // const [nextUrl, setNextUrl] = useState();
+  const [nextUrl, setNextUrl] = useState();
+  const [tid, setTid] = useState();
 
   useEffect(() => {
     const postKakaopay = async () => {
@@ -16,14 +17,25 @@ function App() {
           "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
         },
       });
-      console.log(data);
+
+      const {
+        data: {
+          tid,
+          next_redirect_app_url,
+          next_redirect_mobile_url,
+          next_redirect_pc_url,
+        },
+      } = data;
+
+      setNextUrl(next_redirect_app_url);
+      setTid(tid);
     };
     postKakaopay();
   }, []);
 
   return (
     <div className="App">
-      <Loading />
+      {nextUrl ? (window.location.href = nextUrl) : <Loading />}
     </div>
   );
 }

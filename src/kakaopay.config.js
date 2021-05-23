@@ -10,9 +10,9 @@ const config = {
     total_amount: 2200,
     vat_amount: 200,
     tax_free_amount: 0,
-    approval_url: "http://localhost:3000/",
-    fail_url: "http://localhost:3000/",
-    cancel_url: "http://localhost:3000/",
+    approval_url: "https://www.naver.com",
+    fail_url: "https://www.naver.com",
+    cancel_url: "https://www.naver.com",
   },
 };
 
