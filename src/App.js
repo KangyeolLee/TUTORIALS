@@ -12,7 +12,7 @@ function App() {
       const data = await axios.post("/v1/payment/ready", null, {
         params,
         headers: {
-          Authorization: "KakaoAK 17f6c6ec457977e41c71d0efed5ce335",
+          Authorization: `KakaoAK ${process.env.REACT_APP_KAKAOPAY_ADMIN_KEY}`,
           "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
         },
       });
