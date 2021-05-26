@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+</head>
+
+<body>
+  <div style="position: relative; width: 75%; margin: 5rem auto;">
+    <h1 style="text-align: center;">2020년도 판매 실적</h1>
+    <button onclick="clickBtn()" id='search' style="float: right; padding: 7px; margin: 1rem 15px 1rem 3rem">조회</button>
+    <select style="float: right; padding: 8.5px; margin: 1rem" name="option_select" id="option">
+      <option value="sum">매출액 통계</option>
+      <option value="menu">메뉴별 통계</option>
+    </select>
+    <select style="float: right; padding: 8.5px; margin: 1rem" name="date_select" id="date">
+      <option value="perMonth">월별</option>
+      <option value="perDay">일별</option>
+    </select>
+    <input type="date" id="end" style="padding: 6px; float: right; margin: 1rem; margin-right: 3rem;">
+    <input type="date" id="start" style="padding: 6px; float: right; margin: 1rem">
+
+    <canvas style="margin-top: 2rem;" id="myChart" width="800" height="600"></canvas>
+  </div>
+
+  <script>
+    const dataSet = [
+      { "2020-10-10" : {"햄버거A" : 1, "햄버거B" : 13, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 21,}, },
+      { "2020-10-11" : {"햄버거A" : 20, "햄버거B" : 3, "햄버거C" : 26, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 2,} },
+      { "2020-10-12" : { "햄버거A" : 5, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 2,}},
+      {"2020-10-13" : {"햄버거A" : 10,"햄버거B" : 3, "햄버거C" : 16,"코카콜라" : 12,"사이다" : 13,"감자튀김" : 3,}}, 
+      {"2020-10-14" : {"햄버거A" : 10, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12,"사이다" : 13, "감자튀김" : 20,}}, 
+      { "2020-10-15" : {"햄버거A" : 11, "햄버거B" : 23, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 20,}, },
+      { "2020-10-16" : {"햄버거A" : 10, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 40,} },
+      { "2020-10-17" : { "햄버거A" : 12, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 20,}},
+      {"2020-10-18" : {"햄버거A" : 10,"햄버거B" : 3, "햄버거C" : 6,"코카콜라" : 12,"사이다" : 13,"감자튀김" : 20,}}, 
+      {"2020-10-19" : {"햄버거A" : 13, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12,"사이다" : 13, "감자튀김" : 22,}}, 
+      { "2020-10-20" : {"햄버거A" : 10, "햄버거B" : 23, "햄버거C" : 16, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 20,}, },
+      { "2020-10-21" : {"햄버거A" : 10, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 30,} },
+      { "2020-10-22" : { "햄버거A" : 14, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 20,}},
+      {"2020-10-23" : {"햄버거A" : 15,"햄버거B" : 3, "햄버거C" : 6,"코카콜라" : 12,"사이다" : 13,"감자튀김" : 20,}}, 
+      {"2020-10-24" : {"햄버거A" : 15, "햄버거B" : 13, "햄버거C" : 6, "코카콜라" : 12,"사이다" : 13, "감자튀김" : 22,}},
+      { "2020-10-25" : {"햄버거A" : 11, "햄버거B" : 3, "햄버거C" : 26, "코카콜라" : 1, "사이다" : 13, "감자튀김" : 20,}, },
+      { "2020-10-26" : {"햄버거A" : 12, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 50,} },
+      { "2020-10-27" : { "햄버거A" : 20, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 2, "사이다" : 13, "감자튀김" : 20,}},
+      {"2020-10-28" : {"햄버거A" : 10,"햄버거B" : 3, "햄버거C" : 6,"코카콜라" : 12,"사이다" : 13,"감자튀김" : 20,}}, 
+      {"2020-10-29" : {"햄버거A" : 20, "햄버거B" : 13, "햄버거C" : 6, "코카콜라" : 2,"사이다" : 13, "감자튀김" : 10,}},  
+      { "2020-11-01" : { "햄버거A" : 14,"햄버거B" : 3,"햄버거C" : 6, "코카콜라" : 12,  "사이다" : 3, "감자튀김" : 20,}}, 
+      { "2020-11-02" : { "햄버거A" : 13, "햄버거B" : 3, "햄버거C" : 6,"코카콜라" : 12,"사이다" : 13,"감자튀김" : 20, } },
+      {"2020-11-03" : {"햄버거A" : 14,"햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12,"사이다" : 13,"감자튀김" : 20,}}, 
+      {"2020-11-04" : { "햄버거A" : 12,"햄버거B" : 23,"햄버거C" : 6, "코카콜라" : 12, "사이다" : 13,"감자튀김" : 50,}},
+      { "2020-11-05" : { "햄버거A" : 0,"햄버거B" : 3,"햄버거C" : 6, "코카콜라" : 12,  "사이다" : 13, "감자튀김" : 20,}}, 
+      { "2020-11-06" : { "햄버거A" : 10, "햄버거B" : 3, "햄버거C" : 6,"코카콜라" : 12,"사이다" : 13,"감자튀김" : 20, } },
+      {"2020-11-07" : {"햄버거A" : 10,"햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12,"사이다" : 13,"감자튀김" : 22,}}, 
+      {"2020-11-08" : { "햄버거A" : 10,"햄버거B" : 3,"햄버거C" : 6, "코카콜라" : 12, "사이다" : 13,"감자튀김" : 20,}},
+      {"2020-11-09" : { "햄버거A" : 20,"햄버거B" : 13,"햄버거C" : 16, "코카콜라" : 2, "사이다" : 13,"감자튀김" : 30,}},
+      { "2020-11-10" : { "햄버거A" : 10,"햄버거B" : 3,"햄버거C" : 6, "코카콜라" : 12,  "사이다" : 13, "감자튀김" : 20,}}, 
+      { "2020-11-11" : { "햄버거A" : 30, "햄버거B" : 3, "햄버거C" : 6,"코카콜라" : 2,"사이다" : 3,"감자튀김" : 20, } },
+      {"2020-11-12" : {"햄버거A" : 10,"햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12,"사이다" : 13,"감자튀김" : 25,}}, 
+      {"2020-11-13" : { "햄버거A" : 20,"햄버거B" : 23,"햄버거C" : 6, "코카콜라" : 12, "사이다" : 13,"감자튀김" : 20,}},
+      {"2020-11-14" : {"햄버거A" : 10, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12,"사이다" : 13, "감자튀김" : 20,}}, 
+      { "2020-11-15" : {"햄버거A" : 20, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 21,}, },
+      { "2020-11-16" : {"햄버거A" : 10, "햄버거B" : 3, "햄버거C" : 26, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 20,} },
+      { "2020-11-17" : { "햄버거A" : 12, "햄버거B" : 13, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 20,}},
+      {"2020-11-18" : {"햄버거A" : 14,"햄버거B" : 3, "햄버거C" : 6,"코카콜라" : 12,"사이다" : 13,"감자튀김" : 20,}}, 
+      {"2020-11-19" : {"햄버거A" : 10, "햄버거B" : 13, "햄버거C" : 6, "코카콜라" : 2,"사이다" : 13, "감자튀김" : 20,}}, 
+      { "2020-11-20" : {"햄버거A" : 15, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 23,}, },
+      { "2020-11-21" : {"햄버거A" : 10, "햄버거B" : 30, "햄버거C" : 16, "코카콜라" : 12, "사이다" : 3, "감자튀김" : 20,} },
+      { "2020-11-22" : { "햄버거A" : 16, "햄버거B" : 31, "햄버거C" : 6, "코카콜라" : 1, "사이다" : 13, "감자튀김" : 20,}},
+      {"2020-11-23" : {"햄버거A" : 80,"햄버거B" : 3, "햄버거C" : 6,"코카콜라" : 12,"사이다" : 13,"감자튀김" : 20,}}, 
+      {"2020-11-24" : {"햄버거A" : 10, "햄버거B" : 32, "햄버거C" : 6, "코카콜라" : 12,"사이다" : 13, "감자튀김" : 40,}},
+      { "2020-11-25" : {"햄버거A" : 17, "햄버거B" : 31, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 20,}, },
+      { "2020-11-26" : {"햄버거A" : 10, "햄버거B" : 31, "햄버거C" : 6, "코카콜라" : 12, "사이다" : 13, "감자튀김" : 20,} },
+      { "2020-11-27" : { "햄버거A" : 10, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 1, "사이다" : 13, "감자튀김" : 20,}},
+      {"2020-11-28" : {"햄버거A" : 13,"햄버거B" : 13, "햄버거C" : 6,"코카콜라" : 12,"사이다" : 13,"감자튀김" : 20,}}, 
+      {"2020-11-29" : {"햄버거A" : 10, "햄버거B" : 3, "햄버거C" : 6, "코카콜라" : 12,"사이다" : 13, "감자튀김" : 20,}},  
+    ];
+    
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            datasets: [{
+                label: '단위(만원) ',
+                data: [120, 190, 30, 50, 20, 30, 20, 20 ,30, 40, 80],
+                backgroundColor: [
+                  'rgba(36, 102, 250, 0.2)', 'rgba(36, 12, 50, 0.2)', 'rgba(3, 102, 20, 0.2)', 'rgba(36, 182, 50, 0.2)',
+                  'rgba(136, 202, 200, 0.2)', 'rgba(36, 182, 50, 0.2)', 'rgba(36, 202, 150, 0.2)', 'rgba(60, 12, 250, 0.2)',
+                  'rgba(36, 122, 150, 0.2)', 'rgba(236, 152, 250, 0.2)', 'rgba(136, 152, 250, 0.2)', 'rgba(160, 12, 50, 0.2)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+        }
+    }); 
+
+    const clickBtn = () => {
+      const start = document.getElementById('start').value;
+      const end = document.getElementById('end').value;
+      const timeStart = moment(start, 'YYYY-MM-DD');
+      const timeEnd = moment(end, 'YYYY-MM-DD');
+      const option = document.getElementById('option').value;
+      const date = document.getElementById('date').value;
+
+      const dayDiff = moment.duration(timeEnd.diff(timeStart)).days();
+      const monthDiff = moment.duration(timeEnd.diff(timeStart)).months();
+
+      const days = [];
+      const months = [];
+      const colors = [];
+
+      if (!start || !end) {
+        alert("날짜를 지정해주세요!");
+        return;
+      }
+
+      if(date === "perMonth") {
+        if(monthDiff < 1) {
+          alert("지정된 기간이 너무 짧습니다. 최소 1개월 이상의 기간을 설정해주세요.");
+          return;
+        }
+
+        while(timeEnd > timeStart || timeStart.format('M') === timeEnd.format('M')) {
+            months.push(timeStart.clone().format('M') + '월');
+            timeStart.add(1, 'month');
+        }
+      } else {
+        if(monthDiff >=1 || dayDiff > 30) {
+          alert("지정된 기간이 30일을 초과합니다. 30일 이내의 기간을 설정해주세요.");
+          return;
+        }
+
+        days.push(timeStart.format('D') + '일');
+        while(timeStart.add(1, 'days').diff(timeEnd) <= 0) {
+            days.push(timeStart.clone().format('D') + '일');
+        }
+      }
+
+      const range = getRangeDate(start, end);
+
+      myChart.destroy();
+
+      let config;
+
+      if(option === "sum") {
+        if (months.length) {
+          for(let i = 0; i < months.length; i++) {
+            colors.push(dynamicColors());
+          }
+        }
+        config = {
+          type: days.length ? 'line' : 'bar',
+          data: {
+              labels: days.length ? days : months,
+              datasets: [{
+                  label: '단위(만원) ',
+                  data: days.length ? getSumOfDays(range, start) : getSumOfMonths(range, start),
+                  fill: false,
+                  borderColor: days.length ? 'rgba(36, 102, 250, 0.65)' : '',
+                  backgroundColor: months.length ? colors : '',
+                  borderWidth: 3.5
+              }]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+          }
+        }
+      } else {
+        for(let i = 0; i < 6; i++) {
+          colors.push(dynamicColors());
+        }
+        config = {
+          type: 'horizontalBar',
+          data: {
+              labels: ['햄버거A', '햄버거B', '햄버거C', '코카콜라', '사이다', '감자튀김'],
+              datasets: [{
+                  label: '판매수량(개) ',
+                  data: getCountOfMenu(range),
+                  backgroundColor: colors,
+                  borderWidth: 1
+              }]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+          }
+        }
+      }
+
+
+      myChart = new Chart(ctx, config);
+      
+    };
+
+    const dynamicColors = () => {
+       const r = Math.floor(Math.random() * 255);
+       const g = Math.floor(Math.random() * 255);
+       const b = Math.floor(Math.random() * 255);
+       return "rgb(" + r + "," + g + "," + b + ", 0.2)";
+    };
+
+    const getRangeDate = (start, end) => {
+      const keys = dataSet.filter(e => {
+
+        const startDate = moment(start, "YYYY-MM-DD");
+        const endDate = moment(end, "YYYY-MM-DD");
+        const target = Object.keys(e)[0];
+        const targetDate = moment(target, "YYYY-MM-DD");
+
+        if(targetDate.isBetween(startDate.subtract(1, 'days'), endDate.add(1, 'days'))) return 1;
+      });
+
+      return keys;
+    }
+
+    const getSumOfDays = (items, start) => {
+      const timeStart = moment(start, "YYYY-MM-DD");
+      const realStart = Object.keys(items[0])[0];
+      const currStart = moment(realStart, "YYYY-MM-DD");
+      const diff = moment.duration(currStart.diff(timeStart)).days();
+      const sums = [];
+      let sum = 0;
+
+      for(i = 0; i < diff; i++) sums.push(null);
+      items.forEach(e => Object.values(e).forEach(el => {
+        sum += el['햄버거A'] * 3000 + el['햄버거B'] * 4000 + el['햄버거C'] * 8000 + el['코카콜라'] * 1500 + el['사이다'] * 1500 + el['감자튀김'] * 900;
+        sums.push(sum / 10000);
+        sum = 0;
+      }));
+      return sums;
+    }
+
+    const getSumOfMonths = (items, start) => {
+      const timeStart = moment(start, "YYYY-MM-DD").format('M');
+      const sums = [];
+      let sum = 0;
+      let curMonth = moment(Object.keys(items[0])[0], 'YYYY-MM-DD').format('M');
+
+      const diff = curMonth * 1 - timeStart * 1; 
+
+      console.log(timeStart, curMonth, diff);
+
+      for(let i = 0; i < diff; i++) sums.push(null);
+
+      items.forEach(e => Object.entries(e).forEach(el => {
+        if(curMonth !== moment(el[0], 'YYYY-MM-DD').format('M')) {
+          sums.push(sum / 10000);
+          sum = 0;
+        } 
+        sum += el[1]['햄버거A'] * 3000 + el[1]['햄버거B'] * 4000 + el[1]['햄버거C'] * 8000 + el[1]['코카콜라'] * 1500 + el[1]['사이다'] * 1500 + el[1]['감자튀김'] * 900;
+        curMonth = moment(el[0], 'YYYY-MM-DD').format('M');
+      }));
+
+      sums.push(sum / 10000);
+
+      return sums;
+    }
+
+    const getCountOfMenu = items => {
+      const counts = [0, 0, 0, 0, 0, 0];
+
+      items.forEach(e => Object.values(e).forEach(el => {
+        counts[0] += el['햄버거A'];
+        counts[1] += el['햄버거B'];
+        counts[2] += el['햄버거C'];
+        counts[3] += el['코카콜라'];
+        counts[4] += el['사이다'];
+        counts[5] += el["감자튀김"];
+      }));
+
+      return counts;
+    }
+    
+  </script>
+
+</body>
+</html>
