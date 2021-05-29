@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "typeRoots": ["./types"]
+  },
+  "exclude": ["node_moduels"]
+}
