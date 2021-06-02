@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="h-52 bg-gray-600">
-      <section className="container px-5 md:px-10 mx-auto py-10">
+      <section className="sm:container px-5 md:px-10 mx-auto py-10">
         <p className="text-gray-50 my-1">제휴문의 : 010-0000-0000</p>
         <p className="text-gray-50 my-1">작가문의 : 010-0000-0000</p>
         <p className="text-gray-50 my-1">회원문의 : 010-0000-0000</p>
