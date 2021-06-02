@@ -34,7 +34,7 @@ const NovelList: VFC<Props> = ({ num, title }) => {
             </div>
           </div>
 
-          <div className="font-bold">2021.05.21</div>
+          <div className="hidden mob:block font-bold">2021.05.21</div>
         </div>
       </a>
     </Link>
