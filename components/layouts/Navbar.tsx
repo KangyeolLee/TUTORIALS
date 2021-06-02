@@ -5,7 +5,7 @@ import { MdMenu, MdSearch, MdNotificationsNone } from "react-icons/md";
 const Navbar = () => {
   return (
     <header className="h-24 sticky top-0 z-50 bg-white shadow-xl">
-      <ul className="h-full flex gap-5 items-center justify-between sm:container sm:mx-auto md:px-10">
+      <ul className="h-full flex gap-5 items-center justify-between container px-5 md:px-10 mx-auto">
         <li className="hover:opacity-60 cursor-pointer">
           <Link href="/">
             <a className="flex items-center">
@@ -23,7 +23,7 @@ const Navbar = () => {
           </Link>
         </li>
 
-        <div className="flex gap-10">
+        <div className="hidden sm:gap-6 md:gap-10 sm:flex">
           <li className="hover:opacity-60 cursor-pointer">
             <Link href="/">
               <a>TOP100</a>
