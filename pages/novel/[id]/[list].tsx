@@ -1,15 +1,20 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { BsChevronLeft, BsChevronRight, BsPlusSquare } from "react-icons/bs";
 import { FiThumbsUp, FiMessageCircle } from "react-icons/fi";
 
 const NovelPage = () => {
   const router = useRouter();
   const [editStatus, setEditStatus] = useState(false);
+  const [modalStatus, setModalStatus] = useState(false);
   const { list } = router.query;
 
   const handleToggleBtn = () => {
     setEditStatus((prev) => !prev);
+  };
+
+  const handleSubmitBtn = () => {
+    setModalStatus((prev) => !prev);
   };
 
   return (
@@ -43,17 +48,77 @@ const NovelPage = () => {
       <div className="relative">
         {editStatus ? (
           <div className="py-20 px-28 text-2xl leading-loose">
-            <span className="rounded-xl bg-green-100">동해물과 동해물과</span>
-            <div>백두산이 마르고 </div>
-            <span className="rounded-xl bg-purple-100">닳도록 닳도록</span>
-            <div>하느님이 보우하사 우리나라 만세 </div>
-            <div>무궁화 삼천리 화려강산</div>
-            <div>대한사람 대한으로 길이 보전하세</div>
+            <span className="relative rounded-xl bg-green-100">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 hover:text-gray-800 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75"
+              />
+              동해물과 동해물과
+            </span>
+            <div className="relative">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75 hover:text-gray-800"
+              />
+              백두산이 마르고
+            </div>
+            <span className="relative rounded-xl bg-purple-100">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 hover:text-gray-800 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75"
+              />
+              닳도록 닳도록
+            </span>
+            <div className="relative">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 hover:text-gray-800 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75"
+              />
+              하느님이 보우하사 우리나라 만세
+            </div>
+            <div className="relative">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 hover:text-gray-800 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75"
+              />
+              무궁화 삼천리 화려강산
+            </div>
+            <div className="relative">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 hover:text-gray-800 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75"
+              />
+              대한사람 대한으로 길이 보전하세
+            </div>
             <br />
-            <div>남산 위의 저 소나무 철갑을 두른 듯</div>
-            <div>바람서리 불변함은 우리 기상일세</div>
-            <div>무궁화 삼천리 화려강산</div>
-            <div>대한사람 대한으로 길이 보전하세</div>
+            <div className="relative">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 hover:text-gray-800 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75"
+              />
+              남산 위의 저 소나무 철갑을 두른 듯
+            </div>
+            <div className="relative">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 hover:text-gray-800 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75"
+              />
+              바람서리 불변함은 우리 기상일세
+            </div>
+            <div className="relative">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 hover:text-gray-800 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75"
+              />
+              무궁화 삼천리 화려강산
+            </div>
+            <div className="relative">
+              <BsPlusSquare
+                onClick={handleSubmitBtn}
+                className="text-gray-300 hover:text-gray-800 absolute top-1/2 transform -translate-y-1/2 -left-10 cursor-pointer hover:opacity-75"
+              />
+              대한사람 대한으로 길이 보전하세
+            </div>
           </div>
         ) : (
           <pre className="py-20 px-28 text-2xl leading-loose">
@@ -144,6 +209,32 @@ const NovelPage = () => {
             className="w-28 text-white font-bold rounded-lg p-4 bg-green-400 hover:opacity-75 cursor-pointer"
           >
             상세보기
+          </div>
+        </div>
+      )}
+
+      {modalStatus && (
+        <div className="fixed flex flex-col justify-center top-0 left-0 w-full h-full bg-black bg-opacity-60 z-50">
+          <div className="flex flex-col gap-5 bg-white p-10 m-16 rounded-3xl">
+            <h1 className="font-bold text-2xl">CCC님의 코멘트</h1>
+            <input
+              placeholder="자유롭게 의견을 남겨보세요"
+              className="p-5 w-full border rounded-lg"
+            />
+            <div className="flex justify-end gap-4">
+              <div
+                onClick={handleSubmitBtn}
+                className="bg-gray-200 font-bold text-xl py-3 px-6 rounded-xl cursor-pointer hover:opacity-75"
+              >
+                취소
+              </div>
+              <div
+                onClick={handleSubmitBtn}
+                className="bg-blue-400 font-bold text-xl py-3 px-6 rounded-xl text-white cursor-pointer hover:opacity-75"
+              >
+                제출
+              </div>
+            </div>
           </div>
         </div>
       )}
