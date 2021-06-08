@@ -1,0 +1,165 @@
+.dashboard {
+  padding-top: 10%;
+
+}
+.slick-slider, .slick-list, .slick-track, .slick-slide, .slick-slide div {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.slick-next {
+  right: 15%;
+}
+.slick-prev {
+  left: 12%;
+  z-index: 1;
+}
+.slick-next::before, .slick-prev::before {
+  font-size: 50px;
+}
+.slick-dots {
+  position: absolute;
+  bottom: 8%
+}
+.slick-dots li button:before {
+  color: white;
+}
+.slick-slide div div {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.dashboard h1 {
+  margin-bottom: 5rem;
+  font-family: 'Jua', sans-serif;
+  position: relative;
+}
+
+.dashboard .card .card-image {
+  overflow: hidden;
+}
+.dashboard .card .card-image img {
+  height: 600px;
+  transition: 1s transform;
+}
+.dashboard .card .card-image img:hover {
+  transform: scale(1.05);
+}
+
+.dashboard .card .card-content p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dashboard .card .card-content .card-title {
+  font-family: 'Jua', sans-serif;
+}
+
+.dashboard .card .card-content p {
+  font-family: 'Nanum Gothic Coding', monospace;
+}
+
+.modal {
+  height: 90% !important;
+  max-height: none;
+  top: 5% !important;
+}
+.modal-content .modal-title {
+  font-family: 'Jua', sans-serif;
+  font-size: 45px;
+  margin-top: 3rem;
+}
+.modal-content .img-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.modal-content img {
+  height: 1000px ;
+}
+
+.modal-content .modal-second-title {
+  font-family: 'Hi Melody', cursive;
+  font-size: 30px;
+}
+
+.modal-content div {
+  margin: 3rem 0 3rem 0;
+}
+
+.blackMirror blockquote {
+  border-left-color: rgba(112, 112, 112, 0.959);
+}
+.blackMirror .modal-footer {
+  background: #212121ef;
+}
+.overNight blockquote {
+  border-left-color: rgb(168, 78, 209);
+}
+
+.modal-content div .sub-highlight {
+  font-weight: 700;
+  font-size: 1.085rem;
+  margin: 1.55rem 0 0.2rem 0;
+}
+.modal-content div .sub-title {
+  font-family: 'Gothic A1', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+}
+.modal-content > .divider.interval {
+  margin-top: 10rem;
+}
+.meetingTime span {
+  margin-left: 2rem;
+}
+
+@media only screen and (max-width: 992px) {
+  .card {
+    margin-bottom: 10rem;
+    margin-top: 5rem;
+  }
+  .modal {
+    width: 90% !important;
+  }
+  .modal-content {
+    padding: 22px !important;
+  }
+  .modal-content .img-wrapper {
+    margin: 0;
+    height: 90vw;
+
+  }
+  .modal-content .img-wrapper img {
+    position: absolute;
+    height: auto;
+    top: 0;
+  }
+  .modal-content .slick-slider img {
+    height: auto;
+  }
+  .meetingTime span {
+    margin-left: 0;
+  }
+  .modal-second-title {
+    font-size: 24px !important;
+  }
+  .modal-content .meetingTime span {
+    display: flex;
+  }
+  .dashboard .card .card-image img {
+    height: 475px;
+  }
+  .dashboard h1 {
+    margin-bottom: .5rem;
+    margin-top: 0;
+  }
+  .slick-next {
+    right: 20px;
+  }
+  .slick-prev {
+    left: 10px;
+    z-index: 1;
+  }
+  .slick-next::before, .slick-prev::before {
+    font-size: 30px;
+  }
+}
