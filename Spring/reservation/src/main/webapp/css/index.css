@@ -1,0 +1,454 @@
+@charset "UTF-8";
+
+html {
+	background-color: #d4dadf;
+}
+.wrapping {
+	/* border: 1px solid blue; */
+	width: 600px;
+	margin: 85px auto;
+	background-color: #e9ecef;
+}
+
+/* 상단 헤더부분 관련 css */
+.header {
+	/* border: 1px solid gray; */
+	background-color: #03cf5d;
+	padding: 1rem;
+	position: fixed;
+	top: 0;
+	width: 600px;
+	box-sizing:border-box;	
+	z-index: 1;
+}
+.header #naverImg {
+	width: 150px;
+	height: 53px;
+	background-image: url(../img/spr_bi.png);
+	background-repeat:no-repeat;
+	display: inline-block;
+	cursor: pointer;
+}
+.header #userName {
+	position: absolute;
+	right: 20px;
+	font-size: 1.5rem;
+	color: white;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* 이미지 슬라이딩 관련 css */
+.promotion {
+	/* border: 1px solid gray; */
+	height: 300px;
+	overflow: hidden;
+}
+.promotion ul {
+	margin: 0;
+	padding: 0;
+	transition: all 1.5s ease-out;				/* sliding.js 무한롤링으로 변경 시 적용하는 옵션 */
+}
+.promotion ul li {
+	list-style: none;
+	float: left;
+}
+/*
+.promotion .slide {
+	width: 600px;
+	height: 300px;
+}												// sliding.js 무한롤링 적용으로 인해 필요없는 CSS 옵션					
+.promotion ul.animated {						// width 와 height 값은 sliding.js 부분에서 자바스크립트로 조정
+	transition: margin-left 1.5s ease-out;		
+}
+*/
+
+/* 카테고리 네비게이션바 관련 css */
+.category {
+	background-color: white;
+	/* border: 1px solid gray; */
+	text-align: center;
+	padding-bottom: 1rem;
+	padding: 1rem 0;
+}
+.category ul {
+	list-style: none;
+	border-bottom: 1px solid gray;
+	height: 33px;
+	margin: 0;
+}
+.category span {
+	display: block;
+	margin-top: 1rem;
+}
+.category ul li {
+	font-size: 1.2rem;
+	display: inline-block;
+	margin-right: 1.5rem;
+	height: 30px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: color;
+}
+.category ul li:hover {
+	color: #afa8a8;
+}
+.category ul li.on {
+	border-bottom: 3px solid #03cf5d;
+	color: #03cf5d;
+}
+
+/* 상품리스트 관련  css */
+.products {
+	/* border: 1px solid gray; */
+	overflow: auto;
+}
+.products .left {
+	float: left;
+	width: 50%;
+}
+.products .right {
+	float: right;
+	width: 50%;
+}
+.products ul {
+	list-style: none;
+	margin: 5px;
+	padding: 0;
+}
+.products ul li {
+	margin: 10px;
+}
+.products .productListwrapper {
+	background-color: white;
+}
+.products .productListwrapper a {
+	text-decoration: none;
+	color: black;
+}
+.products .productListwrapper img {
+	width: 100%;
+}
+.products .productListwrapper span {
+	max-height:62px;
+	word-wrap:break-word;
+	display: block;
+	display: -webkit-box;			/* ellipsis 3줄 처리 */
+	-webkit-line-clamp: 3;
+	-webkit-box-orient:vertical;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	padding: 5 10px;
+}
+.products .productListwrapper .description {
+	font-weight:bolder;
+}
+.products .productListwrapper .placeName {
+	font-weight:bolder;
+}
+.products .productListwrapper .content {
+	color: #909090;
+}
+.products .placeName:after {
+	content: '';
+	display: block;
+	width: 100%;
+	margin: 0.5rem auto;
+	border-bottom: 1px solid #d4dadf;
+}
+
+/* 더보기 관련 css */
+.morePages {
+	background-color: white;
+	border: 2px solid #d4dadf;
+	text-align: center;
+	cursor: pointer;
+	transition: border;
+	box-sizing:border-box;
+	margin: 0 15px;
+}
+.morePages div {
+	padding: 1rem 0;
+}
+.morePages:hover {
+	border: 3px solid #4b86e0;
+}
+.morePages:hover div {
+	margin: -1px 0;
+}
+
+
+/* TOP 관련 css */
+.topPage {
+	/* border: 1px solid gray; */
+	text-align: center;
+	padding: 1rem 0;
+	cursor: pointer;
+	margin: 2rem 15px 0 15px;
+}
+
+/* footer 영역 관련 css */
+footer {
+	/* border: 1px solid gray; */
+	text-align: center;
+	padding: 2rem 15px;
+	color: gray;
+}
+
+/*
+------------------- detail page 영역 -----------------------
+*/
+.setTextMiddle {
+	text-align: center;
+}
+.productImage {
+	border: 1px solid gray;
+	height: 600px;
+	position: relative;
+	display: flex;
+	overflow: hidden;
+}
+.productImage .bannerImage {
+	margin: 0;
+	padding: 0;
+	transition: all 1s ease-out;
+	display: flex;
+}
+.productImage .bannerImage li {
+	list-style: none;
+	float: left;
+	display: flex;
+}
+.productImage::before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0.3;
+	position: absolute;
+}
+.productImage span {
+	display: block;
+	position: absolute;
+	color: white;
+}
+.productImage #product_counts {
+	top: 5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 1.3rem;
+	border-radius: 1rem;
+	padding: 0.2rem 1rem;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+.productImage #product_counts #counts, #slash {
+	opacity: 0.6
+}
+.productImage #product_title {
+	bottom: 10rem;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 2.5rem;
+}
+.productImage #rightBtn {
+	top: 50%;
+	transform: translateY(-50%);
+	right: 5%;
+	font-size: 2.5rem;
+	cursor: pointer;
+	transition: opacity;
+}
+.productImage #rightBtn:hover {
+	opacity : 0.8;
+}
+.productImage #leftBtn {
+	top: 50%;
+	transform: translateY(-50%);
+	left: 5%;
+	font-size: 2.5rem;
+	cursor: pointer;
+	transition: opacity;
+}
+.productImage #leftBtn:hover {
+	opacity : 0.8;
+}
+
+.productContent {
+	border: 1px solid gray;
+	position: relative;
+}
+.productContent div {
+	border: 1px solid gray;
+	padding: 1rem;
+	box-sizing: border-box;
+}
+.productContent #showContents {
+	background-color: white;
+	margin-bottom: 4rem;
+}
+.productContent #showContents .descript_content.hidden {
+	margin: 0;
+	display: -webkit-box;			/* ellipsis 3줄 처리 */
+	-webkit-line-clamp: 3;
+	-webkit-box-orient:vertical;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+.productContent .showMore {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	margin-top: 1rem;
+	bottom: 0;
+	cursor: pointer;
+}
+
+.event {
+	border: 1px solid gray;
+	padding: 1rem;
+}
+.event .LayerEffectAfter::after {
+	content: '';
+	display: block;
+	border-bottom: 1px solid gray;
+	width: 100%;
+	margin: 0.5rem auto;	
+}
+.event span {
+	display: block;
+}
+
+.reservation {
+	cursor: pointer;
+	border: 1px solid gray;
+	padding: 1rem;
+	text-align: center;
+	color: white;
+	background-color: #03cf5d;
+}
+
+.review {
+	border: 1px solid gray;
+	padding: 1rem;
+	position: relative;
+	background-color: white;
+}
+.review .LayerEffectAfter::after {
+	content: '';
+	display: block;
+	border-bottom: 1.4px solid gray;
+	width: 100%;
+	margin: 0.5rem auto;	
+}
+.review .reviewContainer span {
+	//font-size: 2rem;
+}
+.review .reviewContainer #userName {
+	content: '';
+	display: inline;
+	padding: 0 1rem;
+	margin: 0 1rem;
+	border-right: 1px solid #d6d4d4;
+	border-left: 1px solid #d6d4d4;
+}
+.review #userDate::after {
+	content: '';
+	display: block;
+	border-bottom: 1px solid gray;
+	margin: 1rem auto;
+}
+.review .afterSetting {
+	margin: 1rem 0;
+	display: block;
+}
+.review .afterSetting::after {
+	content: '';
+	display: block;
+	border-bottom: 1px solid gray;
+	margin: 1rem 0;
+}
+.review .bottomSetting {
+	display: block;
+	margin-bottom: 4rem;
+}
+.review .moreReviews {
+	cursor: pointer;
+	position: absolute;
+	width: 100%;
+	border: 1px solid gray;
+	padding: 1rem;
+	text-align: center;
+	bottom: 0;
+	left: 0;
+	box-sizing: border-box;
+}
+
+.moreInfos {
+	border: 1px solid gray;
+	background-color: white;
+}
+.moreInfos .tabUI {
+	overflow: auto;
+}
+.moreInfos .tabUI ul {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 3px;
+	overflow: auto;
+	border-bottom: 1px solid gray;
+}
+.moreInfos .tabUI ul li {
+	list-style: none;
+	text-align: center;
+	padding: 1rem;
+	width: 50%;
+	float: left;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+.moreInfos .tabUI ul #specInfo::after {
+	content: '상세정보';
+}
+.moreInfos .tabUI ul #navigation::after {
+	content: '오시는길';
+}
+.moreInfos .tabUI ul li.on::after {
+	border-bottom: 3px solid #03cf5d;
+	color: #03cf5d;
+	padding: 1rem;
+}
+.moreInfos #printInfo {
+	display: block;
+	margin: 1rem;
+}
+.moreInfos #printInfo #infoImage {
+	width: 100%;
+}
+.moreInfos #printInfo #mapImage {
+	width: 100%;
+	margin: 2rem auto;
+}
+.moreInfos #printInfo span {
+	display: block;
+}
+.moreInfos #printInfo .container {
+	border: 1px solid grey;
+	padding: 1rem;
+	margin-top : 1.5rem;
+	overflow: auto;
+}
+.moreInfos #printInfo .container div {
+	width: 50%;
+	float: left;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+// 추후 개발 리포트 [ 2019.05.01 ] 
+
+// 슬라이딩 작동 중 버튼 활성화 + 반대 방향 버튼 클릭 시 기능 깨짐 수정 요망
+// 예매평 더 보기 클릭 시 나타나는 페이지 구현
+// 예매자 한줄평 평균점수 적용 요망
+// 평균점수 및 방문날짜 소수점 이하 버림계산 및 날짜형식에 맞게끔 출력 수정
+// 전체적인 UI 다듬고 깔끔하게 만들어야 함
