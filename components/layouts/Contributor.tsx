@@ -5,12 +5,17 @@ interface Props {
   nickname: string;
   count: number;
   rank: number;
+  openUserModal: () => void;
 }
 
-const Contributor = ({ nickname, count, rank }: Props) => {
+const Contributor = ({ nickname, count, rank, openUserModal }: Props) => {
   const medal = rank === 1 ? "gold" : rank === 2 ? "silver" : "bronze";
+
   return (
-    <div className="flex justify-between gap-2 sm:gap-4 my-2 cursor-pointer hover:bg-gray-200 border rounded-md p-3">
+    <div
+      onClick={openUserModal}
+      className="flex justify-between gap-2 sm:gap-4 my-2 cursor-pointer hover:bg-gray-200 border rounded-md p-3"
+    >
       <div className="flex gap-2 md:gap-4">
         <Image
           src={`/img/${medal}.svg`}
