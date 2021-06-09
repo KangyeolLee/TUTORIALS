@@ -1,7 +1,7 @@
 import Comments from "@components/layouts/Comments";
 import CommentsBlind from "@components/layouts/CommentsBlind";
 import Misson from "@components/layouts/Misson";
-import Modal from "@components/layouts/Modal";
+import CommentModal from "@components/layouts/CommentModal";
 import NovelContentForContribution from "@components/layouts/NovelContentForContribution";
 import NovelContentForReading from "@components/layouts/NovelContentForReading";
 import TabBar from "@components/layouts/TabBar";
@@ -72,7 +72,7 @@ const NovelPage = () => {
         <CommentsBlind handleToggleBtn={handleToggleBtn} />
       )}
 
-      {modalStatus && <Modal handleSubmitBtn={handleSubmitBtn} />}
+      {modalStatus && <CommentModal handleSubmitBtn={handleSubmitBtn} />}
     </section>
   );
 };

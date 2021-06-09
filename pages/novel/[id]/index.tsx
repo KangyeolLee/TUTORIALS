@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import NovelList from "@components/layouts/NovelList";
 import NovelDescription from "@components/layouts/NovelDescription";
 import Contributors from "@components/layouts/Contributors";
+import UserModal from "@components/layouts/UserModal";
 
 const NovelDetail = () => {
+  const [modalStatus, setModalStatus] = useState(false);
+
+  const openUserModal = () => {
+    setModalStatus((prev) => !prev);
+  };
+
   return (
     <section className="sm:container px-5 md:px-10 mx-auto my-16">
       <NovelDescription title="이것은 소설의 제목입니다" writer="Gian95" />
 
-      <Contributors />
+      <Contributors openUserModal={openUserModal} />
 
       <h1 className="mt-14 mb-2 text-2xl font-bold">회차 목록</h1>
       <div className="divide-y divide-light-gray-500">
@@ -20,6 +27,8 @@ const NovelDetail = () => {
         <NovelList num={6} title="하나님이 보우하사" />
         <NovelList num={7} title="우리나라 만세" />
       </div>
+
+      {modalStatus && <UserModal handleSubmitBtn={openUserModal} />}
     </section>
   );
 };
