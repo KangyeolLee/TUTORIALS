@@ -1,8 +1,10 @@
 import Comments from "@components/layouts/Comments";
 import CommentsBlind from "@components/layouts/CommentsBlind";
+import Misson from "@components/layouts/Misson";
 import Modal from "@components/layouts/Modal";
 import NovelContentForContribution from "@components/layouts/NovelContentForContribution";
 import NovelContentForReading from "@components/layouts/NovelContentForReading";
+import TabBar from "@components/layouts/TabBar";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
@@ -11,6 +13,7 @@ const NovelPage = () => {
   const router = useRouter();
   const [editStatus, setEditStatus] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
+  const [tabStatus, setTabStatus] = useState({ active: "opinion" });
   const { list } = router.query;
 
   const handleToggleBtn = () => {
@@ -62,18 +65,9 @@ const NovelPage = () => {
       </div>
 
       {editStatus ? (
-        <div className="flex flex-col gap-5 my-20">
-          <div className="flex gap-2 justify-end">
-            <div className="rounded-xl bg-blue-500 py-3 px-7 text-white font-bold cursor-pointer hover:opacity-75">
-              의견
-            </div>
-            <div className="border rounded-xl py-3 px-7 cursor-pointer hover:opacity-75">
-              미션
-            </div>
-          </div>
-
-          <Comments />
-        </div>
+        <TabBar setTabStatus={setTabStatus} tabStatus={tabStatus}>
+          {tabStatus.active === "opinion" ? <Comments /> : <Misson />}
+        </TabBar>
       ) : (
         <CommentsBlind handleToggleBtn={handleToggleBtn} />
       )}
