@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ["novelpia.com"],
+    domains: ["clayworks.space"],
   },
 };
