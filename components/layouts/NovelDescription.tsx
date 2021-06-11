@@ -9,16 +9,18 @@ type Props = {
 
 const NovelDescription: VFC<Props> = ({ title, writer }) => {
   return (
-    <div className="flex flex-col sm:flex-row gap-6 md:gap-10">
-      <Image
-        className="rounded-xl"
-        src="/img/coverImg.PNG"
-        alt="cover image"
-        width={300}
-        height={450}
-      />
+    <section className="flex flex-col sm:flex-row gap-6 md:gap-10">
+      <article>
+        <Image
+          className="rounded-xl"
+          src="/img/coverImg.PNG"
+          alt="cover image"
+          width={300}
+          height={450}
+        />
+      </article>
 
-      <div className="flex-1">
+      <article className="flex-1">
         <h1 className="font-bold text-2xl">{title}</h1>
         <div className="border-b-2 my-2"></div>
         <div className="flex gap-2 my-2">
@@ -65,8 +67,8 @@ const NovelDescription: VFC<Props> = ({ title, writer }) => {
           <h1 className="font-bold">줄거리</h1>
           <p>누가누가 태어나서 누가누가 밥을 먹고...</p>
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 };
 
