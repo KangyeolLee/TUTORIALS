@@ -2,10 +2,10 @@ import React, { VFC } from "react";
 import Image from "next/image";
 import { FiUser, FiThumbsUp } from "react-icons/fi";
 
-type Props = {
+interface Props {
   title: string;
   writer: string;
-};
+}
 
 const NovelDescription: VFC<Props> = ({ title, writer }) => {
   return (

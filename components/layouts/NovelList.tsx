@@ -2,10 +2,10 @@ import { VFC } from "react";
 import Link from "next/link";
 import { FiUser, FiThumbsUp, FiMessageCircle } from "react-icons/fi";
 
-type Props = {
+interface Props {
   num: number;
   title: string;
-};
+}
 
 const NovelList: VFC<Props> = ({ num, title }) => {
   return (

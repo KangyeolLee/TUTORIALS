@@ -1,13 +1,9 @@
+import { NovelType } from "@dummy/dummyType";
 import React, { VFC } from "react";
 import NovelList from "./NovelList";
 
-type Novel = {
-  num: number;
-  title: string;
-};
-
 interface Props {
-  list: Novel[];
+  list: NovelType[];
 }
 
 const NovelListWrapper: VFC<Props> = ({ list }) => {
