@@ -3,6 +3,7 @@ import NovelList from "@components/layouts/NovelList";
 import NovelDescription from "@components/layouts/NovelDescription";
 import Contributors from "@components/layouts/Contributors";
 import UserModal from "@components/layouts/UserModal";
+import NovelListWrapper from "@components/layouts/NovelListWrapper";
 
 const NovelDetail = () => {
   const [modalStatus, setModalStatus] = useState(false);
@@ -17,16 +18,7 @@ const NovelDetail = () => {
 
       <Contributors openUserModal={openUserModal} />
 
-      <h1 className="mt-14 mb-2 text-2xl font-bold">회차 목록</h1>
-      <div className="divide-y divide-light-gray-500">
-        <NovelList num={1} title="프롤로그" />
-        <NovelList num={2} title="가자 디지몬 친구들" />
-        <NovelList num={3} title="동해물과" />
-        <NovelList num={4} title="백두산이" />
-        <NovelList num={5} title="마르고 닳도록" />
-        <NovelList num={6} title="하나님이 보우하사" />
-        <NovelList num={7} title="우리나라 만세" />
-      </div>
+      <NovelListWrapper list={dummyData} />
 
       {modalStatus && <UserModal handleSubmitBtn={openUserModal} />}
     </section>
@@ -34,3 +26,13 @@ const NovelDetail = () => {
 };
 
 export default NovelDetail;
+
+const dummyData = [
+  { num: 1, title: "프롤로그" },
+  { num: 2, title: "가자 디지몬 친구들" },
+  { num: 3, title: "동해물과" },
+  { num: 4, title: "백두산이" },
+  { num: 5, title: "마르고 닳도록" },
+  { num: 6, title: "하나님이 보우하사" },
+  { num: 7, title: "우리나라 만세" },
+];
