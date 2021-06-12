@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Novelist Project
 
-## Getting Started
+- 집단지성을 활용한 독자 참여형 소설 집필 플랫폼
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- web/mobile optimize
+- image lazy loading
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Skill Stacks
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+모든 스킬 스택의 채택의 공통적인 이유는 학습 및 숙련도 향상을 기본 베이스로 합니다.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- typescript 사용
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+  - 타입 유추를 통한 개발 생산성 향상
+  - 디버깅 용이
 
-## Learn More
+- nextJS create-next-app 사용
 
-To learn more about Next.js, take a look at the following resources:
+  - Server-side-Rendering 적용
+  - CRA 환경보다 기본 셋팅이 더 가벼움 (cf. CRA Webpack 설정 등)
+  - Routing 처리를 프레임워크단에서 자체적으로 보다 쉽게 관리
+  - API를 자체 서버를 통해 보다 간편하게 구축 가능
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- tailwindcss 사용
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  - className 명을 통한 스타일링으로 빠른 개발 속도
+  - 자바스크립트와의 코드 분리를 통한 프레임워크와 독립성
 
-## Deploy on Vercel
+- postcss plugin
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  - tailwindcss에 autoprefixer 적용
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- semantic html
+  - Server-Side-Rendering을 사용하는 만큼 semantic한 html 문서 작성 필요
+  - header, main, footer, section, article 등의 태그를 사용하여 semantic 하게 구성
+
+## Issue
+
+- tailwindcss
+
+  - 개발 생산성을 위해 도입했지만 초반 러닝커브가 있어 오히려 속도가 붙기까지 시간 소요가 있었음
+  - HTML 태그 (JSX문법 내) 에 클래스명이 너무 과도하게 길어지는 느낌이 불편하게 다가옴
+  - 쓰다보니 CSS in JS의 개념이 더 익숙하고 편리하다는 느낌이 듬
+
+- next/image
+
+  - 자체적으로 캐싱/지연로딩 등을 지원해주는 점은 매우 편리하다고 생각
+  - 그러나 해당 기능을 원활하게 이용하기 위해서는 `next.config.js` 에 별도의 설정이 필요
+
+- next
+  - 어떤 디자인 패턴을 가져가는 것이 가장 효율적인지에 대한 고민이 많았음
+  - 단순 next 프레임워크만의 문제는 아니며 가장 react스럽게 구조를 짜는 것에 대한 고민이 필요할 것으로 생각
