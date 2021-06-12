@@ -26,7 +26,7 @@ const NovelPage = () => {
 
   return (
     <section className="sm:container px-5 md:px-10 mx-auto my-16">
-      <div className="flex justify-between">
+      <section className="flex justify-between">
         <div>
           <h1 className="text-3xl font-bold mb-2">이것은 소설의 제목입니다</h1>
           <p className="text-lg">#{list}</p>
@@ -50,9 +50,9 @@ const NovelPage = () => {
             </>
           )}
         </div>
-      </div>
+      </section>
 
-      <div className="relative">
+      <section className="relative">
         {editStatus ? (
           <NovelContentForContribution handleSubmitBtn={handleSubmitBtn} />
         ) : (
@@ -62,7 +62,7 @@ const NovelPage = () => {
         <div className="text-center text-gray-400">1 / 20</div>
         <BsChevronLeft className="hidden mob:block absolute top-1/2 left-0 text-5xl hover:opacity-50 cursor-pointer" />
         <BsChevronRight className="hidden mob:block absolute top-1/2 right-0 text-5xl hover:opacity-50 cursor-pointer" />
-      </div>
+      </section>
 
       {editStatus ? (
         <TabBar setTabStatus={setTabStatus} tabStatus={tabStatus}>
