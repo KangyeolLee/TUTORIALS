@@ -23,7 +23,7 @@ const TabBar = ({ children, setTabStatus, tabStatus }: Props) => {
   const isNotSelected = "border";
 
   return (
-    <div className="flex flex-col gap-5 my-20">
+    <section className="flex flex-col gap-5 my-20">
       <div className="flex gap-2 justify-end">
         <div
           id="opinion"
@@ -46,7 +46,7 @@ const TabBar = ({ children, setTabStatus, tabStatus }: Props) => {
       </div>
 
       {children}
-    </div>
+    </section>
   );
 };
 
