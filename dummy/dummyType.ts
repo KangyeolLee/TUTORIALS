@@ -10,3 +10,7 @@ export type NovelType = {
   num: number;
   title: string;
 };
+
+export type TabStatus = {
+  active: string;
+};

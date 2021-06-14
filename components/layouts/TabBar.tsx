@@ -1,8 +1,5 @@
+import { TabStatus } from "@dummy/dummyType";
 import React from "react";
-
-type TabStatus = {
-  active: string;
-};
 
 interface Props {
   children: JSX.Element;
