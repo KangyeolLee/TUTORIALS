@@ -7,7 +7,8 @@ import NovelContentForReading from "@components/layouts/NovelContentForReading";
 import TabBar from "@components/layouts/TabBar";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import NovelTitle from "@components/layouts/NovelTitle";
+import NovelDetails from "@components/layouts/NovelDetails";
 
 const NovelPage = () => {
   const router = useRouter();
@@ -26,43 +27,13 @@ const NovelPage = () => {
 
   return (
     <section className="sm:container px-5 md:px-10 mx-auto my-16">
-      <section className="flex justify-between">
-        <div>
-          <h1 className="text-3xl font-bold mb-2">이것은 소설의 제목입니다</h1>
-          <p className="text-lg">#{list}</p>
-        </div>
+      <NovelTitle
+        list={list}
+        editStatus={editStatus}
+        handleToggleBtn={handleToggleBtn}
+      />
 
-        <div
-          onClick={handleToggleBtn}
-          className={`flex items-center justify-between rounded-full  w-20 h-10 cursor-pointer hover:opacity-75 ${
-            editStatus ? "bg-green-400" : "bg-gray-200"
-          }`}
-        >
-          {editStatus ? (
-            <>
-              <span className="text-white ml-3">ON</span>
-              <div className="rounded-full w-8 h-8 mr-1 bg-white"></div>
-            </>
-          ) : (
-            <>
-              <div className="rounded-full w-8 h-8 ml-1 bg-white"></div>
-              <span className="text-white mr-2">OFF</span>
-            </>
-          )}
-        </div>
-      </section>
-
-      <section className="relative">
-        {editStatus ? (
-          <NovelContentForContribution handleSubmitBtn={handleSubmitBtn} />
-        ) : (
-          <NovelContentForReading />
-        )}
-
-        <div className="text-center text-gray-400">1 / 20</div>
-        <BsChevronLeft className="hidden mob:block absolute top-1/2 left-0 text-5xl hover:opacity-50 cursor-pointer" />
-        <BsChevronRight className="hidden mob:block absolute top-1/2 right-0 text-5xl hover:opacity-50 cursor-pointer" />
-      </section>
+      <NovelDetails editStatus={editStatus} handleSubmitBtn={handleSubmitBtn} />
 
       {editStatus ? (
         <TabBar setTabStatus={setTabStatus} tabStatus={tabStatus}>
