@@ -1,5 +1,5 @@
 import Banner from "@components/layouts/Banner";
-import PreviewNovelWrapper from "@components/layouts/PreviewNovelWrapper";
+import PreviewNovelWrapper from "@components/layouts/Novels/PreviewNovelWrapper";
 
 export default function Home() {
   return (

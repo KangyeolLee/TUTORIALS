@@ -1,14 +1,12 @@
-import Comments from "@components/layouts/Comments";
-import CommentsBlind from "@components/layouts/CommentsBlind";
-import Misson from "@components/layouts/Misson";
-import CommentModal from "@components/layouts/CommentModal";
-import NovelContentForContribution from "@components/layouts/NovelContentForContribution";
-import NovelContentForReading from "@components/layouts/NovelContentForReading";
-import TabBar from "@components/layouts/TabBar";
+import Comments from "@components/layouts/Comments/Comments";
+import CommentsBlind from "@components/layouts/Comments/CommentsBlind";
+import Misson from "@components/layouts/TabBar/Misson";
+import CommentModal from "@components/layouts/Comments/CommentModal";
+import TabBar from "@components/layouts/TabBar/TabBar";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import NovelTitle from "@components/layouts/NovelTitle";
-import NovelDetails from "@components/layouts/NovelDetails";
+import NovelTitle from "@components/layouts/Novels/NovelTitle";
+import NovelDetails from "@components/layouts/Novels/NovelDetails";
 
 const NovelPage = () => {
   const router = useRouter();

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import NovelDescription from "@components/layouts/NovelDescription";
-import Contributors from "@components/layouts/Contributors";
+import NovelDescription from "@components/layouts/Novels/NovelDescription";
+import Contributors from "@components/layouts/Contributor/Contributors";
 import UserModal from "@components/layouts/UserModal";
-import NovelListWrapper from "@components/layouts/NovelListWrapper";
+import NovelListWrapper from "@components/layouts/Novels/NovelListWrapper";
 import { dummyContributors, dummyNovels } from "@dummy/dummyData";
 
 const NovelDetail = () => {
