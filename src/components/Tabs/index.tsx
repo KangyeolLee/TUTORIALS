@@ -5,14 +5,41 @@ import NewsTab from "./NewsTab";
 
 const index = () => {
   return (
-    <Tabs isFitted isLazy variant="enclosed">
-      <TabList>
-        <Tab>유튜브</Tab>
-        <Tab>이미지</Tab>
-        <Tab>뉴스</Tab>
+    <Tabs isFitted isLazy variant="enclosed-colored">
+      <TabList pos="fixed" w="100%" zIndex={100}>
+        <Tab
+          _selected={{
+            bg: "#fff",
+            borderTopColor: "",
+            borderColor: "inherit",
+            borderBottomColor: "transparent",
+          }}
+        >
+          유튜브
+        </Tab>
+        <Tab
+          _selected={{
+            bg: "#fff",
+            borderTopColor: "",
+            borderColor: "inherit",
+            borderBottomColor: "transparent",
+          }}
+        >
+          이미지
+        </Tab>
+        <Tab
+          _selected={{
+            bg: "#fff",
+            borderTopColor: "",
+            borderColor: "inherit",
+            borderBottomColor: "transparent",
+          }}
+        >
+          뉴스
+        </Tab>
       </TabList>
 
-      <TabPanels>
+      <TabPanels pt="42px">
         <TabPanel p={0}>
           <YoutubeTab />
         </TabPanel>
