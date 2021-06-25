@@ -33,8 +33,12 @@
   - tailwindcss에 autoprefixer 적용
 
 - semantic html
+
   - Server-Side-Rendering을 사용하는 만큼 semantic한 html 문서 작성 필요
   - header, main, footer, section, article 등의 태그를 사용하여 semantic 하게 구성
+
+- vercel 을 통한 배포 환경 구성
+  - 페이지: https://swm-novelist-project.vercel.app/
 
 ## Issue
 
