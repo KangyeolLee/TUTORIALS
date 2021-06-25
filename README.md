@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+# Herotime Webview for Flutter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 트로트 가수 임영웅을 위한 유튜브/이미지/뉴스소식 등을 모아볼 수 있는 애플리케이션의 웹뷰
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- only mobile optimization (except for Web application)
+- 검색없이 카테고리 별 원하는 모음집을 손쉽게 감상 가능
 
-### `npm start`
+## Skill Stacks
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 모든 스킬 스택의 선택 이유는 공통적으로 학습 및 숙련도 향상을 기본 전제로 함
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- TYPESCRIPT
 
-### `npm test`
+  - 타입 유추를 통한 개발 생산성 및 안정성 향상
+  - 디버깅 용이
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- REACT feat. CRA CLI
 
-### `npm run build`
+  - 웹뷰 제작이기 때문에 검색엔진 등에 의한 노출 필요X
+  - 빠른 환경 구축을 위해 제공되는 CLI 이용
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- CHAKRA-UI
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  - tailwindcss를 사용하며 겪었던 불편함을 잘 해소할 수 있는 UI 라이브러리라 생각
+  - 기본적인 디자인 틀이 다 잡혀있기 때문에 UI 구성 시간 단축 가능
+  - 공식문서에 의하면 웹/모바일 등의 접근성을 최우선으로 두고있다고 소개
+  - 해당 프로젝트는 웹뷰를 구성해야 하므로 모바일 접근성이 고려되는 라이브러리로 적합하다고 판단
+  - React Component 스타일로 사용 가능 + emotion 기반 스타일링
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- CRACO
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+  - tsconfig 파일에서 단축성을 위해 일부 경로를 절대 경로로 사용하고자 함
+  - 해당 경로를 수정하는 것이 CRA 환경 웹팩에 의해 막혀있고 관련 조작을 위해서는 `eject` 할 필요
+  - 그러나 단순히 경로만 건드는 설정을 위해 `eject` 하여 손수 커스텀하는 코스트가 너무 크다고 판단
+  - 따라서 `eject` 하지 않고도 커스텀 설정을 하기 위해 CRA 환경에서 커스텀 설정을 위한 라이브러리로 채택
