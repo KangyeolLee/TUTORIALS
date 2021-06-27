@@ -1,27 +1,59 @@
 const $main = document.getElementById("main");
+const $wrapper = document.createElement("div");
+const $header = document.createElement("h1");
+const $scores = document.createElement("div");
 const $table = document.createElement("table");
 const $result = document.createElement("div");
+const $buttonArea = document.createElement("div");
+const $resetBtn = document.createElement("div");
+const $newBtn = document.createElement("div");
 
 let clickable = true;
 let turn = "O";
 const rows = [];
+const records = {
+  O: 0,
+  X: 0,
+};
 
-for (let i = 0; i < 3; i++) {
-  const $tr = document.createElement("tr");
-  const cells = [];
-  for (let i = 0; i < 3; i++) {
-    const $td = document.createElement("td");
-    cells.push($td);
-    $tr.append($td);
-  }
-  rows.push(cells);
-  $table.append($tr);
-}
-
+makeTable();
 $table.addEventListener("click", checkTurnCallback);
 
-$main.append($table);
-$main.append($result);
+$header.innerText = "TIC TAC TOE";
+$scores.innerHTML = `<div>나 : <span id="O">${records.O}<span></div>
+<div>컴퓨터 : <span id="X">${records.X}</span></div>`;
+$resetBtn.innerText = "RESET GAME";
+$newBtn.innerText = "NEW GAME";
+
+$header.id = "header";
+$result.id = "result";
+$scores.id = "scores";
+$buttonArea.id = "btn-area";
+
+$buttonArea.append($resetBtn);
+$buttonArea.append($newBtn);
+
+$wrapper.append($header);
+$wrapper.append($scores);
+$wrapper.append($table);
+$wrapper.append($result);
+$wrapper.append($buttonArea);
+$main.append($wrapper);
+
+// 테이블을 만드는 함수
+function makeTable() {
+  for (let i = 0; i < 3; i++) {
+    const $tr = document.createElement("tr");
+    const cells = [];
+    for (let i = 0; i < 3; i++) {
+      const $td = document.createElement("td");
+      cells.push($td);
+      $tr.append($td);
+    }
+    rows.push(cells);
+    $table.append($tr);
+  }
+}
 
 // 게임의 승부를 판단하는 함수
 function checkWinnerAndDraw(target) {
@@ -84,6 +116,9 @@ function checkHasWinner(rowIndex, cellIndex) {
 
 // 승리자가 나온 경우 게임종료
 function endGame() {
+  const $scoreEl = document.getElementById(turn);
+  $scoreEl.innerHTML = ++records[turn];
+
   $result.textContent = `${turn}님의 승리!`;
   $table.removeEventListener("click", checkTurnCallback);
 }
@@ -99,6 +134,7 @@ function checkTurnCallback(event) {
   if (!clickable) return;
   if (event.target.textContent) return;
 
+  event.target.classList.add("user");
   event.target.textContent = turn;
 
   // 승부 검사
@@ -117,6 +153,7 @@ function handleTurnOfComputer() {
     const emptyCells = rows.flat().filter((v) => !v.textContent);
     const randomCell =
       emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    randomCell.classList.add("computer");
     randomCell.textContent = "X";
 
     checkWinnerAndDraw(randomCell);
