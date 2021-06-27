@@ -10,14 +10,18 @@ const $newBtn = document.createElement("div");
 
 let clickable = true;
 let turn = "O";
-const rows = [];
+let timer = null;
+let rows = [];
 const records = {
   O: 0,
   X: 0,
 };
 
 makeTable();
+
 $table.addEventListener("click", checkTurnCallback);
+$resetBtn.addEventListener("click", resetGame);
+$newBtn.addEventListener("click", newGame);
 
 $header.innerText = "TIC TAC TOE";
 $scores.innerHTML = `<div>나 : <span id="O">${records.O}<span></div>
@@ -129,6 +133,40 @@ function drawGame() {
   $table.removeEventListener("click", checkTurnCallback);
 }
 
+// 게임 재개
+function resetGame() {
+  reloadTable();
+}
+
+// 게임 초기화
+function newGame() {
+  reloadTable();
+  Object.keys(records).forEach((id) => {
+    document.getElementById(id).innerText = 0;
+  });
+}
+
+// 테이블 제거 및 관련 데이터 초기화 후 재생성
+function reloadTable() {
+  if (timer) {
+    clickable = true;
+    turn = "O";
+    clearTimeout(timer);
+    timer = null;
+  }
+
+  rows = [];
+  $table.removeEventListener("click", checkTurnCallback);
+  $result.textContent = "";
+
+  while ($table.hasChildNodes()) {
+    $table.removeChild($table.firstChild);
+  }
+
+  makeTable();
+  $table.addEventListener("click", checkTurnCallback);
+}
+
 // 클릭 이벤트 핸들러 콜백 함수 : 차례에 따라 장기말 배치 및 게임 진행
 function checkTurnCallback(event) {
   if (!clickable) return;
@@ -149,7 +187,7 @@ function checkTurnCallback(event) {
 function handleTurnOfComputer() {
   clickable = false;
 
-  setTimeout(() => {
+  timer = setTimeout(() => {
     const emptyCells = rows.flat().filter((v) => !v.textContent);
     const randomCell =
       emptyCells[Math.floor(Math.random() * emptyCells.length)];
