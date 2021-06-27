@@ -18,6 +18,33 @@ body {
   text-align: center;
 }
 
+#scores {
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#btn-area {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+  color: #111;
+  font-size: 1.25rem;
+}
+
+#btn-area > div {
+  padding: 10px;
+  width: 150px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 15px;
+  cursor: pointer;
+}
+#btn-area > div:hover {
+  opacity: 0.75;
+}
+
 table {
   border-collapse: collapse;
   margin: 1rem;
