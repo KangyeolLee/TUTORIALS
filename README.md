@@ -15,6 +15,7 @@
   - 그 외 순수 HTML만 사용하여 컴포넌트 단위로 분리가 불가능하여 반복되는 레이아웃의 경우 일부 단축하여 구현
     - eg. 카테고리별 항목 레이아웃 일부 생략 / 개개 항목 세부 정보(가격, 수량) 일괄 적용 등
 - 트랜지션/확대/반짝임 등의 사용자 인터랙션은 모두 CSS만 활용하여 구현
+- 헤더 `position: fixed` 적용
 
 ### Skill Stacks
 
@@ -33,6 +34,10 @@
 ├── reset.css
 └── style.css
 ```
+
+### Screen Shot
+
+![_D__coding_tutorials%20(GIT)_Vanilla_BAEMINS-SHOP_index html (1)](https://user-images.githubusercontent.com/48883344/123659296-7c194d80-d86d-11eb-91fa-ba53f56ef98a.png)
 
 ### How To Access
 
