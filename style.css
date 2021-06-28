@@ -1,0 +1,79 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 전역 클래스 관련 설정 (padding/margin/font/display 등..) */
+.container {
+  margin: 0 4rem;
+}
+
+.flex {
+  display: flex;
+}
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+.flex-between {
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-end {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.fs-2 {
+  font-size: 1.15rem;
+}
+
+/* 헤더관련 CSS 속성 설정 */
+header {
+  z-index: 1000;
+  top: 0px;
+  position: sticky;
+  background-color: #fff;
+}
+
+.navbar {
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.navbar-list-wrapper {
+  padding: 1rem 0;
+  display: flex;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: #adadad;
+}
+.navbar-list-wrapper li {
+  cursor: pointer;
+}
+.navbar-list-wrapper li.selected {
+  color: #111;
+}
+.navbar-list-wrapper li + li {
+  border-left: 1px solid #cdcdcd;
+  padding-left: 10px;
+}
+.navbar-list-wrapper li:hover {
+  opacity: 0.65;
+}
+
+#main-navbar {
+  padding: 1.5rem 0;
+}
+
+/* 본문 관련 CSS 속성 설정 */
+main {
+  flex: 1;
+  /* border: 1px solid #111; */
+}
+
+footer {
+  height: 14rem;
+  border: 1px solid #111;
+}
