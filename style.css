@@ -15,19 +15,16 @@ body {
 }
 .flex-center {
   justify-content: center;
-  align-items: center;
 }
 .flex-between {
   justify-content: space-between;
-  align-items: center;
 }
 .flex-end {
   justify-content: flex-end;
-  align-items: center;
 }
 
-.fs-2 {
-  font-size: 1.15rem;
+.font-bold {
+  font-weight: bold;
 }
 
 /* 헤더관련 CSS 속성 설정 */
@@ -39,6 +36,7 @@ header {
 }
 
 .navbar {
+  color: #adadad;
   border-bottom: 1px solid #cdcdcd;
 }
 
@@ -47,7 +45,6 @@ header {
   display: flex;
   gap: 10px;
   font-size: 0.75rem;
-  color: #adadad;
 }
 .navbar-list-wrapper li {
   cursor: pointer;
@@ -74,6 +71,36 @@ main {
 }
 
 footer {
-  height: 14rem;
-  border: 1px solid #111;
+  /* padding: 2rem 0; */
+}
+
+#bottom-navbar {
+  border-top: 1px solid #cdcdcd;
+  color: #111;
+}
+
+#footer-info {
+  color: #adadad;
+  padding: 2rem 0;
+  font-size: 0.75rem;
+}
+
+#footer-info p + p {
+  margin-top: 0.5rem;
+}
+
+#footer-info h6 {
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+#footer-info a {
+  display: block;
+  color: #111;
+  margin-top: 0.5rem;
+}
+
+#footer-info #tel-number {
+  font-size: 1.2rem;
+  color: #111;
 }
