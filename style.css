@@ -7,7 +7,7 @@ body {
 
 /* 전역 클래스 관련 설정 (padding/margin/font/display 등..) */
 .container {
-  max-width: 1080px;
+  width: 1080px;
   margin: auto;
   background-color: #fff;
 }
@@ -24,6 +24,9 @@ body {
 .flex-end {
   justify-content: flex-end;
 }
+.flex-align-center {
+  align-items: center;
+}
 
 .font-bold {
   font-weight: bold;
@@ -38,8 +41,9 @@ body {
 /* 헤더관련 CSS 속성 설정 */
 header {
   z-index: 1000;
-  top: 0px;
-  position: sticky;
+  top: 0;
+  position: fixed;
+  width: 100%;
   background-color: #fff;
 }
 
@@ -71,9 +75,25 @@ header {
 #main-navbar {
   padding: 1.5rem 0;
 }
+#main-navbar .category {
+  display: flex;
+  font-size: 1.08rem;
+  color: #666;
+}
+#main-navbar .category::before {
+  margin-right: 4px;
+  position: relative;
+  display: inline-block;
+  content: " ";
+  width: 20px;
+  height: 20px;
+  background-size: 20px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAAWJJREFUaAXt2r9Kw1AUx/FTNcT+QRTM6OSgi7uv4DO426nSR+gjFDtV0M0H0MVXcNZZEByKg8RBattLkibieM8gLe29yTfjCbf3dz4nBG6oCBcCCCCAAAIIILAigZq2z3B4Eby+ZGfafZfrhye1x3b72tgybtmKRe3tOdhJZHav3Xe5nmffz/N92jJu2IplrtFwmadb9Fa5CasvraTZnMnYPPg48aSRZ+dCAAEEEEAAAQQQQACBpQqon3h63e7utxk/LXW3Ff1YK2ic9vr9L9t26mlpasxmJtmRbZHrtSK7lrFy52Ea1h6FstQrN2H1pRVGUZzEH8c+Tjbci2Ifc5MZAQQQQAABBBBAwCsB9YvHVacTvsvk3Ktu/sIeyPbd5WAwtWVXDw+jNG2lIje2Ra7XRpIWf8axNly54yENu/64LpqvchNWX1qmXp/Ij7ldVHQd63+zr2Nj9kQAAQQQQOB/AnNLoUEKQvT/GQAAAABJRU5ErkJggg==);
+}
 
 /* 본문 관련 CSS 속성 설정 */
 main {
+  margin-top: 146px;
   flex: 1;
 }
 
