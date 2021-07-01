@@ -33,4 +33,5 @@
 
 ### How To Play
 
-`git clone` 이후 `index.html` 파일 실행
+- `Github Pages`를 이용해 배포
+- 링크: https://kangyeollee.github.io/Tic-Tac-Toe/
