@@ -6,6 +6,7 @@
 
 - only mobile optimization (except for Web application)
 - 검색없이 카테고리 별 원하는 모음집을 손쉽게 감상 가능
+- 이미지 탭은 `Mansonry` 스타일 레이아웃으로 출력
 
 ## Skill Stacks
 
