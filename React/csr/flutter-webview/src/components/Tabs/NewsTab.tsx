@@ -1,5 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import NewsListItem from "./../NewsListItem";
+import NewsListItem from "../ListItem/NewsListItem";
 
 const NewsTab = () => {
   return (

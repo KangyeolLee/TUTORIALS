@@ -1,5 +1,5 @@
 import { Grid } from "@chakra-ui/react";
-import ImageListItem from "@components/ImageListItem";
+import ImageListItem from "@components/ListItem/ImageListItem";
 
 const ImagesTab = () => {
   return (

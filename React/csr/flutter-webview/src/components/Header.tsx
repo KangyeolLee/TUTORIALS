@@ -35,7 +35,7 @@ const Header = () => {
       align="center"
     >
       <ArrowBackIcon
-        onClick={() => history.goBack()}
+        onClick={() => history.push("/")}
         opacity={location.pathname !== "/" ? "1" : "0"}
       />
 
