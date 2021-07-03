@@ -1,5 +1,5 @@
 import { SimpleGrid, HStack, Tag, Divider } from "@chakra-ui/react";
-import YoutubeListItem from "@components/YoutubeListItem";
+import YoutubeListItem from "@components/ListItem/YoutubeListItem";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
