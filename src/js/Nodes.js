@@ -39,9 +39,7 @@ export default class Nodes {
   _addEventListener() {
     this.$target.addEventListener('click', e => {
       const $node = e.target.closest('.Node');
-  
-      console.log($node);
-  
+    
       if (!$node) {
         return;
       }

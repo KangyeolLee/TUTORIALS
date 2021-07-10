@@ -25,7 +25,33 @@ export default class App {
 
     this._breadcurmb = new Breadcrumb({
       $app,
-      initialState: this.state.depth
+      initialState: this.state.depth,
+      onClick: (index) => {
+        if (!index) {
+          this.setState({
+            ...this.state,
+            isRoot: true,
+            depth: [],
+            nodes: cache.root,
+          });
+
+          return;
+        }
+
+        if (index === this.state.depth.length - 1) {
+          return;
+        }
+
+        const nextState = { ...this.state };
+        const nextDepth = nextState.depth.slice(0, index+1);
+
+        this.setState({
+          ...nextState,
+          isRoot: false,
+          depth: nextDepth,
+          nodes: cache[nextDepth[nextDepth.length-1].id],
+        });
+      }
     });
 
     this._nodes = new Nodes({
@@ -49,7 +75,7 @@ export default class App {
                 depth: [...this.state.depth, node],
                 isRoot: false,
               });
-              
+
               return;
             }
 
@@ -85,9 +111,6 @@ export default class App {
           nextState.depth.pop();
           
           const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length-1].id;
-
-          console.log(nextState.depth);
-          console.log(prevNodeId);
 
           if (!prevNodeId) {
             // const rootNodes = await request();
@@ -130,7 +153,6 @@ export default class App {
   // 해당 메서드에서는 자신의 state뿐만아니라 자신이 관리하는 하위 컴포넌트의
   // setState까지 모두 관리하여 렌더링 로직을 수행
   setState(nextState) {
-    console.log(cache)
     this.state = nextState;
     this._breadcurmb.setState(this.state.depth);
     this._nodes.setState({
