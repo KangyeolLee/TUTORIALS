@@ -38,17 +38,46 @@ export default class App {
               ...this.state,
               depth: [...this.state.depth, node],
               nodes: nextNodes,
+              isRoot: false,
             });
           } else if (node.type === 'FILE') {
             this.setState({
               ...this.state,
               selectedFilePath: node.filePath,
+              isRoot: false,
             })
           }
         } catch (error) {
           // 에러 처리하기
         }
-        
+      },
+      onBackClick: async () => {
+        try {
+          const nextState = { ...this.state };
+          nextState.depth.pop();
+          
+          const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length-1].id;
+
+          if (!prevNodeId) {
+            const rootNodes = await request();
+            this.setState({
+              ...nextState,
+              isRoot: true,
+              nodes: rootNodes,
+            });
+
+            return;
+          }
+
+          const prevNodes = await request(prevNodeId);
+          this.setState({
+            ...nextState,
+            isRoot: false,
+            nodes: prevNodes,
+          })
+        } catch (error) {
+          // 에러 처리
+        }
       }
     });
 
