@@ -3,16 +3,18 @@ import Breadcrumb from "./BreadCrumb.js";
 import Nodes from "./Nodes.js";
 import ImageView from './ImageView.js';
 import Loading from './Loading.js';
+import Error from "./Error.js";
 
 const cache = {};
 
 export default class App {
   constructor($app) {
     this.state = {
-      isRoot: false,  // 현재 페이지가 메인페이지인지 판단하는 플래그
-      isLoading: true,
-      nodes: [],      // 현재 화면에 따라 출력해야할 nodes 데이터
-      depth: [],      // 상위 디렉토리에서 하위 디렉토리까지 이동 시 거쳐온 서브 디렉토리 
+      isRoot: true,          // 현재 페이지가 메인페이지인지 판단하는 플래그
+      isLoading: true,        // 로딩여부 체크값
+      error: null,            // 에러가 발생하는 경우의 에러메시지
+      nodes: [],              // 현재 화면에 따라 출력해야할 nodes 데이터
+      depth: [],              // 상위 디렉토리에서 하위 디렉토리까지 이동 시 거쳐온 서브 디렉토리 
       selectedFilePath: null  // 이미지뷰어에서 출력할 이미지의 경로
     }
 
@@ -63,70 +65,60 @@ export default class App {
         nodes: this.state.nodes,
       },
       onClick: async (node) => {
-        try {
-          if (node.type === 'DIRECTORY') {
-            if (cache.hasOwnProperty(node.id)) {
-              this.setState({
-                ...this.state,
-                selectedFilePath: null,
-                nodes: cache[node.id],
-                depth: [...this.state.depth, node],
-                isRoot: false,
-              });
-
-              return;
-            }
-
-            const nextNodes = await this._getNodesData(node.id);
+        if (node.type === 'DIRECTORY') {
+          if (cache.hasOwnProperty(node.id)) {
             this.setState({
               ...this.state,
+              selectedFilePath: null,
+              nodes: cache[node.id],
               depth: [...this.state.depth, node],
-              nodes: nextNodes,
-              selectedFilePath: null,
               isRoot: false,
-            });
-
-            cache[node.id] = nextNodes;
-          } else if (node.type === 'FILE') {
-            this.setState({
-              ...this.state,
-              selectedFilePath: node.filePath,
-              isRoot: false,
-            });
-          }
-        } catch (error) {
-          // 에러 처리하기
-          console.log(error.message);
-        }
-      },
-      onBackClick: async () => {
-        try {
-          const nextState = { ...this.state };
-          nextState.depth.pop();
-          
-          const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length-1].id;
-
-          if (!prevNodeId) {
-            this.setState({
-              ...nextState,
-              isRoot: true,
-              selectedFilePath: null,
-              nodes: cache.root,
             });
 
             return;
           }
 
+          const nextNodes = await this._getNodesData(node.id);
+          this.setState({
+            ...this.state,
+            depth: [...this.state.depth, node],
+            nodes: nextNodes,
+            selectedFilePath: null,
+            isRoot: false,
+          });
+
+          cache[node.id] = nextNodes;
+        } else if (node.type === 'FILE') {
+          this.setState({
+            ...this.state,
+            selectedFilePath: node.filePath,
+            isRoot: false,
+          });
+        }
+      },
+      onBackClick: async () => {
+        const nextState = { ...this.state };
+        nextState.depth.pop();
+          
+        const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length-1].id;
+
+        if (!prevNodeId) {
           this.setState({
             ...nextState,
-            isRoot: false,
+            isRoot: true,
             selectedFilePath: null,
-            nodes: cache[prevNodeId],
-          })
-        } catch (error) {
-          // 에러 처리
-          console.log(error.message);
+            nodes: cache.root,
+          });
+
+          return;
         }
+
+        this.setState({
+          ...nextState,
+          isRoot: false,
+          selectedFilePath: null,
+          nodes: cache[prevNodeId],
+        });        
       }
     });
 
@@ -139,6 +131,11 @@ export default class App {
       $app,
       initialState: this.state.isLoading,
     })
+
+    this._error = new Error({
+      $app,
+      initialState: this.state.error,
+    });
 
     this.init();
   }
@@ -154,7 +151,10 @@ export default class App {
       const nodes = await request(id);
       return nodes;
     } catch (error) {
-      console.log(error.message);
+      this.setState({
+        ...this.state,
+        error: error.message,
+      });
     } finally {
       this.setState({
         ...this.state,
@@ -176,20 +176,17 @@ export default class App {
     });
     this._imageView.setState(this.state.selectedFilePath);
     this._loading.setState(this.state.isLoading);
+    this._error.setState(this.state.error);
   }
 
   async init() {
-    try {
-      const rootNodes = await this._getNodesData();
-      this.setState({
-        ...this.state,
-        isRoot: true,
-        nodes: rootNodes,
-      });
+    const rootNodes = await this._getNodesData();
+    this.setState({
+      ...this.state,
+      isRoot: true,
+      nodes: rootNodes,
+    });
 
-      cache.root = rootNodes;
-    } catch (error) {
-      throw new Error(`통신 중 에러가 발생했습니다: ${error.message}`);
-    }
+    cache.root = rootNodes;
   }
 }
