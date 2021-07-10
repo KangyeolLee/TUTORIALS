@@ -1,7 +1,7 @@
-import request from "./api";
-import Breadcrumb from "./BreadCrumb";
-import Nodes from "./Nodes";
-import ImageView from './ImageView';
+import request from "./api.js";
+import Breadcrumb from "./BreadCrumb.js";
+import Nodes from "./Nodes.js";
+import ImageView from './ImageView.js';
 
 export default class App {
   constructor($app) {
