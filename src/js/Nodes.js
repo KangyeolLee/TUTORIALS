@@ -1,4 +1,4 @@
-class Nodes {
+export default class Nodes {
   constructor({ $app, initialState, onClick }) {
     this.state = initialState;
     this.onClick = onClick;

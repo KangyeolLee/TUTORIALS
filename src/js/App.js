@@ -1,4 +1,4 @@
-class App {
+export default class App {
   constructor($app) {
     this.state = {
       isRoot: false,  // 현재 페이지가 메인페이지인지 판단하는 플래그

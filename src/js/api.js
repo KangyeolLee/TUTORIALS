@@ -14,3 +14,5 @@ const request = async (nodeId) => {
     throw new Error(`에러가 발생했습니다: ${error.message}`)
   }
 }
+
+export default request;

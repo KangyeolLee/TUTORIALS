@@ -1,4 +1,4 @@
-class Breadcrumb {
+export default class Breadcrumb {
   constructor({ $app, initialState }) {
     this.state = initialState;
         
