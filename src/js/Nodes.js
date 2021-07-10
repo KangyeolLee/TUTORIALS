@@ -18,7 +18,7 @@ export default class Nodes {
   }
 
   render() {
-    if(this.state.nodes) {
+    if(this.state.nodes.length) {
       const nodesTemplate = this.state.nodes.map(node => {
         const path = node.type === "FILE" ? './assets/file.png' : './assets/directory.png';
 
