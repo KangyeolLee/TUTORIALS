@@ -34,6 +34,10 @@ body {
   display: flex;
   flex-direction: column;
   word-break: keep-all;
+  cursor: pointer;
+}
+.Node:hover {
+  opacity: 0.75;
 }
 
 .Breadcrumb {
@@ -54,6 +58,13 @@ body {
 
 .Breadcrumb > div:last-child::after {
   content: "";
+}
+
+.Breadcrumb .nav-item {
+  cursor: pointer;
+}
+.Breadcrumb .nav-item:hover {
+  opacity: 0.75;
 }
 
 .Modal {
