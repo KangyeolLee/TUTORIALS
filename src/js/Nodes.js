@@ -4,6 +4,7 @@ export default class Nodes {
     this.onClick = onClick;
 
     this.$target = document.createElement('ul');
+    this.$target.classList.add('Nodes');
     $app.append(this.$target);
 
     this.render();
