@@ -5,10 +5,31 @@ export default class ImageView {
     this.state = initialState;
     this.$target = document.createElement('div');
     this.$target.classList.add('Modal', 'ImageView');
+    this.$target.setAttribute('tabindex', -1);
+
+    this._addEventListener();
 
     $app.append(this.$target);
 
     this.render();
+  }
+
+  _addEventListener () {
+    this.$target.addEventListener('click', e => {
+      const className = e.target.className;
+
+      if (className !== 'Modal ImageView') {
+        return;
+      }
+
+      this.setState(null);
+    });
+
+    this.$target.addEventListener('keydown', e => {
+      if(e.key === 'Escape') {
+        this.setState(null);
+      }
+    })
   }
 
   setState(nextState) {
@@ -22,6 +43,8 @@ export default class ImageView {
         ? `<img src="${IMAGE_PATH_PREFIX}${this.state}" />`
         : ''}  
     </div>`;
+
     this.$target.style.display = this.state ? 'block' : 'none';
+    this.$target.focus();
   }
 }

@@ -30,6 +30,7 @@ export default class App {
         if (index === null) {
           this.setState({
             ...this.state,
+            selectedFilePath: null,
             isRoot: true,
             depth: [],
             nodes: cache.root,
@@ -48,6 +49,7 @@ export default class App {
         this.setState({
           ...nextState,
           isRoot: false,
+          selectedFilePath: null,
           depth: nextDepth,
           nodes: cache[nextDepth[nextDepth.length-1].id],
         });
@@ -66,6 +68,7 @@ export default class App {
             if (cache.hasOwnProperty(node.id)) {
               this.setState({
                 ...this.state,
+                selectedFilePath: null,
                 nodes: cache[node.id],
                 depth: [...this.state.depth, node],
                 isRoot: false,
@@ -79,6 +82,7 @@ export default class App {
               ...this.state,
               depth: [...this.state.depth, node],
               nodes: nextNodes,
+              selectedFilePath: null,
               isRoot: false,
             });
 
@@ -106,6 +110,7 @@ export default class App {
             this.setState({
               ...nextState,
               isRoot: true,
+              selectedFilePath: null,
               nodes: cache.root,
             });
 
@@ -115,6 +120,7 @@ export default class App {
           this.setState({
             ...nextState,
             isRoot: false,
+            selectedFilePath: null,
             nodes: cache[prevNodeId],
           })
         } catch (error) {
@@ -140,6 +146,7 @@ export default class App {
   async _getNodesData(id) {
     this.setState({
       ...this.state,
+      selectedFilePath: null,
       isLoading: true,
     });
 
@@ -151,6 +158,7 @@ export default class App {
     } finally {
       this.setState({
         ...this.state,
+        selectedFilePath: null,
         isLoading: false,
       })
     }
