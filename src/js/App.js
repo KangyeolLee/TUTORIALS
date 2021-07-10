@@ -27,7 +27,7 @@ export default class App {
       $app,
       initialState: this.state.depth,
       onClick: (index) => {
-        if (!index) {
+        if (index === null) {
           this.setState({
             ...this.state,
             isRoot: true,
