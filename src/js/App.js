@@ -62,11 +62,6 @@ export default class App {
       },
       onClick: async (node) => {
         try {
-          this.setState({
-            ...this.state,
-            isLoading: true,
-          });
-
           if (node.type === 'DIRECTORY') {
             if (cache.hasOwnProperty(node.id)) {
               this.setState({
@@ -79,7 +74,7 @@ export default class App {
               return;
             }
 
-            const nextNodes = await request(node.id);
+            const nextNodes = await this._getNodesData(node.id);
             this.setState({
               ...this.state,
               depth: [...this.state.depth, node],
@@ -98,11 +93,6 @@ export default class App {
         } catch (error) {
           // 에러 처리하기
           console.log(error.message);
-        } finally {
-          this.setState({
-            ...this.state,
-            isLoading: false,
-          });
         }
       },
       onBackClick: async () => {
@@ -113,7 +103,6 @@ export default class App {
           const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length-1].id;
 
           if (!prevNodeId) {
-            // const rootNodes = await request();
             this.setState({
               ...nextState,
               isRoot: true,
@@ -123,7 +112,6 @@ export default class App {
             return;
           }
 
-          // const prevNodes = await request(prevNodeId);
           this.setState({
             ...nextState,
             isRoot: false,
@@ -149,6 +137,25 @@ export default class App {
     this.init();
   }
 
+  async _getNodesData(id) {
+    this.setState({
+      ...this.state,
+      isLoading: true,
+    });
+
+    try {
+      const nodes = await request(id);
+      return nodes;
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      this.setState({
+        ...this.state,
+        isLoading: false,
+      })
+    }
+  }
+
   // App 컴포넌트도 렌더링을 위한 별도의 setState를 가지고 있음
   // 해당 메서드에서는 자신의 state뿐만아니라 자신이 관리하는 하위 컴포넌트의
   // setState까지 모두 관리하여 렌더링 로직을 수행
@@ -165,12 +172,7 @@ export default class App {
 
   async init() {
     try {
-      this.setState({
-        ...this.state,
-        isLoading: true,
-      });
-
-      const rootNodes = await request();
+      const rootNodes = await this._getNodesData();
       this.setState({
         ...this.state,
         isRoot: true,
@@ -180,11 +182,6 @@ export default class App {
       cache.root = rootNodes;
     } catch (error) {
       throw new Error(`통신 중 에러가 발생했습니다: ${error.message}`);
-    } finally {
-      this.setState({
-        ...this.state,
-        isLoading: false,
-      })
     }
   }
 }
