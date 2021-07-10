@@ -46,10 +46,14 @@ body {
   border-bottom: 1px solid #ccc;
   display: flex;
   flex-direction: row;
+  gap: 2rem;
 }
 
 .Breadcrumb > div {
   padding: 4px;
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
 }
 
 .Breadcrumb > div::after {
@@ -61,7 +65,22 @@ body {
 }
 
 .Breadcrumb .nav-item {
+  position: relative;
   cursor: pointer;
+  background-color: teal;
+  color: #fff;
+}
+.Breadcrumb .nav-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: calc(-1rem + 1.5px);
+  width: 0;
+  height: 0;
+  border-top: calc(1rem - 1.5px) solid transparent;
+  border-left: calc(1rem - 1.5px) solid teal;
+  border-right: none;
+  border-bottom: calc(1rem - 1.5px) solid transparent;
 }
 .Breadcrumb .nav-item:hover {
   opacity: 0.75;
