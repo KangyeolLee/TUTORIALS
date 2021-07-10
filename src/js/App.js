@@ -1,6 +1,7 @@
 import request from "./api";
 import Breadcrumb from "./BreadCrumb";
 import Nodes from "./Nodes";
+import ImageView from './ImageView';
 
 export default class App {
   constructor($app) {
@@ -8,6 +9,7 @@ export default class App {
       isRoot: false,  // 현재 페이지가 메인페이지인지 판단하는 플래그
       nodes: [],      // 현재 화면에 따라 출력해야할 nodes 데이터
       depth: [],      // 상위 디렉토리에서 하위 디렉토리까지 이동 시 거쳐온 서브 디렉토리 
+      selectedFilePath: null  // 이미지뷰어에서 출력할 이미지의 경로
     }
 
     // _variables는 클래스에서 private member를 의미하는 일종의 컨벤션
@@ -28,18 +30,39 @@ export default class App {
         isRoot: this.state.isRoot,
         nodes: this.state.nodes,
       },
-      onClick: (node) => {
-        if (node.type === 'DIRECTORY') {
-          // Node의 타입이 디렉토리인 경우 넘겨주는 콜백 작성
-        } else if (node.type === 'FILE') {
-          // Node의 타입이 파일인 경우 넘겨주는 콜백 작성
+      onClick: async (node) => {
+        try {
+          if (node.type === 'DIRECTORY') {
+            const nextNodes = await request(node.id);
+            this.setState({
+              ...this.state,
+              depth: [...this.state.depth, node],
+              nodes: nextNodes,
+            });
+          } else if (node.type === 'FILE') {
+            this.setState({
+              ...this.state,
+              selectedFilePath: node.filePath,
+            })
+          }
+        } catch (error) {
+          // 에러 처리하기
         }
+        
       }
+    });
+
+    this._imageView = new ImageView({
+      $app,
+      initialState: this.state.selectedFilePath,
     });
 
     this.init();
   }
 
+  // App 컴포넌트도 렌더링을 위한 별도의 setState를 가지고 있음
+  // 해당 메서드에서는 자신의 state뿐만아니라 자신이 관리하는 하위 컴포넌트의
+  // setState까지 모두 관리하여 렌더링 로직을 수행
   setState(nextState) {
     this.state = nextState;
     this._breadcurmb.setState(this.state.depth);
@@ -47,6 +70,7 @@ export default class App {
       isRoot: this.state.isRoot,
       nodes: this.state.nodes,
     });
+    this._imageView.setState(this.state.selectedFilePath);
   }
 
   async init() {
