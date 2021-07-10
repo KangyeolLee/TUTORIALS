@@ -15,8 +15,6 @@ class Nodes {
   }
 
   render() {
-    this.$target.innerHTML = this.state.nodes.map(node => `<li>${node.name}</li>`);
-
     if(this.state.nodes) {
       const nodesTemplate = this.state.nodes.map(node => {
         const path = node.type === "FILE" ? './assets/file.png' : './assets/directory.png';
