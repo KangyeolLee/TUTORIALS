@@ -40,6 +40,7 @@ export default class Nodes {
 
         if (!nodeId) {
           this.onBackClick();
+          return;
         }
 
         const selectedNode = this.state.nodes.find(node => node.id === nodeId);

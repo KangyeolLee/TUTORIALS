@@ -4,6 +4,8 @@ import Nodes from "./Nodes.js";
 import ImageView from './ImageView.js';
 import Loading from './Loading.js';
 
+const cache = {};
+
 export default class App {
   constructor($app) {
     this.state = {
@@ -40,6 +42,17 @@ export default class App {
           });
 
           if (node.type === 'DIRECTORY') {
+            if (cache.hasOwnProperty(node.id)) {
+              this.setState({
+                ...this.state,
+                nodes: cache[node.id],
+                depth: [...this.state.depth, node],
+                isRoot: false,
+              });
+              
+              return;
+            }
+
             const nextNodes = await request(node.id);
             this.setState({
               ...this.state,
@@ -47,6 +60,8 @@ export default class App {
               nodes: nextNodes,
               isRoot: false,
             });
+
+            cache[node.id] = nextNodes;
           } else if (node.type === 'FILE') {
             this.setState({
               ...this.state,
@@ -56,6 +71,7 @@ export default class App {
           }
         } catch (error) {
           // 에러 처리하기
+          console.log(error.message);
         } finally {
           this.setState({
             ...this.state,
@@ -65,40 +81,34 @@ export default class App {
       },
       onBackClick: async () => {
         try {
-          this.setState({
-            ...this.state,
-            isLoading: true,
-          });
-
           const nextState = { ...this.state };
           nextState.depth.pop();
           
           const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length-1].id;
 
+          console.log(nextState.depth);
+          console.log(prevNodeId);
+
           if (!prevNodeId) {
-            const rootNodes = await request();
+            // const rootNodes = await request();
             this.setState({
               ...nextState,
               isRoot: true,
-              nodes: rootNodes,
+              nodes: cache.root,
             });
 
             return;
           }
 
-          const prevNodes = await request(prevNodeId);
+          // const prevNodes = await request(prevNodeId);
           this.setState({
             ...nextState,
             isRoot: false,
-            nodes: prevNodes,
+            nodes: cache[prevNodeId],
           })
         } catch (error) {
           // 에러 처리
-        } finally {
-          this.setState({
-            ...this.state,
-            isLoading: false,
-          })
+          console.log(error.message);
         }
       }
     });
@@ -120,6 +130,7 @@ export default class App {
   // 해당 메서드에서는 자신의 state뿐만아니라 자신이 관리하는 하위 컴포넌트의
   // setState까지 모두 관리하여 렌더링 로직을 수행
   setState(nextState) {
+    console.log(cache)
     this.state = nextState;
     this._breadcurmb.setState(this.state.depth);
     this._nodes.setState({
@@ -143,6 +154,8 @@ export default class App {
         isRoot: true,
         nodes: rootNodes,
       });
+
+      cache.root = rootNodes;
     } catch (error) {
       throw new Error(`통신 중 에러가 발생했습니다: ${error.message}`);
     } finally {
