@@ -9,6 +9,7 @@ export default class Nodes {
     $app.append(this.$target);
 
     this.render();
+    this._addEventListener();
   }
 
   setState(nextState) {
@@ -33,22 +34,30 @@ export default class Nodes {
         ? `<div class="Node"><img src="./assets/prev.png" alt="뒤로가기 버튼"/></div>${nodesTemplate}`
         : nodesTemplate; 
     }
+  }
 
-    this.$target.querySelectorAll('.Node').forEach($node => {
-      $node.addEventListener('click', e => {
-        const { nodeId } = e.target.dataset;
-
-        if (!nodeId) {
-          this.onBackClick();
-          return;
-        }
-
-        const selectedNode = this.state.nodes.find(node => node.id === nodeId);
-
-        if (selectedNode) {
-          this.onClick(selectedNode);
-        }
-      })
-    })
+  _addEventListener() {
+    this.$target.addEventListener('click', e => {
+      const $node = e.target.closest('.Node');
+  
+      console.log($node);
+  
+      if (!$node) {
+        return;
+      }
+  
+      const { nodeId } = $node.dataset;
+  
+      if (!nodeId) {
+        this.onBackClick();
+        return;
+      }
+  
+      const selectedNode = this.state.nodes.find(node => node.id === nodeId);
+  
+      if (selectedNode) {
+        this.onClick(selectedNode);
+      }
+    });
   }
 }
