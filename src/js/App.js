@@ -2,11 +2,13 @@ import request from "./api.js";
 import Breadcrumb from "./BreadCrumb.js";
 import Nodes from "./Nodes.js";
 import ImageView from './ImageView.js';
+import Loading from './Loading.js';
 
 export default class App {
   constructor($app) {
     this.state = {
       isRoot: false,  // 현재 페이지가 메인페이지인지 판단하는 플래그
+      isLoading: true,
       nodes: [],      // 현재 화면에 따라 출력해야할 nodes 데이터
       depth: [],      // 상위 디렉토리에서 하위 디렉토리까지 이동 시 거쳐온 서브 디렉토리 
       selectedFilePath: null  // 이미지뷰어에서 출력할 이미지의 경로
@@ -32,6 +34,11 @@ export default class App {
       },
       onClick: async (node) => {
         try {
+          this.setState({
+            ...this.state,
+            isLoading: true,
+          });
+
           if (node.type === 'DIRECTORY') {
             const nextNodes = await request(node.id);
             this.setState({
@@ -45,14 +52,24 @@ export default class App {
               ...this.state,
               selectedFilePath: node.filePath,
               isRoot: false,
-            })
+            });
           }
         } catch (error) {
           // 에러 처리하기
+        } finally {
+          this.setState({
+            ...this.state,
+            isLoading: false,
+          });
         }
       },
       onBackClick: async () => {
         try {
+          this.setState({
+            ...this.state,
+            isLoading: true,
+          });
+
           const nextState = { ...this.state };
           nextState.depth.pop();
           
@@ -77,6 +94,11 @@ export default class App {
           })
         } catch (error) {
           // 에러 처리
+        } finally {
+          this.setState({
+            ...this.state,
+            isLoading: false,
+          })
         }
       }
     });
@@ -85,6 +107,11 @@ export default class App {
       $app,
       initialState: this.state.selectedFilePath,
     });
+
+    this._loading = new Loading({
+      $app,
+      initialState: this.state.isLoading,
+    })
 
     this.init();
   }
@@ -100,10 +127,16 @@ export default class App {
       nodes: this.state.nodes,
     });
     this._imageView.setState(this.state.selectedFilePath);
+    this._loading.setState(this.state.isLoading);
   }
 
   async init() {
     try {
+      this.setState({
+        ...this.state,
+        isLoading: true,
+      });
+
       const rootNodes = await request();
       this.setState({
         ...this.state,
@@ -112,6 +145,11 @@ export default class App {
       });
     } catch (error) {
       throw new Error(`통신 중 에러가 발생했습니다: ${error.message}`);
+    } finally {
+      this.setState({
+        ...this.state,
+        isLoading: false,
+      })
     }
   }
 }
