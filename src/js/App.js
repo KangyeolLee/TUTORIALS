@@ -28,34 +28,7 @@ export default class App {
     this._breadcurmb = new Breadcrumb({
       $app,
       initialState: this.state.depth,
-      onClick: (index) => {
-        if (index === null) {
-          this.setState({
-            ...this.state,
-            selectedFilePath: null,
-            isRoot: true,
-            depth: [],
-            nodes: cache.root,
-          });
-
-          return;
-        }
-
-        if (index === this.state.depth.length - 1) {
-          return;
-        }
-
-        const nextState = { ...this.state };
-        const nextDepth = nextState.depth.slice(0, index+1);
-
-        this.setState({
-          ...nextState,
-          isRoot: false,
-          selectedFilePath: null,
-          depth: nextDepth,
-          nodes: cache[nextDepth[nextDepth.length-1].id],
-        });
-      }
+      onClick: (index) => this._breadcurmbOnClick(index),
     });
 
     this._nodes = new Nodes({
@@ -64,62 +37,8 @@ export default class App {
         isRoot: this.state.isRoot,
         nodes: this.state.nodes,
       },
-      onClick: async (node) => {
-        if (node.type === 'DIRECTORY') {
-          if (cache.hasOwnProperty(node.id)) {
-            this.setState({
-              ...this.state,
-              selectedFilePath: null,
-              nodes: cache[node.id],
-              depth: [...this.state.depth, node],
-              isRoot: false,
-            });
-
-            return;
-          }
-
-          const nextNodes = await this._getNodesData(node.id);
-          this.setState({
-            ...this.state,
-            depth: [...this.state.depth, node],
-            nodes: nextNodes,
-            selectedFilePath: null,
-            isRoot: false,
-          });
-
-          cache[node.id] = nextNodes;
-        } else if (node.type === 'FILE') {
-          this.setState({
-            ...this.state,
-            selectedFilePath: node.filePath,
-            isRoot: false,
-          });
-        }
-      },
-      onBackClick: async () => {
-        const nextState = { ...this.state };
-        nextState.depth.pop();
-          
-        const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length-1].id;
-
-        if (!prevNodeId) {
-          this.setState({
-            ...nextState,
-            isRoot: true,
-            selectedFilePath: null,
-            nodes: cache.root,
-          });
-
-          return;
-        }
-
-        this.setState({
-          ...nextState,
-          isRoot: false,
-          selectedFilePath: null,
-          nodes: cache[prevNodeId],
-        });        
-      }
+      onClick: (node) => this._nodesOnClick(node),
+      onBackClick: () => this._nodesOnBackClick(),
     });
 
     this._imageView = new ImageView({
@@ -188,5 +107,92 @@ export default class App {
     });
 
     cache.root = rootNodes;
+  }
+
+  _breadcurmbOnClick(index) {
+    if (index === null) {
+      this.setState({
+        ...this.state,
+        selectedFilePath: null,
+        isRoot: true,
+        depth: [],
+        nodes: cache.root,
+      });
+
+      return;
+    }
+
+    if (index === this.state.depth.length-1) {
+      return;
+    }
+
+    const nextState = { ...this.state };
+    const nextDepth = nextState.depth.slice(0, index+1);
+
+    this.setState({
+      ...nextState,
+      isRoot: false,
+      selectedFilePath: null,
+      depth: nextDepth,
+      nodes: cache[nextDepth[nextDepth.length-1].id],
+    });
+  }
+
+  async _nodesOnClick(node) {
+    if (node.type === 'DIRECTORY') {
+      if (cache.hasOwnProperty(node.id)) {
+        this.setState({
+          ...this.state,
+          selectedFilePath: null,
+          nodes: cache[node.id],
+          depth: [...this.state.depth, node],
+          isRoot: false,
+        });
+
+        return;
+      }
+
+      const nextNodes = await this._getNodesData(node.id);
+      this.setState({
+        ...this.state,
+        depth: [...this.state.depth, node],
+        nodes: nextNodes,
+        selectedFilePath: null,
+        isRoot: false,
+      });
+
+      cache[node.id] = nextNodes;
+    } else if (node.type === 'FILE') {
+      this.setState({
+        ...this.state,
+        selectedFilePath: node.filePath,
+        isRoot: false,
+      });
+    }
+  }
+
+  _nodesOnBackClick() {
+    const nextState = { ...this.state };
+    nextState.depth.pop();
+          
+    const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length-1].id;
+
+    if (!prevNodeId) {
+      this.setState({
+        ...nextState,
+        isRoot: true,
+        selectedFilePath: null,
+        nodes: cache.root,
+      });
+
+      return;
+    }
+
+    this.setState({
+      ...nextState,
+      isRoot: false,
+      selectedFilePath: null,
+      nodes: cache[prevNodeId],
+    });        
   }
 }
