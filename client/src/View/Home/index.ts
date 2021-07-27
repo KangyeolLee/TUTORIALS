@@ -2,7 +2,6 @@ import './styles';
 import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import TodoModel from '@/Model/TodoModel';
-import { addMint, tea } from '@/assets';
 import TodoController from '@/Controller/TodoController';
 
 export default class Home extends Component {
@@ -24,11 +23,9 @@ export default class Home extends Component {
     return html`
       <div class="class-test" id="id-test">
         <div class="title-wrapper">
-          <img src=${tea} />
           <h1>ToDoList Test With Model-View Observer Pattern</h1>
         </div>
         <div class="button-area">
-          <img class="add-data" src=${addMint}></img>
           <span>todo 추가</div>
         </div>
         <div class="todo-render">
