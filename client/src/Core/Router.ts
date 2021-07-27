@@ -82,11 +82,9 @@ class Router {
       return;
     }
 
-    console.log(route);
-
     const component = this.getComponent(route);
     if (component && isClass(component)) {
-      this.unmountComponent();
+      // this.unmountComponent();
 
       new component(this.$app, detail);
     } else {
