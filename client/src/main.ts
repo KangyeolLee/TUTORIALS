@@ -1,4 +1,4 @@
-import './reset';
+import '@/scss/index';
 import { initRouter, Route } from '@/Core/Router';
 import Home from '@/View/Home/index';
 import Header from '@/Components/Header';
