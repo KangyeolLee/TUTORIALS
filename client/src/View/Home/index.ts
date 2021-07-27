@@ -3,6 +3,7 @@ import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import TodoModel from '@/Model/TodoModel';
 import TodoController from '@/Controller/TodoController';
+import { Props, State } from '@/utils/types';
 
 export default class Home extends Component {
   model: any;
@@ -26,7 +27,7 @@ export default class Home extends Component {
           <h1>ToDoList Test With Model-View Observer Pattern</h1>
         </div>
         <div class="button-area">
-          <span>todo 추가</div>
+          <span class="add-data">todo 추가</div>
         </div>
         <div class="todo-render">
           ${todos
@@ -48,20 +49,11 @@ export default class Home extends Component {
   }
 
   setEvent() {
-    // this.addEvent('click', '.add-data', () => this.handleClick());
-    this.addEvent(
-      'click',
-      '.add-data',
-      this.controller.handleClickAddBtn.bind(this)
-    );
+    this.addEvent('click', '.add-data', this.handleClick.bind(this));
   }
 
-  willbeunmounted() {
-    console.log('this page will be unmounted : Home');
-    console.log(this.$target);
-    // const $new = this.$target.cloneNode(true);
-    // this.$target.parentNode?.replaceChild($new, this.$target);
-    // console.log(this.$target);
-    // this.$target.innerHTML = '';
+  setUnmount() {
+    this.model.unsubscribe('todo', this);
+    this.removeEvent();
   }
 }

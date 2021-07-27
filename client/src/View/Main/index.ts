@@ -4,6 +4,21 @@ import { html } from '@/utils/helper';
 
 export default class Main extends Component {
   template() {
-    return html`<div>메인</div>`;
+    console.log('메인 렌더링 시작');
+    return html`<div class="main-test">메인</div>`;
+  }
+
+  handleConsole() {
+    console.log(1);
+  }
+
+  setEvent() {
+    console.log('main 에서 이벤트 등록');
+    this.addEvent('click', '.main-test', this.handleConsole.bind(this));
+    console.log('main : ', this.eventlisteners);
+  }
+
+  setUnmount() {
+    this.removeEvent();
   }
 }
