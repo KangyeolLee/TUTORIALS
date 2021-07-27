@@ -7,7 +7,7 @@ import { svgIcons } from '@/assets/svgIcons';
 export default class Header extends Component {
   template() {
     return html`
-      <div class="header-wrapper">
+      <div class="header-wrapper container">
         <span class="header-title">우아한 가계부</span>
         <div class="switch">
           <div class="switch btn" id="btn-prev-month">${svgIcons.leftBtn}</div>
