@@ -1,11 +1,9 @@
 import './styles';
 import Component from '@/Core/Component';
-import { html, customEventEmitter } from '@/utils/helper';
-import TestComponent from '@/Components/TestComponent';
+import { html } from '@/utils/helper';
 import TodoModel from '@/Model/TodoModel';
 import { addMint, tea } from '@/assets';
 import TodoController from '@/Controller/TodoController';
-import { $router } from '@/Core/Router';
 
 export default class Home extends Component {
   model: any;
@@ -50,11 +48,6 @@ export default class Home extends Component {
 
   handleClick() {
     this.model.addTodo('todo', 'test');
-  }
-
-  mounted() {
-    const $component = this.$target.querySelector('.component') as HTMLElement;
-    new TestComponent($component);
   }
 
   setEvent() {
