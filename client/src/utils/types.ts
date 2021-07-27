@@ -1,5 +1,19 @@
-import { ClassElement } from 'typescript';
+export type RouterType = {
+  $app: HTMLElement;
+  routes: Route[];
+  fallback?: string;
+};
 
-export function isClass(value: ClassElement) {
-  return Boolean(value && value.toString().startsWith('class '));
-}
+export type Route = {
+  path: string;
+  redirect?: string;
+  component?: any;
+};
+
+export type EventListener = {
+  type: string;
+  listener: (e: Event) => void;
+};
+
+export type State = {};
+export type Props = {};
