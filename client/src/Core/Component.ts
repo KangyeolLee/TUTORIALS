@@ -1,16 +1,20 @@
-export default class Component {
-  $target: HTMLElement;
-  $state: any;
-  $props?: any;
+import { EventListener } from '@/utils/types';
 
-  constructor($target: HTMLElement, $state?: any, $props?: any) {
+export default class Component<S, P> {
+  $target: HTMLElement;
+  $state?: S;
+  $props?: P;
+  eventlisteners: EventListener[];
+
+  constructor($target: HTMLElement, $state?: S, $props?: P) {
     this.$target = $target;
     this.$state = $state;
     this.$props = $props;
+    this.eventlisteners = [];
     this.setup();
     this.render();
     this.setEvent();
-    this.setUnmountEvent();
+    this.resetEvent();
   }
 
   setup() {}
@@ -19,20 +23,39 @@ export default class Component {
     return ``;
   }
 
+  setEvent() {}
+
+  // 컴포넌트가 unmount 되는 시점에 호출되는 메서드
+  resetEvent() {
+    document.addEventListener('componentWillUnmount', () => this.setUnmount(), {
+      once: true,
+    });
+  }
+
   addEvent(eventType: string, selector: string, callback: Function) {
     const children: Element[] = [...this.$target.querySelectorAll(selector)];
     const isTarget = (target: Element) =>
       children.includes(target) || target.closest(selector);
 
-    this.$target.addEventListener(eventType, (event: Event) => {
+    const listener = (event: Event) => {
       if (!isTarget(event.target as Element)) return false;
-      callback(event);
-    });
+      callback();
+    };
+
+    this.$target.addEventListener(eventType, listener);
+    this.eventlisteners.push({ type: eventType, listener });
   }
 
-  setEvent() {}
+  // addEvent를 통해 등록된 이벤트 리스트를 모두 초기화하는 메서드
+  removeEvent() {
+    console.log('will be deleted : ', this.eventlisteners);
+    this.eventlisteners.forEach(({ type, listener }) => {
+      this.$target.removeEventListener(type, listener);
+    });
+    this.eventlisteners = [];
+  }
 
-  setState(nextState: any) {
+  setState(nextState: S) {
     this.$state = { ...this.$state, ...nextState };
     this.render();
   }
@@ -49,12 +72,6 @@ export default class Component {
 
   mounted() {}
 
-  setUnmountEvent() {
-    document.addEventListener(
-      'willbeunmounted',
-      this.willbeunmounted.bind(this)
-    );
-  }
-
-  willbeunmounted() {}
+  // 컴포넌트 단위에서 언마운트 되는 시점에 지정할 작업을 작성하는 메서드
+  setUnmount() {}
 }
