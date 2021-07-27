@@ -1,7 +1,8 @@
 import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
+import { Props, State } from '@/utils/types';
 
-export default class Calendar extends Component {
+export default class Calendar extends Component<State, Props> {
   template() {
     console.log('달력 렌더링 시작');
     return html`<div class="main-test">e달력</div>`;

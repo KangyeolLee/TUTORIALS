@@ -1,6 +1,6 @@
-import { EventListener } from '@/utils/types';
+import { EventListener, Props, State } from '@/utils/types';
 
-export default class Component<S, P> {
+export default class Component<S extends State, P extends Props> {
   $target: HTMLElement;
   $state?: S;
   $props?: P;

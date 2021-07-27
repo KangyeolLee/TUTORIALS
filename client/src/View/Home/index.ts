@@ -5,7 +5,11 @@ import TodoModel from '@/Model/TodoModel';
 import TodoController from '@/Controller/TodoController';
 import { Props, State } from '@/utils/types';
 
-export default class Home extends Component {
+interface TodoState<T> extends State {
+  todos: Array<T>;
+}
+
+export default class Home extends Component<TodoState<string>, Props> {
   model: any;
   controller: any;
 
@@ -19,7 +23,7 @@ export default class Home extends Component {
   }
 
   template() {
-    const { todos } = this.$state;
+    const { todos } = this.$state!;
 
     return html`
       <div class="class-test" id="id-test">
@@ -32,7 +36,7 @@ export default class Home extends Component {
         <div class="todo-render">
           ${todos
             ?.map(
-              (todo: any) => `
+              (todo) => `
           <div>${todo}</div>
         `
             )
