@@ -33,9 +33,11 @@ export default class Header extends Component {
   }
 
   mounted() {
-    const $main = this.$target.querySelector('.main') as HTMLElement;
-    const $calendar = this.$target.querySelector('.calendar') as HTMLElement;
-    const $chart = this.$target.querySelector('.chart') as HTMLElement;
+    const $main = this.$target.querySelector('#menu-main') as HTMLElement;
+    const $calendar = this.$target.querySelector(
+      '#menu-calendar'
+    ) as HTMLElement;
+    const $chart = this.$target.querySelector('#menu-chart') as HTMLElement;
 
     $main.addEventListener('click', () => $router.push('/main'));
     $calendar.addEventListener('click', () => $router.push('/calendar'));
