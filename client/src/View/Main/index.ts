@@ -1,3 +1,4 @@
+import './styles';
 import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 

@@ -1,15 +1,16 @@
 import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import { $router } from '@/Core/Router';
+import { svgIcons } from '@/assets/svgIcons';
 
 export default class Header extends Component {
   template() {
     return html`
       <div>
         헤더입니당
-        <button class="main">메인</button>
-        <button class="calendar">달력</button>
-        <button class="chart">차트</button>
+        <button class="main">메인${svgIcons.fileText}</button>
+        <button class="calendar">달력 ${svgIcons.calendar}</button>
+        <button class="chart">차트 ${svgIcons.chart}</button>
       </div>
     `;
   }
