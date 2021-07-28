@@ -9,7 +9,7 @@ import { Route } from './utils/types';
 const $app = document.querySelector('.content-wrapper') as HTMLElement;
 const $header = document.querySelector('header') as HTMLElement;
 const routes: Route[] = [
-  { path: '/', redirect: '/home' },
+  { path: '/', redirect: '/main' },
   { path: '/main', component: MainView },
   { path: '/calendar', component: CalendarView },
   { path: '/charts', component: Charts },
