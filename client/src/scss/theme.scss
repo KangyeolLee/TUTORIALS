@@ -85,3 +85,12 @@ $category10: #e2b765;
   font-size: 1.6rem;
   line-height: 2.4rem;
 }
+
+@mixin content-box {
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
+    0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+  width: 100%;
+  align-items: center;
+  border-radius: 1rem;
+  background-color: $off-white;
+}
