@@ -1,9 +1,9 @@
 // type=0 : 지출 / type=1 : 수입
-export const histories = [
+export const dummyhistories = [
   {
     id: 1,
     user_id: 1,
-    category: '쇼핑',
+    category: '쇼핑/뷰티',
     payment: '현대카드',
     price: 54000,
     content: '사이드 테이블 구매',
@@ -160,6 +160,7 @@ export const category = [
   { id: 5, type: '의료/건강' },
   { id: 6, type: '문화/여가' },
   { id: 7, type: '미분류' },
+  { id: 8, type: '금융 이자' },
 ];
 
 export const payment = [

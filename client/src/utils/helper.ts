@@ -14,3 +14,6 @@ export const customEventEmitter = (eventType: string, detail?: object) => {
 export function isClass(value: ClassElement) {
   return Boolean(value && value.toString().startsWith('class '));
 }
+
+export const addComma = (str: string) =>
+  str.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
