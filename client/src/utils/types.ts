@@ -1,5 +1,57 @@
-import { ClassElement } from 'typescript';
+/**
+ * @example
+ * Modal 관련 공통 타입
+ */
+interface Model {
+  subscribe: (key: string, observer: any) => void;
+  unsubscribe: (key: string, observer: any) => void;
+  notify: (key: string, data: any) => void;
+}
 
-export function isClass(value: ClassElement) {
-  return Boolean(value && value.toString().startsWith('class '));
+/**
+ * @example
+ * Router 관련 타입
+ */
+export type RouterType = {
+  $app: HTMLElement;
+  routes: Route[];
+  fallback?: string;
+};
+
+export type Route = {
+  path: string;
+  redirect?: string;
+  component?: any;
+};
+
+/**
+ * @example
+ * Component 관련 타입
+ */
+export type EventListener = {
+  type: string;
+  listener: (e: Event) => void;
+};
+
+export type State = {};
+export type Props = {};
+
+/**
+ * @example
+ * TodayModel 관련 타입
+ */
+export type Today = {
+  year: number;
+  month: number;
+};
+
+export interface TodayModel extends Model {
+  today: Today;
+  key: string;
+  getPrevDate: () => void;
+  getNextData: () => void;
+}
+
+export interface DateState extends State {
+  today: Today;
 }

@@ -1,19 +1,18 @@
 import '@/scss/index';
-import { initRouter, Route } from '@/Core/Router';
-import Home from '@/View/Home/index';
+import { initRouter } from '@/Core/Router';
 import Header from '@/Components/Header';
-import Main from '@/View/Main';
-import Calendar from '@/View/Calendar/index';
-import Charts from '@/View/Charts/index';
+import MainView from '@/View/MainView';
+import CalendarView from '@/View/CalendarView';
+import ChartsView from '@/View/ChartsView';
+import { Route } from './utils/types';
 
 const $app = document.querySelector('.content-wrapper') as HTMLElement;
 const $header = document.querySelector('header') as HTMLElement;
 const routes: Route[] = [
-  { path: '/', redirect: '/home' },
-  { path: '/home', component: Home },
-  { path: '/main', component: Main },
-  { path: '/calendar', component: Calendar },
-  { path: '/charts', component: Charts },
+  { path: '/', redirect: '/main' },
+  { path: '/main', component: MainView },
+  { path: '/calendar', component: CalendarView },
+  { path: '/charts', component: ChartsView },
 ];
 
 function init() {

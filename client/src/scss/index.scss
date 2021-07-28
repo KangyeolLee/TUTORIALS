@@ -15,8 +15,14 @@ html {
   font-size: 10px;
   font-family: 'Noto Sans KR', sans-serif;
   color: $body;
+  padding-bottom: 10rem;
 }
 
 svg {
   stroke: $btn-deactive;
+}
+
+.container {
+  max-width: 102.4rem; // 1024px
+  margin: auto;
 }

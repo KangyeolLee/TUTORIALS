@@ -16,17 +16,4 @@ class StoreInitializer {
   }
 }
 
-class DuplicatesInitializer {
-  private _duplicates: any;
-
-  constructor() {
-    this._duplicates = new Set();
-  }
-
-  get getStates() {
-    return this._duplicates;
-  }
-}
-
 export const Store = new StoreInitializer();
-export const Duplicates = new DuplicatesInitializer();

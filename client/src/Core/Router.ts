@@ -1,17 +1,5 @@
-import { isClass } from '@/utils/types';
-import { customEventEmitter } from '@/utils/helper';
-
-export type RouterType = {
-  $app: HTMLElement;
-  routes: Route[];
-  fallback?: string;
-};
-
-export type Route = {
-  path: string;
-  redirect?: string;
-  component?: any;
-};
+import { isClass, customEventEmitter } from '@/utils/helper';
+import { Route, RouterType } from '@/utils/types';
 
 class Router {
   $app: HTMLElement;
@@ -58,13 +46,17 @@ class Router {
     return component;
   }
 
+  // customEvent 'moveroutes' 관련 경로 이동 이벤트 핸들러 (pushState 감지)
   moveroutesHandler(event: CustomEvent) {
+    this.unmountComponent();
     const path: string = event.detail.path;
     history.pushState(event.detail, '', path);
     this.renderComponent(path, event.detail);
   }
 
+  // 기본 브라우저 이벤트 'popstate' 관련 이벤트 핸들러 (뒤로가기/앞으로가기)
   popstateHandler() {
+    this.unmountComponent();
     this.renderComponent(history.state.path, history.state);
   }
 
@@ -84,21 +76,18 @@ class Router {
 
     const component = this.getComponent(route);
     if (component && isClass(component)) {
-      // this.unmountComponent();
-
       new component(this.$app, detail);
     } else {
       throw new Error('[라우터 에러] 유효한 형식의 라우터가 아닙니다.');
     }
-
-    // console.log('현재 페이지를 언마운트(내용 초기화, 이벤트 제거)하고 나서');
-    // console.log('해당하는 페이지로 history.pushState');
-    // console.log('path에 해당하는 컴포넌트를 가져오고');
-    // console.log('해당하는 컴포넌트를 화면에 렌더링!');
   }
 
   unmountComponent() {
-    customEventEmitter('willbeunmounted');
+    const { path } = history.state ?? { path: '/main' };
+
+    customEventEmitter('componentWillUnmount');
+
+    console.log('해당 컴포넌트는 언마운트 될겁니다...: ', path);
   }
 
   push(path: string) {

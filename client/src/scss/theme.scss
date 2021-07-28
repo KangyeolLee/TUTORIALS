@@ -4,7 +4,9 @@ $body: #626666;
 $label: #8d9393;
 $placeholder: #c1c5c5;
 $line: #ccd3d3;
+$line2: #d7d7d7;
 $backgrond: #f5f5f5;
+$white: #ffffff;
 $off-white: #fcfcfc;
 $btn-deactive: #a0e1e0;
 $primary1: #2ac1bc;
@@ -12,6 +14,8 @@ $primary2: #a0e1e0;
 $primary3: #219a95;
 $error: #f45452;
 $cancel: #f45452;
+$red: #f45452;
+$grey1: #888888;
 
 // category colors
 $category1: #6ed5eb;
@@ -82,4 +86,13 @@ $category10: #e2b765;
   font-weight: 500;
   font-size: 1.6rem;
   line-height: 2.4rem;
+}
+
+@mixin content-box {
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
+    0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+  width: 100%;
+  align-items: center;
+  border-radius: 1rem;
+  background-color: $off-white;
 }
