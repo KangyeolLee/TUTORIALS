@@ -2,8 +2,9 @@ import './styles';
 import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import Calendar from '@/Components/Calendar';
+import { Props, State } from '@/utils/types';
 
-export default class CalendarView extends Component {
+export default class CalendarView extends Component<State, Props> {
   template() {
     return html`
       <section class="calendar-wrapper container">
