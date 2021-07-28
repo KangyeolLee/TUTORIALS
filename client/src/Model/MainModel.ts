@@ -1,12 +1,6 @@
 import { dummyhistories } from '@/assets/dummy';
 import Observable from '@/Core/Observable';
-import { IHistory } from '@/utils/types';
-
-type typeString = 'expense' | 'income';
-interface HistoryType {
-  expense?: boolean;
-  income?: boolean;
-}
+import { IHistory, Today, HistoryType, typeString } from '@/utils/types';
 
 class MainModel extends Observable {
   key: string = 'history';
@@ -20,21 +14,27 @@ class MainModel extends Observable {
       expense: true,
       income: true,
     };
-    this.initHistoryCard();
   }
 
-  initHistoryCard() {
-    dummyhistories.forEach((history) => {
-      const newHistory: IHistory = {
-        date: history.create_time,
-        type: history.type,
-        category: history.category,
-        content: history.content,
-        payment: history.payment,
-        price: history.price,
-      };
-      this.historyCards.push(newHistory);
-    });
+  getHistoryCard(today: Today) {
+    this.historyCards = dummyhistories
+      .filter((history) => {
+        const [year, month, _] = history.create_time
+          .split('-')
+          .map((d) => parseInt(d));
+        return today.year === year && today.month === month;
+      })
+      .map((history) => {
+        return {
+          date: history.create_time,
+          type: history.type,
+          category: history.category,
+          content: history.content,
+          payment: history.payment,
+          price: history.price,
+        };
+      });
+    this.notify(this.key, { historyCards: this.historyCards });
   }
 
   addHistory(history: IHistory) {
