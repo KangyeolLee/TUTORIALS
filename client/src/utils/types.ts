@@ -55,3 +55,16 @@ export interface TodayModel extends Model {
 export interface DateState extends State {
   today: Today;
 }
+
+/**
+ * @example
+ * history 리스트 타입
+ */
+export interface IHistory {
+  date: string;
+  type: number;
+  category: string;
+  content: string;
+  payment: string;
+  price: number;
+}
