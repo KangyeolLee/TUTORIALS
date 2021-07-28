@@ -3,7 +3,8 @@ import Observable from '@/Core/Observable';
 import { IHistory } from '@/utils/types';
 
 class MainModel extends Observable {
-  private historyCards: IHistory[];
+  key: string = 'history';
+  historyCards: IHistory[];
 
   constructor() {
     super();

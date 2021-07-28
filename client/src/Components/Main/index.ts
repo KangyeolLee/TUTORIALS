@@ -15,7 +15,7 @@ export default class Main extends Component<IMainState, Props> {
 
   setup() {
     this.model = MainModel;
-    this.model.subscribe('history', 'MAIN', this);
+    this.model.subscribe(MainModel.key, this);
     this.$state = {
       historyCards: [...this.model.historyCards],
     };
