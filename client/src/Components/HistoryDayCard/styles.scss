@@ -1,0 +1,21 @@
+@import '@/scss/theme';
+
+.history-day-card {
+  margin: 4rem 0;
+}
+
+.history-date {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1.6rem;
+
+  .date {
+    @include bold-medium;
+    color: black;
+  }
+
+  .total {
+    @include bold-medium;
+    color: $body;
+  }
+}
