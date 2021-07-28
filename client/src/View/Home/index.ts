@@ -55,4 +55,9 @@ export default class Home extends Component<TodoState<string>, Props> {
   setEvent() {
     this.addEvent('click', '.add-data', this.handleClick.bind(this));
   }
+
+  setUnmount() {
+    console.log('구독 해제');
+    this.model.unsubscribe('todo', this);
+  }
 }

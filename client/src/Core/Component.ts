@@ -27,9 +27,16 @@ export default class Component<S extends State, P extends Props> {
 
   // 컴포넌트가 unmount 되는 시점에 호출되는 메서드
   resetEvent() {
-    document.addEventListener('componentWillUnmount', () => this.setUnmount(), {
-      once: true,
-    });
+    document.addEventListener(
+      'componentWillUnmount',
+      () => {
+        this.removeEvent();
+        this.setUnmount();
+      },
+      {
+        once: true,
+      }
+    );
   }
 
   addEvent(eventType: string, selector: string, callback: Function) {
@@ -73,7 +80,5 @@ export default class Component<S extends State, P extends Props> {
   mounted() {}
 
   // 컴포넌트 단위에서 언마운트 되는 시점에 지정할 작업을 작성하는 메서드
-  setUnmount() {
-    this.removeEvent();
-  }
+  setUnmount() {}
 }

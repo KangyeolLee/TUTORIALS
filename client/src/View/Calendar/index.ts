@@ -17,8 +17,4 @@ export default class Calendar extends Component<State, Props> {
     this.addEvent('click', '.main-test', this.handleConsole);
     console.log('달력 : ', this.eventlisteners);
   }
-
-  setUnmount() {
-    this.removeEvent();
-  }
 }
