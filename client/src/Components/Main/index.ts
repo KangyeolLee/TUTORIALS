@@ -2,121 +2,49 @@ import Component from '@/Core/Component';
 import './styles';
 import { Props, State } from '@/utils/types';
 import { html } from '@/utils/helper';
-import { histories } from '@/assets/dummy';
-import List from '@/Components/List';
+import MainModel from '@/Model/MainModel';
+import HistoryDayCard from '../HistoryDayCard';
+import { IHistory } from '@/utils/types';
 
-export default class Main extends Component<State, Props> {
+interface IMainState extends State {
+  historyCards: IHistory[];
+}
+
+export default class Main extends Component<IMainState, Props> {
+  model: any;
+
+  setup() {
+    this.model = MainModel;
+    this.model.subscribe('history', 'MAIN', this);
+    this.$state = {
+      historyCards: [...this.model.historyCards],
+    };
+  }
+
   template() {
-    return html`
-    <section class="history-day-card">
-      <div class="history-date">
-        <div class="date">${'7월 15일'}${' 목'}</div>
-        <div class="total">${'수입 1,000원'}</div>
-      </div>
-      <li class="history-list">
-        <div class="category-tag" data-id="${7}">${'생활'}</div>
-        <div class="history-text">
-          <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-          <div class="history-payment">${'현대카드'}</div>
-          <div class="history-price">${'-10,900원'}</div>
-        <div>
-      </li>
-      <li class="history-list">
-        <div class="category-tag" data-id="${2}">${'생활'}</div>
-        <div class="history-text">
-          <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-          <div class="history-payment">${'현대카드'}</div>
-          <div class="history-price">${'-10,900원'}</div>
-        <div>
-      </li>
-      <li class="history-list">
-        <div class="category-tag" data-id="${3}">${'생활'}</div>
-        <div class="history-text">
-          <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-          <div class="history-payment">${'현대카드'}</div>
-          <div class="history-price">${'-10,900원'}</div>
-        <div>
-      </li>
-      <li class="history-list">
-        <div class="category-tag" data-id="${4}">${'생활'}</div>
-        <div class="history-text">
-          <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-          <div class="history-payment">${'현대카드'}</div>
-          <div class="history-price">${'-10,900원'}</div>
-        <div>
-      </li>
-      <section class="history-day-card">
-        <div class="history-date">
-          <div class="date">${'7월 15일'}${'목'}</div>
-          <div class="total">${'수입 1,000원'}</div>
-        </div>
-        <li class="history-list">
-          <div class="category-tag" data-id="${5}">${'생활'}</div>
-          <div class="history-text">
-            <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-            <div class="history-payment">${'현대카드'}</div>
-            <div class="history-price">${'-10,900원'}</div>
-          <div>
-        </li>
-        <li class="history-list">
-          <div class="category-tag" data-id="${1}">${'생활'}</div>
-          <div class="history-text">
-            <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-            <div class="history-payment">${'현대카드'}</div>
-            <div class="history-price">${'-10,900원'}</div>
-          <div>
-        </li>
-      </section>
-      <section class="history-day-card">
-        <div class="history-date">
-          <div class="date">${'7월 15일'}${'목'}</div>
-          <div class="total">${'수입 1,000원'}</div>
-        </div>
-        <li class="history-list">
-          <div class="category-tag" data-id="${10}">${'생활'}</div>
-          <div class="history-text">
-            <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-            <div class="history-payment">${'현대카드'}</div>
-            <div class="history-price">${'-10,900원'}</div>
-          <div>
-        </li>
-      </section>
-      <section class="history-day-card">
-        <div class="history-date">
-          <div class="date">${'7월 15일'}${'목'}</div>
-          <div class="total">${'수입 1,000원'}</div>
-        </div>
-        <li class="history-list">
-          <div class="category-tag" data-id="${1}">${'생활'}</div>
-          <div class="history-text">
-            <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-            <div class="history-payment">${'현대카드'}</div>
-            <div class="history-price">${'-10,900원'}</div>
-          <div>
-        </li>
-      </section>
-      <section class="history-day-card">
-        <div class="history-date">
-          <div class="date">${'7월 15일'}${'목'}</div>
-          <div class="total">${'수입 1,000원'}</div>
-        </div>
-        <li class="history-list">
-          <div class="category-tag" data-id="${1}">${'생활'}</div>
-          <div class="history-text">
-            <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-            <div class="history-payment">${'현대카드'}</div>
-            <div class="history-price">${'-10,900원'}</div>
-          <div>
-        </li>
-        <li class="history-list">
-          <div class="category-tag" data-id="${9}">${'생활'}</div>
-          <div class="history-text">
-            <div class="history-content">${'스트리밍서비스 정기 결제'}</div>
-            <div class="history-payment">${'현대카드'}</div>
-            <div class="history-price">${'-10,900원'}</div>
-          <div>
-        </li>
-      </section>
-    `;
+    return html` <ul class="day-card-list"></ul> `;
+  }
+
+  mounted() {
+    const { historyCards } = this.$state!; // '!' 지우고 싶어요...
+
+    const $daycardList = this.$target.querySelector(
+      '.day-card-list'
+    ) as HTMLElement;
+
+    const historyDates = historyCards.map(
+      (history) => history.date
+    ) as string[];
+    const dates = Array.from(new Set(historyDates));
+
+    dates.forEach((date) => {
+      const curDateHistories = historyCards.filter(
+        (history) => history.date === date
+      );
+      const $li = document.createElement('li');
+      new HistoryDayCard($li, { curDateHistories });
+
+      $daycardList.appendChild($li);
+    });
   }
 }
