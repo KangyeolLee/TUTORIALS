@@ -1,1 +1,24 @@
 @import '@/scss/theme';
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-self: end;
+
+  .menu-list {
+    margin: 0 1.5rem;
+
+    svg {
+      transform: scale(1.2);
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      svg {
+        stroke: white;
+        transition: all 0.2s;
+      }
+    }
+  }
+}
