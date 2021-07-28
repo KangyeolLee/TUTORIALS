@@ -18,8 +18,4 @@ export default class Main extends Component<State, Props> {
     this.addEvent('click', '.main-test', this.handleConsole.bind(this));
     console.log('main : ', this.eventlisteners);
   }
-
-  setUnmount() {
-    this.removeEvent();
-  }
 }

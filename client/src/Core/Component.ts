@@ -73,5 +73,7 @@ export default class Component<S extends State, P extends Props> {
   mounted() {}
 
   // 컴포넌트 단위에서 언마운트 되는 시점에 지정할 작업을 작성하는 메서드
-  setUnmount() {}
+  setUnmount() {
+    this.removeEvent();
+  }
 }
