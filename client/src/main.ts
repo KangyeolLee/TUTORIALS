@@ -1,10 +1,11 @@
 import '@/scss/index';
-import { initRouter, Route } from '@/Core/Router';
+import { initRouter } from '@/Core/Router';
 import Home from '@/View/Home/index';
 import Header from '@/Components/Header';
 import Main from '@/View/Main';
 import CalendarView from '@/View/CalendarView';
 import Charts from '@/View/Charts/index';
+import { Route } from './utils/types';
 
 const $app = document.querySelector('.content-wrapper') as HTMLElement;
 const $header = document.querySelector('header') as HTMLElement;
