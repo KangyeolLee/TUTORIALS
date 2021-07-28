@@ -14,4 +14,5 @@ export default class CategoryTag extends Component<ICategoryTagStates, Props> {
     const id = category.filter((c) => c.type === type)[0].id;
     return html` <div class="category-tag" data-id="${id}">${type}</div> `;
   }
+  removeEvent() {}
 }

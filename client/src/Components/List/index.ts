@@ -30,4 +30,6 @@ export default class List extends Component<IListStates, Props> {
     const $tag = this.$target.querySelector('.tag-wrapper') as HTMLElement;
     new CategoryTag($tag, { type: history.category });
   }
+
+  removeEvent() {}
 }
