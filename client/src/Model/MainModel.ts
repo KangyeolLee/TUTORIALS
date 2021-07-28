@@ -26,11 +26,11 @@ class MainModel extends Observable {
     });
   }
 
-  addHistory(key: string, history: IHistory) {
+  addHistory(history: IHistory) {
     const nextHistory = [...this.historyCards, history];
     this.historyCards = nextHistory;
 
-    this.notify(key, nextHistory);
+    this.notify(this.key, { historyCards: nextHistory });
   }
 }
 
