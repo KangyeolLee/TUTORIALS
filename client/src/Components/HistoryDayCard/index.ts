@@ -13,30 +13,16 @@ export default class HistoryDayCard extends Component<
   Props
 > {
   template() {
-    // 리팩토링 할 겁니다~~~~
     const date = this.$state!.curDateHistories[0].date;
-    const dateNumber: number[] = date?.split('-').map((s) => parseInt(s));
-    const week = ['일', '월', '화', '수', '목', '금', '토'];
-    const dayOfWeek = week[new Date(date).getDay()];
-
-    const expenseTotal = this.$state?.curDateHistories
-      .filter((history) => history.type === 0)
-      .reduce((acc, cur, i) => {
-        return acc + cur.price;
-      }, 0);
-
-    const incomeTotal = this.$state?.curDateHistories
-      .filter((history) => history.type === 1)
-      .reduce((acc, cur, i) => {
-        return acc + cur.price;
-      }, 0);
+    const [_, month, day]: number[] = date.split('-').map((s) => parseInt(s));
+    const dayOfWeek = this.getDayOfWeek(date);
+    const expenseTotal = this.getExpenseTotal();
+    const incomeTotal = this.getIncomeTotal();
 
     return html`
       <section class="history-day-card">
         <div class="history-date">
-          <div class="date">
-            ${dateNumber[1]}월 ${dateNumber[2]}일 ${dayOfWeek}
-          </div>
+          <div class="date">${month}월 ${day}일 ${dayOfWeek}</div>
           <div class="total">
             ${incomeTotal ? '수입 ' + addComma(incomeTotal.toString()) : ''}
             ${expenseTotal ? '지출 ' + addComma(expenseTotal.toString()) : ''}
@@ -56,5 +42,25 @@ export default class HistoryDayCard extends Component<
       new List($li, { history });
       $historyList?.appendChild($li);
     });
+  }
+
+  getDayOfWeek(date: string) {
+    return ['일', '월', '화', '수', '목', '금', '토'][new Date(date).getDay()];
+  }
+
+  getExpenseTotal() {
+    return this.$state?.curDateHistories
+      .filter((history) => history.type === 0)
+      .reduce((acc, cur, i) => {
+        return acc + cur.price;
+      }, 0);
+  }
+
+  getIncomeTotal() {
+    return this.$state?.curDateHistories
+      .filter((history) => history.type === 1)
+      .reduce((acc, cur, i) => {
+        return acc + cur.price;
+      }, 0);
   }
 }
