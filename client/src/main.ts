@@ -1,6 +1,5 @@
 import '@/scss/index';
 import { initRouter } from '@/Core/Router';
-import Home from '@/View/Home/index';
 import Header from '@/Components/Header';
 import Main from '@/View/Main';
 import CalendarView from '@/View/CalendarView';
@@ -11,7 +10,6 @@ const $app = document.querySelector('.content-wrapper') as HTMLElement;
 const $header = document.querySelector('header') as HTMLElement;
 const routes: Route[] = [
   { path: '/', redirect: '/home' },
-  { path: '/home', component: Home },
   { path: '/main', component: Main },
   { path: '/calendar', component: CalendarView },
   { path: '/charts', component: Charts },
