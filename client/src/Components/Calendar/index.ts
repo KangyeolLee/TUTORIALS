@@ -72,7 +72,7 @@ export default class Calendar extends Component<DateState, Props> {
 
   // 데이터 연동이 되는 시점에서 내부 로직을 조금 분리할 계획입니다..!
   makeCalendar(today_date: number, last_date: number, first_day: number) {
-    const { month } = this.$state?.today;
+    const { month } = this.$state!.today;
     const $calendar = this.$target.querySelector(
       '.calendar-tbody'
     ) as HTMLTableElement;
