@@ -1,6 +1,5 @@
 import '@/scss/index';
 import { initRouter } from '@/Core/Router';
-import Home from '@/View/Home/index';
 import Header from '@/Components/Header';
 import MainView from '@/View/MainView';
 import CalendarView from '@/View/CalendarView';
