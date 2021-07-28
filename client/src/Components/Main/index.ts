@@ -53,7 +53,7 @@ export default class Main extends Component<IMainState, Props> {
             id="history-select-income"
             ${income ? 'active' : ''}
           >
-            ${svgIcons.check}
+            ${svgIcons.checkSmall}
           </button>
           <span class="text">수입 <span class="income-sum"></span></span>
           <button
@@ -61,7 +61,7 @@ export default class Main extends Component<IMainState, Props> {
             id="history-select-expense"
             ${expense ? 'active' : ''}
           >
-            ${svgIcons.check}
+            ${svgIcons.checkSmall}
           </button>
           <span class="text">지출 <span class="expense-sum"></span></span>
         </div>
