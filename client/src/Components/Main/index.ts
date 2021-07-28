@@ -35,7 +35,7 @@ export default class Main extends Component<IMainState, Props> {
     const historyDates = historyCards.map(
       (history) => history.date
     ) as string[];
-    const dates = Array.from(new Set(historyDates));
+    const dates = Array.from(new Set(historyDates)).sort().reverse();
 
     dates.forEach((date) => {
       const curDateHistories = historyCards.filter(
