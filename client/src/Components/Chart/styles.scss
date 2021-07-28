@@ -1,0 +1,26 @@
+@import '@/scss/theme';
+
+.chart-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .circular-chart {
+    position: relative;
+    width: 30rem;
+    height: 30rem;
+    border: 0.1rem solid $line;
+    border-radius: 100%;
+
+    &::after {
+      position: absolute;
+      top: 14.5%;
+      left: 14.5%;
+      content: '';
+      width: 70%;
+      height: 70%;
+      border: 0.1rem solid $line;
+      border-radius: 100%;
+    }
+  }
+}
