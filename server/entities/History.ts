@@ -1,0 +1,29 @@
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import User from './User';
+
+@Entity('history')
+export default class History {
+  @PrimaryGeneratedColumn()
+  id!: number;
+
+  @Column({ type: 'varchar', length: 50 })
+  category!: string;
+
+  @Column({ type: 'varchar', length: 50 })
+  payment!: string;
+
+  @Column({ type: 'int8', unsigned: true })
+  price!: number;
+
+  @Column({ type: 'varchar', length: 50 })
+  content!: string;
+
+  @Column({ type: 'tinyint' })
+  type!: number;
+
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt!: Date;
+
+  @ManyToOne(() => User, (user) => user.histories)
+  user!: User;
+}
