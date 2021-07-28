@@ -10,7 +10,6 @@ const $app = document.querySelector('.content-wrapper') as HTMLElement;
 const $header = document.querySelector('header') as HTMLElement;
 const routes: Route[] = [
   { path: '/', redirect: '/home' },
-  { path: '/home', component: Home },
   { path: '/main', component: MainView },
   { path: '/calendar', component: CalendarView },
   { path: '/charts', component: Charts },
