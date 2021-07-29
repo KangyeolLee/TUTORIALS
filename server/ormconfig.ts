@@ -8,8 +8,8 @@ export default {
   username: config.dbUser,
   password: config.dbPW,
   database: config.dbName,
-  synchronize: true,
-  logging: false,
+  synchronize: false,
+  logging: true,
   entities: [`${__dirname}/**/entities/**/*{.ts,.js}`],
   extra: {
     charset: 'utf8mb4_general_ci',

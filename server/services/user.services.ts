@@ -1,3 +1,6 @@
+import { getCustomRepository } from 'typeorm';
+import UserRepository from '../repositories/user.repository';
+
 class UserService {
   // typedi를 이용한 디펜던시 인젝션을 해볼까...합니다(?)
   constructor() {}
@@ -6,7 +9,8 @@ class UserService {
   public async signUP() {
     try {
       const someModel = '생성자에서 구독한 모델에서 DB CURD 로직 수행';
-      const user = someModel + '생성된 데이터를 반환';
+      const user = 1;
+      // const user = await getCustomRepository(UserRepository).findByEmail('123@naver.com');
       return user;
     } catch (error) {
       throw error;

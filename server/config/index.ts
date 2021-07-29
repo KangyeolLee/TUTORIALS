@@ -14,6 +14,6 @@ export default {
   dbUser: process.env.DB_USER,
   dbPW: process.env.DB_PASSWORD,
   dbName: process.env.DATABASE,
-  api: process.env.API_BASE,
+  api: process.env.API_BASE as string,
   jwtSecret: process.env.JWT_SECRET,
 };
