@@ -19,7 +19,16 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'), //dart-sass 적용
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
