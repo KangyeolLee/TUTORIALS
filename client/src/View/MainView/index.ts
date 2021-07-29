@@ -149,6 +149,8 @@ export default class MainView extends Component<State, Props> {
   }
 
   handleSubmitButton() {
+    if (!this.isValidated()) return;
+
     const $dateInput = this.$target.querySelector(
       'input[name="date"]'
     ) as HTMLInputElement;
@@ -238,8 +240,12 @@ export default class MainView extends Component<State, Props> {
     const submitBtn = this.$target.querySelector(
       '#main-input-submit'
     ) as HTMLElement;
-    if (date && category && content && payment && price)
-      submitBtn.setAttribute('active', '');
+    if (this.isValidated()) submitBtn.setAttribute('active', '');
     else submitBtn.removeAttribute('active');
+  }
+
+  isValidated(): boolean {
+    const { date, category, content, payment, price } = this.validation;
+    return date && category && content && payment && price;
   }
 }
