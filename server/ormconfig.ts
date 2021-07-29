@@ -1,3 +1,4 @@
+import { ConnectionOptions } from 'typeorm';
 import config from './config';
 
 export default {
@@ -9,13 +10,8 @@ export default {
   database: config.dbName,
   synchronize: true,
   logging: false,
-  entities: [`${__dirname}/**/models/**/*{.ts,.js}`],
+  entities: [`${__dirname}/**/entities/**/*{.ts,.js}`],
   extra: {
     charset: 'utf8mb4_general_ci',
   },
-  cli: {
-    entitiesDir: 'src/entity',
-    migrationsDir: 'src/migration',
-    subscribersDir: 'src/subscriber',
-  },
-};
+} as ConnectionOptions;
