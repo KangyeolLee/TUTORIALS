@@ -8,8 +8,8 @@ if (env.error) {
 }
 
 export default {
-  port: parseInt(process.env.PORT!, 10),
-  dbPort: parseInt(process.env.DB_PORT!, 10),
+  port: parseInt(process.env.PORT as string, 10),
+  dbPort: parseInt(process.env.DB_PORT as string, 10),
   dbHost: process.env.DB_HOST,
   dbUser: process.env.DB_USER,
   dbPW: process.env.DB_PASSWORD,

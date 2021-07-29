@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import User from './User';
 
 @Entity('history')
@@ -12,7 +18,7 @@ export default class History {
   @Column({ type: 'varchar', length: 50 })
   payment!: string;
 
-  @Column({ type: 'int8', unsigned: true })
+  @Column({ type: 'int', unsigned: true })
   price!: number;
 
   @Column({ type: 'varchar', length: 50 })
@@ -21,9 +27,12 @@ export default class History {
   @Column({ type: 'tinyint' })
   type!: number;
 
-  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'datetime', default: () => '(CURRENT_DATE)' })
   createdAt!: Date;
 
-  @ManyToOne(() => User, (user) => user.histories)
+  @ManyToOne(() => User, (user) => user.histories, {
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
   user!: User;
 }

@@ -20,7 +20,7 @@ export default class User {
   @Column({ type: 'varchar', length: 300 })
   token!: string;
 
-  @CreateDateColumn({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'datetime', default: () => '(CURRENT_DATE)' })
   createdAt!: Date;
 
   @OneToMany(() => History, (history) => history.user)
