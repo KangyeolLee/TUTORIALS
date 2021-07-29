@@ -21,7 +21,32 @@ export default class MainView extends Component<State, Props> {
         <ul class="input-bar">
           <li>
             <label for="date">일자</label>
-            <input type="text" name="date" />
+            <input
+              type="text"
+              maxlength="4"
+              name="date-year"
+              placeholder="2021"
+              class="input-date"
+              value=${new Date().getFullYear()}
+            />
+            <span>/</span>
+            <input
+              type="text"
+              maxlength="2"
+              name="date-month"
+              placeholder="08"
+              class="input-date"
+              value=${new Date().getMonth() + 1}
+            />
+            <span>/</span>
+            <input
+              type="text"
+              maxlength="2"
+              name="date-day"
+              placeholder="31"
+              class="input-date"
+              value=${new Date().getDate()}
+            />
           </li>
           <li>
             <label for="category">분류</label>
