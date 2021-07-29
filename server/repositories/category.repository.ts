@@ -1,17 +1,47 @@
-import { EntityRepository, Repository } from 'typeorm';
-import UserCategory from './../entities/UserCategory';
+import {
+  EntityRepository,
+  Repository,
+  InsertResult,
+  DeleteResult,
+} from 'typeorm';
+import Category from '../entities/Category';
+import UserCategory from '../entities/UserCategory';
 
 @EntityRepository(UserCategory)
-export default class CategoryRepository extends Repository<UserCategory> {
-  findAllByUserId(userId: number) {
-    try {
-      return this.createQueryBuilder('category')
-        .where({
-          userId,
-        })
-        .getMany();
-    } catch (error) {
-      console.log(error);
-    }
+export class UserCategoryRepository extends Repository<UserCategory> {
+  findAllByUserId(userId: number): Promise<UserCategory[] | undefined> {
+    return this.createQueryBuilder('user_category')
+      .select('category.type AS type, user_category.id AS id')
+      .leftJoin('user_category.category', 'category')
+      .where('user_category.userId = :userId', { userId })
+      .getRawMany();
+  }
+
+  createUserCategoryByUserId(
+    userId: number,
+    categoryId: number,
+    color: string
+  ): Promise<InsertResult | undefined> {
+    const result = this.create({
+      user: { id: userId },
+      category: { id: categoryId },
+      color,
+    });
+    return this.insert(result);
+  }
+
+  deleteUserCategoryByUserId(
+    userId: number,
+    id: number
+  ): Promise<DeleteResult> {
+    return this.delete({ id, user: { id: userId } });
+  }
+}
+
+@EntityRepository(Category)
+export class CategoryRepository extends Repository<Category> {
+  createCategoryForUser(type: string): Promise<InsertResult | undefined> {
+    const result = this.create({ type });
+    return this.insert(result);
   }
 }
