@@ -6,15 +6,8 @@ const router = Router();
 export default (app: Router) => {
   app.use('/histories', router);
 
-  router.get(`/`, (req: Request, res: Response, next: NextFunction) => {
-    return res
-      .json({
-        message: 'ok',
-        ok: true,
-      })
-      .status(200);
-  });
-
+  // router.get(`/`, (req: any, res: any) => console.log('hi'));
+  router.get(`/`, historyController.selectHistory);
   router.post(`/`, historyController.insertHistory);
 
   router.put(
