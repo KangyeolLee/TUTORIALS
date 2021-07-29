@@ -88,3 +88,11 @@ export interface IHistory {
   payment: string;
   price: number;
 }
+
+export interface IValidationType {
+  date: boolean;
+  category: boolean;
+  content: boolean;
+  payment: boolean;
+  price: boolean;
+}
