@@ -3,6 +3,11 @@ import {
   CategoryRepository,
   UserCategoryRepository,
 } from '../repositories/category.repository';
+import {
+  CategoryType,
+  ResultRawType,
+  UserCategoryForRemoval,
+} from '../types/types';
 
 class CategoryService {
   async findCategories(userId: number) {
@@ -16,18 +21,18 @@ class CategoryService {
     }
   }
 
-  async createCategory(userId: number, type: string, color: string) {
+  async createCategory({ userId, type, color }: CategoryType) {
     try {
       const category = await getCustomRepository(
         CategoryRepository
       ).createCategoryForUser(type);
       const {
-        raw: { insertId },
-      } = category!;
+        raw: { insertId: categoryId },
+      }: ResultRawType = category!;
 
       const result = await getCustomRepository(
         UserCategoryRepository
-      ).createUserCategoryByUserId(userId, insertId, color);
+      ).createUserCategoryByUserId({ userId, categoryId, color });
 
       return result;
     } catch (error) {
@@ -35,11 +40,11 @@ class CategoryService {
     }
   }
 
-  async deleteUserCategoryByUserId(userId: number, id: number) {
+  async deleteUserCategoryByUserId({ userId, id }: UserCategoryForRemoval) {
     try {
       const result = await getCustomRepository(
         UserCategoryRepository
-      ).deleteUserCategoryByUserId(userId, id);
+      ).deleteUserCategoryByUserId({ userId, id });
 
       return result;
     } catch (error) {

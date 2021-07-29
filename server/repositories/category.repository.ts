@@ -6,6 +6,7 @@ import {
 } from 'typeorm';
 import Category from '../entities/Category';
 import UserCategory from '../entities/UserCategory';
+import { UserCategoryForRemoval, UserCategoryType } from '../types/types';
 
 @EntityRepository(UserCategory)
 export class UserCategoryRepository extends Repository<UserCategory> {
@@ -17,11 +18,11 @@ export class UserCategoryRepository extends Repository<UserCategory> {
       .getRawMany();
   }
 
-  createUserCategoryByUserId(
-    userId: number,
-    categoryId: number,
-    color: string
-  ): Promise<InsertResult | undefined> {
+  createUserCategoryByUserId({
+    userId,
+    categoryId,
+    color,
+  }: UserCategoryType): Promise<InsertResult | undefined> {
     const result = this.create({
       user: { id: userId },
       category: { id: categoryId },
@@ -30,10 +31,10 @@ export class UserCategoryRepository extends Repository<UserCategory> {
     return this.insert(result);
   }
 
-  deleteUserCategoryByUserId(
-    userId: number,
-    id: number
-  ): Promise<DeleteResult> {
+  deleteUserCategoryByUserId({
+    userId,
+    id,
+  }: UserCategoryForRemoval): Promise<DeleteResult> {
     return this.delete({ id, user: { id: userId } });
   }
 }

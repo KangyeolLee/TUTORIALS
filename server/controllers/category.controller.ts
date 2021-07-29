@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import categoryServices from '../services/category.services';
+import { ResultRawType } from '../types/types';
 
 class CategoryController {
   async findCategories(req: Request, res: Response, next: NextFunction) {
@@ -22,10 +23,14 @@ class CategoryController {
       // userId 로그인 세션에서 가져와야 함!!
       const userId = 1;
       const { type, color } = req.body;
-      const result = await categoryServices.createCategory(userId, type, color);
+      const result = await categoryServices.createCategory({
+        userId,
+        type,
+        color,
+      });
       const {
         raw: { insertId },
-      } = result!;
+      }: ResultRawType = result!;
 
       return res.status(200).json({
         insertId,
@@ -43,10 +48,10 @@ class CategoryController {
       const userId = 1;
       // 선택한 카테고리의 고유 id 값을 의미
       const { categoryId } = req.params;
-      const result = await categoryServices.deleteUserCategoryByUserId(
+      const result = await categoryServices.deleteUserCategoryByUserId({
         userId,
-        +categoryId
-      );
+        id: +categoryId,
+      });
 
       return res.status(200).json({
         result,
