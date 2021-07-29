@@ -15,7 +15,7 @@ if [ $local != $target ]; then
 
     echo '---client build---'
     cd ./client
-    npm install && npm run build
+    sudo npm install && npm run build
     cp -r ./dist/* /var/www/html
 
     # 기존 커밋 덮어쓰기

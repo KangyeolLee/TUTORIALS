@@ -12,7 +12,7 @@ async function startServer() {
       console.log(`🛡️  Server listening on port: ${config.port} 🛡️`)
     );
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 }
 
