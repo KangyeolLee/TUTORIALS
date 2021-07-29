@@ -5,10 +5,13 @@ import HistoryRepository from './../repositories/history.repository';
 
 class HistoryService {
   async insertHistory(history: HistoryType): Promise<InsertResult | undefined> {
+  async insertHistory(history: HistoryType): Promise<number> {
     try {
-      const historyId = await getCustomRepository(
-        HistoryRepository
-      ).insertHistory(history);
+      const result = await getCustomRepository(HistoryRepository).insertHistory(
+        history
+      );
+      const historyId = result.identifiers[0].id;
+
       return historyId;
     } catch (error) {
       throw new Error('[카테고리 쿼리 에러] ' + error);
