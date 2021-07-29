@@ -63,4 +63,6 @@ export default class HistoryDayCard extends Component<
         return acc + cur.price;
       }, 0);
   }
+
+  removeEvent() {}
 }

@@ -1,36 +1,52 @@
 import { dummyhistories } from '@/assets/dummy';
 import Observable from '@/Core/Observable';
-import { IHistory } from '@/utils/types';
+import { IHistory, Today, HistoryType, typeString } from '@/utils/types';
 
 class MainModel extends Observable {
   key: string = 'history';
   historyCards: IHistory[];
+  historyType: HistoryType;
 
   constructor() {
     super();
     this.historyCards = [];
-    this.initHistoryCard();
+    this.historyType = {
+      expense: true,
+      income: true,
+    };
   }
 
-  initHistoryCard() {
-    dummyhistories.forEach((history) => {
-      const newHistory: IHistory = {
-        date: history.create_time,
-        type: history.type,
-        category: history.category,
-        content: history.content,
-        payment: history.payment,
-        price: history.price,
-      };
-      this.historyCards.push(newHistory);
-    });
+  getHistoryCard(today: Today) {
+    this.historyCards = dummyhistories
+      .filter((history) => {
+        const [year, month, _] = history.create_time
+          .split('-')
+          .map((d) => parseInt(d));
+        return today.year === year && today.month === month;
+      })
+      .map((history) => {
+        return {
+          date: history.create_time,
+          type: history.type,
+          category: history.category,
+          content: history.content,
+          payment: history.payment,
+          price: history.price,
+        };
+      });
+    this.notify(this.key, { historyCards: this.historyCards });
   }
 
-  addHistory(key: string, history: IHistory) {
+  addHistory(history: IHistory) {
     const nextHistory = [...this.historyCards, history];
     this.historyCards = nextHistory;
 
-    this.notify(key, nextHistory);
+    this.notify(this.key, { historyCards: nextHistory });
+  }
+
+  toggleType(nextType: typeString) {
+    this.historyType[nextType] = !this.historyType[nextType];
+    this.notify(this.key, { historyType: this.historyType });
   }
 }
 

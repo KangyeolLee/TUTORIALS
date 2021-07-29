@@ -52,8 +52,28 @@ export interface TodayModel extends Model {
   getNextData: () => void;
 }
 
+/**
+ * @example
+ * MainModel 관련 타입
+ */
+
+export type typeString = 'expense' | 'income';
+export interface HistoryType {
+  expense?: boolean;
+  income?: boolean;
+}
+export interface MainModelType extends Model {
+  key: string;
+  historyCards: IHistory[];
+  historyType: HistoryType;
+  getHistoryCard: (today: Today) => void;
+  addHistory: (history: IHistory) => void;
+  toggleType: (nextType: typeString) => void;
+}
+
 export interface DateState extends State {
   today: Today;
+  historyCards?: IHistory[];
 }
 
 /**

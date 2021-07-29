@@ -3,18 +3,25 @@ import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import { $router } from '@/Core/Router';
 import { svgIcons } from '@/assets/svgIcons';
-import { Props, TodayModel } from '@/utils/types';
+import { MainModelType, Props, TodayModel } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
 import { DateState } from '@/utils/types';
+import MainModel from '@/Model/MainModel';
 
 export default class Header extends Component<DateState, Props> {
   model!: TodayModel;
+  mainModel!: MainModelType;
 
   setup() {
+    // main 모델(history) 구독
+    this.mainModel = MainModel;
+    this.mainModel.subscribe(this.mainModel.key, this);
+
     this.model = DateModel;
     this.model.subscribe(this.model.key, this);
     this.$state = {
       today: this.model.today,
+      historyCards: this.mainModel.historyCards,
     };
   }
 
@@ -55,10 +62,12 @@ export default class Header extends Component<DateState, Props> {
 
   handleClickPrevBtn() {
     this.model.getPrevDate();
+    this.mainModel.getHistoryCard(this.$state!.today);
   }
 
   handleClickNextBtn() {
     this.model.getNextData();
+    this.mainModel.getHistoryCard(this.$state!.today);
   }
 
   setEvent() {
@@ -74,7 +83,5 @@ export default class Header extends Component<DateState, Props> {
     );
   }
 
-  resetEvent() {
-    return false;
-  }
+  removeEvent() {}
 }

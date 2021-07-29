@@ -24,6 +24,10 @@ export const svgIcons = {
     <path d="M19 1L6.625 13L1 7.54545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     `,
+  checkSmall: `<svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.9902 1.99996L11.5802 0.579956L4.99023 7.16996L2.41023 4.59996L0.990234 6.00996L4.99023 9.99996L12.9902 1.99996Z"/>
+    </svg>
+    `,
   leftBtn: `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9 17L1 9L9 1" stroke="#FCFCFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>

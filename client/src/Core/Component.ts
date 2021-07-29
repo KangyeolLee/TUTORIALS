@@ -46,7 +46,7 @@ export default class Component<S extends State, P extends Props> {
 
     const listener = (event: Event) => {
       if (!isTarget(event.target as Element)) return false;
-      callback();
+      callback(event);
     };
 
     this.$target.addEventListener(eventType, listener);
