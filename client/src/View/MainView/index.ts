@@ -1,18 +1,36 @@
 import './styles';
 import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
-import { Props, State } from '@/utils/types';
+import { IValidationType, MainModelType, Props, State } from '@/utils/types';
 import { svgIcons } from '@/assets/svgIcons';
 import Main from '@/Components/Main';
 import MainModel from '@/Model/MainModel';
 import { IHistory } from '@/utils/types';
 
 export default class MainView extends Component<State, Props> {
-  model: any;
+  model!: MainModelType;
   inputCondition: boolean[] = new Array();
+  validation!: IValidationType;
+  date!: {
+    year: number;
+    month: number;
+    day: number;
+  };
 
   setup() {
     this.model = MainModel;
+    this.date = {
+      year: new Date().getFullYear(),
+      month: new Date().getMonth() + 1,
+      day: new Date().getDate(),
+    };
+    this.validation = {
+      date: true,
+      category: false,
+      content: false,
+      payment: false,
+      price: false,
+    };
   }
 
   template() {
@@ -85,6 +103,44 @@ export default class MainView extends Component<State, Props> {
       '#main-input-submit',
       this.handleSubmitButton.bind(this)
     );
+
+    // date
+    this.addEvent(
+      'input',
+      'input[name="date-year"]',
+      this.validateYear.bind(this)
+    );
+    this.addEvent(
+      'input',
+      'input[name="date-month"]',
+      this.validateMonth.bind(this)
+    );
+    this.addEvent(
+      'input',
+      'input[name="date-day"]',
+      this.validateDay.bind(this)
+    );
+
+    this.addEvent(
+      'input',
+      'input[name="category"]',
+      this.validateCategory.bind(this)
+    );
+    this.addEvent(
+      'input',
+      'input[name="content"]',
+      this.validateContent.bind(this)
+    );
+    this.addEvent(
+      'input',
+      'input[name="payment"]',
+      this.validatePayment.bind(this)
+    );
+    this.addEvent(
+      'input',
+      'input[name="price"]',
+      this.validatePrice.bind(this)
+    );
   }
 
   setUnmount() {
@@ -125,5 +181,65 @@ export default class MainView extends Component<State, Props> {
     $contentInput.value = '';
     $paymentInput.value = '';
     $priceInput.value = '';
+  }
+
+  validateYear(e: HTMLInputElement) {
+    let year: number = parseInt((<HTMLInputElement>e.target).value);
+    if (!year) return;
+
+    if (year > 2050) year = 2050;
+    else if (year < 2000) year = 2000;
+    (<HTMLInputElement>e.target).value = String(year);
+    this.date.year = year;
+  }
+  validateMonth(e: HTMLInputElement) {
+    let month: number = parseInt((<HTMLInputElement>e.target).value);
+    if (!month) return;
+
+    if (month > 12) month = 12;
+    else if (month < 1) month = 1;
+    (<HTMLInputElement>e.target).value = String(month);
+    this.date.month = month;
+  }
+  validateDay(e: HTMLInputElement) {
+    const lastDay = new Date(this.date.year, this.date.month, 0).getDate();
+    let day: number = parseInt((<HTMLInputElement>e.target).value);
+    if (!day) return;
+
+    if (day > lastDay) day = lastDay;
+    else if (day < 1) day = 1;
+    (<HTMLInputElement>e.target).value = String(day);
+    this.date.day = day;
+  }
+
+  validateCategory(e: HTMLInputElement) {
+    if (e.target.value === '') this.validation.category = false;
+    else this.validation.category = true;
+    this.checkValidated();
+  }
+  validateContent(e: HTMLInputElement) {
+    if (e.target.value === '') this.validation.content = false;
+    else this.validation.content = true;
+    this.checkValidated();
+  }
+  validatePayment(e: HTMLInputElement) {
+    if (e.target.value === '') this.validation.payment = false;
+    else this.validation.payment = true;
+    this.checkValidated();
+  }
+  validatePrice(e: HTMLInputElement) {
+    if (e.target.value === '') this.validation.price = false;
+    else this.validation.price = true;
+    this.checkValidated();
+  }
+
+  checkValidated(): void {
+    const { date, category, content, payment, price } = this.validation;
+    const submitBtn = this.$target.querySelector(
+      '#main-input-submit'
+    ) as HTMLElement;
+    if (date && category && content && payment && price)
+      submitBtn.setAttribute('active', '');
+    else submitBtn.removeAttribute('active');
   }
 }
