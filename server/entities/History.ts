@@ -18,7 +18,7 @@ export default class History {
   @Column({ type: 'varchar', length: 50 })
   payment!: string;
 
-  @Column({ type: 'int', unsigned: true })
+  @Column({ type: 'decimal', unsigned: true })
   price!: number;
 
   @Column({ type: 'varchar', length: 50 })
@@ -31,7 +31,6 @@ export default class History {
   createdAt!: Date;
 
   @ManyToOne(() => User, (user) => user.histories, {
-    nullable: false,
     onDelete: 'CASCADE',
   })
   user!: User;
