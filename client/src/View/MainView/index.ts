@@ -179,6 +179,15 @@ export default class MainView extends Component<State, Props> {
     $contentInput.value = '';
     $paymentInput.value = '';
     $priceInput.value = '';
+
+    this.validation = {
+      date: true,
+      category: false,
+      content: false,
+      payment: false,
+      price: false,
+    };
+    this.checkValidated();
   }
 
   validateYear(e: HTMLInputElement) {
