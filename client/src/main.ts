@@ -16,8 +16,8 @@ const routes: Route[] = [
 ];
 
 function init() {
-  new Header($header);
   initRouter({ $app, routes });
+  new Header($header);
 }
 
 init();

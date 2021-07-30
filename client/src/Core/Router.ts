@@ -112,7 +112,7 @@ export function initRouter(options: RouterType) {
   customEventEmitter(
     'moveroutes',
     history.state ?? {
-      path: '/',
+      path: '/main',
     }
   );
 }
