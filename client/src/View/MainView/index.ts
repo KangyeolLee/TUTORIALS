@@ -1,6 +1,6 @@
 import './styles';
 import Component from '@/Core/Component';
-import { html } from '@/utils/helper';
+import { addComma, html } from '@/utils/helper';
 import { IValidationType, MainModelType, Props, State } from '@/utils/types';
 import { svgIcons } from '@/assets/svgIcons';
 import Main from '@/Components/Main';
@@ -170,7 +170,7 @@ export default class MainView extends Component<State, Props> {
       category: $categoryInput.value,
       content: $contentInput.value,
       payment: $paymentInput.value,
-      price: parseInt($priceInput.value),
+      price: parseInt($priceInput.value.replace(/,/g, '')),
     };
 
     this.model.addHistory(newHistory);
@@ -236,7 +236,11 @@ export default class MainView extends Component<State, Props> {
   }
   validatePrice(e: HTMLInputElement) {
     if (e.target.value === '') this.validation.price = false;
-    else this.validation.price = true;
+    else {
+      const price = e.target.value.replace(/,/g, '');
+      e.target.value = addComma(price);
+      this.validation.price = true;
+    }
     this.checkValidated();
   }
 
