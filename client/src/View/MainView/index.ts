@@ -1,6 +1,6 @@
 import './styles';
 import Component from '@/Core/Component';
-import { html } from '@/utils/helper';
+import { addComma, html } from '@/utils/helper';
 import { IValidationType, MainModelType, Props, State } from '@/utils/types';
 import { svgIcons } from '@/assets/svgIcons';
 import Main from '@/Components/Main';
@@ -151,9 +151,6 @@ export default class MainView extends Component<State, Props> {
   handleSubmitButton() {
     if (!this.isValidated()) return;
 
-    const $dateInput = this.$target.querySelector(
-      'input[name="date"]'
-    ) as HTMLInputElement;
     const $categoryInput = this.$target.querySelector(
       'input[name="category"]'
     ) as HTMLInputElement;
@@ -168,21 +165,29 @@ export default class MainView extends Component<State, Props> {
     ) as HTMLInputElement;
 
     const newHistory: IHistory = {
-      date: $dateInput.value,
+      date: `${this.date.year}-${this.date.month}-${this.date.day}`,
       type: 0,
       category: $categoryInput.value,
       content: $contentInput.value,
       payment: $paymentInput.value,
-      price: parseInt($priceInput.value),
+      price: parseInt($priceInput.value.replace(/,/g, '')),
     };
 
     this.model.addHistory(newHistory);
 
-    $dateInput.value = '';
     $categoryInput.value = '';
     $contentInput.value = '';
     $paymentInput.value = '';
     $priceInput.value = '';
+
+    this.validation = {
+      date: true,
+      category: false,
+      content: false,
+      payment: false,
+      price: false,
+    };
+    this.checkValidated();
   }
 
   validateYear(e: HTMLInputElement) {
@@ -231,12 +236,15 @@ export default class MainView extends Component<State, Props> {
   }
   validatePrice(e: HTMLInputElement) {
     if (e.target.value === '') this.validation.price = false;
-    else this.validation.price = true;
+    else {
+      const price = e.target.value.replace(/,/g, '');
+      e.target.value = addComma(price);
+      this.validation.price = true;
+    }
     this.checkValidated();
   }
 
   checkValidated(): void {
-    const { date, category, content, payment, price } = this.validation;
     const submitBtn = this.$target.querySelector(
       '#main-input-submit'
     ) as HTMLElement;

@@ -17,6 +17,23 @@ class MainModel extends Observable {
   }
 
   getHistoryCard(today: Today) {
+    this.filterHistoryCardsByMonth(today);
+    this.notify(this.key, { historyCards: this.historyCards });
+  }
+
+  addHistory(history: IHistory) {
+    const nextHistory = [...this.historyCards, history];
+    this.historyCards = nextHistory;
+
+    this.notify(this.key, { historyCards: nextHistory });
+  }
+
+  toggleType(nextType: typeString) {
+    this.historyType[nextType] = !this.historyType[nextType];
+    this.notify(this.key, { historyType: this.historyType });
+  }
+
+  filterHistoryCardsByMonth(today: Today): void {
     this.historyCards = dummyhistories
       .filter((history) => {
         const [year, month, _] = history.create_time
@@ -34,19 +51,6 @@ class MainModel extends Observable {
           price: history.price,
         };
       });
-    this.notify(this.key, { historyCards: this.historyCards });
-  }
-
-  addHistory(history: IHistory) {
-    const nextHistory = [...this.historyCards, history];
-    this.historyCards = nextHistory;
-
-    this.notify(this.key, { historyCards: nextHistory });
-  }
-
-  toggleType(nextType: typeString) {
-    this.historyType[nextType] = !this.historyType[nextType];
-    this.notify(this.key, { historyType: this.historyType });
   }
 }
 
