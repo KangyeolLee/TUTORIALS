@@ -55,9 +55,19 @@ export default class Header extends Component<DateState, Props> {
     ) as HTMLElement;
     const $chart = this.$target.querySelector('#menu-chart') as HTMLElement;
 
-    $main.addEventListener('click', () => $router.push('/main'));
-    $calendar.addEventListener('click', () => $router.push('/calendar'));
-    $chart.addEventListener('click', () => $router.push('/charts'));
+    $main.addEventListener('click', () => {
+      $router.push('/main');
+      this.changeMenu();
+    });
+    $calendar.addEventListener('click', () => {
+      $router.push('/calendar');
+      this.changeMenu();
+    });
+    $chart.addEventListener('click', () => {
+      $router.push('/charts');
+      this.changeMenu();
+    });
+    this.changeMenu();
   }
 
   handleClickPrevBtn() {
@@ -84,4 +94,24 @@ export default class Header extends Component<DateState, Props> {
   }
 
   removeEvent() {}
+
+  changeMenu() {
+    const path = history.state.path as string;
+    this.$target
+      .querySelectorAll('li.menu-list')
+      .forEach((elem: Element) => elem.removeAttribute('active'));
+    switch (path) {
+      case '/main':
+        this.$target.querySelector('li#menu-main')?.setAttribute('active', '');
+        break;
+      case '/calendar':
+        this.$target
+          .querySelector('li#menu-calendar')
+          ?.setAttribute('active', '');
+        break;
+      case '/charts':
+        this.$target.querySelector('li#menu-chart')?.setAttribute('active', '');
+        break;
+    }
+  }
 }
