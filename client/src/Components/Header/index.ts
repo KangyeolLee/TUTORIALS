@@ -3,13 +3,13 @@ import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import { $router } from '@/Core/Router';
 import { svgIcons } from '@/assets/svgIcons';
-import { MainModelType, Props, TodayModel } from '@/utils/types';
+import { MainModelType, Props, TodayModelType } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
 import { DateState } from '@/utils/types';
 import MainModel from '@/Model/MainModel';
 
 export default class Header extends Component<DateState, Props> {
-  model!: TodayModel;
+  model!: TodayModelType;
   mainModel!: MainModelType;
 
   setup() {

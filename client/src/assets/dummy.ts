@@ -150,6 +150,16 @@ export const dummyhistories = [
     type: 0,
     create_time: '2021-08-15',
   },
+  {
+    id: 16,
+    user_id: 1,
+    category: '문화/여가',
+    payment: '신한카드',
+    price: 600000,
+    content: '헬스장 1달치 환불',
+    type: 1,
+    create_time: '2021-08-15',
+  },
 ];
 
 export const category = [

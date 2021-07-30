@@ -1,4 +1,5 @@
 /**
+import { histories } from './../assets/dummy';
  * @example
  * Modal 관련 공통 타입
  */
@@ -45,11 +46,22 @@ export type Today = {
   month: number;
 };
 
-export interface TodayModel extends Model {
+export interface TodayModelType extends Model {
   today: Today;
   key: string;
   getPrevDate: () => void;
   getNextData: () => void;
+}
+
+export interface CalendarState extends State {
+  today: Today;
+  historyCards?: IHistory[];
+  historyType: HistoryType;
+  histories: {
+    [key: string]: {
+      history: { income?: number; outcome?: number; amount: number | null };
+    };
+  };
 }
 
 /**

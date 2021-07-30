@@ -1,8 +1,15 @@
 import Component from '@/Core/Component';
 import './styles';
-import { html } from '@/utils/helper';
-import { Props, State, TodayModel, DateState } from '@/utils/types';
+import { html, addComma } from '@/utils/helper';
+import {
+  Props,
+  TodayModelType,
+  MainModelType,
+  CalendarState,
+  HistoryType,
+} from '@/utils/types';
 import DateModel from '@/Model/DateModel';
+import MainModel from '@/Model/MainModel';
 
 const SEVEN_DAYS = 7;
 const SIX_DAYS = 6;
@@ -18,24 +25,80 @@ type HistoryForDate = {
   };
 };
 
-export default class Calendar extends Component<DateState, Props> {
-  model!: TodayModel;
+type HistoryTypeForDate = {
+  history: {
+    income?: number;
+    outcome?: number;
+    amount: number | null;
+  };
+};
+
+export default class Calendar extends Component<CalendarState, Props> {
+  todayModel!: TodayModelType;
+  mainModel!: MainModelType;
 
   setup() {
-    this.model = DateModel;
-    this.model.subscribe(this.model.key, this);
+    this.todayModel = DateModel;
+    this.todayModel.subscribe(this.todayModel.key, this);
+
+    this.mainModel = MainModel;
+    this.mainModel.subscribe(this.mainModel.key, this);
+
     this.$state = {
-      today: this.model.today,
+      today: this.todayModel.today,
+      historyCards: this.mainModel.historyCards,
+      historyType: this.mainModel.historyType,
+      histories: {},
     };
+
+    this.mainModel.getHistoryCard(this.$state!.today);
+
+    console.log(this.$state);
   }
+
   template() {
-    const a = 0;
-    console.log(this.$state?.today);
     return html`
       <table class="calendar-table">
         <tbody class="calendar-tbody"></tbody>
       </table>
     `;
+  }
+
+  /**
+   * histories[i] = {
+   *    income: ...,
+   *    outcome: ...,
+   *    amount: ...,
+   * }
+   */
+  filterHistories() {
+    const { historyCards, histories } = this.$state!;
+    historyCards?.forEach((history) => {
+      const { date, type, price } = history;
+      const { income, outcome, amount } = histories?.[date]?.history ?? {
+        income: undefined,
+        outcome: undefined,
+        amount: null,
+      };
+
+      if (type) {
+        histories[date] = {
+          history: {
+            income: income ? income + price : price,
+            outcome,
+            amount: amount ? amount + price : price,
+          },
+        };
+      } else if (type === 0) {
+        histories[date] = {
+          history: {
+            income,
+            outcome: outcome ? outcome + price : price,
+            amount: amount ? amount + price : price,
+          },
+        };
+      }
+    });
   }
 
   getTodayDates() {
@@ -56,9 +119,13 @@ export default class Calendar extends Component<DateState, Props> {
       amount !== null
         ? html`
             <div class="history">
-              ${income ? `<div class="income">${income}</div>` : null}
-              ${outcome ? `<div class="outcome">-${outcome}</div>` : null}
-              <div class="amount">${amount}</div>
+              ${income
+                ? `<div class="income">${addComma(income + '')}</div>`
+                : null}
+              ${outcome
+                ? `<div class="outcome">-${addComma(outcome + '')}</div>`
+                : null}
+              <div class="amount">${addComma(amount + '')}</div>
             </div>
             <div class="day">${date}</div>
           `
@@ -72,7 +139,8 @@ export default class Calendar extends Component<DateState, Props> {
 
   // 데이터 연동이 되는 시점에서 내부 로직을 조금 분리할 계획입니다..!
   makeCalendar(today_date: number, last_date: number, first_day: number) {
-    const { month } = this.$state!.today;
+    this.filterHistories();
+    const { year, month } = this.$state!.today;
     const $calendar = this.$target.querySelector(
       '.calendar-tbody'
     ) as HTMLTableElement;
@@ -83,6 +151,12 @@ export default class Calendar extends Component<DateState, Props> {
     }
 
     for (let i = START_ONE; i <= last_date; i++) {
+      const date =
+        year +
+        '-' +
+        (month > 9 ? month : '0' + month) +
+        '-' +
+        (i > 9 ? i : '0' + i);
       if (first_day !== SEVEN_DAYS) {
         const $cell = $row.insertCell();
         $cell.id = `calendar-date-${i}`;
@@ -91,7 +165,7 @@ export default class Calendar extends Component<DateState, Props> {
           $cell.classList.add('today');
         $cell.innerHTML = this.makeHistoryForDate({
           date: i,
-          history: { amount: null },
+          history: this.$state?.histories[date]?.history ?? { amount: null },
         });
         first_day++;
       } else {
@@ -101,17 +175,9 @@ export default class Calendar extends Component<DateState, Props> {
         if (today_date === i && month === new Date().getMonth() + 1)
           $cell.classList.add('today');
         // 더미데이터 : 추후 삭제 예정
-        const history =
-          i === 4
-            ? {
-                income: 1850000,
-                outcome: 450000,
-                amount: 1400000,
-              }
-            : { amount: null };
         $cell.innerHTML = this.makeHistoryForDate({
           date: i,
-          history,
+          history: this.$state?.histories[date]?.history ?? { amount: null },
         });
         first_day -= SIX_DAYS;
       }
@@ -126,10 +192,10 @@ export default class Calendar extends Component<DateState, Props> {
     const { today_date, last_date, first_day } = this.getTodayDates();
 
     this.makeCalendar(today_date, last_date, first_day);
-    console.log(last_date, first_day);
   }
 
   setUnmount() {
-    this.model.unsubscribe(this.model.key, this);
+    this.todayModel.unsubscribe(this.todayModel.key, this);
+    this.mainModel.unsubscribe(this.mainModel.key, this);
   }
 }
