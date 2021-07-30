@@ -1,6 +1,6 @@
 import './styles';
 import Component from '@/Core/Component';
-import { html } from '@/utils/helper';
+import { asyncSetState, html } from '@/utils/helper';
 import { $router } from '@/Core/Router';
 import { svgIcons } from '@/assets/svgIcons';
 import { MainModelType, Props, TodayModelType } from '@/utils/types';
@@ -13,6 +13,7 @@ export default class Header extends Component<DateState, Props> {
   mainModel!: MainModelType;
 
   setup() {
+    this.classIDF = 'Header';
     // main 모델(history) 구독
     this.mainModel = MainModel;
     this.mainModel.subscribe(this.mainModel.key, this);
@@ -26,6 +27,7 @@ export default class Header extends Component<DateState, Props> {
   }
 
   template() {
+    console.log('date : ', this.$state?.today);
     const { year, month } = this.$state!.today;
 
     return html`
@@ -71,13 +73,17 @@ export default class Header extends Component<DateState, Props> {
   }
 
   handleClickPrevBtn() {
-    this.model.getPrevDate();
-    this.mainModel.getHistoryCard(this.$state!.today);
+    asyncSetState(
+      this.model.getPrevDate(),
+      this.mainModel.getHistoryCard(this.model.today)
+    );
   }
 
   handleClickNextBtn() {
-    this.model.getNextData();
-    this.mainModel.getHistoryCard(this.$state!.today);
+    asyncSetState(
+      this.model.getNextData(),
+      this.mainModel.getHistoryCard(this.model.today)
+    );
   }
 
   setEvent() {

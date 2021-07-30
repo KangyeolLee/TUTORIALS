@@ -5,12 +5,14 @@ export default class Component<S extends State, P extends Props> {
   $state?: S;
   $props?: P;
   eventlisteners: EventListener[];
+  classIDF: string;
 
   constructor($target: HTMLElement, $state?: S, $props?: P) {
     this.$target = $target;
     this.$state = $state;
     this.$props = $props;
     this.eventlisteners = [];
+    this.classIDF = '';
     this.setup();
     this.render();
     this.setEvent();

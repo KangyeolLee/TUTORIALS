@@ -1,5 +1,6 @@
 /* any는 나중에 꼭꼮꼭 타입을 바꿔주도록 해보아요 */
 import { Store } from '@/Core/Store';
+import { curType } from '@/utils/types';
 
 export default class Observable {
   private _observers: any;
@@ -23,7 +24,11 @@ export default class Observable {
     );
   }
 
-  notify(key: string, data: any) {
-    this._observers[key].forEach((observer: any) => observer.setState(data));
+  async notify(key: string, data: any): Promise<curType> {
+    return this._observers[key].map((observer: any) => ({
+      name: observer.classIDF,
+      observer,
+      data,
+    }));
   }
 }

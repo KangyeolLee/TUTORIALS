@@ -1,3 +1,5 @@
+import Component from '@/Core/Component';
+
 /**
 import { histories } from './../assets/dummy';
  * @example
@@ -8,6 +10,15 @@ interface Model {
   unsubscribe: (key: string, observer: any) => void;
   notify: (key: string, data: any) => void;
 }
+
+export type ObserversType = {
+  [key: string]: { new (): Component<State, Props> }[];
+};
+
+export type subscribeType = {
+  key: string;
+  observer: { new (): Component<State, Props> };
+};
 
 /**
  * @example
@@ -49,19 +60,14 @@ export type Today = {
 export interface TodayModelType extends Model {
   today: Today;
   key: string;
-  getPrevDate: () => void;
-  getNextData: () => void;
+  getPrevDate: () => Promise<curType>;
+  getNextData: () => Promise<curType>;
 }
 
 export interface CalendarState extends State {
   today: Today;
   historyCards?: IHistory[];
   historyType: HistoryType;
-  histories: {
-    [key: string]: {
-      history: { income?: number; outcome?: number; amount: number | null };
-    };
-  };
 }
 
 /**
@@ -78,9 +84,9 @@ export interface MainModelType extends Model {
   key: string;
   historyCards: IHistory[];
   historyType: HistoryType;
-  getHistoryCard: (today: Today) => void;
-  addHistory: (history: IHistory) => void;
-  toggleType: (nextType: typeString) => void;
+  getHistoryCard: (today: Today) => Promise<curType>;
+  addHistory: (history: IHistory) => Promise<curType>;
+  toggleType: (nextType: typeString) => Promise<curType>;
 }
 
 export interface DateState extends State {
@@ -108,3 +114,20 @@ export interface IValidationType {
   payment: boolean;
   price: boolean;
 }
+
+/**
+ * @example
+ * 비동기 setState 데이터 관련 타입
+ */
+export type curType = {
+  name: string;
+  observer: any;
+  data: any;
+};
+
+export type accType = {
+  [key: string]: {
+    observer: any;
+    data: any;
+  };
+};

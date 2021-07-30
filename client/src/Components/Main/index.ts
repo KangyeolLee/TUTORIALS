@@ -8,7 +8,7 @@ import {
   TodayModelType,
   HistoryType,
 } from '@/utils/types';
-import { addComma, html } from '@/utils/helper';
+import { addComma, asyncSetState, html } from '@/utils/helper';
 import MainModel from '@/Model/MainModel';
 import HistoryDayCard from '../HistoryDayCard';
 import { IHistory } from '@/utils/types';
@@ -26,6 +26,7 @@ export default class Main extends Component<IMainState, Props> {
   dateModel!: TodayModelType;
 
   setup() {
+    this.classIDF = 'Main';
     // main 모델(history) 구독
     this.mainModel = MainModel;
     this.mainModel.subscribe(this.mainModel.key, this);
@@ -38,7 +39,8 @@ export default class Main extends Component<IMainState, Props> {
       today: this.dateModel.today,
       historyType: this.mainModel.historyType,
     };
-    this.mainModel.getHistoryCard(this.$state!.today);
+
+    asyncSetState(this.mainModel.getHistoryCard(this.$state!.today));
   }
 
   template() {
@@ -149,10 +151,10 @@ export default class Main extends Component<IMainState, Props> {
   }
 
   toggleIncomBtn(e: any) {
-    this.mainModel.toggleType('income');
+    asyncSetState(this.mainModel.toggleType('income'));
   }
 
   toggleExpenseBtn(e: any) {
-    this.mainModel.toggleType('expense');
+    asyncSetState(this.mainModel.toggleType('expense'));
   }
 }
