@@ -27,3 +27,19 @@ export type UserPaymentForRemoval = {
   userId: number;
   id: number;
 };
+export type CategoryType = {
+  userId: number;
+  type: string;
+  color: string;
+};
+
+export type UserCategoryType = {
+  userId: number;
+  categoryId: number;
+  color: string;
+};
+
+export type UserCategoryForRemoval = {
+  userId: number;
+  id: number;
+};

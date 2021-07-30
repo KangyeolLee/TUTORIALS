@@ -23,12 +23,12 @@ class PaymentService {
 
   async createPayment({ userId, type }: PaymentType) {
     try {
-      const category = await getCustomRepository(
+      const payment = await getCustomRepository(
         PaymentRepository
       ).createPaymentForUser(type);
       const {
         raw: { insertId: paymentId },
-      }: ResultRawType = category!;
+      }: ResultRawType = payment;
 
       const result = await getCustomRepository(
         UserPaymentRepository

@@ -21,7 +21,7 @@ export class UserPaymentRepository extends Repository<UserPayment> {
   createUserPaymentByUserId({
     userId,
     paymentId,
-  }: UserPaymentType): Promise<InsertResult | undefined> {
+  }: UserPaymentType): Promise<InsertResult> {
     const result = this.create({
       user: { id: userId },
       payment: { id: paymentId },
@@ -39,7 +39,7 @@ export class UserPaymentRepository extends Repository<UserPayment> {
 
 @EntityRepository(Payment)
 export class PaymentRepository extends Repository<Payment> {
-  createPaymentForUser(type: string): Promise<InsertResult | undefined> {
+  createPaymentForUser(type: string): Promise<InsertResult> {
     const result = this.create({ type });
     return this.insert(result);
   }
