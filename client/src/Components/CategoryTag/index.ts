@@ -11,8 +11,15 @@ interface ICategoryTagStates extends State {
 export default class CategoryTag extends Component<ICategoryTagStates, Props> {
   template() {
     const { type } = this.$state!;
-    const id = category.filter((c) => c.type === type)[0].id;
-    return html` <div class="category-tag" data-id="${id}">${type}</div> `;
+    const isExisting = category.filter((c) => c.type === type)[0];
+    return html`
+      <div
+        class="category-tag"
+        data-id="${isExisting ? isExisting.id : category[6].id}"
+      >
+        ${isExisting ? isExisting.type : category[6].type}
+      </div>
+    `;
   }
   removeEvent() {}
 }
