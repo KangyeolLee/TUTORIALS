@@ -13,6 +13,20 @@ export type ResultRawType = {
   raw: { insertId: number };
 };
 
+export type PaymentType = {
+  userId: number;
+  type: string;
+};
+
+export type UserPaymentType = {
+  userId: number;
+  paymentId: number;
+};
+
+export type UserPaymentForRemoval = {
+  userId: number;
+  id: number;
+};
 export type CategoryType = {
   userId: number;
   type: string;
