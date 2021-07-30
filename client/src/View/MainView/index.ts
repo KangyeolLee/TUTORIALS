@@ -1,6 +1,6 @@
 import './styles';
 import Component from '@/Core/Component';
-import { addComma, html } from '@/utils/helper';
+import { addComma, asyncSetState, html } from '@/utils/helper';
 import { IValidationType, MainModelType, Props, State } from '@/utils/types';
 import { svgIcons } from '@/assets/svgIcons';
 import Main from '@/Components/Main';
@@ -173,7 +173,7 @@ export default class MainView extends Component<State, Props> {
       price: parseInt($priceInput.value.replace(/,/g, '')),
     };
 
-    this.model.addHistory(newHistory);
+    asyncSetState(this.model.addHistory(newHistory));
 
     $categoryInput.value = '';
     $contentInput.value = '';
@@ -190,7 +190,7 @@ export default class MainView extends Component<State, Props> {
     this.checkValidated();
   }
 
-  validateYear(e: HTMLInputElement) {
+  validateYear(e: KeyboardEvent) {
     let year: number = parseInt((<HTMLInputElement>e.target).value);
     if (!year) return;
 
@@ -199,7 +199,7 @@ export default class MainView extends Component<State, Props> {
     (<HTMLInputElement>e.target).value = String(year);
     this.date.year = year;
   }
-  validateMonth(e: HTMLInputElement) {
+  validateMonth(e: KeyboardEvent) {
     let month: number = parseInt((<HTMLInputElement>e.target).value);
     if (!month) return;
 
@@ -208,7 +208,7 @@ export default class MainView extends Component<State, Props> {
     (<HTMLInputElement>e.target).value = String(month);
     this.date.month = month;
   }
-  validateDay(e: HTMLInputElement) {
+  validateDay(e: KeyboardEvent) {
     const lastDay = new Date(this.date.year, this.date.month, 0).getDate();
     let day: number = parseInt((<HTMLInputElement>e.target).value);
     if (!day) return;
@@ -219,26 +219,30 @@ export default class MainView extends Component<State, Props> {
     this.date.day = day;
   }
 
-  validateCategory(e: HTMLInputElement) {
-    if (e.target.value === '') this.validation.category = false;
+  validateCategory(e: KeyboardEvent) {
+    if ((<HTMLInputElement>e.target).value === '')
+      this.validation.category = false;
     else this.validation.category = true;
     this.checkValidated();
   }
-  validateContent(e: HTMLInputElement) {
-    if (e.target.value === '') this.validation.content = false;
+  validateContent(e: KeyboardEvent) {
+    if ((<HTMLInputElement>e.target).value === '')
+      this.validation.content = false;
     else this.validation.content = true;
     this.checkValidated();
   }
-  validatePayment(e: HTMLInputElement) {
-    if (e.target.value === '') this.validation.payment = false;
+  validatePayment(e: KeyboardEvent) {
+    if ((<HTMLInputElement>e.target).value === '')
+      this.validation.payment = false;
     else this.validation.payment = true;
     this.checkValidated();
   }
-  validatePrice(e: HTMLInputElement) {
-    if (e.target.value === '') this.validation.price = false;
+  validatePrice(e: KeyboardEvent) {
+    if ((<HTMLInputElement>e.target).value === '')
+      this.validation.price = false;
     else {
-      const price = e.target.value.replace(/,/g, '');
-      e.target.value = addComma(price);
+      const price = (<HTMLInputElement>e.target).value.replace(/,/g, '');
+      (<HTMLInputElement>e.target).value = addComma(price);
       this.validation.price = true;
     }
     this.checkValidated();
