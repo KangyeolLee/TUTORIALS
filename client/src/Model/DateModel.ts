@@ -1,5 +1,5 @@
 import Observable from '@/Core/Observable';
-import { Today } from '@/utils/types';
+import { curType, Today } from '@/utils/types';
 
 class DateModel extends Observable {
   today: Today;
@@ -26,7 +26,7 @@ class DateModel extends Observable {
 
     this.today = { year, month };
     const prevDate = { today: this.today };
-    this.notify(this.key, prevDate);
+    return this.notify(this.key, prevDate);
   }
 
   getNextData() {
@@ -39,7 +39,7 @@ class DateModel extends Observable {
 
     this.today = { year, month };
     const nextDate = { today: this.today };
-    this.notify(this.key, nextDate);
+    return this.notify(this.key, nextDate);
   }
 }
 
