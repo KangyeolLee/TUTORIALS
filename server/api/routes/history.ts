@@ -9,8 +9,8 @@ export default (app: Router) => {
   // router.get(`/`, (req: any, res: any) => console.log('hi'));
   router.get(`/`, historyController.selectHistory);
   router.post(`/`, historyController.insertHistory);
-
-  router.put(
+  router.put(`/:historyId`, historyController.updateHistory);
+  router.delete(`/:hisotryId`);
     `/:historyId`,
     (req: Request, res: Response, next: NextFunction) => {
       return res

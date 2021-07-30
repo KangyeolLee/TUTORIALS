@@ -31,4 +31,8 @@ export default class HistoryRepository extends Repository<History> {
     });
     return this.insert(newHistory);
   }
+
+  updateHistoryById(id: number, history: HistoryType): Promise<UpdateResult> {
+    return this.update(id, history);
+  }
 }

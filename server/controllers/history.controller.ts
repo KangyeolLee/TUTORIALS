@@ -32,6 +32,21 @@ class HistoryController {
       next(error);
     }
   }
+
+  // history 수정
+  async updateHistory(req: Request, res: Response, next: NextFunction) {
+    try {
+      const historyId = parseInt(req.params.historyId);
+      const { history } = req.body;
+      await HistoryService.updateHistory(historyId, history);
+
+      res
+        .json({ ok: true, message: '내역이 수정되었습니다.', historyId })
+        .status(200);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new HistoryController();

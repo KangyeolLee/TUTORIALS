@@ -32,6 +32,22 @@ class HistoryService {
       throw new Error('[카테고리 쿼리 에러] ' + error);
     }
   }
+
+  async updateHistory(
+    historyId: number,
+    history: HistoryType
+  ): Promise<number> {
+    try {
+      const result = await getCustomRepository(
+        HistoryRepository
+      ).updateHistoryById(historyId, history);
+      console.log(result);
+
+      return historyId;
+    } catch (error) {
+      throw new Error('[카테고리 쿼리 에러] ' + error);
+    }
+  }
 }
 
 export default new HistoryService();
