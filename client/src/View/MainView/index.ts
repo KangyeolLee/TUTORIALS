@@ -151,9 +151,6 @@ export default class MainView extends Component<State, Props> {
   handleSubmitButton() {
     if (!this.isValidated()) return;
 
-    const $dateInput = this.$target.querySelector(
-      'input[name="date"]'
-    ) as HTMLInputElement;
     const $categoryInput = this.$target.querySelector(
       'input[name="category"]'
     ) as HTMLInputElement;
@@ -168,7 +165,7 @@ export default class MainView extends Component<State, Props> {
     ) as HTMLInputElement;
 
     const newHistory: IHistory = {
-      date: $dateInput.value,
+      date: `${this.date.year}-${this.date.month}-${this.date.day}`,
       type: 0,
       category: $categoryInput.value,
       content: $contentInput.value,
@@ -178,7 +175,6 @@ export default class MainView extends Component<State, Props> {
 
     this.model.addHistory(newHistory);
 
-    $dateInput.value = '';
     $categoryInput.value = '';
     $contentInput.value = '';
     $paymentInput.value = '';
@@ -236,7 +232,6 @@ export default class MainView extends Component<State, Props> {
   }
 
   checkValidated(): void {
-    const { date, category, content, payment, price } = this.validation;
     const submitBtn = this.$target.querySelector(
       '#main-input-submit'
     ) as HTMLElement;
