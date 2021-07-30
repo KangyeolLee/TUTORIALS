@@ -26,6 +26,7 @@ export default class Main extends Component<IMainState, Props> {
   dateModel!: TodayModelType;
 
   setup() {
+    this.classIDF = 'Main';
     // main 모델(history) 구독
     this.mainModel = MainModel;
     this.mainModel.subscribe(this.mainModel.key, this);

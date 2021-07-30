@@ -26,7 +26,7 @@ export default class Observable {
 
   async notify(key: string, data: any): Promise<curType> {
     return this._observers[key].map((observer: any) => ({
-      name: observer.constructor.name,
+      name: observer.classIDF,
       observer,
       data,
     }));

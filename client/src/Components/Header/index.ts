@@ -13,6 +13,7 @@ export default class Header extends Component<DateState, Props> {
   mainModel!: MainModelType;
 
   setup() {
+    this.classIDF = 'Header';
     // main 모델(history) 구독
     this.mainModel = MainModel;
     this.mainModel.subscribe(this.mainModel.key, this);
@@ -26,7 +27,7 @@ export default class Header extends Component<DateState, Props> {
   }
 
   template() {
-    console.log(this.$state);
+    console.log('date : ', this.$state?.today);
     const { year, month } = this.$state!.today;
 
     return html`

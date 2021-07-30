@@ -18,6 +18,7 @@ export default class MainView extends Component<State, Props> {
   };
 
   setup() {
+    this.classIDF = 'MainView';
     this.model = MainModel;
     this.date = {
       year: new Date().getFullYear(),
