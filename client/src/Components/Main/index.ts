@@ -5,7 +5,7 @@ import {
   Props,
   State,
   Today,
-  TodayModel,
+  TodayModelType,
   HistoryType,
 } from '@/utils/types';
 import { addComma, html } from '@/utils/helper';
@@ -23,7 +23,7 @@ interface IMainState extends State {
 
 export default class Main extends Component<IMainState, Props> {
   mainModel!: MainModelType;
-  dateModel!: TodayModel;
+  dateModel!: TodayModelType;
 
   setup() {
     // main 모델(history) 구독
