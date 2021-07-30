@@ -22,7 +22,7 @@ export class UserCategoryRepository extends Repository<UserCategory> {
     userId,
     categoryId,
     color,
-  }: UserCategoryType): Promise<InsertResult | undefined> {
+  }: UserCategoryType): Promise<InsertResult> {
     const result = this.create({
       user: { id: userId },
       category: { id: categoryId },
@@ -41,7 +41,7 @@ export class UserCategoryRepository extends Repository<UserCategory> {
 
 @EntityRepository(Category)
 export class CategoryRepository extends Repository<Category> {
-  createCategoryForUser(type: string): Promise<InsertResult | undefined> {
+  createCategoryForUser(type: string): Promise<InsertResult> {
     const result = this.create({ type });
     return this.insert(result);
   }

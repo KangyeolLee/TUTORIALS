@@ -28,7 +28,7 @@ class CategoryService {
       ).createCategoryForUser(type);
       const {
         raw: { insertId: categoryId },
-      }: ResultRawType = category!;
+      }: ResultRawType = category;
 
       const result = await getCustomRepository(
         UserCategoryRepository
