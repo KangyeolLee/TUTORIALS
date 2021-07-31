@@ -1,8 +1,12 @@
 import { ClassElement } from 'typescript';
 import { accType, curType } from './types';
 
-export const html = (str: TemplateStringsArray, ...args: unknown[]) =>
-  str.map((s, i) => `${s}${args[i] || ''}`).join('');
+export const html = (str: TemplateStringsArray, ...args: unknown[]) => {
+  const resultHTML = str.map((s, i) => `${s}${args[i] || ''}`).join('');
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(resultHTML, 'text/html');
+  return doc.body;
+};
 
 export const customEventEmitter = (eventType: string, detail?: object) => {
   document.dispatchEvent(
