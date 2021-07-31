@@ -46,22 +46,20 @@ export default class Main extends Component<IMainState, Props> {
   template() {
     const { expense, income } = this.$state!.historyType;
 
-    return html`
+    const test = html`
       <section class="main-history-total">
         <div>전체 내역 <span class="history-total-num"></span>건</div>
         <div class="history-selectors">
           <button
-            class="history-select-btn"
+            class="history-select-btn ${income && 'active'}"
             id="history-select-income"
-            ${income ? 'active' : ''}
           >
             ${svgIcons.checkSmall}
           </button>
           <span class="text">수입 <span class="income-sum"></span></span>
           <button
-            class="history-select-btn"
+            class="history-select-btn ${expense && 'active'}"
             id="history-select-expense"
-            ${expense ? 'active' : ''}
           >
             ${svgIcons.checkSmall}
           </button>
@@ -70,6 +68,7 @@ export default class Main extends Component<IMainState, Props> {
       </section>
       <ul class="day-card-list"></ul>
     `;
+    return test;
   }
 
   mounted() {

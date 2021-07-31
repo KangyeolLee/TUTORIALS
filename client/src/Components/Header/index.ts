@@ -27,7 +27,6 @@ export default class Header extends Component<DateState, Props> {
   }
 
   template() {
-    console.log('date : ', this.$state?.today);
     const { year, month } = this.$state!.today;
 
     return html`
@@ -51,24 +50,6 @@ export default class Header extends Component<DateState, Props> {
   }
 
   mounted() {
-    const $main = this.$target.querySelector('#menu-main') as HTMLElement;
-    const $calendar = this.$target.querySelector(
-      '#menu-calendar'
-    ) as HTMLElement;
-    const $chart = this.$target.querySelector('#menu-chart') as HTMLElement;
-
-    $main.addEventListener('click', () => {
-      $router.push('/main');
-      this.changeMenu();
-    });
-    $calendar.addEventListener('click', () => {
-      $router.push('/calendar');
-      this.changeMenu();
-    });
-    $chart.addEventListener('click', () => {
-      $router.push('/charts');
-      this.changeMenu();
-    });
     this.changeMenu();
   }
 
@@ -97,9 +78,22 @@ export default class Header extends Component<DateState, Props> {
       '#btn-next-month',
       this.handleClickNextBtn.bind(this)
     );
+    this.addEvent('click', '#menu-main', () => {
+      $router.push('/main');
+      this.changeMenu();
+    });
+    this.addEvent('click', '#menu-calendar', () => {
+      $router.push('/calendar');
+      this.changeMenu();
+    });
+    this.addEvent('click', '#menu-chart', () => {
+      $router.push('/charts');
+      this.changeMenu();
+    });
   }
 
   removeEvent() {}
+  resetEvent() {}
 
   changeMenu() {
     const path = history.state.path as string;
