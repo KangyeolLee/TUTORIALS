@@ -1,4 +1,5 @@
 import { EventListener, Props, State } from '@/utils/types';
+import { diffing } from '@/Core/diffing';
 
 export default class Component<S extends State, P extends Props> {
   $target: HTMLElement;
@@ -21,8 +22,8 @@ export default class Component<S extends State, P extends Props> {
 
   setup() {}
 
-  template() {
-    return ``;
+  template(): HTMLElement {
+    throw new Error('[WARNING✌] template 메서드를 정의하셔야 합니다.');
   }
 
   setEvent() {}
@@ -34,6 +35,7 @@ export default class Component<S extends State, P extends Props> {
       () => {
         this.removeEvent();
         this.setUnmount();
+        this.$target.innerHTML = '';
       },
       {
         once: true,
@@ -57,7 +59,6 @@ export default class Component<S extends State, P extends Props> {
 
   // addEvent를 통해 등록된 이벤트 리스트를 모두 초기화하는 메서드
   removeEvent() {
-    console.log('will be deleted : ', this.eventlisteners);
     this.eventlisteners.forEach(({ type, listener }) => {
       this.$target.removeEventListener(type, listener);
     });
@@ -71,11 +72,7 @@ export default class Component<S extends State, P extends Props> {
 
   render() {
     const template = this.template();
-
-    if (template) {
-      this.$target.innerHTML = template;
-    }
-
+    diffing(template, this.$target);
     this.mounted();
   }
 

@@ -2,14 +2,14 @@ import { isClass, customEventEmitter } from '@/utils/helper';
 import { Route, RouterType } from '@/utils/types';
 
 class Router {
-  $app: HTMLElement;
+  $root: HTMLElement;
   routes: {
     [key: string]: Route;
   } = {};
   fallback: string;
 
-  constructor({ $app, routes, fallback = '/' }: RouterType) {
-    this.$app = $app;
+  constructor({ $root, routes, fallback = '/' }: RouterType) {
+    this.$root = $root;
     this.fallback = fallback;
     this.generateRoutes(routes);
     this.initEvent();
@@ -76,7 +76,7 @@ class Router {
 
     const component = this.getComponent(route);
     if (component && isClass(component)) {
-      new component(this.$app, detail);
+      new component(this.$root, detail);
     } else {
       throw new Error('[라우터 에러] 유효한 형식의 라우터가 아닙니다.');
     }
@@ -86,8 +86,6 @@ class Router {
     const { path } = history.state ?? { path: '/main' };
 
     customEventEmitter('componentWillUnmount');
-
-    console.log('해당 컴포넌트는 언마운트 될겁니다...: ', path);
   }
 
   push(path: string) {

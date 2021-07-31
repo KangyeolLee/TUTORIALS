@@ -17,7 +17,6 @@ class MainModel extends Observable {
   }
 
   getHistoryCard(today: Today) {
-    console.log(today);
     this.filterHistoryCardsByMonth(today);
     return this.notify(this.key, { historyCards: this.historyCards });
   }

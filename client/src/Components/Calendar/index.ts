@@ -6,7 +6,6 @@ import {
   TodayModelType,
   MainModelType,
   CalendarState,
-  HistoryType,
 } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
 import MainModel from '@/Model/MainModel';
@@ -51,12 +50,9 @@ export default class Calendar extends Component<CalendarState, Props> {
     };
 
     asyncSetState(this.mainModel.getHistoryCard(this.$state!.today));
-
-    console.log(this.$state);
   }
 
   template() {
-    console.log('아마 2번일걸?');
     return html`
       <table class="calendar-table">
         <tbody class="calendar-tbody"></tbody>
@@ -64,13 +60,6 @@ export default class Calendar extends Component<CalendarState, Props> {
     `;
   }
 
-  /**
-   * histories[i] = {
-   *    income: ...,
-   *    outcome: ...,
-   *    amount: ...,
-   * }
-   */
   filterHistories() {
     const histories: { [key: string]: HistoryTypeForDate } = {};
     const { historyCards } = this.$state!;
@@ -137,7 +126,7 @@ export default class Calendar extends Component<CalendarState, Props> {
             <div class="day">${date}</div>
           `;
 
-    return innerContent;
+    return innerContent.outerHTML;
   }
 
   // 데이터 연동이 되는 시점에서 내부 로직을 조금 분리할 계획입니다..!
