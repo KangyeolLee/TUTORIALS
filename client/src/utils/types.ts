@@ -25,7 +25,7 @@ export type subscribeType = {
  * Router 관련 타입
  */
 export type RouterType = {
-  $app: HTMLElement;
+  $root: HTMLElement;
   routes: Route[];
   fallback?: string;
 };
@@ -130,4 +130,14 @@ export type accType = {
     observer: any;
     data: any;
   };
+};
+
+/**
+ * @example
+ * Diffing 데이터 관련 타입
+ */
+export type DiffingNodesType = {
+  $old?: HTMLElement | DocumentFragment;
+  node: HTMLElement;
+  $oldNode: HTMLElement;
 };
