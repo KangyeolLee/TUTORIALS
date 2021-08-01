@@ -1,14 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
+import { Container } from 'typedi';
 import paymentServices from '../services/payment.services';
 import { ResultRawType } from '../types/types';
 import { getPayload } from '../utils/getPayload';
+
+const PaymentServices = Container.get(paymentServices);
 
 class PaymentController {
   async findPayments(req: Request, res: Response, next: NextFunction) {
     try {
       // userId 로그인 세션에서 가져와야 함!!
       const userId = getPayload(req);
-      const payments = await paymentServices.findPayments(userId);
+      const payments = await PaymentServices.findPayments(userId);
 
       return res.status(200).json({
         payments,
@@ -24,7 +27,7 @@ class PaymentController {
       // userId 로그인 세션에서 가져와야 함!!
       const userId = getPayload(req);
       const { type } = req.body;
-      const result = await paymentServices.createPayment({ userId, type });
+      const result = await PaymentServices.createPayment({ userId, type });
       const {
         raw: { insertId },
       }: ResultRawType = result!;
@@ -44,7 +47,7 @@ class PaymentController {
       const userId = getPayload(req);
       // 선택한 카테고리의 고유 id 값을 의미
       const { paymentId } = req.params;
-      const result = await paymentServices.deleteUserPaymentByUserId({
+      const result = await PaymentServices.deleteUserPaymentByUserId({
         userId,
         id: +paymentId,
       });

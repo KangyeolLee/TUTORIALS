@@ -1,13 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
+import { Container } from 'typedi';
 import categoryServices from '../services/category.services';
 import { ResultRawType } from '../types/types';
 import { getPayload } from './../utils/getPayload';
+
+const CategoryServices = Container.get(categoryServices);
 
 class CategoryController {
   async findCategories(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = getPayload(req);
-      const categories = await categoryServices.findCategories(userId);
+      const categories = await CategoryServices.findCategories(userId);
 
       return res.status(200).json({
         categories,
@@ -22,7 +25,7 @@ class CategoryController {
     try {
       const userId = getPayload(req);
       const { type, color } = req.body;
-      const result = await categoryServices.createCategory({
+      const result = await CategoryServices.createCategory({
         userId,
         type,
         color,
@@ -45,7 +48,7 @@ class CategoryController {
     try {
       const userId = getPayload(req);
       const { categoryId } = req.params;
-      const result = await categoryServices.deleteUserCategoryByUserId({
+      const result = await CategoryServices.deleteUserCategoryByUserId({
         userId,
         id: +categoryId,
       });

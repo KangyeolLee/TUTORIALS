@@ -1,9 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import qs from 'qs';
-import UserService from './../services/user.services';
-import TokenService from '../services/token.services';
+import userService from './../services/user.services';
+import tokenService from '../services/token.services';
 import config from '../config';
 import { ResultRawType, UserProfile } from '../types/types';
+import { Container } from 'typedi';
+
+const UserServices = Container.get(userService);
+const TokenServices = Container.get(tokenService);
 
 const GITHUB_AUTHORIZE = 'https://github.com/login/oauth/authorize?';
 
@@ -28,19 +32,18 @@ class UserController {
   async login(req: Request, res: Response, next: NextFunction) {
     try {
       const { code } = req.query;
-      const accessToken: string = await UserService.getAccessToken(
+      const accessToken: string = await UserServices.getAccessToken(
         code as string
       );
-      const userProfile: UserProfile = await UserService.getUserProfile(
+      const userProfile: UserProfile = await UserServices.getUserProfile(
         accessToken
       );
 
-      // 분리할 수 있다면 Service 계층으로 이동 : UserService.checkUserProfile(userProfile.login)
       let userId: number;
-      const user = await UserService.findUserByGithubUser(userProfile.login);
+      const user = await UserServices.findUserByGithubUser(userProfile.login);
 
       if (!user) {
-        const result = await UserService.createUserByGithubUser(
+        const result = await UserServices.createUserByGithubUser(
           userProfile.login
         );
         const {
@@ -52,7 +55,7 @@ class UserController {
       }
 
       // userId로 토큰 생성
-      const { access, refresh } = await TokenService.issueToken(userId);
+      const { access, refresh } = await TokenServices.issueToken(userId);
 
       res.append('Set-Cookie', `accessToken=${access}; Path=/; HttpOnly;`);
       res.append(
