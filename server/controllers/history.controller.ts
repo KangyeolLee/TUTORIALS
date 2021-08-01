@@ -15,7 +15,7 @@ class HistoryController {
         .json({ ok: true, message: '내역이 조회되었습니다.', historyList })
         .status(200);
     } catch (error) {
-      next(error);
+      res.json({ ok: false, message: '내역 조회에 실패했습니다.' }).status(200);
     }
   }
 
@@ -29,14 +29,14 @@ class HistoryController {
         .json({ ok: true, message: '내역이 추가되었습니다.', historyId })
         .status(200);
     } catch (error) {
-      next(error);
+      res.json({ ok: false, message: '내역 추가에 실패했습니다.' }).status(200);
     }
   }
 
   // history 수정
   async updateHistory(req: Request, res: Response, next: NextFunction) {
     try {
-      const historyId = parseInt(req.params.historyId);
+      const historyId = +req.params.historyId;
       const { history } = req.body;
       await HistoryService.updateHistory(historyId, history);
 
@@ -44,19 +44,19 @@ class HistoryController {
         .json({ ok: true, message: '내역이 수정되었습니다.', historyId })
         .status(200);
     } catch (error) {
-      next(error);
+      res.json({ ok: false, message: '내역 수정에 실패했습니다.' }).status(200);
     }
   }
 
   // history 삭제
   async deleteHistory(req: Request, res: Response, next: NextFunction) {
     try {
-      const historyId = parseInt(req.params.historyId);
+      const historyId = +req.params.historyId;
       await HistoryService.deleteHistory(historyId);
 
       res.json({ ok: true, message: '내역이 삭제되었습니다.' }).status(200);
     } catch (error) {
-      next(error);
+      res.json({ ok: false, message: '내역 삭제에 실패했습니다.' }).status(200);
     }
   }
 }
