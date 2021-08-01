@@ -4,10 +4,13 @@ import {
   Column,
   CreateDateColumn,
   OneToMany,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import History from './History';
 import UserPayment from './UserPayment';
 import UserCategory from './UserCategory';
+import RefreshToken from './RefreshToken';
 
 @Entity('user')
 export default class User {
@@ -16,9 +19,6 @@ export default class User {
 
   @Column({ type: 'varchar', length: 255 })
   email!: string;
-
-  @Column({ type: 'varchar', length: 300 })
-  token!: string;
 
   @CreateDateColumn({ type: 'datetime', default: () => '(CURRENT_DATE)' })
   createdAt!: Date;
@@ -31,4 +31,7 @@ export default class User {
 
   @OneToMany(() => UserCategory, (userCategory) => userCategory.user)
   userCategory!: UserCategory[];
+
+  @OneToOne(() => RefreshToken, (refreshToken) => refreshToken.user)
+  token!: RefreshToken;
 }
