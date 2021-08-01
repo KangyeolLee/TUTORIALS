@@ -11,13 +11,10 @@ import History from '../entities/History';
 @EntityRepository(History)
 export default class HistoryRepository extends Repository<History> {
   getHistoryByMonth(id: number, date: string) {
-    return (
-      this.createQueryBuilder()
-        // .select(`date_format(createdAt, '%Y-%m')`)
-        .where('userId=:id', { id })
-        .andWhere(`date_format(createdAt, '%Y-%m')=:date`, { date })
-        .getMany()
-    );
+    return this.createQueryBuilder()
+      .where('userId=:id', { id })
+      .andWhere(`date_format(createdAt, '%Y-%m')=:date`, { date })
+      .getMany();
   }
 
   insertHistory(history: HistoryType): Promise<InsertResult> {
