@@ -1,3 +1,4 @@
+import { Service } from 'typedi';
 import { getCustomRepository } from 'typeorm';
 import {
   PaymentRepository,
@@ -9,7 +10,8 @@ import {
   UserPaymentForRemoval,
 } from '../types/types';
 
-class PaymentService {
+@Service()
+export default class PaymentService {
   async findPayments(userId: number) {
     try {
       const payments = await getCustomRepository(
@@ -52,5 +54,3 @@ class PaymentService {
     }
   }
 }
-
-export default new PaymentService();

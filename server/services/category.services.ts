@@ -1,3 +1,4 @@
+import { Service } from 'typedi';
 import { getCustomRepository } from 'typeorm';
 import {
   CategoryRepository,
@@ -9,7 +10,8 @@ import {
   UserCategoryForRemoval,
 } from '../types/types';
 
-class CategoryService {
+@Service()
+export default class CategoryService {
   async findCategories(userId: number) {
     try {
       const categories = await getCustomRepository(
@@ -52,5 +54,3 @@ class CategoryService {
     }
   }
 }
-
-export default new CategoryService();

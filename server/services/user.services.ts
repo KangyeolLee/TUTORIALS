@@ -4,14 +4,13 @@ import fetch from 'node-fetch';
 import config from '../config';
 import { UserProfile } from '../types/types';
 import User from '../entities/User';
+import { Service } from 'typedi';
 
 const GITHUB_ACCESS_TOKEN = 'https://github.com/login/oauth/access_token';
 const GITHUB_USER = 'https://api.github.com/user';
 
-class UserService {
-  // typedi를 이용한 디펜던시 인젝션을 해볼까...합니다(?)
-  // constructor() {}
-
+@Service()
+export default class UserService {
   async findUserByGithubUser(githubUser: string): Promise<User | undefined> {
     try {
       const user = await getCustomRepository(UserRepository).findByGithubUser(
@@ -79,5 +78,3 @@ class UserService {
     }
   }
 }
-
-export default new UserService();
