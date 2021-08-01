@@ -18,7 +18,7 @@ export default class User {
   id!: number;
 
   @Column({ type: 'varchar', length: 255 })
-  email!: string;
+  githubUser!: string;
 
   @CreateDateColumn({ type: 'datetime', default: () => '(CURRENT_DATE)' })
   createdAt!: Date;
