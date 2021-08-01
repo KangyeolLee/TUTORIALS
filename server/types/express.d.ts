@@ -1,9 +1,10 @@
-// export {}
+import { Payload } from './types';
 
-// declare global {
-//   namespace Express {
-//     interface Request {
-//       user?: import()
-//     }
-//   }
-// }
+declare global {
+  // eslint-disable-next-line no-unused-vars
+  namespace Express {
+    export interface Request {
+      payload: Payload;
+    }
+  }
+}

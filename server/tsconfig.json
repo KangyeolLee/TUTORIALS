@@ -13,6 +13,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["es2020"],
-    "typeRoots": ["./node_modules/@types", "./types/express.d.ts"]
-  }
+    "typeRoots": ["./types/express.d.ts", "./node_modules/@types"]
+  },
+  "include": ["./**/*"],
+  "exclude": ["node_modules"],
+  "files": ["types/express.d.ts"]
 }

@@ -15,5 +15,8 @@ export default {
   dbPW: process.env.DB_PASSWORD,
   dbName: process.env.DATABASE,
   api: process.env.API_BASE as string,
-  jwtSecret: process.env.JWT_SECRET,
+  jwtSecret: process.env.JWT_SECRET as string,
+  GithubClient: process.env.GITHUB_CLIENT_ID,
+  GithubSecrets: process.env.GITHUB_SECRETS,
+  RedirectUrl: process.env.REDIRECT_URL,
 };
