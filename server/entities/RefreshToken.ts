@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-  PrimaryColumn,
-} from 'typeorm';
+import { Column, Entity, OneToOne, JoinColumn } from 'typeorm';
 import User from './User';
 
 @Entity('refresh_token')
