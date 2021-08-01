@@ -6,38 +6,8 @@ const router = Router();
 export default (app: Router) => {
   app.use('/histories', router);
 
-  router.get(`/`, (req: Request, res: Response, next: NextFunction) => {
-    return res
-      .json({
-        message: 'ok',
-        ok: true,
-      })
-      .status(200);
-  });
-
+  router.get(`/`, historyController.selectHistory);
   router.post(`/`, historyController.insertHistory);
-
-  router.put(
-    `/:historyId`,
-    (req: Request, res: Response, next: NextFunction) => {
-      return res
-        .json({
-          message: 'ok',
-          ok: true,
-        })
-        .status(200);
-    }
-  );
-
-  router.delete(
-    `/:hisotryId`,
-    (req: Request, res: Response, next: NextFunction) => {
-      return res
-        .json({
-          message: 'ok',
-          ok: true,
-        })
-        .status(200);
-    }
-  );
+  router.put(`/:historyId`, historyController.updateHistory);
+  router.delete(`/:historyId`, historyController.deleteHistory);
 };
