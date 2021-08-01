@@ -43,3 +43,18 @@ export type UserCategoryForRemoval = {
   userId: number;
   id: number;
 };
+
+export type UserProfile = {
+  login: string;
+  avatar_url?: string;
+  gravatar_id?: string;
+  name?: string;
+  email?: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type Payload = {
+  ok: boolean;
+  id: number;
+};
