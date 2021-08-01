@@ -61,9 +61,6 @@ module.exports = {
     historyApiFallback: true,
     contentBase: path.join(__dirname, 'dist'),
     publicPath: '/',
-    proxy: {
-      '/api': 'http://localhost:3000',
-    },
   },
   resolve: {
     modules: ['node_modules'],
