@@ -16,7 +16,7 @@ class HistoryService {
         date
       );
     } catch (error) {
-      throw new Error('[카테고리 쿼리 에러] ' + error);
+      throw new Error('[history 쿼리 에러] ' + error);
     }
   }
 
@@ -29,7 +29,7 @@ class HistoryService {
 
       return historyId;
     } catch (error) {
-      throw new Error('[카테고리 쿼리 에러] ' + error);
+      throw new Error('[history 쿼리 에러] ' + error);
     }
   }
 
@@ -45,7 +45,20 @@ class HistoryService {
 
       return historyId;
     } catch (error) {
-      throw new Error('[카테고리 쿼리 에러] ' + error);
+      throw new Error('[history 쿼리 에러] ' + error);
+    }
+  }
+
+  async deleteHistory(historyId: number): Promise<number> {
+    try {
+      const result = await getCustomRepository(
+        HistoryRepository
+      ).deleteHistoryById(historyId);
+      console.log(result);
+
+      return historyId;
+    } catch (error) {
+      throw new Error('[history 쿼리 에러] ' + error);
     }
   }
 }

@@ -1,4 +1,5 @@
 import {
+  DeleteResult,
   EntityRepository,
   InsertResult,
   Repository,
@@ -34,5 +35,9 @@ export default class HistoryRepository extends Repository<History> {
 
   updateHistoryById(id: number, history: HistoryType): Promise<UpdateResult> {
     return this.update(id, history);
+  }
+
+  deleteHistoryById(id: number): Promise<DeleteResult> {
+    return this.delete(id);
   }
 }

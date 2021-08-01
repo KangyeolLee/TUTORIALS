@@ -47,6 +47,18 @@ class HistoryController {
       next(error);
     }
   }
+
+  // history 삭제
+  async deleteHistory(req: Request, res: Response, next: NextFunction) {
+    try {
+      const historyId = parseInt(req.params.historyId);
+      await HistoryService.deleteHistory(historyId);
+
+      res.json({ ok: true, message: '내역이 삭제되었습니다.' }).status(200);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new HistoryController();
