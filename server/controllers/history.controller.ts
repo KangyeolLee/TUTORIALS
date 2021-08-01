@@ -5,17 +5,20 @@ class HistoryController {
   //  history 조회
   async selectHistory(req: Request, res: Response, next: NextFunction) {
     try {
-      const year = req.query.year as string;
-      const month = req.query.month as string;
-      const id: number = req.body.id;
+      const { year, month } = req.query;
+      if (typeof year !== 'string' || typeof month !== 'string')
+        throw new Error('year과 month가 유효하지 않습니다.');
 
+      const id: number = req.body.id;
       const historyList = await HistoryService.selectHistory(id, year, month);
 
       res
         .json({ ok: true, message: '내역이 조회되었습니다.', historyList })
         .status(200);
     } catch (error) {
-      res.json({ ok: false, message: '내역 조회에 실패했습니다.' }).status(200);
+      res
+        .json({ ok: false, message: '내역 조회에 실패했습니다.', error })
+        .status(200);
     }
   }
 
