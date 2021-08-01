@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import categoryServices from '../services/category.services';
-import { ResultRawType } from '../types/types';
-import { getPayload } from './../utils/getPayload';
+import { extractInsertId, getPayload } from '../utils/helper';
 
 class CategoryController {
   async findCategories(req: Request, res: Response, next: NextFunction) {
@@ -27,9 +26,7 @@ class CategoryController {
         type,
         color,
       });
-      const {
-        raw: { insertId },
-      }: ResultRawType = result!;
+      const insertId = extractInsertId(result);
 
       return res.status(200).json({
         insertId,
