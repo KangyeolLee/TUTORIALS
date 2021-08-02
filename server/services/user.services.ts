@@ -6,9 +6,6 @@ import { UserProfile } from '../types/types';
 import User from '../entities/User';
 import { Service } from 'typedi';
 
-const GITHUB_ACCESS_TOKEN = 'https://github.com/login/oauth/access_token';
-const GITHUB_USER = 'https://api.github.com/user';
-
 @Service()
 export default class UserService {
   async findUserByGithubUser(githubUser: string): Promise<User | undefined> {
@@ -33,25 +30,33 @@ export default class UserService {
     }
   }
 
+  async checkUserAlreadyExist(
+    userProfile: UserProfile,
+    user: User | undefined
+  ) {
+    try {
+      let userId: number;
+
+      if (!user) {
+        const result = await this.createUserByGithubUser(userProfile.login);
+        userId = extractInsertId(result);
+      } else {
+        userId = user.id;
+      }
+
+      return userId;
+    } catch (error) {
+      throw new Error('[유저체크에러]' + error);
+    }
+  }
+
   async getAccessToken(code: string): Promise<string> {
     try {
-      // option은 나중에 어딘가 숨겨도 될 거 가타요~~
-      const option = {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          client_id: config.GithubClient,
-          client_secret: config.GithubSecrets,
-          code,
-        }),
-      };
-      //--------------------------------------------
-      const accessTokenResponse = await fetch(GITHUB_ACCESS_TOKEN, option).then(
-        (res) => res.json()
-      );
+      const option = config.gitAccessOption(code);
+      const accessTokenResponse = await fetch(
+        config.GithubAccessToken,
+        option
+      ).then((res) => res.json());
       return accessTokenResponse.access_token;
     } catch (error) {
       throw new Error('[GITHUB 토큰에러]' + error);
@@ -60,16 +65,8 @@ export default class UserService {
 
   async getUserProfile(token: string): Promise<UserProfile> {
     try {
-      const option = {
-        method: 'get',
-        headers: {
-          'Accept': 'Application/json',
-          'Authorization': `token ${token}`,
-          'X-OAuth-Scopes': 'user',
-          'X-Accepted-OAuth-Scopes': 'user',
-        },
-      };
-      const userProfile = await fetch(GITHUB_USER, option).then((res) =>
+      const option = config.gitUserOption(token);
+      const userProfile = await fetch(config.GithubUser, option).then((res) =>
         res.json()
       );
       return userProfile;

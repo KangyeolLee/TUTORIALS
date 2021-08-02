@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { Container } from 'typedi';
 import categoryServices from '../services/category.services';
-import { ResultRawType } from '../types/types';
-import { getPayload } from './../utils/getPayload';
+import { extractInsertId, getPayload } from '../utils/helper';
 
 const CategoryServices = Container.get(categoryServices);
 
@@ -30,9 +29,7 @@ class CategoryController {
         type,
         color,
       });
-      const {
-        raw: { insertId },
-      }: ResultRawType = result!;
+      const insertId = extractInsertId(result);
 
       return res.status(200).json({
         insertId,
