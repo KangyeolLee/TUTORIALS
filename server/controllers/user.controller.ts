@@ -27,9 +27,8 @@ class UserController {
       const accessToken: string = await UserServices.getAccessToken(
         code as string
       );
-      const userProfile: UserProfile = await UserServices.getUserProfile(
-        accessToken
-      );
+      const userProfile: UserProfile =
+        await UserServices.getUserProfileFromGithub(accessToken);
 
       const user = await UserServices.findUserByGithubUser(userProfile.login);
       const userId = await UserServices.checkUserAlreadyExist(
@@ -63,11 +62,10 @@ class UserController {
   async getUserInfo(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.payload;
-      console.log(req.payload);
-
+      const user = await UserServices.getUserProfile(id);
       return res.status(200).json({
         ok: true,
-        id,
+        user,
       });
     } catch (error) {
       next(error);
