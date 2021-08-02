@@ -112,19 +112,19 @@ export default class HistoryDayCard extends Component<
     }
 
     // 해당 월의 history 추출
-    const historyDates = historyList.map((history) => history.date);
+    const historyDates = historyList.map((history) => history.createAt);
     // 카드를 생성할 날짜를 중복 제거한 후 배열로 저장
     const dates = Array.from(new Set(historyDates)).sort().reverse();
 
     const histories = historyList.reduce(
       (acc: Record<string, IHistory[]>, history) => {
-        if (!acc[history.date]) {
-          acc[history.date] = [];
-          acc[history.date].push(history);
+        if (!acc[history.createAt]) {
+          acc[history.createAt] = [];
+          acc[history.createAt].push(history);
           return acc;
         }
 
-        acc[history.date].push(history);
+        acc[history.createAt].push(history);
         return acc;
       },
       {}

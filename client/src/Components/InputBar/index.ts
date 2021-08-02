@@ -157,12 +157,13 @@ export default class InputBar extends Component<State, Props> {
     ) as HTMLInputElement;
 
     const newHistory: IHistory = {
-      date: `${this.date.year}-${this.date.month}-${this.date.day}`,
+      createAt: `${this.date.year}-${this.date.month}-${this.date.day}`,
       type: 0,
       category: $categoryInput.value,
       content: $contentInput.value,
       payment: $paymentInput.value,
       price: parseInt($priceInput.value.replace(/,/g, '')),
+      id: (Math.random() * 10) >> 0,
     };
 
     asyncSetState(this.model.addHistory(newHistory));

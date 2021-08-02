@@ -111,12 +111,13 @@ export type PriceAmountType = {
  * history 리스트 타입
  */
 export interface IHistory {
-  date: string;
+  createAt: string;
   type: number;
   category: string;
   content: string;
   payment: string;
   price: number;
+  id: number;
 }
 
 export interface IValidationType {
