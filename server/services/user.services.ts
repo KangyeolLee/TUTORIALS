@@ -5,6 +5,7 @@ import config from '../config';
 import { UserProfile } from '../types/types';
 import User from '../entities/User';
 import { Service } from 'typedi';
+import { extractInsertId } from '../utils/helper';
 
 @Service()
 export default class UserService {
