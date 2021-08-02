@@ -5,14 +5,14 @@ import { svgIcons } from '@/assets/svgIcons';
 import {
   Props,
   State,
-  MainModelType,
+  HistoryModelType,
   IValidationType,
   IHistory,
 } from '@/utils/types';
 import HistoryModel from '@/Model/HistoryModel';
 
 export default class InputBar extends Component<State, Props> {
-  model!: MainModelType;
+  model!: HistoryModelType;
   inputCondition: boolean[] = new Array();
   validation!: IValidationType;
   date!: {

@@ -1,11 +1,11 @@
 import './styles';
 import Component from '@/Core/Component';
-import { Props, State, MainModelType } from '@/utils/types';
+import { Props, State, HistoryModelType } from '@/utils/types';
 import { html, addComma } from '@/utils/helper';
 import HistoryModel from '@/Model/HistoryModel';
 
 export default class PriceBar extends Component<State, Props> {
-  model!: MainModelType;
+  model!: HistoryModelType;
 
   setup() {
     this.classIDF = 'PriceBar';

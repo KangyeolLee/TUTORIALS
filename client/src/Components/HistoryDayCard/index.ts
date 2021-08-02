@@ -4,7 +4,7 @@ import {
   HistoryType,
   IHistory,
   IHistoryDayCardProps,
-  MainModelType,
+  HistoryModelType,
   Props,
   State,
   Today,
@@ -26,7 +26,7 @@ export default class HistoryDayCard extends Component<
   IListStates,
   IHistoryDayCardProps
 > {
-  historyModel!: MainModelType;
+  historyModel!: HistoryModelType;
   dateModel!: TodayModelType;
 
   setup() {

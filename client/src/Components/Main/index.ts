@@ -1,6 +1,12 @@
 import Component from '@/Core/Component';
 import './styles';
-import { MainModelType, Props, State, Today, HistoryType } from '@/utils/types';
+import {
+  HistoryModelType,
+  Props,
+  State,
+  Today,
+  HistoryType,
+} from '@/utils/types';
 import { asyncSetState, html } from '@/utils/helper';
 import HistoryModel from '@/Model/HistoryModel';
 import { IHistory } from '@/utils/types';
@@ -14,7 +20,7 @@ interface IMainState extends State {
 }
 
 export default class Main extends Component<IMainState, Props> {
-  historyModel!: MainModelType;
+  historyModel!: HistoryModelType;
 
   setup() {
     this.historyModel = HistoryModel;

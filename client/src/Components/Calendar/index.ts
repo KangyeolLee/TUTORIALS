@@ -4,7 +4,7 @@ import { html, addComma, asyncSetState } from '@/utils/helper';
 import {
   Props,
   TodayModelType,
-  MainModelType,
+  HistoryModelType,
   CalendarState,
   CalendarControllerType,
 } from '@/utils/types';
@@ -14,7 +14,7 @@ import CalendarController from '@/Controller/CalendarController';
 
 export default class Calendar extends Component<CalendarState, Props> {
   todayModel!: TodayModelType;
-  mainModel!: MainModelType;
+  mainModel!: HistoryModelType;
   calendarController!: CalendarControllerType;
 
   setup() {

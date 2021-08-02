@@ -3,7 +3,7 @@ import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import { $router } from '@/Core/Router';
 import { svgIcons } from '@/assets/svgIcons';
-import { MainModelType, Props, TodayModelType } from '@/utils/types';
+import { HistoryModelType, Props, TodayModelType } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
 import { DateState } from '@/utils/types';
 import HeaderController from '@/Controller/HeaderController';
@@ -11,7 +11,7 @@ import HeaderController from '@/Controller/HeaderController';
 export default class Header extends Component<DateState, Props> {
   dateModel!: TodayModelType;
   headerController!: any;
-  mainModel!: MainModelType;
+  mainModel!: HistoryModelType;
 
   setup() {
     this.classIDF = 'Header';

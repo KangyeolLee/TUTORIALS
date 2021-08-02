@@ -1,3 +1,4 @@
+import { getHistories } from '@/api/history';
 import { dummyhistories } from '@/assets/dummy';
 import Observable from '@/Core/Observable';
 import { makeDateForm } from '@/utils/helper';
@@ -9,7 +10,7 @@ import {
   PriceAmountType,
 } from '@/utils/types';
 
-class MainModel extends Observable {
+class HistoryModel extends Observable {
   key: string = 'history';
   historyCards: IHistory[];
   historyType: HistoryType;
@@ -29,6 +30,11 @@ class MainModel extends Observable {
       outcome: 0,
     };
     this.historyCardForToday = [];
+  }
+
+  async initState({ year, month }: Today) {
+    const res = await getHistories({ year, month });
+    console.log(res);
   }
 
   getHistoryCard(today: Today) {
@@ -106,4 +112,4 @@ class MainModel extends Observable {
   }
 }
 
-export default new MainModel();
+export default new HistoryModel();
