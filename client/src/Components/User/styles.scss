@@ -1,35 +1,61 @@
 @import '@/scss/theme';
 
-.history-list-item {
-  @include body-regular;
-  display: flex;
-  box-sizing: border-box;
-  border-top: 1px solid $line;
-  padding: 1.5rem 1rem;
-  list-style: none;
-  cursor: pointer;
+.user {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 23rem auto;
+  column-gap: 4rem;
 
-  .history-text {
-    display: grid;
-    flex: 1;
-    grid-template-columns: 2fr 1fr 1fr;
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.9rem;
+    height: fit-content;
 
-    .history-content {
-      color: black;
-    }
-
-    .history-price {
+    .github-user {
       @include bold-large;
       color: black;
-      margin-left: auto;
+    }
+
+    .logout-btn {
+      @include bold-small;
+      cursor: pointer;
+      padding: 0.5rem 1.2rem;
+      background-color: $primary1;
+      border: 0;
+      border-radius: 1rem;
+      color: white;
     }
   }
 
-  &:last-child {
-    border-bottom: 1px solid $line;
-  }
+  .user-payments {
+    padding: 3rem;
 
-  &:hover {
-    background-color: $backgrond;
+    .content-box-title .user-category-title {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .user-payments-icons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      column-gap: 3rem;
+      row-gap: 2.5rem;
+      justify-content: center;
+      align-items: center;
+    }
   }
+}
+
+.content-box {
+  @include content-box;
+  width: auto;
+}
+
+.content-box-title {
+  @include bold-large;
+  font-size: 2rem;
+  color: $title-active;
+  margin-bottom: 3rem;
 }
