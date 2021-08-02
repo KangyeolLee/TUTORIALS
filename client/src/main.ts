@@ -4,6 +4,7 @@ import Header from '@/Components/Header';
 import MainView from '@/View/MainView';
 import CalendarView from '@/View/CalendarView';
 import ChartsView from '@/View/ChartsView';
+import UserView from '@/View/UserView';
 import { Route } from './utils/types';
 
 try {
@@ -14,6 +15,7 @@ try {
     { path: '/main', component: MainView },
     { path: '/calendar', component: CalendarView },
     { path: '/charts', component: ChartsView },
+    { path: '/user', component: UserView },
   ];
 
   function init() {

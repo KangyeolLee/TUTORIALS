@@ -27,7 +27,7 @@ class PaymentController {
       const userId = getPayload(req);
       const { type } = req.body;
 
-      const result = await paymentServices.createPayment({ userId, type });
+      const result = await PaymentServices.createPayment({ userId, type });
       const insertId = extractInsertId(result);
 
       return res.status(200).json({

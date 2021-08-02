@@ -5,6 +5,7 @@ import config from '../config';
 import { UserProfile } from '../types/types';
 import User from '../entities/User';
 import { Service } from 'typedi';
+import { extractInsertId } from '../utils/helper';
 
 @Service()
 export default class UserService {
@@ -63,7 +64,7 @@ export default class UserService {
     }
   }
 
-  async getUserProfile(token: string): Promise<UserProfile> {
+  async getUserProfileFromGithub(token: string): Promise<UserProfile> {
     try {
       const option = config.gitUserOption(token);
       const userProfile = await fetch(config.GithubUser, option).then((res) =>
@@ -72,6 +73,15 @@ export default class UserService {
       return userProfile;
     } catch (error) {
       throw new Error('[GITHUB API에러]' + error);
+    }
+  }
+
+  async getUserProfile(id: number): Promise<User | undefined> {
+    try {
+      const user = await getCustomRepository(UserRepository).findById(id);
+      return user;
+    } catch (error) {
+      throw new Error('[USER 쿼리 에러]' + error);
     }
   }
 }

@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import config from '../config';
 import routes from '../api';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 export default ({ app }: { app: express.Application }) => {
   app.set('port', config.port || 3000);
@@ -9,6 +10,7 @@ export default ({ app }: { app: express.Application }) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 
+  app.use(cookieParser());
   app.use(cors(config.CorsOptions));
   app.use(config.api, routes());
 

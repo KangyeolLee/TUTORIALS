@@ -141,3 +141,17 @@ export type DiffingNodesType = {
   node: HTMLElement;
   $oldNode: HTMLElement;
 };
+
+/**
+ * @example
+ * PaymentsModel 데이터 관련 타입
+ */
+export interface PaymentsModelType extends Model {
+  key: string;
+  paymentList: PaymentType[];
+  getUserPayments: () => Promise<curType>;
+}
+export type PaymentType = {
+  id: number;
+  type: string;
+};

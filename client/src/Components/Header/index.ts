@@ -44,6 +44,7 @@ export default class Header extends Component<DateState, Props> {
           <li class="menu-list" id="menu-main">${svgIcons.fileText}</li>
           <li class="menu-list" id="menu-calendar">${svgIcons.calendar}</li>
           <li class="menu-list" id="menu-chart">${svgIcons.chart}</li>
+          <li class="menu-list" id="menu-user">${svgIcons.user}</li>
         </ul>
       </div>
     `;
@@ -90,6 +91,10 @@ export default class Header extends Component<DateState, Props> {
       $router.push('/charts');
       this.changeMenu();
     });
+    this.addEvent('click', '#menu-user', () => {
+      $router.push('/user');
+      this.changeMenu();
+    });
   }
 
   removeEvent() {}
@@ -111,6 +116,9 @@ export default class Header extends Component<DateState, Props> {
         break;
       case '/charts':
         this.$target.querySelector('li#menu-chart')?.setAttribute('active', '');
+        break;
+      case '/user':
+        this.$target.querySelector('li#menu-user')?.setAttribute('active', '');
         break;
     }
   }
