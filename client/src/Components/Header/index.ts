@@ -75,31 +75,8 @@ export default class Header extends Component<DateState, Props> {
     });
     this.addEvent('click', '#menu-user', () => {
       $router.push('/user');
-      this.changeMenu();
+      this.headerController.changeMenu();
     });
-  }
-
-  changeMenu() {
-    const path = history.state.path as string;
-    this.$target
-      .querySelectorAll('li.menu-list')
-      .forEach((elem: Element) => elem.removeAttribute('active'));
-    switch (path) {
-      case '/main':
-        this.$target.querySelector('li#menu-main')?.setAttribute('active', '');
-        break;
-      case '/calendar':
-        this.$target
-          .querySelector('li#menu-calendar')
-          ?.setAttribute('active', '');
-        break;
-      case '/charts':
-        this.$target.querySelector('li#menu-chart')?.setAttribute('active', '');
-        break;
-      case '/user':
-        this.$target.querySelector('li#menu-user')?.setAttribute('active', '');
-        break;
-    }
   }
 
   removeEvent() {}

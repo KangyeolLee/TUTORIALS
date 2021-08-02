@@ -10,13 +10,12 @@ class HeaderController {
   constructor() {
     this.historyModel = HistoryModel;
     this.dateModel = DateModel;
-    // console.log(this.historyModel);
   }
 
   handleClickPrevBtn() {
     asyncSetState(
       this.dateModel.getPrevDate(),
-      this.historyModel.getHistoryCard(this.dateModel.today),
+      this.historyModel.initState(this.dateModel.today),
       this.historyModel.initHistoryForToday()
     );
   }
@@ -24,7 +23,7 @@ class HeaderController {
   handleClickNextBtn() {
     asyncSetState(
       this.dateModel.getNextData(),
-      this.historyModel.getHistoryCard(this.dateModel.today),
+      this.historyModel.initState(this.dateModel.today),
       this.historyModel.initHistoryForToday()
     );
   }
@@ -43,6 +42,9 @@ class HeaderController {
         break;
       case '/charts':
         $target.querySelector('li#menu-chart')?.setAttribute('active', '');
+        break;
+      case '/user':
+        $target.querySelector('li#menu-user')?.setAttribute('active', '');
         break;
     }
   }
