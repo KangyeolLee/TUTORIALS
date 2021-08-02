@@ -1,19 +1,11 @@
 import Component from '@/Core/Component';
 import './styles';
-import {
-  MainModelType,
-  Props,
-  State,
-  Today,
-  TodayModelType,
-  HistoryType,
-} from '@/utils/types';
-import { addComma, asyncSetState, html } from '@/utils/helper';
+import { MainModelType, Props, State, Today, HistoryType } from '@/utils/types';
+import { asyncSetState, html } from '@/utils/helper';
 import MainModel from '@/Model/MainModel';
-import HistoryDayCard from '../HistoryDayCard';
 import { IHistory } from '@/utils/types';
-import DateModel from '@/Model/DateModel';
 import { svgIcons } from '@/assets/svgIcons';
+import HistoryDayCard from '@/Components/HistoryDayCard/index';
 
 interface IMainState extends State {
   historyCards: IHistory[];
@@ -22,45 +14,22 @@ interface IMainState extends State {
 }
 
 export default class Main extends Component<IMainState, Props> {
-  mainModel!: MainModelType;
-  dateModel!: TodayModelType;
+  historyModel!: MainModelType;
 
   setup() {
-    this.classIDF = 'Main';
-    // main 모델(history) 구독
-    this.mainModel = MainModel;
-    this.mainModel.subscribe(this.mainModel.key, this);
-    // date 모델 구독
-    this.dateModel = DateModel;
-    this.dateModel.subscribe(this.dateModel.key, this);
-
-    this.$state = {
-      historyCards: this.mainModel.historyCards,
-      today: this.dateModel.today,
-      historyType: this.mainModel.historyType,
-    };
-
-    asyncSetState(this.mainModel.getHistoryCard(this.$state!.today));
+    this.historyModel = MainModel;
   }
 
   template() {
-    const { expense, income } = this.$state!.historyType;
-
-    const test = html`
+    return html`
       <section class="main-history-total">
         <div>전체 내역 <span class="history-total-num"></span>건</div>
         <div class="history-selectors">
-          <button
-            class="history-select-btn ${income && 'active'}"
-            id="history-select-income"
-          >
+          <button class="history-select-btn active" id="history-select-income">
             ${svgIcons.checkSmall}
           </button>
           <span class="text">수입 <span class="income-sum"></span></span>
-          <button
-            class="history-select-btn ${expense && 'active'}"
-            id="history-select-expense"
-          >
+          <button class="history-select-btn active" id="history-select-expense">
             ${svgIcons.checkSmall}
           </button>
           <span class="text">지출 <span class="expense-sum"></span></span>
@@ -68,7 +37,6 @@ export default class Main extends Component<IMainState, Props> {
       </section>
       <ul class="day-card-list"></ul>
     `;
-    return test;
   }
 
   mounted() {
@@ -85,20 +53,11 @@ export default class Main extends Component<IMainState, Props> {
       '.expense-sum'
     ) as HTMLSpanElement;
 
-    // 리스트 업데이트
-    const historyDates = this.updateList($daycardList);
-    // 전체 내역 건수 업데이트
-    $totalNum.innerText = historyDates.length.toString();
-
-    const incomeSum = this.$state?.historyCards
-      .filter((history) => history.type === 1)
-      .reduce((acc, cur, i) => acc + cur.price, 0);
-    const expenseSum = this.$state?.historyCards
-      .filter((history) => history.type === 0)
-      .reduce((acc, cur, i) => acc + cur.price, 0);
-
-    $incomeSum.innerText = addComma(incomeSum!.toString());
-    $expenseSum.innerText = addComma(expenseSum!.toString());
+    new HistoryDayCard($daycardList, undefined, {
+      $totalNum,
+      $incomeSum,
+      $expenseSum,
+    });
   }
 
   setEvent() {
@@ -114,46 +73,17 @@ export default class Main extends Component<IMainState, Props> {
     );
   }
 
-  setUnmount() {
-    this.mainModel.unsubscribe(this.mainModel.key, this);
-    this.dateModel.unsubscribe(this.dateModel.key, this);
+  toggleIncomBtn() {
+    this.$target
+      .querySelector('#history-select-income')
+      ?.classList.toggle('active');
+    asyncSetState(this.historyModel.toggleType('income'));
   }
 
-  updateList($daycardList: HTMLUListElement) {
-    const { historyCards, today, historyType } = this.$state!;
-
-    // 수입/지출 선택에 따른 historyList 추출
-    const historyList = historyCards.filter((history) => {
-      if (historyType.expense && historyType.income) return true;
-      else if (historyType.expense && !historyType.income)
-        return history.type === 0;
-      else if (!historyType.expense && historyType.income)
-        return history.type === 1;
-      else return false;
-    });
-
-    // 해당 월의 history 추출
-    const historyDates = historyList.map((history) => history.date);
-    // 카드를 생성할 날짜를 중복 제거한 후 배열로 저장
-    const dates = Array.from(new Set(historyDates)).sort().reverse();
-
-    dates.forEach((date) => {
-      const curDateHistories = historyList.filter(
-        (history) => history.date === date
-      );
-      const $li = document.createElement('li');
-      new HistoryDayCard($li, { curDateHistories });
-      $daycardList.appendChild($li);
-    });
-
-    return historyDates;
-  }
-
-  toggleIncomBtn(e: any) {
-    asyncSetState(this.mainModel.toggleType('income'));
-  }
-
-  toggleExpenseBtn(e: any) {
-    asyncSetState(this.mainModel.toggleType('expense'));
+  toggleExpenseBtn() {
+    this.$target
+      .querySelector('#history-select-expense')
+      ?.classList.toggle('active');
+    asyncSetState(this.historyModel.toggleType('expense'));
   }
 }
