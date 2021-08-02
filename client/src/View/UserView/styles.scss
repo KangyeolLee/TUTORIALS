@@ -1,0 +1,28 @@
+@import '@/scss/theme';
+
+.user-wrapper {
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+
+  .github-btn {
+    @include bold-large;
+    box-shadow: 0 0.1rem 1.23rem rgb(0 0 0 / 0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 1.4rem 2rem;
+    background-color: #222;
+    border: 0;
+    border-radius: 1rem;
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+
+    svg {
+      stroke: none;
+      fill: white;
+      margin-right: 1rem;
+    }
+  }
+}

@@ -1,24 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
-import qs from 'qs';
-import UserService from './../services/user.services';
-import TokenService from '../services/token.services';
+import userService from './../services/user.services';
+import tokenService from '../services/token.services';
 import config from '../config';
-import { ResultRawType, UserProfile } from '../types/types';
+import { UserProfile } from '../types/types';
+import { setRandomString } from '../utils/helper';
+import { Container } from 'typedi';
 
-const GITHUB_AUTHORIZE = 'https://github.com/login/oauth/authorize?';
+const UserServices = Container.get(userService);
+const TokenServices = Container.get(tokenService);
 
 class UserController {
   async requestGithub(req: Request, res: Response, next: NextFunction) {
-    const state = Math.random().toString(36).substr(2);
     try {
-      const query = qs.stringify({
-        client_id: config.GithubClient,
-        redirect_url: config.RedirectUrl,
-        state,
-        scope: 'user:email',
-      });
-
-      const redirectUrl = GITHUB_AUTHORIZE + query;
+      const query = config.setQuery(setRandomString());
+      const redirectUrl = config.GithubAuthorize + query;
       res.redirect(redirectUrl);
     } catch (error) {
       next(error);
@@ -28,51 +23,48 @@ class UserController {
   async login(req: Request, res: Response, next: NextFunction) {
     try {
       const { code } = req.query;
-      const accessToken: string = await UserService.getAccessToken(
+      const accessToken: string = await UserServices.getAccessToken(
         code as string
       );
-      const userProfile: UserProfile = await UserService.getUserProfile(
-        accessToken
+      const userProfile: UserProfile =
+        await UserServices.getUserProfileFromGithub(accessToken);
+
+      const user = await UserServices.findUserByGithubUser(userProfile.login);
+      const userId = await UserServices.checkUserAlreadyExist(
+        userProfile,
+        user
       );
+      const { access, refresh } = await TokenServices.issueToken(userId);
 
-      // 분리할 수 있다면 Service 계층으로 이동 : UserService.checkUserProfile(userProfile.login)
-      let userId: number;
-      const user = await UserService.findUserByGithubUser(userProfile.login);
+      res.cookie('accessToken', access, { httpOnly: true });
+      res.cookie('refreshToken', refresh, { httpOnly: true, path: '/refresh' });
 
-      if (!user) {
-        const result = await UserService.createUserByGithubUser(
-          userProfile.login
-        );
-        const {
-          raw: { insertId },
-        }: ResultRawType = result!;
-        userId = insertId;
-      } else {
-        userId = user.id;
-      }
-
-      // userId로 토큰 생성
-      const { access, refresh } = await TokenService.issueToken(userId);
-
-      res.append('Set-Cookie', `accessToken=${access}; Path=/; HttpOnly;`);
-      res.append(
-        'Set-Cookie',
-        `refreshToken=${refresh}; Path=/refresh; HttpOnly;`
-      );
-      return res.redirect('http://localhost:8080/main');
+      return res.redirect(config.RedirectClientUrl);
     } catch (error) {
       next(error);
     }
   }
+
   async logout(req: Request, res: Response, next: NextFunction) {
     try {
-      // 서비스에서 로그인 호출
-      // 토큰 반환
-      res.append('Set-Cookie', `accessToken=; Path=/; HttpOnly;`);
-      res.append('Set-Cookie', `refreshToken=; Path=/refresh; HttpOnly;`);
-      return res.json({
+      res.clearCookie('accessToken', { path: '/' });
+      res.clearCookie('refreshToken', { path: '/refresh' });
+      return res.status(200).json({
         ok: true,
-        message: '로그아웃 되었네요 ㅊㅋ',
+        message: '[경]로그아웃 되었네요[축]',
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getUserInfo(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.payload;
+      const user = await UserServices.getUserProfile(id);
+      return res.status(200).json({
+        ok: true,
+        user,
       });
     } catch (error) {
       next(error);

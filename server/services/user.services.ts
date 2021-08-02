@@ -4,14 +4,11 @@ import fetch from 'node-fetch';
 import config from '../config';
 import { UserProfile } from '../types/types';
 import User from '../entities/User';
+import { Service } from 'typedi';
+import { extractInsertId } from '../utils/helper';
 
-const GITHUB_ACCESS_TOKEN = 'https://github.com/login/oauth/access_token';
-const GITHUB_USER = 'https://api.github.com/user';
-
-class UserService {
-  // typedi를 이용한 디펜던시 인젝션을 해볼까...합니다(?)
-  // constructor() {}
-
+@Service()
+export default class UserService {
   async findUserByGithubUser(githubUser: string): Promise<User | undefined> {
     try {
       const user = await getCustomRepository(UserRepository).findByGithubUser(
@@ -34,43 +31,43 @@ class UserService {
     }
   }
 
+  async checkUserAlreadyExist(
+    userProfile: UserProfile,
+    user: User | undefined
+  ) {
+    try {
+      let userId: number;
+
+      if (!user) {
+        const result = await this.createUserByGithubUser(userProfile.login);
+        userId = extractInsertId(result);
+      } else {
+        userId = user.id;
+      }
+
+      return userId;
+    } catch (error) {
+      throw new Error('[유저체크에러]' + error);
+    }
+  }
+
   async getAccessToken(code: string): Promise<string> {
     try {
-      // option은 나중에 어딘가 숨겨도 될 거 가타요~~
-      const option = {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          client_id: config.GithubClient,
-          client_secret: config.GithubSecrets,
-          code,
-        }),
-      };
-      //--------------------------------------------
-      const accessTokenResponse = await fetch(GITHUB_ACCESS_TOKEN, option).then(
-        (res) => res.json()
-      );
+      const option = config.gitAccessOption(code);
+      const accessTokenResponse = await fetch(
+        config.GithubAccessToken,
+        option
+      ).then((res) => res.json());
       return accessTokenResponse.access_token;
     } catch (error) {
       throw new Error('[GITHUB 토큰에러]' + error);
     }
   }
 
-  async getUserProfile(token: string): Promise<UserProfile> {
+  async getUserProfileFromGithub(token: string): Promise<UserProfile> {
     try {
-      const option = {
-        method: 'get',
-        headers: {
-          'Accept': 'Application/json',
-          'Authorization': `token ${token}`,
-          'X-OAuth-Scopes': 'user',
-          'X-Accepted-OAuth-Scopes': 'user',
-        },
-      };
-      const userProfile = await fetch(GITHUB_USER, option).then((res) =>
+      const option = config.gitUserOption(token);
+      const userProfile = await fetch(config.GithubUser, option).then((res) =>
         res.json()
       );
       return userProfile;
@@ -78,6 +75,13 @@ class UserService {
       throw new Error('[GITHUB API에러]' + error);
     }
   }
-}
 
-export default new UserService();
+  async getUserProfile(id: number): Promise<User | undefined> {
+    try {
+      const user = await getCustomRepository(UserRepository).findById(id);
+      return user;
+    } catch (error) {
+      throw new Error('[USER 쿼리 에러]' + error);
+    }
+  }
+}

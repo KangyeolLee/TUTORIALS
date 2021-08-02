@@ -1,9 +1,11 @@
-import { getCustomRepository, InsertResult } from 'typeorm';
+import { Service } from 'typedi';
+import { getCustomRepository } from 'typeorm';
 import History from '../entities/History';
 import { HistoryType } from '../types/types';
 import HistoryRepository from './../repositories/history.repository';
 
-class HistoryService {
+@Service()
+export default class HistoryService {
   async selectHistory(
     id: number,
     year: string,
@@ -41,7 +43,6 @@ class HistoryService {
       const result = await getCustomRepository(
         HistoryRepository
       ).updateHistoryById(historyId, history);
-      console.log(result);
 
       return historyId;
     } catch (error) {
@@ -54,7 +55,6 @@ class HistoryService {
       const result = await getCustomRepository(
         HistoryRepository
       ).deleteHistoryById(historyId);
-      console.log(result);
 
       return historyId;
     } catch (error) {
@@ -62,5 +62,3 @@ class HistoryService {
     }
   }
 }
-
-export default new HistoryService();
