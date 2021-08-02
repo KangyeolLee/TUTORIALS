@@ -1,0 +1,35 @@
+@import '@/scss/theme';
+
+.history-list-item {
+  @include body-regular;
+  display: flex;
+  box-sizing: border-box;
+  border-top: 1px solid $line;
+  padding: 1.5rem 1rem;
+  list-style: none;
+  cursor: pointer;
+
+  .history-text {
+    display: grid;
+    flex: 1;
+    grid-template-columns: 2fr 1fr 1fr;
+
+    .history-content {
+      color: black;
+    }
+
+    .history-price {
+      @include bold-large;
+      color: black;
+      margin-left: auto;
+    }
+  }
+
+  &:last-child {
+    border-bottom: 1px solid $line;
+  }
+
+  &:hover {
+    background-color: $backgrond;
+  }
+}
