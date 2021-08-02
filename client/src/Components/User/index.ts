@@ -41,11 +41,23 @@ export default class User extends Component<UserState, Props> {
   setEvent() {
     this.addEvent('click', '.logout-btn', this.handleLogOut);
     this.addEvent('dblclick', '.user-payments', this.handleDoubleClick);
+    this.addEvent('click', '.user-payments', this.handleClick);
   }
 
   async handleLogOut() {
     const res = await apiLogout();
     $router.push('/main');
+  }
+
+  handleClick(e: Event) {
+    const target = e.target as HTMLElement;
+    const deleteIcon = target.closest<HTMLDivElement>('.delete-icon');
+    if (!deleteIcon) return;
+
+    const categoryNode = deleteIcon.parentElement as HTMLElement;
+    categoryNode.remove();
+
+    // TODO category delete => 삭제된 카테고리 '미분류'로 설정
   }
 
   handleDoubleClick(e: Event) {
