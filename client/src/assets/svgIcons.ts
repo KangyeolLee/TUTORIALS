@@ -40,4 +40,10 @@ export const svgIcons = {
     <path d="M1.33325 1.5H10.6666" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     `,
+  user: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 16.3333C16 15.4493 15.6839 15.6014 15.1213 14.9763C14.5587 14.3512 13.7956 14 13 14H7C6.20435 14 5.44129 14.3512 4.87868 14.9763C4.31607 15.6014 4 15.4493 4 16.3333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 11C11.6569 11 13 9.65685 13 8C13 6.34315 11.6569 5 10 5C8.34315 5 7 6.34315 7 8C7 9.65685 8.34315 11 10 11Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="10" cy="10" r="9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    `,
 };
