@@ -4,7 +4,6 @@ import tokenService from '../services/token.services';
 import config from '../config';
 import { UserProfile } from '../types/types';
 import { setRandomString } from '../utils/helper';
-import { setCookiesForToken } from './../utils/helper';
 import { Container } from 'typedi';
 
 const UserServices = Container.get(userService);
