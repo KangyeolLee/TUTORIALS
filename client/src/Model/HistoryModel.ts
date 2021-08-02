@@ -9,6 +9,7 @@ import {
   typeString,
   PriceAmountType,
 } from '@/utils/types';
+import dayjs from 'dayjs';
 
 class HistoryModel extends Observable {
   key: string = 'history';
@@ -32,7 +33,7 @@ class HistoryModel extends Observable {
     this.historyCardForToday = [];
   }
 
-  async initState(today: Today) {
+  async getHistoryCard(today: Today) {
     const { year, month } = today;
     const { data } = await getHistories({ year, month });
     const { historyList } = data;
@@ -40,9 +41,15 @@ class HistoryModel extends Observable {
     return this.notify(this.key, { historyCards: historyList });
   }
 
-  getHistoryCard(today: Today) {
-    this.filterHistoryCardsByMonth(today);
-    return this.notify(this.key, { historyCards: this.historyCards });
+  getTodaysHistoryCard(today: Today) {
+    this.filterHistoryCardByDay(today);
+    return this.notify(this.key, {
+      historyCardForToday: this.historyCardForToday,
+    });
+  }
+
+  getHistoryPayAmount() {
+    return this.filterHistoryPriceAmount();
   }
 
   addHistory(history: IHistory) {
@@ -64,7 +71,7 @@ class HistoryModel extends Observable {
     return this.notify(this.key, { historyType: this.historyType });
   }
 
-  filterHistoryCardsByMonth(today: Today): void {
+  private filterHistoryCardsByMonth(today: Today): void {
     this.historyCards = dummyhistories
       .filter((history) => {
         const [year, month, _] = history.createdAt
@@ -85,11 +92,11 @@ class HistoryModel extends Observable {
       });
   }
 
-  filterHistoryPriceAmount() {
+  private filterHistoryPriceAmount() {
     this.priceAmount = this.historyCards.reduce(
       (sum, history) => {
-        sum.amount += history.type ? history.price : -history.price;
-        sum.income += history.type ? history.price : 0;
+        sum.amount += history.type ? +history.price : -history.price;
+        sum.income += history.type ? +history.price : 0;
         sum.outcome += history.type ? 0 : -history.price;
         return sum;
       },
@@ -99,20 +106,13 @@ class HistoryModel extends Observable {
     return this.priceAmount;
   }
 
-  filterHistoryCardByDay(today: Today) {
+  private filterHistoryCardByDay(today: Today) {
     const { year, month, day } = today;
     const date = makeDateForm({ year, month, day: day! });
     const historyCardsForToday = this.historyCards.filter(
-      (history) => history.createdAt === date
+      (history) => dayjs(history.createdAt).format('YYYY-MM-DD') === date
     );
     this.historyCardForToday = historyCardsForToday;
-  }
-
-  getTodaysHistoryCard(today: Today) {
-    this.filterHistoryCardByDay(today);
-    return this.notify(this.key, {
-      historyCardForToday: this.historyCardForToday,
-    });
   }
 }
 
