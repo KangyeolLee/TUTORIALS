@@ -1,11 +1,20 @@
 import { dummyhistories } from '@/assets/dummy';
 import Observable from '@/Core/Observable';
-import { IHistory, Today, HistoryType, typeString } from '@/utils/types';
+import { makeDateForm } from '@/utils/helper';
+import {
+  IHistory,
+  Today,
+  HistoryType,
+  typeString,
+  PriceAmountType,
+} from '@/utils/types';
 
 class MainModel extends Observable {
   key: string = 'history';
   historyCards: IHistory[];
   historyType: HistoryType;
+  priceAmount: PriceAmountType;
+  historyCardForToday: IHistory[];
 
   constructor() {
     super();
@@ -14,6 +23,12 @@ class MainModel extends Observable {
       expense: true,
       income: true,
     };
+    this.priceAmount = {
+      amount: 0,
+      income: 0,
+      outcome: 0,
+    };
+    this.historyCardForToday = [];
   }
 
   getHistoryCard(today: Today) {
@@ -26,6 +41,13 @@ class MainModel extends Observable {
     this.historyCards = nextHistory;
 
     return this.notify(this.key, { historyCards: nextHistory });
+  }
+
+  initHistoryForToday() {
+    this.historyCardForToday = [];
+    return this.notify(this.key, {
+      historyCardForToday: this.historyCardForToday,
+    });
   }
 
   toggleType(nextType: typeString) {
@@ -51,6 +73,36 @@ class MainModel extends Observable {
           price: history.price,
         };
       });
+  }
+
+  filterHistoryPriceAmount() {
+    this.priceAmount = this.historyCards.reduce(
+      (sum, history) => {
+        sum.amount += history.type ? history.price : -history.price;
+        sum.income += history.type ? history.price : 0;
+        sum.outcome += history.type ? 0 : -history.price;
+        return sum;
+      },
+      { amount: 0, income: 0, outcome: 0 }
+    );
+
+    return this.priceAmount;
+  }
+
+  filterHistoryCardByDay(today: Today) {
+    const { year, month, day } = today;
+    const date = makeDateForm({ year, month, day: day! });
+    const historyCardsForToday = this.historyCards.filter(
+      (history) => history.date === date
+    );
+    this.historyCardForToday = historyCardsForToday;
+  }
+
+  getTodaysHistoryCard(today: Today) {
+    this.filterHistoryCardByDay(today);
+    return this.notify(this.key, {
+      historyCardForToday: this.historyCardForToday,
+    });
   }
 }
 
