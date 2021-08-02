@@ -1,0 +1,33 @@
+@import '@/scss/theme';
+
+.price-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  border: 0.1rem solid $line;
+  padding: 1rem;
+  height: 4.8rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  background-color: $white;
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
+    0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+  @include bold-medium;
+  color: $grey1;
+
+  .in-outcome {
+    display: flex;
+    gap: 2rem;
+
+    .income {
+      color: $primary3;
+    }
+    .outcome {
+      color: $red;
+    }
+  }
+
+  .total {
+    color: $title-active;
+  }
+}
