@@ -8,15 +8,6 @@ export const getPayload = (req: Request): number => {
 
 export const setRandomString = () => Math.random().toString(36).substr(2);
 
-export const setCookiesForToken = (
-  res: Response,
-  access: string,
-  refresh: string
-) => {
-  res.append('Set-Cookie', `accessToken=${access}; Path=/; HttpOnly;`);
-  res.append('Set-Cookie', `refreshToken=${refresh}; Path=/refresh; HttpOnly;`);
-};
-
 export const extractInsertId = (result: InsertResult) => {
   const {
     raw: { insertId },
