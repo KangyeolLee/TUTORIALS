@@ -6,6 +6,8 @@
   justify-content: center;
 
   .github-btn {
+    @include bold-large;
+    box-shadow: 0 0.1rem 1.23rem rgb(0 0 0 / 0.6);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -15,7 +17,6 @@
     border-radius: 1rem;
     color: white;
     text-align: center;
-    @include bold-large;
     font-size: 2rem;
 
     svg {

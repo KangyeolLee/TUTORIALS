@@ -8,7 +8,7 @@ import { getUserInfo } from '@/api/user';
 
 interface UserViewState extends State {
   id: number;
-  githubId: string;
+  githubUser: string;
 }
 
 export default class UserView extends Component<UserViewState, Props> {
@@ -16,8 +16,8 @@ export default class UserView extends Component<UserViewState, Props> {
     getUserInfo()
       .then((res) => {
         this.setState({
-          id: res.data.id,
-          githubId: res.data.githubId,
+          id: res.data.user.id,
+          githubUser: res.data.user.githubUser,
         });
       })
       .catch((err) => {
@@ -47,7 +47,7 @@ export default class UserView extends Component<UserViewState, Props> {
       const $userWrapper = this.$target.querySelector(
         '.user-wrapper'
       ) as HTMLElement;
-      new User($userWrapper, { user: this.$state });
+      new User($userWrapper, { user: this.$state! });
     }
   }
 }
