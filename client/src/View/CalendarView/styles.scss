@@ -26,17 +26,4 @@
   .calendar {
     padding-top: 5rem;
   }
-
-  .price-bar {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 4rem;
-    @include bold-medium;
-    color: $grey1;
-
-    .in-outcome {
-      display: flex;
-      gap: 2rem;
-    }
-  }
 }

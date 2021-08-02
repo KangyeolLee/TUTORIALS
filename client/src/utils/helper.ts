@@ -42,3 +42,21 @@ export async function asyncSetState(...rest: Promise<curType>[]) {
 
   Object.values(results).forEach((res) => res.observer.setState(res.data));
 }
+
+export const makeDateForm = ({
+  year,
+  month,
+  day,
+}: {
+  year: number;
+  month: number;
+  day: number;
+}) => {
+  return (
+    year +
+    '-' +
+    (month > 9 ? month : '0' + month) +
+    '-' +
+    (day > 9 ? day : '0' + day)
+  );
+};

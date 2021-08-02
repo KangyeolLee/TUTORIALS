@@ -2,9 +2,16 @@ import './styles';
 import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import Calendar from '@/Components/Calendar';
-import { Props, State } from '@/utils/types';
+import { Props, State, IHistory, HistoryType } from '@/utils/types';
+import PriceBar from '@/Components/PriceBar/index';
+import HistoryDayCard from '@/Components/HistoryDayCard/index';
 
-export default class CalendarView extends Component<State, Props> {
+interface IMainState extends State {
+  historyCards: IHistory[];
+  historyType: HistoryType;
+}
+
+export default class CalendarView extends Component<IMainState, Props> {
   template() {
     return html`
       <section class="calendar-wrapper container">
@@ -19,16 +26,8 @@ export default class CalendarView extends Component<State, Props> {
         </ul>
 
         <div class="calendar"></div>
-
-        <div class="price-bar">
-          <div class="in-outcome">
-            <span class="price-content">총 수입 ${'1,450,000'}</span>
-            <span class="price-content">총 지출 ${'50,000'}</span>
-          </div>
-          <div class="total">
-            <span class="price-content">총계 ${'1,400,000'}</span>
-          </div>
-        </div>
+        <div class="price-bar"></div>
+        <ul class="history-card-list"></ul>
       </section>
     `;
   }
@@ -36,5 +35,13 @@ export default class CalendarView extends Component<State, Props> {
   mounted() {
     const $calendar = this.$target.querySelector('.calendar') as HTMLElement;
     new Calendar($calendar);
+
+    const $pricebar = this.$target.querySelector('.price-bar') as HTMLElement;
+    new PriceBar($pricebar);
+
+    const $daycardList = this.$target.querySelector(
+      '.history-card-list'
+    ) as HTMLElement;
+    new HistoryDayCard($daycardList, undefined, { onlyToday: true });
   }
 }

@@ -1,7 +1,6 @@
 import Component from '@/Core/Component';
 
 /**
-import { histories } from './../assets/dummy';
  * @example
  * Modal 관련 공통 타입
  */
@@ -55,6 +54,7 @@ export type Props = {};
 export type Today = {
   year: number;
   month: number;
+  day?: number;
 };
 
 export interface TodayModelType extends Model {
@@ -67,7 +67,7 @@ export interface TodayModelType extends Model {
 export interface CalendarState extends State {
   today: Today;
   historyCards?: IHistory[];
-  historyType: HistoryType;
+  historyCardForToday?: IHistory[];
 }
 
 /**
@@ -84,15 +84,26 @@ export interface MainModelType extends Model {
   key: string;
   historyCards: IHistory[];
   historyType: HistoryType;
+  historyCardForToday: IHistory[];
   getHistoryCard: (today: Today) => Promise<curType>;
   addHistory: (history: IHistory) => Promise<curType>;
   toggleType: (nextType: typeString) => Promise<curType>;
+  filterHistoryPriceAmount: () => PriceAmountType;
+  filterHistoryCardByDay: (today: Today) => void;
+  getTodaysHistoryCard: (today: Today) => Promise<curType>;
+  initHistoryForToday: () => Promise<curType>;
 }
 
 export interface DateState extends State {
   today: Today;
   historyCards?: IHistory[];
 }
+
+export type PriceAmountType = {
+  amount: number;
+  income: number;
+  outcome: number;
+};
 
 /**
  * @example
@@ -113,6 +124,13 @@ export interface IValidationType {
   content: boolean;
   payment: boolean;
   price: boolean;
+}
+
+export interface IHistoryDayCardProps extends Props {
+  onlyToday?: boolean;
+  $totalNum?: HTMLSpanElement;
+  $incomeSum?: HTMLSpanElement;
+  $expenseSum?: HTMLSpanElement;
 }
 
 /**
@@ -144,8 +162,47 @@ export type DiffingNodesType = {
 
 /**
  * @example
+ * Calendar Component 데이터 관련 타입
+ */
+export type DatesType = {
+  today_date: number;
+  last_date: number;
+  first_day: number;
+};
+
+export type CalendarControllerType = {
+  getTodayDates: (today: Today) => DatesType;
+  makeCalendar: (
+    t1: number,
+    t2: number,
+    t3: number,
+    state: CalendarState,
+    target: HTMLElement
+  ) => void;
+};
+
+export type HistoryForDate = {
+  date: number;
+  history?: {
+    income: number;
+    outcome: number;
+    amount: number | null;
+  };
+};
+
+export type HistoryTypeForDate = {
+  history: {
+    income: number;
+    outcome: number;
+    amount: number | null;
+  };
+};
+
+/**
+ * @example
  * PaymentsModel 데이터 관련 타입
  */
+
 export interface PaymentsModelType extends Model {
   key: string;
   paymentList: PaymentType[];

@@ -1,28 +1,28 @@
 import './styles';
 import Component from '@/Core/Component';
-import { asyncSetState, html } from '@/utils/helper';
+import { html } from '@/utils/helper';
 import { $router } from '@/Core/Router';
 import { svgIcons } from '@/assets/svgIcons';
 import { MainModelType, Props, TodayModelType } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
 import { DateState } from '@/utils/types';
-import MainModel from '@/Model/MainModel';
+import HeaderController from '@/Controller/HeaderController';
 
 export default class Header extends Component<DateState, Props> {
-  model!: TodayModelType;
+  dateModel!: TodayModelType;
+  headerController!: any;
   mainModel!: MainModelType;
 
   setup() {
     this.classIDF = 'Header';
-    // main 모델(history) 구독
-    this.mainModel = MainModel;
-    this.mainModel.subscribe(this.mainModel.key, this);
 
-    this.model = DateModel;
-    this.model.subscribe(this.model.key, this);
+    this.dateModel = DateModel;
+    this.dateModel.subscribe(DateModel.key, this);
+
+    this.headerController = HeaderController;
+
     this.$state = {
-      today: this.model.today,
-      historyCards: this.mainModel.historyCards,
+      today: this.dateModel.today,
     };
   }
 
@@ -51,54 +51,33 @@ export default class Header extends Component<DateState, Props> {
   }
 
   mounted() {
-    this.changeMenu();
-  }
-
-  handleClickPrevBtn() {
-    asyncSetState(
-      this.model.getPrevDate(),
-      this.mainModel.getHistoryCard(this.model.today)
-    );
-  }
-
-  handleClickNextBtn() {
-    asyncSetState(
-      this.model.getNextData(),
-      this.mainModel.getHistoryCard(this.model.today)
-    );
+    this.headerController.changeMenu(this.$target);
   }
 
   setEvent() {
-    this.addEvent(
-      'click',
-      '#btn-prev-month',
-      this.handleClickPrevBtn.bind(this)
+    this.addEvent('click', '#btn-prev-month', () =>
+      this.headerController.handleClickPrevBtn()
     );
-    this.addEvent(
-      'click',
-      '#btn-next-month',
-      this.handleClickNextBtn.bind(this)
+    this.addEvent('click', '#btn-next-month', () =>
+      this.headerController.handleClickNextBtn()
     );
     this.addEvent('click', '#menu-main', () => {
       $router.push('/main');
-      this.changeMenu();
+      this.headerController.changeMenu(this.$target);
     });
     this.addEvent('click', '#menu-calendar', () => {
       $router.push('/calendar');
-      this.changeMenu();
+      this.headerController.changeMenu(this.$target);
     });
     this.addEvent('click', '#menu-chart', () => {
       $router.push('/charts');
-      this.changeMenu();
+      this.headerController.changeMenu(this.$target);
     });
     this.addEvent('click', '#menu-user', () => {
       $router.push('/user');
       this.changeMenu();
     });
   }
-
-  removeEvent() {}
-  resetEvent() {}
 
   changeMenu() {
     const path = history.state.path as string;
@@ -122,4 +101,7 @@ export default class Header extends Component<DateState, Props> {
         break;
     }
   }
+
+  removeEvent() {}
+  resetEvent() {}
 }
