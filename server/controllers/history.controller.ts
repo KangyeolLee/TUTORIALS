@@ -1,5 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import HistoryService from './../services/history.services';
+import { Container } from 'typedi';
+import historyServices from './../services/history.services';
+
+const HistoryServices = Container.get(historyServices);
 
 class HistoryController {
   //  history 조회
@@ -10,7 +13,7 @@ class HistoryController {
         throw new Error('year과 month가 유효하지 않습니다.');
 
       const id: number = req.body.id;
-      const historyList = await HistoryService.selectHistory(id, year, month);
+      const historyList = await HistoryServices.selectHistory(id, year, month);
 
       res
         .json({ ok: true, message: '내역이 조회되었습니다.', historyList })
@@ -26,7 +29,7 @@ class HistoryController {
   async insertHistory(req: Request, res: Response, next: NextFunction) {
     try {
       const { history } = req.body;
-      const historyId: number = await HistoryService.insertHistory(history);
+      const historyId: number = await HistoryServices.insertHistory(history);
 
       res
         .json({ ok: true, message: '내역이 추가되었습니다.', historyId })
@@ -41,7 +44,7 @@ class HistoryController {
     try {
       const historyId = +req.params.historyId;
       const { history } = req.body;
-      await HistoryService.updateHistory(historyId, history);
+      await HistoryServices.updateHistory(historyId, history);
 
       res
         .json({ ok: true, message: '내역이 수정되었습니다.', historyId })
@@ -55,7 +58,7 @@ class HistoryController {
   async deleteHistory(req: Request, res: Response, next: NextFunction) {
     try {
       const historyId = +req.params.historyId;
-      await HistoryService.deleteHistory(historyId);
+      await HistoryServices.deleteHistory(historyId);
 
       res.json({ ok: true, message: '내역이 삭제되었습니다.' }).status(200);
     } catch (error) {
