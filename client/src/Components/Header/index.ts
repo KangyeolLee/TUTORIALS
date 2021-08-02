@@ -75,7 +75,7 @@ export default class Header extends Component<DateState, Props> {
     });
     this.addEvent('click', '#menu-user', () => {
       $router.push('/user');
-      this.headerController.changeMenu();
+      this.headerController.changeMenu(this.$target);
     });
   }
 

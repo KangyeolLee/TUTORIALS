@@ -14,7 +14,7 @@ export default class PriceBar extends Component<State, Props> {
   }
 
   template() {
-    const { amount, income, outcome } = this.model.filterHistoryPriceAmount();
+    const { amount, income, outcome } = this.model.getHistoryPayAmount();
     return html`
       <div class="in-outcome">
         <span class="price-content income"

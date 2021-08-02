@@ -45,7 +45,7 @@ export default class HistoryDayCard extends Component<
       historyType: this.historyModel.historyType,
     };
 
-    asyncSetState(this.historyModel.initState(this.$state.today));
+    asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
   }
 
   template() {
