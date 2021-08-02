@@ -85,14 +85,12 @@ export interface HistoryModelType extends Model {
   historyCards: IHistory[];
   historyType: HistoryType;
   historyCardForToday: IHistory[];
-  getHistoryCard: (today: Today) => Promise<curType>;
+  getHistoryCard: ({ year, month }: Today) => Promise<curType>;
   addHistory: (history: IHistory) => Promise<curType>;
   toggleType: (nextType: typeString) => Promise<curType>;
-  filterHistoryPriceAmount: () => PriceAmountType;
-  filterHistoryCardByDay: (today: Today) => void;
   getTodaysHistoryCard: (today: Today) => Promise<curType>;
+  getHistoryPayAmount: () => PriceAmountType;
   initHistoryForToday: () => Promise<curType>;
-  initState: ({ year, month }: Today) => Promise<curType>;
 }
 
 export interface DateState extends State {
