@@ -43,7 +43,7 @@ export default class UserView extends Component<UserViewState, Props> {
   }
 
   mounted() {
-    if (this.$state!.id !== 1) {
+    if (this.$state!.hasOwnProperty('id')) {
       const $userWrapper = this.$target.querySelector(
         '.user-wrapper'
       ) as HTMLElement;
