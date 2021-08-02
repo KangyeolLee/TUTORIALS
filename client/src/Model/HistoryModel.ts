@@ -32,10 +32,12 @@ class HistoryModel extends Observable {
     this.historyCardForToday = [];
   }
 
-  async initState({ year, month }: Today) {
+  async initState(today: Today) {
+    const { year, month } = today;
     const { data } = await getHistories({ year, month });
     const { historyList } = data;
-    console.log(historyList);
+    this.historyCards = historyList;
+    return this.notify(this.key, { historyCards: historyList });
   }
 
   getHistoryCard(today: Today) {
@@ -65,14 +67,14 @@ class HistoryModel extends Observable {
   filterHistoryCardsByMonth(today: Today): void {
     this.historyCards = dummyhistories
       .filter((history) => {
-        const [year, month, _] = history.createAt
+        const [year, month, _] = history.createdAt
           .split('-')
           .map((d) => parseInt(d));
         return today.year === year && today.month === month;
       })
       .map((history) => {
         return {
-          createAt: history.createAt,
+          createdAt: history.createdAt,
           type: history.type,
           category: history.category,
           content: history.content,
@@ -101,7 +103,7 @@ class HistoryModel extends Observable {
     const { year, month, day } = today;
     const date = makeDateForm({ year, month, day: day! });
     const historyCardsForToday = this.historyCards.filter(
-      (history) => history.createAt === date
+      (history) => history.createdAt === date
     );
     this.historyCardForToday = historyCardsForToday;
   }

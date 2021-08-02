@@ -8,7 +8,7 @@ export const dummyhistories = [
     price: 54000,
     content: '사이드 테이블 구매',
     type: 0,
-    createAt: '2021-06-29',
+    createdAt: '2021-06-29',
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const dummyhistories = [
     price: 9000,
     content: '엽기떡볶이',
     type: 0,
-    createAt: '2021-06-30',
+    createdAt: '2021-06-30',
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ export const dummyhistories = [
     price: 45340,
     content: '후불 교통비 결제',
     type: 0,
-    createAt: '2021-07-01',
+    createdAt: '2021-07-01',
   },
   {
     id: 4,
@@ -38,7 +38,7 @@ export const dummyhistories = [
     price: 45340,
     content: '온라인 세미나 신청',
     type: 0,
-    createAt: '2021-07-02',
+    createdAt: '2021-07-02',
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ export const dummyhistories = [
     price: 1490000,
     content: '시카고 뮤지컬',
     type: 0,
-    createAt: '2021-07-03',
+    createdAt: '2021-07-03',
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ export const dummyhistories = [
     price: 125300,
     content: '체육관 수강 등록',
     type: 0,
-    createAt: '2021-07-03',
+    createdAt: '2021-07-03',
   },
   {
     id: 7,
@@ -68,7 +68,7 @@ export const dummyhistories = [
     price: 6400,
     content: '종량제 봉투 구입',
     type: 0,
-    createAt: '2021-07-05',
+    createdAt: '2021-07-05',
   },
   {
     id: 8,
@@ -78,7 +78,7 @@ export const dummyhistories = [
     price: 1600,
     content: '신한카드 금융 이자',
     type: 1,
-    createAt: '2021-07-10',
+    createdAt: '2021-07-10',
   },
   {
     id: 9,
@@ -88,7 +88,7 @@ export const dummyhistories = [
     price: 1000,
     content: '우아한 형제들 캐시백',
     type: 1,
-    createAt: '2021-07-17',
+    createdAt: '2021-07-17',
   },
   {
     id: 10,
@@ -98,7 +98,7 @@ export const dummyhistories = [
     price: 60000,
     content: '건강검진 진행',
     type: 0,
-    createAt: '2021-07-20',
+    createdAt: '2021-07-20',
   },
   {
     id: 11,
@@ -108,7 +108,7 @@ export const dummyhistories = [
     price: 4000,
     content: '길거리 포장마차 분식 먹방',
     type: 0,
-    createAt: '2021-08-02',
+    createdAt: '2021-08-02',
   },
   {
     id: 12,
@@ -118,7 +118,7 @@ export const dummyhistories = [
     price: 10000,
     content: '친구와의 내기에서 승리!',
     type: 1,
-    createAt: '2021-08-07',
+    createdAt: '2021-08-07',
   },
   {
     id: 13,
@@ -128,7 +128,7 @@ export const dummyhistories = [
     price: 35000,
     content: '고급 일식 식당에서 친구와 식사 (내가 다 냄)',
     type: 0,
-    createAt: '2021-08-09',
+    createdAt: '2021-08-09',
   },
   {
     id: 14,
@@ -138,7 +138,7 @@ export const dummyhistories = [
     price: 2000000,
     content: '월급',
     type: 1,
-    createAt: '2021-08-10',
+    createdAt: '2021-08-10',
   },
   {
     id: 15,
@@ -148,7 +148,7 @@ export const dummyhistories = [
     price: 600000,
     content: '헬스장 1달치 등록',
     type: 0,
-    createAt: '2021-08-15',
+    createdAt: '2021-08-15',
   },
   {
     id: 16,
@@ -158,7 +158,7 @@ export const dummyhistories = [
     price: 600000,
     content: '헬스장 1달치 환불',
     type: 1,
-    createAt: '2021-08-15',
+    createdAt: '2021-08-15',
   },
 ];
 

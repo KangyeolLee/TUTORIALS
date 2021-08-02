@@ -44,14 +44,13 @@ export default class HistoryDayCard extends Component<
       historyType: this.historyModel.historyType,
     };
 
-    asyncSetState(this.historyModel.getHistoryCard(this.$state!.today));
+    asyncSetState(this.historyModel.initState(this.$state.today));
   }
 
   template() {
     const { onlyToday } = this.$props ?? { onlyToday: false };
     const { dates, histories } = this.updateList(onlyToday);
     const { year, month } = this.$state!.today;
-    this.historyModel.initState({ year, month });
 
     return html`
       ${dates
@@ -111,20 +110,24 @@ export default class HistoryDayCard extends Component<
       $expenseSum!.innerText = addComma(expenseSum!.toString());
     }
 
+    historyList.forEach((history) => console.log(history.createdAt));
+
     // 해당 월의 history 추출
-    const historyDates = historyList.map((history) => history.createAt);
+    const historyDates = historyList.map((history) => history.createdAt);
     // 카드를 생성할 날짜를 중복 제거한 후 배열로 저장
     const dates = Array.from(new Set(historyDates)).sort().reverse();
 
+    console.log(historyDates);
+
     const histories = historyList.reduce(
       (acc: Record<string, IHistory[]>, history) => {
-        if (!acc[history.createAt]) {
-          acc[history.createAt] = [];
-          acc[history.createAt].push(history);
+        if (!acc[history.createdAt]) {
+          acc[history.createdAt] = [];
+          acc[history.createdAt].push(history);
           return acc;
         }
 
-        acc[history.createAt].push(history);
+        acc[history.createdAt].push(history);
         return acc;
       },
       {}

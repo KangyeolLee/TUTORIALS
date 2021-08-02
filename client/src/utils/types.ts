@@ -92,7 +92,7 @@ export interface HistoryModelType extends Model {
   filterHistoryCardByDay: (today: Today) => void;
   getTodaysHistoryCard: (today: Today) => Promise<curType>;
   initHistoryForToday: () => Promise<curType>;
-  initState: ({ year, month }: Today) => void;
+  initState: ({ year, month }: Today) => Promise<curType>;
 }
 
 export interface DateState extends State {
@@ -111,7 +111,7 @@ export type PriceAmountType = {
  * history 리스트 타입
  */
 export interface IHistory {
-  createAt: string;
+  createdAt: string;
   type: number;
   category: string;
   content: string;
