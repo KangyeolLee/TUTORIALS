@@ -1,5 +1,6 @@
 import Component from '@/Core/Component';
 import './styles';
+import dayjs from 'dayjs';
 import {
   HistoryType,
   IHistory,
@@ -50,7 +51,6 @@ export default class HistoryDayCard extends Component<
   template() {
     const { onlyToday } = this.$props ?? { onlyToday: false };
     const { dates, histories } = this.updateList(onlyToday);
-    const { year, month } = this.$state!.today;
 
     return html`
       ${dates
@@ -99,10 +99,10 @@ export default class HistoryDayCard extends Component<
 
     const incomeSum = historyList
       .filter((history) => history.type === 1)
-      .reduce((acc, cur) => acc + cur.price, 0);
+      .reduce((acc, cur) => acc + Number(cur.price), 0);
     const expenseSum = historyList
       .filter((history) => history.type === 0)
-      .reduce((acc, cur) => acc + cur.price, 0);
+      .reduce((acc, cur) => acc + Number(cur.price), 0);
 
     if (!onlyToday) {
       $totalNum!.innerText = historyList.length.toString();
@@ -110,24 +110,23 @@ export default class HistoryDayCard extends Component<
       $expenseSum!.innerText = addComma(expenseSum!.toString());
     }
 
-    historyList.forEach((history) => console.log(history.createdAt));
-
     // 해당 월의 history 추출
-    const historyDates = historyList.map((history) => history.createdAt);
+    const historyDates = historyList.map((history) =>
+      dayjs(history.createdAt).format('YYYY-MM-DD')
+    );
     // 카드를 생성할 날짜를 중복 제거한 후 배열로 저장
     const dates = Array.from(new Set(historyDates)).sort().reverse();
 
-    console.log(historyDates);
-
     const histories = historyList.reduce(
       (acc: Record<string, IHistory[]>, history) => {
-        if (!acc[history.createdAt]) {
-          acc[history.createdAt] = [];
-          acc[history.createdAt].push(history);
+        const date = dayjs(history.createdAt).format('YYYY-MM-DD');
+        if (!acc[date]) {
+          acc[date] = [];
+          acc[date].push(history);
           return acc;
         }
 
-        acc[history.createdAt].push(history);
+        acc[date].push(history);
         return acc;
       },
       {}
@@ -143,16 +142,16 @@ export default class HistoryDayCard extends Component<
   getExpenseTotal(curDateHistories: IHistory[]) {
     return curDateHistories
       .filter((history) => history.type === 0)
-      .reduce((acc, cur, i) => {
-        return acc + cur.price;
+      .reduce((acc, cur) => {
+        return acc + Number(cur.price);
       }, 0);
   }
 
   getIncomeTotal(curDateHistories: IHistory[]) {
     return curDateHistories
       .filter((history) => history.type === 1)
-      .reduce((acc, cur, i) => {
-        return acc + cur.price;
+      .reduce((acc, cur) => {
+        return acc + Number(cur.price);
       }, 0);
   }
 

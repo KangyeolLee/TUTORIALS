@@ -167,8 +167,8 @@ export const category = [
   { id: 2, type: '식비' },
   { id: 3, type: '교통' },
   { id: 4, type: '쇼핑/뷰티' },
-  { id: 5, type: '의료/건강' },
-  { id: 6, type: '문화/여가' },
+  { id: 5, type: '여가' },
+  { id: 6, type: '문화' },
   { id: 7, type: '미분류' },
   { id: 8, type: '금융 이자' },
 ];
