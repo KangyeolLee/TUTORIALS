@@ -15,7 +15,7 @@ class HeaderController {
   handleClickPrevBtn() {
     asyncSetState(
       this.dateModel.getPrevDate(),
-      this.historyModel.initState(this.dateModel.today),
+      this.historyModel.getHistoryCard(this.dateModel.today),
       this.historyModel.initHistoryForToday()
     );
   }
@@ -23,7 +23,7 @@ class HeaderController {
   handleClickNextBtn() {
     asyncSetState(
       this.dateModel.getNextData(),
-      this.historyModel.initState(this.dateModel.today),
+      this.historyModel.getHistoryCard(this.dateModel.today),
       this.historyModel.initHistoryForToday()
     );
   }
