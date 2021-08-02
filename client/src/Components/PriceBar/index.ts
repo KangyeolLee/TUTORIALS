@@ -2,14 +2,14 @@ import './styles';
 import Component from '@/Core/Component';
 import { Props, State, MainModelType } from '@/utils/types';
 import { html, addComma } from '@/utils/helper';
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 
 export default class PriceBar extends Component<State, Props> {
   model!: MainModelType;
 
   setup() {
     this.classIDF = 'PriceBar';
-    this.model = MainModel;
+    this.model = HistoryModel;
     this.model.subscribe(this.model.key, this);
   }
 

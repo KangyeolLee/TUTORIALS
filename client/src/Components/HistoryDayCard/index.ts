@@ -12,7 +12,7 @@ import {
 } from '@/utils/types';
 import { addComma, asyncSetState, html } from '@/utils/helper';
 import HistoryList from '@/Components/HistoryList';
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 import DateModel from '@/Model/DateModel';
 
 interface IListStates extends State {
@@ -31,7 +31,7 @@ export default class HistoryDayCard extends Component<
 
   setup() {
     this.classIDF = 'HistoryDayCard';
-    this.historyModel = MainModel;
+    this.historyModel = HistoryModel;
     this.historyModel.subscribe(this.historyModel.key, this);
 
     this.dateModel = DateModel;
@@ -50,6 +50,8 @@ export default class HistoryDayCard extends Component<
   template() {
     const { onlyToday } = this.$props ?? { onlyToday: false };
     const { dates, histories } = this.updateList(onlyToday);
+    const { year, month } = this.$state!.today;
+    this.historyModel.initState({ year, month });
 
     return html`
       ${dates

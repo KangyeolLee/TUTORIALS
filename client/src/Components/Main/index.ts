@@ -2,7 +2,7 @@ import Component from '@/Core/Component';
 import './styles';
 import { MainModelType, Props, State, Today, HistoryType } from '@/utils/types';
 import { asyncSetState, html } from '@/utils/helper';
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 import { IHistory } from '@/utils/types';
 import { svgIcons } from '@/assets/svgIcons';
 import HistoryDayCard from '@/Components/HistoryDayCard/index';
@@ -17,7 +17,7 @@ export default class Main extends Component<IMainState, Props> {
   historyModel!: MainModelType;
 
   setup() {
-    this.historyModel = MainModel;
+    this.historyModel = HistoryModel;
   }
 
   template() {

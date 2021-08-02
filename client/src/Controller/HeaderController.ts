@@ -1,4 +1,4 @@
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 import { MainModelType, TodayModelType } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
 import { asyncSetState } from '@/utils/helper';
@@ -8,7 +8,7 @@ class HeaderController {
   dateModel!: TodayModelType;
 
   constructor() {
-    this.historyModel = MainModel;
+    this.historyModel = HistoryModel;
     this.dateModel = DateModel;
     // console.log(this.historyModel);
   }

@@ -9,7 +9,7 @@ import {
   IValidationType,
   IHistory,
 } from '@/utils/types';
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 
 export default class InputBar extends Component<State, Props> {
   model!: MainModelType;
@@ -23,7 +23,7 @@ export default class InputBar extends Component<State, Props> {
 
   setup() {
     this.classIDF = 'InputBar';
-    this.model = MainModel;
+    this.model = HistoryModel;
     this.date = {
       year: new Date().getFullYear(),
       month: new Date().getMonth() + 1,

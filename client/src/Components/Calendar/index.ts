@@ -9,7 +9,7 @@ import {
   CalendarControllerType,
 } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 import CalendarController from '@/Controller/CalendarController';
 
 export default class Calendar extends Component<CalendarState, Props> {
@@ -21,7 +21,7 @@ export default class Calendar extends Component<CalendarState, Props> {
     this.todayModel = DateModel;
     this.todayModel.subscribe(this.todayModel.key, this);
 
-    this.mainModel = MainModel;
+    this.mainModel = HistoryModel;
     this.mainModel.subscribe(this.mainModel.key, this);
 
     this.calendarController = CalendarController;
