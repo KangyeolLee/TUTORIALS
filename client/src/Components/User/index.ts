@@ -26,7 +26,13 @@ export default class User extends Component<UserState, Props> {
             <span class="title">카테고리</span>
             <span class="edit-button">편집</span>
           </section>
-          <ul class="user-payments-icons"></ul>
+          <ul class="user-payments-icons">
+            ${CategoryIcon(1)}${CategoryIcon(1)}${CategoryIcon(
+              1
+            )}${CategoryIcon(1)}${CategoryIcon(1)}${CategoryIcon(
+              1
+            )}${CategoryIcon(1)}
+          </ul>
         </section>
       </div>
     `;
@@ -36,16 +42,16 @@ export default class User extends Component<UserState, Props> {
     const $userPaymentsIcons = this.$target.querySelector(
       '.user-payments-icons'
     ) as HTMLElement;
-
-    for (let i = 0; i < 8; i++) {
-      const $li = document.createElement('li');
-      new CategoryIcon($li);
-      $userPaymentsIcons.appendChild($li);
-    }
   }
 
   setEvent() {
     this.addEvent('click', '.logout-btn', this.handleLogOut);
+
+    this.addEvent('dblclick', '.user-payments', (e: Event) => {
+      const target = e.target as HTMLElement;
+      const $categoryType = target.closest('.category-type');
+      $categoryType?.setAttribute('editable', '');
+    });
   }
 
   async handleLogOut() {
