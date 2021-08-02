@@ -57,5 +57,9 @@
     &:hover {
       background-color: #ddd;
     }
+
+    &:focus {
+      outline-style: none;
+    }
   }
 }

@@ -38,24 +38,57 @@ export default class User extends Component<UserState, Props> {
     `;
   }
 
-  mounted() {
-    const $userPaymentsIcons = this.$target.querySelector(
-      '.user-payments-icons'
-    ) as HTMLElement;
-  }
-
   setEvent() {
     this.addEvent('click', '.logout-btn', this.handleLogOut);
-
-    this.addEvent('dblclick', '.user-payments', (e: Event) => {
-      const target = e.target as HTMLElement;
-      const $categoryType = target.closest('.category-type');
-      $categoryType?.setAttribute('editable', '');
-    });
+    this.addEvent('dblclick', '.user-payments', this.handleDoubleClick);
   }
 
   async handleLogOut() {
     const res = await apiLogout();
     $router.push('/main');
+  }
+
+  handleDoubleClick(e: Event) {
+    const target = e.target as HTMLElement;
+    const categoryType = target.closest<HTMLDivElement>('.category-type');
+    if (!categoryType) return;
+
+    // 카테고리 수정
+    categoryType.contentEditable = 'true';
+    const prevText = categoryType.textContent as string;
+    const curNode = categoryType.firstChild as Node;
+
+    const sel = window.getSelection() as Selection; // 현재 커서 selection 정보
+    const range = document.createRange(); // 새로운 range로 설정할 변수
+    range.setStart(curNode, 0);
+    range.setEnd(curNode, prevText.length);
+    sel.removeAllRanges(); // 이전 Range를 삭제하고
+    sel.addRange(range); // 새로 생성
+
+    // blur: focus가 해제될 때(버블링 X)
+    categoryType.addEventListener('blur', function handleBlur() {
+      categoryType.removeEventListener('blur', handleBlur);
+      categoryType.removeAttribute('contentEditable');
+
+      const editedText = categoryType.textContent as string;
+
+      if (editedText.length === 0 || editedText === prevText) {
+        categoryType.innerHTML = prevText;
+        return;
+      }
+
+      // TODO category update
+      console.log(editedText);
+    });
+
+    categoryType.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        categoryType.blur();
+      } else if (e.key === 'Escape') {
+        categoryType.innerHTML = prevText;
+        categoryType.blur();
+      }
+    });
   }
 }
