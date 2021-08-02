@@ -1,0 +1,25 @@
+@import '@/scss/theme';
+
+.user-wrapper {
+  padding-top: 10rem;
+
+  .login-btn {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding: 1.4rem 2rem;
+    background-color: #222;
+    border: 0;
+    border-radius: 1rem;
+    color: white;
+    text-align: center;
+    @include bold-large;
+    font-size: 2rem;
+
+    svg {
+      stroke: none;
+      fill: white;
+      margin-right: 1rem;
+    }
+  }
+}
