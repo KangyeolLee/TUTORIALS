@@ -1,10 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
-import UserService from './../services/user.services';
-import TokenService from '../services/token.services';
+import userService from './../services/user.services';
+import tokenService from '../services/token.services';
 import config from '../config';
 import { UserProfile } from '../types/types';
 import { setRandomString } from '../utils/helper';
 import { setCookiesForToken } from './../utils/helper';
+import { Container } from 'typedi';
+
+const UserServices = Container.get(userService);
+const TokenServices = Container.get(tokenService);
 
 class UserController {
   async requestGithub(req: Request, res: Response, next: NextFunction) {
@@ -20,16 +24,16 @@ class UserController {
   async login(req: Request, res: Response, next: NextFunction) {
     try {
       const { code } = req.query;
-      const accessToken: string = await UserService.getAccessToken(
+      const accessToken: string = await UserServices.getAccessToken(
         code as string
       );
-      const userProfile: UserProfile = await UserService.getUserProfile(
+      const userProfile: UserProfile = await UserServices.getUserProfile(
         accessToken
       );
 
-      const user = await UserService.findUserByGithubUser(userProfile.login);
-      const userId = await UserService.checkUserAlreadyExist(userProfile, user);
-      const { access, refresh } = await TokenService.issueToken(userId);
+      const user = await UserServices.findUserByGithubUser(userProfile.login);
+      const userId = await UserServices.checkUserAlreadyExist(userProfile, user);
+      const { access, refresh } = await TokenServices.issueToken(userId);
 
       setCookiesForToken(res, access, refresh);
 

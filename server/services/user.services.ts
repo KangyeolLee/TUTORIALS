@@ -4,9 +4,10 @@ import fetch from 'node-fetch';
 import config from '../config';
 import { UserProfile } from '../types/types';
 import User from '../entities/User';
-import { extractInsertId } from '../utils/helper';
+import { Service } from 'typedi';
 
-class UserService {
+@Service()
+export default class UserService {
   async findUserByGithubUser(githubUser: string): Promise<User | undefined> {
     try {
       const user = await getCustomRepository(UserRepository).findByGithubUser(
@@ -74,5 +75,3 @@ class UserService {
     }
   }
 }
-
-export default new UserService();

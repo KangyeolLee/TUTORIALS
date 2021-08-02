@@ -1,8 +1,10 @@
 import { sign, refresh } from '../utils/jwtAuth';
 import { getCustomRepository } from 'typeorm';
 import RefreshTokenRepository from '../repositories/refreshToken.repository';
+import { Service } from 'typedi';
 
-class TokenService {
+@Service()
+export default class TokenService {
   async issueToken(userId: number) {
     try {
       const accessToken = sign({ id: userId });
@@ -35,5 +37,3 @@ class TokenService {
     }
   }
 }
-
-export default new TokenService();
