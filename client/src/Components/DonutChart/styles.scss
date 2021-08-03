@@ -1,11 +1,16 @@
 @import '@/scss/theme';
 
-.chart-view {
-  circle {
-    cursor: pointer;
-    &:hover {
-      opacity: 0.75;
-      // transform: scale(1.1);
+#donut-chart {
+  .svg-text {
+    &.income {
+      stroke: $primary3 !important;
     }
+
+    &.outcome {
+      stroke: $red !important;
+    }
+  }
+  circle {
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.1));
   }
 }
