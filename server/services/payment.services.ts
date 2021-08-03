@@ -25,12 +25,20 @@ export default class PaymentService {
 
   async createPayment({ userId, type }: PaymentType) {
     try {
-      const payment = await getCustomRepository(
+      const existedPayment = await getCustomRepository(
         PaymentRepository
-      ).createPaymentForUser(type);
-      const {
-        raw: { insertId: paymentId },
-      }: ResultRawType = payment;
+      ).findPaymentByType(type);
+
+      // ID가 있는 경우에는 추가하지 않고 해당 페이먼트ID로 유저페이먼트에 추가
+      let paymentId;
+      if (existedPayment) {
+        paymentId = existedPayment.id;
+      } else {
+        const category = await getCustomRepository(
+          PaymentRepository
+        ).createPaymentForUser(type);
+        paymentId = category.raw.insertId.paymentId;
+      }
 
       const result = await getCustomRepository(
         UserPaymentRepository

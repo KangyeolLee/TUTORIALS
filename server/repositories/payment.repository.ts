@@ -49,6 +49,10 @@ export class UserPaymentRepository extends Repository<UserPayment> {
 
 @EntityRepository(Payment)
 export class PaymentRepository extends Repository<Payment> {
+  findPaymentByType(type: string): Promise<Payment | undefined> {
+    return this.findOne({ type });
+  }
+
   createPaymentForUser(type: string): Promise<InsertResult> {
     const result = this.create({ type });
     return this.insert(result);
