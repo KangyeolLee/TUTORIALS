@@ -157,7 +157,7 @@ export default class InputBar extends Component<State, Props> {
     ) as HTMLInputElement;
 
     const newHistory: IHistory = {
-      createAt: `${this.date.year}-${this.date.month}-${this.date.day}`,
+      createdAt: `${this.date.year}-${this.date.month}-${this.date.day}`,
       type: 0,
       category: $categoryInput.value,
       content: $contentInput.value,
