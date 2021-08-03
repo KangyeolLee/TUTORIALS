@@ -1,0 +1,47 @@
+@import '@/scss/theme';
+
+.user-categories {
+  padding: 3rem;
+
+  &:hover {
+    .add-button {
+      opacity: 1;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+  }
+
+  .add-button {
+    opacity: 0;
+    transition: opacity 200ms ease, transform 200ms ease;
+    cursor: pointer;
+    svg {
+      stroke: $primary3;
+    }
+  }
+
+  .user-category-title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .user-category-icons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 3rem;
+    row-gap: 2.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.content-box {
+  @include content-box;
+  width: auto;
+}
+
+.content-box-title {
+  @include bold-large;
+  font-size: 2rem;
+  color: $title-active;
+  margin-bottom: 3rem;
+}
