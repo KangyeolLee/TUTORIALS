@@ -39,6 +39,11 @@
 
   .icon {
     margin-right: 0.7rem;
+    border-radius: 1rem;
+    background-color: $line;
+    border: 0.1rem solid $placeholder;
+    width: 3.5rem;
+    height: 3.5rem;
   }
 
   .category-type {

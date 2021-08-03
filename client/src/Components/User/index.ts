@@ -1,20 +1,33 @@
 import './styles';
 import Component from '@/Core/Component';
-import { Props, State } from '@/utils/types';
-import { html } from '@/utils/helper';
+import { CategoryModelType, CategoryType, Props, State } from '@/utils/types';
+import { asyncSetState, html } from '@/utils/helper';
 import { apiLogout } from '@/api/auth';
 import { $router } from '@/Core/Router';
 import CategoryIcon from '@/Components/CategoryIcon';
+import CategoryModel from '@/Model/CategoryModel';
+import { category } from '@/assets/dummy';
 
 interface UserState extends State {
   user: {
     id: number;
     githubUser: string;
   };
+  categoryList?: CategoryType[];
 }
 
 export default class User extends Component<UserState, Props> {
+  categoryModel!: CategoryModelType;
+
+  async setup() {
+    this.categoryModel = CategoryModel;
+    this.categoryModel.subscribe(this.categoryModel.key, this);
+
+    asyncSetState(this.categoryModel.getUserCategories());
+  }
+
   template() {
+    console.log(this.$state);
     return html`
       <div class="user">
         <section class="content-box user-info">
@@ -27,11 +40,11 @@ export default class User extends Component<UserState, Props> {
             <span class="edit-button">편집</span>
           </section>
           <ul class="user-payments-icons">
-            ${CategoryIcon(1)}${CategoryIcon(1)}${CategoryIcon(
-              1
-            )}${CategoryIcon(1)}${CategoryIcon(1)}${CategoryIcon(
-              1
-            )}${CategoryIcon(1)}
+            ${!this.$state?.categoryList
+              ? ''
+              : this.$state?.categoryList
+                  .map((category) => CategoryIcon(category))
+                  .join('')}
           </ul>
         </section>
       </div>
