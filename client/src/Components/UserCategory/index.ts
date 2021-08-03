@@ -21,9 +21,7 @@ export default class UserCategory extends Component<UserCategoryState, Props> {
   }
 
   template() {
-    console.log(this.$state);
-
-    const d = html`
+    return html`
       <section class="content-box-title user-category-title">
         <span class="title">카테고리</span>
         <span class="add-button">${svgIcons.add}</span>
@@ -38,8 +36,10 @@ export default class UserCategory extends Component<UserCategoryState, Props> {
               .join('')}
       </ul>
     `;
-    console.log(d);
-    return d;
+  }
+
+  setUnmount() {
+    this.categoryModel.unsubscribe(this.categoryModel.key, this);
   }
 
   setEvent() {

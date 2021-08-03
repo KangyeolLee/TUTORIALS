@@ -12,13 +12,10 @@ interface UserState extends State {
     id: number;
     githubUser: string;
   };
-  categoryList?: CategoryType[];
 }
 
 export default class User extends Component<UserState, Props> {
   template() {
-    console.log(this.$state);
-
     return html`
       <div class="user">
         <section class="content-box user-info">
@@ -34,6 +31,7 @@ export default class User extends Component<UserState, Props> {
   }
 
   mounted() {
+    console.log('user mounted', this.$state);
     const $categoryBox = this.$target.querySelector(
       '.user-categories'
     ) as HTMLElement;
