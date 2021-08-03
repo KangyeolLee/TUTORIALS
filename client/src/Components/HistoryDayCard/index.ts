@@ -6,7 +6,6 @@ import {
   IHistory,
   IHistoryDayCardProps,
   HistoryModelType,
-  Props,
   State,
   Today,
   TodayModelType,
@@ -87,6 +86,7 @@ export default class HistoryDayCard extends Component<
     const { $totalNum, $incomeSum, $expenseSum } = this.$props!;
 
     const targetHistories = onlyToday ? historyCardForToday : historyCards;
+
     // 수입/지출 선택에 따른 historyList 추출
     const historyList = targetHistories.filter((history) => {
       if (historyType.expense && historyType.income) return true;
@@ -104,7 +104,7 @@ export default class HistoryDayCard extends Component<
       .filter((history) => history.type === 0)
       .reduce((acc, cur) => acc + Number(cur.price), 0);
 
-    if (!onlyToday) {
+    if (!onlyToday && $totalNum && $incomeSum && $expenseSum) {
       $totalNum!.innerText = historyList.length.toString();
       $incomeSum!.innerText = addComma(incomeSum!.toString());
       $expenseSum!.innerText = addComma(expenseSum!.toString());

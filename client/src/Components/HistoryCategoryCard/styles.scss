@@ -1,0 +1,45 @@
+@import '@/scss/theme';
+
+.category-percentage {
+  display: flex;
+  flex-direction: column;
+
+  .button-area {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    @include body-medium;
+
+    div {
+      cursor: pointer;
+    }
+  }
+
+  .category-card-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .category-card {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 0.1rem solid $line;
+
+      .percent {
+        @include body-medium;
+      }
+
+      .price {
+        @include body-medium;
+        flex: 1;
+        text-align: right;
+        font-weight: 500;
+        color: $title-active;
+      }
+    }
+  }
+}
