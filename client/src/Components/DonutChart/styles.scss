@@ -1,0 +1,11 @@
+@import '@/scss/theme';
+
+.chart-view {
+  circle {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.75;
+      // transform: scale(1.1);
+    }
+  }
+}
