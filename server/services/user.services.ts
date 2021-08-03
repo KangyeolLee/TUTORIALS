@@ -6,6 +6,7 @@ import { UserProfile } from '../types/types';
 import User from '../entities/User';
 import { Service } from 'typedi';
 import { extractInsertId } from '../utils/helper';
+import { UserCategoryRepository } from '../repositories/category.repository';
 
 @Service()
 export default class UserService {
@@ -31,6 +32,17 @@ export default class UserService {
     }
   }
 
+  async insertDefaultCategory(userId: number): Promise<InsertResult> {
+    try {
+      const res = await getCustomRepository(
+        UserCategoryRepository
+      ).insertDefaultCategory(userId);
+      return res;
+    } catch (error) {
+      throw new Error('[User 쿼리오류]' + error);
+    }
+  }
+
   async checkUserAlreadyExist(
     userProfile: UserProfile,
     user: User | undefined
@@ -41,6 +53,7 @@ export default class UserService {
       if (!user) {
         const result = await this.createUserByGithubUser(userProfile.login);
         userId = extractInsertId(result);
+        await this.insertDefaultCategory(userId);
       } else {
         userId = user.id;
       }

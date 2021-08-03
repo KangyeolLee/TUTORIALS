@@ -8,6 +8,16 @@ import Category from '../entities/Category';
 import UserCategory from '../entities/UserCategory';
 import { UserCategoryForRemoval, UserCategoryType } from '../types/types';
 
+const category = [
+  { id: 1, color: '#817DCE' },
+  { id: 2, color: '#4A6CC3' },
+  { id: 3, color: '#4CA1DE' },
+  { id: 4, color: '#94D3CC' },
+  { id: 5, color: '#4CB8B8' },
+  { id: 6, color: '#6ED5EB' },
+  { id: 7, color: '#D092E2' },
+];
+
 @EntityRepository(UserCategory)
 export class UserCategoryRepository extends Repository<UserCategory> {
   findAllByUserId(userId: number): Promise<UserCategory[] | undefined> {
@@ -38,6 +48,14 @@ export class UserCategoryRepository extends Repository<UserCategory> {
     id,
   }: UserCategoryForRemoval): Promise<DeleteResult> {
     return this.delete({ id, user: { id: userId } });
+  }
+
+  insertDefaultCategory(id: number): Promise<InsertResult> {
+    return this.insert(
+      category.map((c) => {
+        return { user: { id }, category: { id: c.id }, color: c.color };
+      })
+    );
   }
 }
 
