@@ -190,7 +190,7 @@ export default class InputBar extends Component<State, Props> {
 
     const newHistory: IHistory = {
       createdAt: `${this.date.year}-${this.date.month}-${this.date.day}`,
-      type: 0,
+      type: this.validation.isExpense ? 0 : 1,
       category: $categoryInput.value,
       content: $contentInput.value,
       payment: $paymentInput.value,

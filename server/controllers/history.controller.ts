@@ -29,7 +29,9 @@ class HistoryController {
   // 새로운 history 추가
   async insertHistory(req: Request, res: Response, next: NextFunction) {
     try {
+      const userId = getPayload(req);
       const { history } = req.body;
+      history.userId = userId;
       const historyId: number = await HistoryServices.insertHistory(history);
 
       res
