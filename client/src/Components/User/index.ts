@@ -1,7 +1,7 @@
 import './styles';
 import Component from '@/Core/Component';
-import { CategoryModelType, CategoryType, Props, State } from '@/utils/types';
-import { asyncSetState, html } from '@/utils/helper';
+import { CategoryType, Props, State } from '@/utils/types';
+import { html } from '@/utils/helper';
 import { apiLogout } from '@/api/auth';
 import { $router } from '@/Core/Router';
 import UserCategory from '../UserCategory';
@@ -25,8 +25,10 @@ export default class User extends Component<UserState, Props> {
           <span class="github-user">${this.$state!.user.githubUser}</span>
           <button class="logout-btn">로그아웃</button>
         </section>
-        <section class="content-box user-categories"></section>
-        <section class="content-box user-payments"></section>
+        <section class="user-boxes">
+          <section class="content-box user-categories"></section>
+          <section class="content-box user-payments"></section>
+        </section>
       </div>
     `;
   }
