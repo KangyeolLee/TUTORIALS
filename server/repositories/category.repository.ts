@@ -12,7 +12,9 @@ import { UserCategoryForRemoval, UserCategoryType } from '../types/types';
 export class UserCategoryRepository extends Repository<UserCategory> {
   findAllByUserId(userId: number): Promise<UserCategory[] | undefined> {
     return this.createQueryBuilder('user_category')
-      .select('category.type AS type, user_category.id AS id')
+      .select(
+        'user_category.id AS id, category.type AS type, user_category.color AS color'
+      )
       .leftJoin('user_category.category', 'category')
       .where('user_category.userId = :userId', { userId })
       .getRawMany();
