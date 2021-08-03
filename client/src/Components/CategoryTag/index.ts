@@ -1,15 +1,16 @@
+import { CategoryType } from '@/utils/types';
 import './styles';
-import { category } from '@/assets/dummy';
 
-export default function CategoryTag(categoryType: string) {
-  const type = categoryType;
-  const isExisting = category.filter((c) => c.type === type)[0];
+export default function CategoryTag(category: CategoryType) {
   return `
     <div
       class="category-tag"
-      data-id="${isExisting ? isExisting.id : category[6].id}"
+      data-id="${category.id}"
+      style="background-color: ${
+        category.id !== -1 ? category.color : '#d2d2d2'
+      };"
     >
-      ${isExisting ? isExisting.type : category[6].type}
+      ${category.type}
     </div>
   `;
 }

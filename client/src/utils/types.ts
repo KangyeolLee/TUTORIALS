@@ -230,7 +230,7 @@ export type PaymentType = {
  */
 export interface CategoryModelType extends Model {
   key: string;
-  categoryList: PaymentType[];
+  categoryList: CategoryType[];
   getUserCategories: () => Promise<curType>;
   deleteUserCategories: (id: number) => Promise<curType>;
   createUserCategories: (type: string, color: string) => Promise<curType>;
