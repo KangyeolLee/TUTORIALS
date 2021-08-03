@@ -1,38 +1,38 @@
 import Component from '@/Core/Component';
 import './styles';
-import { html, addComma, asyncSetState } from '@/utils/helper';
+import { html, asyncSetState } from '@/utils/helper';
 import {
   Props,
   TodayModelType,
-  MainModelType,
+  HistoryModelType,
   CalendarState,
   CalendarControllerType,
 } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 import CalendarController from '@/Controller/CalendarController';
 
 export default class Calendar extends Component<CalendarState, Props> {
   todayModel!: TodayModelType;
-  mainModel!: MainModelType;
+  historyModel!: HistoryModelType;
   calendarController!: CalendarControllerType;
 
   setup() {
     this.todayModel = DateModel;
     this.todayModel.subscribe(this.todayModel.key, this);
 
-    this.mainModel = MainModel;
-    this.mainModel.subscribe(this.mainModel.key, this);
+    this.historyModel = HistoryModel;
+    this.historyModel.subscribe(this.historyModel.key, this);
 
     this.calendarController = CalendarController;
 
     this.$state = {
       today: this.todayModel.today,
-      historyCards: this.mainModel.historyCards,
-      historyCardForToday: this.mainModel.historyCardForToday,
+      historyCards: this.historyModel.historyCards,
+      historyCardForToday: this.historyModel.historyCardForToday,
     };
 
-    asyncSetState(this.mainModel.getHistoryCard(this.$state!.today));
+    asyncSetState(this.historyModel.getHistoryCard(this.$state!.today));
   }
 
   template() {
@@ -64,7 +64,7 @@ export default class Calendar extends Component<CalendarState, Props> {
     const tid = (<HTMLElement>e.target).closest('.history-data')?.id;
     const date = tid?.match(regex)?.[0];
     asyncSetState(
-      this.mainModel.getTodaysHistoryCard({ ...today, day: +date! })
+      this.historyModel.getTodaysHistoryCard({ ...today, day: +date! })
     );
   }
 
@@ -74,6 +74,6 @@ export default class Calendar extends Component<CalendarState, Props> {
 
   setUnmount() {
     this.todayModel.unsubscribe(this.todayModel.key, this);
-    this.mainModel.unsubscribe(this.mainModel.key, this);
+    this.historyModel.unsubscribe(this.historyModel.key, this);
   }
 }

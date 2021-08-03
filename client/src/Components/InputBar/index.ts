@@ -5,14 +5,14 @@ import { svgIcons } from '@/assets/svgIcons';
 import {
   Props,
   State,
-  MainModelType,
+  HistoryModelType,
   IValidationType,
   IHistory,
 } from '@/utils/types';
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 
 export default class InputBar extends Component<State, Props> {
-  model!: MainModelType;
+  model!: HistoryModelType;
   inputCondition: boolean[] = new Array();
   validation!: IValidationType;
   date!: {
@@ -23,7 +23,7 @@ export default class InputBar extends Component<State, Props> {
 
   setup() {
     this.classIDF = 'InputBar';
-    this.model = MainModel;
+    this.model = HistoryModel;
     this.date = {
       year: new Date().getFullYear(),
       month: new Date().getMonth() + 1,
@@ -157,12 +157,13 @@ export default class InputBar extends Component<State, Props> {
     ) as HTMLInputElement;
 
     const newHistory: IHistory = {
-      date: `${this.date.year}-${this.date.month}-${this.date.day}`,
+      createAt: `${this.date.year}-${this.date.month}-${this.date.day}`,
       type: 0,
       category: $categoryInput.value,
       content: $contentInput.value,
       payment: $paymentInput.value,
       price: parseInt($priceInput.value.replace(/,/g, '')),
+      id: (Math.random() * 10) >> 0,
     };
 
     asyncSetState(this.model.addHistory(newHistory));

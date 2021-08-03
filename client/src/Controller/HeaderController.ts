@@ -1,16 +1,15 @@
-import MainModel from '@/Model/MainModel';
-import { MainModelType, TodayModelType } from '@/utils/types';
+import HistoryModel from '@/Model/HistoryModel';
+import { HistoryModelType, TodayModelType } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
 import { asyncSetState } from '@/utils/helper';
 
 class HeaderController {
-  historyModel!: MainModelType;
+  historyModel!: HistoryModelType;
   dateModel!: TodayModelType;
 
   constructor() {
-    this.historyModel = MainModel;
+    this.historyModel = HistoryModel;
     this.dateModel = DateModel;
-    // console.log(this.historyModel);
   }
 
   handleClickPrevBtn() {
@@ -43,6 +42,9 @@ class HeaderController {
         break;
       case '/charts':
         $target.querySelector('li#menu-chart')?.setAttribute('active', '');
+        break;
+      case '/user':
+        $target.querySelector('li#menu-user')?.setAttribute('active', '');
         break;
     }
   }

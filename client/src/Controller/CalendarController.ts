@@ -6,6 +6,7 @@ import {
 } from '@/utils/types';
 import { addComma, html, makeDateForm } from '@/utils/helper';
 import { IHistory } from '@/utils/types';
+import dayjs from 'dayjs';
 
 const SEVEN_DAYS = 7;
 const SIX_DAYS = 6;
@@ -90,24 +91,25 @@ class CalendarController {
   private filterHistories(historyCards: IHistory[]) {
     const histories: { [key: string]: HistoryTypeForDate } = {};
     historyCards?.forEach((history) => {
-      const { date, type, price } = history;
+      const { createdAt, type, price } = history;
+      const date = dayjs(createdAt).format('YYYY-MM-DD');
       const { income, outcome, amount } =
         histories[date]?.history ?? this.inititalState.history;
 
       if (type === INCOME) {
         histories[date] = {
           history: {
-            income: income ? income + price : price,
+            income: income ? +income + +price : +price,
             outcome,
-            amount: amount ? amount + price : price,
+            amount: amount ? +amount + +price : +price,
           },
         };
       } else if (type === OUTCOME) {
         histories[date] = {
           history: {
             income,
-            outcome: outcome ? outcome + price : -price,
-            amount: amount ? amount + price : -price,
+            outcome: outcome ? +outcome + -price : -price,
+            amount: amount ? +amount + -price : -price,
           },
         };
       }

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typedi';
+import { getPayload } from '../utils/helper';
 import historyServices from './../services/history.services';
 
 const HistoryServices = Container.get(historyServices);
@@ -12,7 +13,7 @@ class HistoryController {
       if (typeof year !== 'string' || typeof month !== 'string')
         throw new Error('year과 month가 유효하지 않습니다.');
 
-      const id: number = req.body.id;
+      const id: number = getPayload(req);
       const historyList = await HistoryServices.selectHistory(id, year, month);
 
       res
