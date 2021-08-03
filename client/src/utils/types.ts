@@ -207,6 +207,8 @@ export interface PaymentsModelType extends Model {
   key: string;
   paymentList: PaymentType[];
   getUserPayments: () => Promise<curType>;
+  deleteUserPayment: (id: number) => Promise<curType>;
+  createUserPayment: (type: string) => Promise<curType>;
 }
 export type PaymentType = {
   id: number;

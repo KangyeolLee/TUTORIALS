@@ -1,0 +1,80 @@
+@import '@/scss/theme';
+
+.payment-icon {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1rem 1.7rem 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.22);
+
+  &:hover {
+    .delete-icon {
+      opacity: 1;
+      background-color: $red;
+      svg {
+        width: 45%;
+        stroke: white;
+      }
+    }
+  }
+
+  .delete-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 200ms ease, transform 200ms ease;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 10rem;
+    cursor: pointer;
+    margin-left: 1rem;
+
+    svg {
+      width: 45%;
+      stroke: $red;
+    }
+  }
+
+  .card-icon {
+    position: relative;
+    margin-right: 0.7rem;
+    border-radius: 0.35rem;
+    background-color: $line;
+    border: 0.1rem solid $placeholder;
+    width: 5.53rem;
+    height: 3.5rem;
+    overflow: hidden;
+    .card-magnetic {
+      position: absolute;
+      top: 0.6rem;
+      background-color: black;
+      height: 0.9rem;
+      width: 100%;
+    }
+  }
+
+  .payment-type {
+    @include bold-medium;
+    line-height: 2rem;
+    white-space: initial;
+    cursor: default;
+    padding: 0.3rem 0.8rem;
+    transition: background-color ease 200ms;
+    border-radius: 8px;
+    word-break: break-all;
+
+    &[contentEditable] {
+      cursor: text;
+      background-color: #ddd;
+    }
+
+    &:focus {
+      outline-style: none;
+      background-color: #ddd;
+    }
+  }
+}
