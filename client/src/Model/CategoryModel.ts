@@ -1,4 +1,4 @@
-import { deleteCategory, getCategories } from '@/api/category';
+import { createCategory, deleteCategory, getCategories } from '@/api/category';
 import Observable from '@/Core/Observable';
 import { CategoryType } from '@/utils/types';
 
@@ -13,20 +13,34 @@ class CategoryModel extends Observable {
 
   async getUserCategories() {
     const res = await getCategories();
-    const nextCategoryList = res.data.categories;
-    this.categoryList = nextCategoryList;
+    this.categoryList = res.data.categories;
     return this.notify(this.key, {
-      categoryList: nextCategoryList,
+      categoryList: this.categoryList,
     });
   }
 
   async deleteUserCategories(id: number) {
     const res = await deleteCategory(id);
-    const nextCategoryList = this.categoryList.filter(
+    this.categoryList = this.categoryList.filter(
       (category) => category.id !== id
     );
     return this.notify(this.key, {
-      categoryList: nextCategoryList,
+      categoryList: this.categoryList,
+    });
+  }
+
+  async createUserCategories(type: string, color: string) {
+    const res = await createCategory({ type, color });
+    this.categoryList = [
+      ...this.categoryList,
+      {
+        type,
+        color,
+        id: res.data.insertId,
+      },
+    ];
+    return this.notify(this.key, {
+      categoryList: this.categoryList,
     });
   }
 }

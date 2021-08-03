@@ -32,7 +32,23 @@
   .user-payments {
     padding: 3rem;
 
-    .content-box-title .user-category-title {
+    &:hover {
+      .add-button {
+        opacity: 1;
+        transition: opacity 200ms ease, transform 200ms ease;
+      }
+    }
+
+    .add-button {
+      opacity: 0;
+      transition: opacity 200ms ease, transform 200ms ease;
+      cursor: pointer;
+      svg {
+        stroke: $primary3;
+      }
+    }
+
+    .user-category-title {
       display: flex;
       justify-content: space-between;
     }

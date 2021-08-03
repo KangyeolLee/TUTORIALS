@@ -6,6 +6,7 @@ import { apiLogout } from '@/api/auth';
 import { $router } from '@/Core/Router';
 import CategoryIcon from '@/Components/CategoryIcon';
 import CategoryModel from '@/Model/CategoryModel';
+import { svgIcons } from '@/assets/svgIcons';
 
 interface UserState extends State {
   user: {
@@ -36,7 +37,7 @@ export default class User extends Component<UserState, Props> {
         <section class="content-box user-payments">
           <section class="content-box-title user-category-title">
             <span class="title">카테고리</span>
-            <span class="edit-button">편집</span>
+            <span class="add-button">${svgIcons.add}</span>
           </section>
           <ul class="user-payments-icons">
             ${!this.$state?.categoryList
@@ -61,17 +62,34 @@ export default class User extends Component<UserState, Props> {
     $router.push('/main');
   }
 
-  handleClick(e: Event) {
-    const target = e.target as HTMLElement;
-    const deleteIcon = target.closest<HTMLDivElement>('.delete-icon');
-    if (!deleteIcon) return;
-
+  handleDeleteCategory(target: HTMLElement) {
     const id = Number(
       target.closest<HTMLDivElement>('.category-icon')?.dataset.id
     );
 
     // TODO category delete => 삭제된 카테고리 '미분류'로 설정
     asyncSetState(this.categoryModel.deleteUserCategories(id));
+  }
+
+  handleAddCategory(target: HTMLElement) {
+    console.log('add');
+    asyncSetState(
+      this.categoryModel.createUserCategories('들어가랏', '#112233')
+    );
+  }
+
+  handleClick(e: Event) {
+    const target = e.target as HTMLElement;
+    const deleteIcon = target.closest<HTMLDivElement>('.delete-icon');
+    const addButton = target.closest<HTMLDivElement>('.add-button');
+    if (deleteIcon) {
+      this.handleDeleteCategory(target);
+      return;
+    }
+    if (addButton) {
+      this.handleAddCategory(target);
+      return;
+    }
   }
 
   handleDoubleClick(e: Event) {
