@@ -1,0 +1,76 @@
+@import '@/scss/theme';
+
+.user {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 23rem auto;
+  column-gap: 4rem;
+
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.9rem;
+    height: fit-content;
+
+    .github-user {
+      @include bold-large;
+      color: black;
+    }
+
+    .logout-btn {
+      @include bold-small;
+      cursor: pointer;
+      padding: 0.5rem 1.2rem;
+      background-color: $primary1;
+      border: 0;
+      border-radius: 1rem;
+      color: white;
+    }
+  }
+
+  .user-payments {
+    padding: 3rem;
+
+    &:hover {
+      .add-button {
+        opacity: 1;
+        transition: opacity 200ms ease, transform 200ms ease;
+      }
+    }
+
+    .add-button {
+      opacity: 0;
+      transition: opacity 200ms ease, transform 200ms ease;
+      cursor: pointer;
+      svg {
+        stroke: $primary3;
+      }
+    }
+
+    .user-payment-title {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .user-payments-icons {
+      display: flex;
+      flex-direction: column;
+      row-gap: 2.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.content-box {
+  @include content-box;
+  width: auto;
+}
+
+.content-box-title {
+  @include bold-large;
+  font-size: 2rem;
+  color: $title-active;
+  margin-bottom: 3rem;
+}

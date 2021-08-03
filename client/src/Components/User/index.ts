@@ -1,10 +1,11 @@
 import './styles';
 import Component from '@/Core/Component';
-import { Props, State } from '@/utils/types';
+import { CategoryType, Props, State } from '@/utils/types';
 import { html } from '@/utils/helper';
 import { apiLogout } from '@/api/auth';
 import { $router } from '@/Core/Router';
-import CategoryIcon from '@/Components/CategoryIcon';
+import UserCategory from '../UserCategory';
+import UserPayment from '../UserPayment';
 
 interface UserState extends State {
   user: {
@@ -21,37 +22,27 @@ export default class User extends Component<UserState, Props> {
           <span class="github-user">${this.$state!.user.githubUser}</span>
           <button class="logout-btn">로그아웃</button>
         </section>
-        <section class="content-box user-payments">
-          <section class="content-box-title user-category-title">
-            <span class="title">카테고리</span>
-            <span class="edit-button">편집</span>
-          </section>
-          <ul class="user-payments-icons">
-            ${CategoryIcon(1)}${CategoryIcon(1)}${CategoryIcon(
-              1
-            )}${CategoryIcon(1)}${CategoryIcon(1)}${CategoryIcon(
-              1
-            )}${CategoryIcon(1)}
-          </ul>
+        <section class="user-boxes">
+          <section class="content-box user-categories"></section>
+          <section class="content-box user-payments"></section>
         </section>
       </div>
     `;
   }
 
   mounted() {
-    const $userPaymentsIcons = this.$target.querySelector(
-      '.user-payments-icons'
+    const $categoryBox = this.$target.querySelector(
+      '.user-categories'
     ) as HTMLElement;
+    new UserCategory($categoryBox);
+    const $paymentBox = this.$target.querySelector(
+      '.user-payments'
+    ) as HTMLElement;
+    new UserPayment($paymentBox);
   }
 
   setEvent() {
-    this.addEvent('click', '.logout-btn', this.handleLogOut.bind(this));
-
-    this.addEvent('dblclick', '.user-payments', (e: Event) => {
-      const target = e.target as HTMLElement;
-      const $categoryType = target.closest('.category-type');
-      $categoryType?.setAttribute('editable', '');
-    });
+    this.addEvent('click', '.logout-btn', this.handleLogOut);
   }
 
   async handleLogOut() {
