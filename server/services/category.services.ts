@@ -25,12 +25,21 @@ export default class CategoryService {
 
   async createCategory({ userId, type, color }: CategoryType) {
     try {
-      const category = await getCustomRepository(
+      const existedCategory = await getCustomRepository(
         CategoryRepository
-      ).createCategoryForUser(type);
-      const {
-        raw: { insertId: categoryId },
-      }: ResultRawType = category;
+      ).findCategoryByType(type);
+
+      // ID가 있는 경우에는 추가하지 않고 해당 카테고리ID로 유저카테고리에 추가
+      let categoryId;
+      if (existedCategory) {
+        categoryId = existedCategory.id;
+      } else {
+        const category = await getCustomRepository(
+          CategoryRepository
+        ).createCategoryForUser(type);
+
+        categoryId = category.raw.insertId.categoryId;
+      }
 
       const result = await getCustomRepository(
         UserCategoryRepository
