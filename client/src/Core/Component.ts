@@ -66,8 +66,10 @@ export default class Component<S extends State, P extends Props> {
   }
 
   setState(nextState: S) {
-    const next = { ...this.$state, ...nextState };
-    if (JSON.stringify(next) === JSON.stringify(this.$state)) return;
+    // console.log('prev : ', this.$state);
+    // const next = { ...this.$state, ...nextState };
+    // console.log('next : ', nextState, next);
+    // if (JSON.stringify(next) === JSON.stringify(this.$state)) return;
 
     this.$state = { ...this.$state, ...nextState };
     this.render();
