@@ -43,7 +43,9 @@ export default class UserCategory extends Component<UserCategoryState, Props> {
   }
 
   setEvent() {
-    this.addEvent('dblclick', '.user-categories', this.handleDoubleClick);
+    this.addEvent('dblclick', '.user-categories', (e: MouseEvent) =>
+      this.handleDoubleClick(e)
+    );
     this.addEvent('click', '.user-categories', this.handleClick.bind(this));
   }
 
