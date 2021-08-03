@@ -119,6 +119,7 @@ export interface IHistory {
 }
 
 export interface IValidationType {
+  isExpense: boolean;
   date: boolean;
   category: boolean;
   content: boolean;

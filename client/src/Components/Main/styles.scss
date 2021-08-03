@@ -1,19 +1,23 @@
 @import '@/scss/theme';
 
-.main-history-total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  @include body-large;
-  color: $primary1;
+.main {
+  padding-top: 10rem;
 
-  .history-selectors {
+  .main-history-total {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    @include body-large;
+    color: $primary1;
 
-    .text {
-      @include body-regular;
-      vertical-align: top;
+    .history-selectors {
+      display: flex;
+      align-items: center;
+
+      .text {
+        @include body-regular;
+        vertical-align: top;
+      }
     }
   }
 }
