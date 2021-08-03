@@ -31,7 +31,6 @@ export default class User extends Component<UserState, Props> {
   }
 
   mounted() {
-    console.log('user mounted', this.$state);
     const $categoryBox = this.$target.querySelector(
       '.user-categories'
     ) as HTMLElement;
