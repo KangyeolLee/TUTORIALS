@@ -1,7 +1,18 @@
 import './styles';
 import Component from '@/Core/Component';
-import { Props, State } from '@/utils/types';
-import { html } from '@/utils/helper';
+import {
+  ChartControllerType,
+  HistoryModelType,
+  IHistory,
+  Props,
+  State,
+  Today,
+  TodayModelType,
+} from '@/utils/types';
+import { asyncSetState, html } from '@/utils/helper';
+import ChartController from '@/Controller/ChartController';
+import HistoryModel from '@/Model/HistoryModel';
+import DateModel from '@/Model/DateModel';
 
 const data = [
   {
@@ -22,7 +33,36 @@ const data = [
   },
 ];
 
-export default class DonutChart extends Component<State, Props> {
+interface IListStates extends State {
+  historyCards: IHistory[];
+  today: Today;
+  selectedType: number;
+}
+
+export default class DonutChart extends Component<IListStates, Props> {
+  historyModel!: HistoryModelType;
+  dateModel!: TodayModelType;
+  chartController!: ChartControllerType;
+
+  setup() {
+    this.classIDF = 'DonutChart';
+
+    this.historyModel = HistoryModel;
+    this.historyModel.subscribe(this.historyModel.key, this);
+    this.chartController = ChartController;
+
+    this.dateModel = DateModel;
+    this.dateModel.subscribe(this.dateModel.key, this);
+
+    this.$state = {
+      historyCards: this.historyModel.historyCards,
+      today: this.dateModel.today,
+      selectedType: this.historyModel.selectedType,
+    };
+
+    asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
+  }
+
   template() {
     return html`
       <svg
@@ -32,47 +72,34 @@ export default class DonutChart extends Component<State, Props> {
         xmlns="http://w3.org/2000/svg"
         version="1.1"
         viewBox="0 0 100 100"
-      ></svg>
+      >
+        <text y="50%" transform="translate(0, 2)" font-family: "Arial, Helvetica, sans-serif">
+          <tspan
+            x="50%"
+            text-anchor="middle"
+            class="svg-text ${this.$state?.selectedType ? 'income' : 'outcome'}"
+          >
+            ${this.$state?.selectedType ? '수입' : '지출'}
+          </tspan>
+        </text>
+      </svg>
     `;
   }
 
   mounted() {
-    const $svg = document.querySelector('svg#donut-chart');
-    let filled = 0;
-    data.forEach((d, i) => {
-      const circle = document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'circle'
+    const { historyCards, selectedType } = this.$state!;
+    const { categoryCards, categories } =
+      this.chartController.filterHistoryCardByCategory(
+        historyCards,
+        selectedType
       );
-      const startAngle = -90;
-      const radius = 30;
-      const cx = 50,
-        cy = 50;
-      const strokeWidth = 15;
-      const dashArray = 2 * Math.PI * radius;
-      const dashOffset = dashArray - (dashArray * d.percent) / 100;
-      const currentDuration = (800 * d.percent) / 100;
-      const delay = (800 * filled) / 100;
-      const angle = (filled * 360) / 100 + startAngle;
-      circle.setAttribute('r', radius);
-      circle.setAttribute('cx', cx);
-      circle.setAttribute('cy', cy);
-      circle.setAttribute('fill', 'transparent');
-      circle.setAttribute('stroke', d.color);
-      circle.setAttribute('stroke-width', strokeWidth);
-      circle.setAttribute('stroke-dasharray', dashArray);
-      circle.setAttribute('stroke-dashoffset', dashArray);
-      circle.style.transition =
-        'stroke-dashoffset ' + currentDuration + 'ms linear ' + delay + 'ms';
-      circle.setAttribute(
-        'transform',
-        'rotate(' + angle + ' ' + cx + ' ' + cy + ')'
-      );
-      $svg?.append(circle);
-      filled += d.percent;
-      setTimeout(function () {
-        circle.style['stroke-dashoffset'] = dashOffset;
-      }, 100);
-    });
+
+    const $svg = document.querySelector('svg#donut-chart') as HTMLElement;
+    this.chartController.makeDonutChart(categories, categoryCards, $svg);
+  }
+
+  setUnmount() {
+    this.historyModel.unsubscribe(this.historyModel.key, this);
+    this.dateModel.unsubscribe(this.dateModel.key, this);
   }
 }

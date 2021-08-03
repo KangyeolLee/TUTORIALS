@@ -85,10 +85,18 @@ export interface HistoryModelType extends Model {
   historyCards: IHistory[];
   historyType: HistoryType;
   historyCardForToday: IHistory[];
+  selectedType: number;
+  selectedCategory: string;
+  selectedHistoryForCategory: IHistory[];
   getHistoryCard: ({ year, month }: Today) => Promise<curType>;
   addHistory: (history: IHistory) => Promise<curType>;
   toggleType: (nextType: typeString) => Promise<curType>;
+  toggleSelectedType: (type: number) => Promise<curType>;
   getTodaysHistoryCard: (today: Today) => Promise<curType>;
+  getHistoryCardForCategory: (
+    selectedCategory: string,
+    selectedHistories: IHistory[]
+  ) => Promise<curType>;
   getHistoryPayAmount: () => PriceAmountType;
   initHistoryForToday: () => Promise<curType>;
 }
@@ -230,4 +238,32 @@ export type CategoryType = {
   id: number;
   type: string;
   color: string;
+};
+
+/**
+ * @example
+ * ChartController 데이터 관련 타입
+ */
+export type CategoryCardsType = {
+  [key: string]: {
+    price: number;
+    percent: number;
+  };
+};
+
+export type ChartControllerType = {
+  filterHistoryCardByCategory: (
+    historyCards: IHistory[],
+    type: number
+  ) => { categories: string[]; categoryCards: CategoryCardsType };
+  filterHistoryCardBySelectedCategory: (
+    historyCards: IHistory[],
+    type: number,
+    selectedCategory: string
+  ) => void;
+  makeDonutChart: (
+    categories: string[],
+    categoryCards: CategoryCardsType,
+    $svg: HTMLElement
+  ) => void;
 };

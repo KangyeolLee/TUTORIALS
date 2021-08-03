@@ -11,12 +11,18 @@ import {
 } from '@/utils/types';
 import dayjs from 'dayjs';
 
+const INCOME = 1;
+const EXPENSE = 0;
+
 class HistoryModel extends Observable {
   key: string = 'history';
   historyCards: IHistory[];
   historyType: HistoryType;
   priceAmount: PriceAmountType;
   historyCardForToday: IHistory[];
+  selectedType: number;
+  selectedCategory: string;
+  selectedHistoryForCategory: IHistory[];
 
   constructor() {
     super();
@@ -31,6 +37,9 @@ class HistoryModel extends Observable {
       outcome: 0,
     };
     this.historyCardForToday = [];
+    this.selectedType = EXPENSE;
+    this.selectedCategory = '';
+    this.selectedHistoryForCategory = [];
   }
 
   async getHistoryCard(today: Today) {
@@ -39,6 +48,18 @@ class HistoryModel extends Observable {
     const { historyList } = data;
     this.historyCards = historyList;
     return this.notify(this.key, { historyCards: historyList });
+  }
+
+  getHistoryCardForCategory(
+    selectedCategory: string,
+    selectedHistoryForCategory: IHistory[]
+  ) {
+    this.selectedCategory = selectedCategory;
+    this.selectedHistoryForCategory = selectedHistoryForCategory;
+    return this.notify(this.key, {
+      selectedCategory: this.selectedCategory,
+      selectedHistoryForCategory: this.selectedHistoryForCategory,
+    });
   }
 
   getTodaysHistoryCard(today: Today) {
@@ -71,25 +92,9 @@ class HistoryModel extends Observable {
     return this.notify(this.key, { historyType: this.historyType });
   }
 
-  private filterHistoryCardsByMonth(today: Today): void {
-    this.historyCards = dummyhistories
-      .filter((history) => {
-        const [year, month, _] = history.createdAt
-          .split('-')
-          .map((d) => parseInt(d));
-        return today.year === year && today.month === month;
-      })
-      .map((history) => {
-        return {
-          createdAt: history.createdAt,
-          type: history.type,
-          category: history.category,
-          content: history.content,
-          payment: history.payment,
-          price: history.price,
-          id: history.id,
-        };
-      });
+  toggleSelectedType(type: number) {
+    this.selectedType = type;
+    return this.notify(this.key, { selectedType: this.selectedType });
   }
 
   private filterHistoryPriceAmount() {

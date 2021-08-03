@@ -7,11 +7,22 @@
   .button-area {
     display: flex;
     justify-content: flex-end;
+    float: right;
     gap: 1rem;
     @include body-medium;
 
-    div {
+    .button {
       cursor: pointer;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+
+      &.active {
+        background-color: $primary1;
+        color: $white;
+      }
+      &:hover {
+        opacity: 0.75;
+      }
     }
   }
 
@@ -19,15 +30,20 @@
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 
     .category-card {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 1rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
       border-bottom: 0.1rem solid $line;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $backgrond;
+      }
 
       .percent {
         @include body-medium;

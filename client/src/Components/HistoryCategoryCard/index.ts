@@ -7,12 +7,13 @@ import {
   HistoryModelType,
   IHistory,
   Today,
-  HistoryType,
   TodayModelType,
+  ChartControllerType,
 } from '@/utils/types';
 import HistoryModel from '@/Model/HistoryModel';
 import DateModel from '@/Model/DateModel';
 import CategoryTag from '@/Components/CategoryTag';
+import ChartController from '@/Controller/ChartController';
 
 const EXPENSE = 0;
 const INCOME = 1;
@@ -20,24 +21,19 @@ const INCOME = 1;
 interface IListStates extends State {
   historyCards: IHistory[];
   today: Today;
-  type: number;
+  selectedType: number;
 }
-
-type accType = {
-  [key: string]: {
-    price: number;
-    percent: number;
-  };
-};
 
 export default class HistoryCategoryCard extends Component<IListStates, Props> {
   historyModel!: HistoryModelType;
   dateModel!: TodayModelType;
+  chartController!: ChartControllerType;
 
   setup() {
     this.classIDF = 'HistoryCategoryCard';
     this.historyModel = HistoryModel;
     this.historyModel.subscribe(this.historyModel.key, this);
+    this.chartController = ChartController;
 
     this.dateModel = DateModel;
     this.dateModel.subscribe(this.dateModel.key, this);
@@ -45,27 +41,42 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
     this.$state = {
       historyCards: this.historyModel.historyCards,
       today: this.dateModel.today,
-      type: EXPENSE,
+      selectedType: this.historyModel.selectedType,
     };
 
     asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
   }
 
   template() {
-    const { categories, categoryCards } = this.composeCategory();
-    console.log(categories, categoryCards);
+    const { selectedType, historyCards } = this.$state!;
+    const { categories, categoryCards } =
+      this.chartController.filterHistoryCardByCategory(
+        historyCards,
+        selectedType
+      );
+
     return html`
       <div class="category-percentage">
         <div class="button-area">
-          <div id="income">수입</div>
-          <div id="outcome">지출</div>
+          <div
+            class="button ${selectedType === INCOME && 'active'}"
+            id="income"
+          >
+            수입
+          </div>
+          <div
+            class="button ${selectedType === EXPENSE && 'active'}"
+            id="outcome"
+          >
+            지출
+          </div>
         </div>
 
         <ul class="category-card-list">
           ${categories
             .map(
               (category) => `
-            <li class="category-card">
+            <li class="category-card" data-category="${category}">
               <span class="category">${CategoryTag(category)}</span>
               <span class="percent">${categoryCards[category].percent}%</span>
               <span class="price">${addComma(
@@ -80,55 +91,28 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
     `;
   }
 
-  toggleTypeToIncome() {
-    this.setState({ ...this.$state!, type: INCOME });
+  handleClickOnCard(selectedCategory: string) {
+    const { selectedType, historyCards } = this.$state!;
+    this.chartController.filterHistoryCardBySelectedCategory(
+      historyCards,
+      selectedType,
+      selectedCategory
+    );
   }
 
-  toggleTypeToExpense() {
-    this.setState({ ...this.$state!, type: EXPENSE });
+  toggleSelectedType(type: number) {
+    asyncSetState(this.historyModel.toggleSelectedType(type));
   }
 
   setEvent() {
-    this.addEvent('click', '#income', () => this.toggleTypeToIncome());
-    this.addEvent('click', '#outcome', () => this.toggleTypeToExpense());
-  }
-
-  composeCategory() {
-    const { historyCards, type } = this.$state!;
-    const typedHistoryCards = historyCards.filter(
-      (history) => history.type === type
-    );
-    const categories = Array.from(
-      new Set(typedHistoryCards.map((history) => history.category))
-    );
-
-    const priceAmount = historyCards
-      .filter((history) => history.type === type)
-      .reduce((acc, cur) => {
-        return acc + Number(cur.price);
-      }, 0);
-
-    console.log(priceAmount);
-
-    const categoryCards = typedHistoryCards.reduce((acc: accType, history) => {
-      if (!acc[history.category]) {
-        acc[history.category] = { price: 0, percent: 0 };
-        acc[history.category].price += +history.price;
-        return acc;
-      }
-
-      acc[history.category].price += +history.price;
-      return acc;
-    }, {});
-
-    Object.entries(categoryCards).forEach((card) => {
-      const [key, value] = card;
-      categoryCards[key].percent = Math.round(
-        (value.price / priceAmount) * 100
-      );
+    this.addEvent('click', '#income', () => this.toggleSelectedType(INCOME));
+    this.addEvent('click', '#outcome', () => this.toggleSelectedType(EXPENSE));
+    this.addEvent('click', '.category-card', (e: MouseEvent) => {
+      const selectedCategory = (<HTMLElement>(
+        (<HTMLElement>e.target)?.closest('.category-card')
+      )).dataset.category;
+      this.handleClickOnCard(selectedCategory!);
     });
-
-    return { categories, categoryCards };
   }
 
   setUnmount() {

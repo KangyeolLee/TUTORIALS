@@ -3,7 +3,8 @@ import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import { Props, State } from '@/utils/types';
 import DonutChart from '@/Components/DonutChart';
-import HistoryCategoryCard from './../../Components/HistoryCategoryCard/index';
+import HistoryCategoryCard from '@/Components/HistoryCategoryCard/index';
+import LineChart from '@/Components/LineChart/index';
 
 export default class ChartsView extends Component<State, Props> {
   template() {
@@ -27,10 +28,15 @@ export default class ChartsView extends Component<State, Props> {
   }
 
   mounted() {
-    const $chart = this.$target.querySelector(
+    const $donutChart = this.$target.querySelector(
       '.donut-chart-view'
     ) as HTMLElement;
-    new DonutChart($chart);
+    new DonutChart($donutChart);
+
+    const $lineChart = this.$target.querySelector(
+      '.line-chart-view'
+    ) as HTMLElement;
+    new LineChart($lineChart);
 
     const $historyCategoryList = this.$target.querySelector(
       '.history-category-list-wrapper'
