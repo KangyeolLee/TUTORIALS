@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const APIENDPOINT = `http://localhost:3000/api/categories`;
 
-export const getCategories = async () => await axios.get(`${APIENDPOINT}`);
+export const getCategories = async () =>
+  await axios.get(`${APIENDPOINT}`, { withCredentials: true });
 
 export const createCategory = async ({
   type,
@@ -11,12 +12,16 @@ export const createCategory = async ({
   type: string;
   color: string;
 }) =>
-  await axios.post(`${APIENDPOINT}`, {
-    type,
-    color,
-  });
+  await axios.post(
+    `${APIENDPOINT}`,
+    {
+      type,
+      color,
+    },
+    { withCredentials: true }
+  );
 
 export const deleteCategory = async (categoryId: number) =>
-  await axios.delete(`${APIENDPOINT}/${categoryId}`);
+  await axios.delete(`${APIENDPOINT}/${categoryId}`, { withCredentials: true });
 
 //ByeBYE~!

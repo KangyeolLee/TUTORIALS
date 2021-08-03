@@ -29,6 +29,7 @@
     width: 2.2rem;
     height: 2.2rem;
     border-radius: 10rem;
+    cursor: pointer;
 
     svg {
       width: 45%;
@@ -38,10 +39,17 @@
 
   .icon {
     margin-right: 0.7rem;
+    border-radius: 1rem;
+    background-color: $line;
+    border: 0.1rem solid $placeholder;
+    width: 3.5rem;
+    min-width: 3.5rem;
+    height: 3.5rem;
   }
 
   .category-type {
     @include bold-medium;
+    width: 100%;
     line-height: 2rem;
     white-space: initial;
     cursor: default;
@@ -50,11 +58,17 @@
     border-radius: 8px;
     word-break: break-all;
 
-    &[editable] {
+    &[contentEditable] {
       cursor: text;
+      background-color: #ddd;
     }
 
     &:hover {
+      background-color: #ddd;
+    }
+
+    &:focus {
+      outline-style: none;
       background-color: #ddd;
     }
   }

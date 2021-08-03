@@ -29,33 +29,8 @@
     }
   }
 
-  .user-payments {
-    padding: 3rem;
-
-    .content-box-title .user-category-title {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .user-payments-icons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      column-gap: 3rem;
-      row-gap: 2.5rem;
-      justify-content: center;
-      align-items: center;
-    }
+  .user-boxes {
+    display: grid;
+    row-gap: 4rem;
   }
-}
-
-.content-box {
-  @include content-box;
-  width: auto;
-}
-
-.content-box-title {
-  @include bold-large;
-  font-size: 2rem;
-  color: $title-active;
-  margin-bottom: 3rem;
 }

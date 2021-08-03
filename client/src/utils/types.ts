@@ -212,3 +212,20 @@ export type PaymentType = {
   id: number;
   type: string;
 };
+
+/**
+ * @example
+ * CategoryModel 데이터 관련 타입
+ */
+export interface CategoryModelType extends Model {
+  key: string;
+  categoryList: PaymentType[];
+  getUserCategories: () => Promise<curType>;
+  deleteUserCategories: (id: number) => Promise<curType>;
+  createUserCategories: (type: string, color: string) => Promise<curType>;
+}
+export type CategoryType = {
+  id: number;
+  type: string;
+  color: string;
+};
