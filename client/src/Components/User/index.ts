@@ -6,7 +6,6 @@ import { apiLogout } from '@/api/auth';
 import { $router } from '@/Core/Router';
 import CategoryIcon from '@/Components/CategoryIcon';
 import CategoryModel from '@/Model/CategoryModel';
-import { category } from '@/assets/dummy';
 
 interface UserState extends State {
   user: {
@@ -54,7 +53,7 @@ export default class User extends Component<UserState, Props> {
   setEvent() {
     this.addEvent('click', '.logout-btn', this.handleLogOut);
     this.addEvent('dblclick', '.user-payments', this.handleDoubleClick);
-    this.addEvent('click', '.user-payments', this.handleClick);
+    this.addEvent('click', '.user-payments', this.handleClick.bind(this));
   }
 
   async handleLogOut() {
@@ -67,10 +66,12 @@ export default class User extends Component<UserState, Props> {
     const deleteIcon = target.closest<HTMLDivElement>('.delete-icon');
     if (!deleteIcon) return;
 
-    const categoryNode = deleteIcon.parentElement as HTMLElement;
-    categoryNode.remove();
+    const id = Number(
+      target.closest<HTMLDivElement>('.category-icon')?.dataset.id
+    );
 
     // TODO category delete => 삭제된 카테고리 '미분류'로 설정
+    asyncSetState(this.categoryModel.deleteUserCategories(id));
   }
 
   handleDoubleClick(e: Event) {
