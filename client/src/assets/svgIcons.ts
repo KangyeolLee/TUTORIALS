@@ -36,9 +36,10 @@ export const svgIcons = {
     <path d="M1 17L9 9L1 1" stroke="#FCFCFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     `,
-  minus: `<svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1.33325 1.5H10.6666" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+  minus: `<svg width="16" height="2" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M1 1H15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  
     `,
   user: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M16 16.3333C16 15.4493 15.6839 15.6014 15.1213 14.9763C14.5587 14.3512 13.7956 14 13 14H7C6.20435 14 5.44129 14.3512 4.87868 14.9763C4.31607 15.6014 4 15.4493 4 16.3333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

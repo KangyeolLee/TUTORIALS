@@ -300,6 +300,13 @@ export default class InputBar extends Component<State, Props> {
     this.validation.isExpense = +type ? false : true;
     otherType.removeAttribute('active');
     target.setAttribute('active', '');
+
+    const priceIcon = this.$target.querySelector(
+      '#data-input>svg'
+    ) as HTMLElement;
+    priceIcon.outerHTML = this.validation.isExpense
+      ? svgIcons.minus
+      : svgIcons.add;
   }
 
   isValidated(): boolean {
