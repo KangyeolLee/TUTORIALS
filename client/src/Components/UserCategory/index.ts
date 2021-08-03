@@ -6,15 +6,11 @@ import CategoryIcon from '@/Components/CategoryIcon';
 import CategoryModel from '@/Model/CategoryModel';
 import { svgIcons } from '@/assets/svgIcons';
 
-interface UserState extends State {
-  user: {
-    id: number;
-    githubUser: string;
-  };
+interface UserCategoryState extends State {
   categoryList?: CategoryType[];
 }
 
-export default class UserCategory extends Component<UserState, Props> {
+export default class UserCategory extends Component<UserCategoryState, Props> {
   categoryModel!: CategoryModelType;
 
   async setup() {
@@ -72,7 +68,7 @@ export default class UserCategory extends Component<UserState, Props> {
     }
 
     const categoriesIcon = this.$target.querySelector(
-      '.user-categories-icons'
+      '.user-category-icons'
     ) as HTMLElement;
     const icon = document.createElement('div');
     icon.innerHTML = CategoryIcon({ color: randomColor, type: '', id: -1 });
@@ -95,7 +91,7 @@ export default class UserCategory extends Component<UserState, Props> {
     // blur: focus가 해제될 때(버블링 X)
     categoryType.addEventListener(
       'blur',
-      function handleBlur() {
+      function handleBlur(this: any) {
         categoryType.removeEventListener('blur', handleBlur);
         categoryType.removeAttribute('contentEditable');
 
