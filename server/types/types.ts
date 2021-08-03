@@ -5,7 +5,7 @@ export type HistoryType = {
   price: number;
   content: string;
   type: number;
-  createAt: string;
+  createdAt: string;
   userId: number;
 };
 
