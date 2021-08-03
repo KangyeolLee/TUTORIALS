@@ -4,38 +4,44 @@
   position: relative;
   width: 100%;
 
-  .chart-background {
+  .chart-view-area {
     position: absolute;
     width: 100%;
-    min-height: 60rem;
     top: -2.5rem;
-    padding: 3.5rem 5rem;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    border: 0.1rem solid $line2;
-    background-color: $white;
-    box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
-      0 0.4rem 2rem rgba(0, 0, 0, 0.1);
-    border-radius: 1rem;
 
-    .chart {
-      width: 50%;
+    .chart-background {
+      width: 100%;
+      min-height: 60rem;
+      padding: 3.5rem 5rem;
+      box-sizing: border-box;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: space-between;
+      border: 0.1rem solid $line2;
+      background-color: $white;
+      box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
+        0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+      border-radius: 1rem;
+
+      .chart-view {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        .donut-chart-view {
+          width: 50%;
+          height: 100%;
+        }
+
+        .history-category-list-wrapper {
+          width: 50%;
+          height: 100%;
+        }
+      }
     }
 
-    .chart-history-list {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      gap: 5rem;
-
-      .list-title {
-        @include body-large;
-        color: $title-active;
-      }
+    .chart-background + .chart-background {
+      margin-top: 5rem;
     }
   }
 }
