@@ -8,6 +8,8 @@ import UserPayment from './../entities/UserPayment';
 import Payment from './../entities/Payment';
 import { UserPaymentForRemoval, UserPaymentType } from '../types/types';
 
+const defaultPayments = [{ id: 1 }, { id: 2 }, { id: 3 }];
+
 @EntityRepository(UserPayment)
 export class UserPaymentRepository extends Repository<UserPayment> {
   findAllByUserId(userId: number): Promise<UserPayment[] | undefined> {
@@ -34,6 +36,14 @@ export class UserPaymentRepository extends Repository<UserPayment> {
     id,
   }: UserPaymentForRemoval): Promise<DeleteResult> {
     return this.delete({ id, user: { id: userId } });
+  }
+
+  insertDefaultPayment(id: number): Promise<InsertResult> {
+    return this.insert(
+      defaultPayments.map((p) => {
+        return { user: { id }, payment: { id: p.id } };
+      })
+    );
   }
 }
 
