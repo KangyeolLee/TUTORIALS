@@ -61,6 +61,10 @@ export class UserCategoryRepository extends Repository<UserCategory> {
 
 @EntityRepository(Category)
 export class CategoryRepository extends Repository<Category> {
+  findCategoryByType(type: string): Promise<Category | undefined> {
+    return this.findOne({ type });
+  }
+
   createCategoryForUser(type: string): Promise<InsertResult> {
     const result = this.create({ type });
     return this.insert(result);
