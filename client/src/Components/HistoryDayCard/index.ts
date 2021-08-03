@@ -1,10 +1,11 @@
 import Component from '@/Core/Component';
 import './styles';
+import dayjs from 'dayjs';
 import {
   HistoryType,
   IHistory,
   IHistoryDayCardProps,
-  MainModelType,
+  HistoryModelType,
   Props,
   State,
   Today,
@@ -12,7 +13,7 @@ import {
 } from '@/utils/types';
 import { addComma, asyncSetState, html } from '@/utils/helper';
 import HistoryList from '@/Components/HistoryList';
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 import DateModel from '@/Model/DateModel';
 
 interface IListStates extends State {
@@ -26,12 +27,12 @@ export default class HistoryDayCard extends Component<
   IListStates,
   IHistoryDayCardProps
 > {
-  historyModel!: MainModelType;
+  historyModel!: HistoryModelType;
   dateModel!: TodayModelType;
 
   setup() {
     this.classIDF = 'HistoryDayCard';
-    this.historyModel = MainModel;
+    this.historyModel = HistoryModel;
     this.historyModel.subscribe(this.historyModel.key, this);
 
     this.dateModel = DateModel;
@@ -44,7 +45,7 @@ export default class HistoryDayCard extends Component<
       historyType: this.historyModel.historyType,
     };
 
-    asyncSetState(this.historyModel.getHistoryCard(this.$state!.today));
+    asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
   }
 
   template() {
@@ -98,10 +99,10 @@ export default class HistoryDayCard extends Component<
 
     const incomeSum = historyList
       .filter((history) => history.type === 1)
-      .reduce((acc, cur) => acc + cur.price, 0);
+      .reduce((acc, cur) => acc + Number(cur.price), 0);
     const expenseSum = historyList
       .filter((history) => history.type === 0)
-      .reduce((acc, cur) => acc + cur.price, 0);
+      .reduce((acc, cur) => acc + Number(cur.price), 0);
 
     if (!onlyToday) {
       $totalNum!.innerText = historyList.length.toString();
@@ -110,19 +111,22 @@ export default class HistoryDayCard extends Component<
     }
 
     // 해당 월의 history 추출
-    const historyDates = historyList.map((history) => history.date);
+    const historyDates = historyList.map((history) =>
+      dayjs(history.createdAt).format('YYYY-MM-DD')
+    );
     // 카드를 생성할 날짜를 중복 제거한 후 배열로 저장
     const dates = Array.from(new Set(historyDates)).sort().reverse();
 
     const histories = historyList.reduce(
       (acc: Record<string, IHistory[]>, history) => {
-        if (!acc[history.date]) {
-          acc[history.date] = [];
-          acc[history.date].push(history);
+        const date = dayjs(history.createdAt).format('YYYY-MM-DD');
+        if (!acc[date]) {
+          acc[date] = [];
+          acc[date].push(history);
           return acc;
         }
 
-        acc[history.date].push(history);
+        acc[date].push(history);
         return acc;
       },
       {}
@@ -138,16 +142,16 @@ export default class HistoryDayCard extends Component<
   getExpenseTotal(curDateHistories: IHistory[]) {
     return curDateHistories
       .filter((history) => history.type === 0)
-      .reduce((acc, cur, i) => {
-        return acc + cur.price;
+      .reduce((acc, cur) => {
+        return acc + Number(cur.price);
       }, 0);
   }
 
   getIncomeTotal(curDateHistories: IHistory[]) {
     return curDateHistories
       .filter((history) => history.type === 1)
-      .reduce((acc, cur, i) => {
-        return acc + cur.price;
+      .reduce((acc, cur) => {
+        return acc + Number(cur.price);
       }, 0);
   }
 

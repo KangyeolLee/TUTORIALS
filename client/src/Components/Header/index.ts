@@ -3,7 +3,7 @@ import Component from '@/Core/Component';
 import { html } from '@/utils/helper';
 import { $router } from '@/Core/Router';
 import { svgIcons } from '@/assets/svgIcons';
-import { MainModelType, Props, TodayModelType } from '@/utils/types';
+import { HistoryModelType, Props, TodayModelType } from '@/utils/types';
 import DateModel from '@/Model/DateModel';
 import { DateState } from '@/utils/types';
 import HeaderController from '@/Controller/HeaderController';
@@ -11,7 +11,7 @@ import HeaderController from '@/Controller/HeaderController';
 export default class Header extends Component<DateState, Props> {
   dateModel!: TodayModelType;
   headerController!: any;
-  mainModel!: MainModelType;
+  mainModel!: HistoryModelType;
 
   setup() {
     this.classIDF = 'Header';
@@ -75,31 +75,8 @@ export default class Header extends Component<DateState, Props> {
     });
     this.addEvent('click', '#menu-user', () => {
       $router.push('/user');
-      this.changeMenu();
+      this.headerController.changeMenu(this.$target);
     });
-  }
-
-  changeMenu() {
-    const path = history.state.path as string;
-    this.$target
-      .querySelectorAll('li.menu-list')
-      .forEach((elem: Element) => elem.removeAttribute('active'));
-    switch (path) {
-      case '/main':
-        this.$target.querySelector('li#menu-main')?.setAttribute('active', '');
-        break;
-      case '/calendar':
-        this.$target
-          .querySelector('li#menu-calendar')
-          ?.setAttribute('active', '');
-        break;
-      case '/charts':
-        this.$target.querySelector('li#menu-chart')?.setAttribute('active', '');
-        break;
-      case '/user':
-        this.$target.querySelector('li#menu-user')?.setAttribute('active', '');
-        break;
-    }
   }
 
   removeEvent() {}

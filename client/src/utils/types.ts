@@ -72,7 +72,7 @@ export interface CalendarState extends State {
 
 /**
  * @example
- * MainModel 관련 타입
+ * HistoryModel 관련 타입
  */
 
 export type typeString = 'expense' | 'income';
@@ -80,17 +80,16 @@ export interface HistoryType {
   expense?: boolean;
   income?: boolean;
 }
-export interface MainModelType extends Model {
+export interface HistoryModelType extends Model {
   key: string;
   historyCards: IHistory[];
   historyType: HistoryType;
   historyCardForToday: IHistory[];
-  getHistoryCard: (today: Today) => Promise<curType>;
+  getHistoryCard: ({ year, month }: Today) => Promise<curType>;
   addHistory: (history: IHistory) => Promise<curType>;
   toggleType: (nextType: typeString) => Promise<curType>;
-  filterHistoryPriceAmount: () => PriceAmountType;
-  filterHistoryCardByDay: (today: Today) => void;
   getTodaysHistoryCard: (today: Today) => Promise<curType>;
+  getHistoryPayAmount: () => PriceAmountType;
   initHistoryForToday: () => Promise<curType>;
 }
 
@@ -110,12 +109,13 @@ export type PriceAmountType = {
  * history 리스트 타입
  */
 export interface IHistory {
-  date: string;
+  createdAt: string;
   type: number;
   category: string;
   content: string;
   payment: string;
   price: number;
+  id: number;
 }
 
 export interface IValidationType {

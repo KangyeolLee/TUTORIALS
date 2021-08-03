@@ -1,3 +1,4 @@
+import { getHistories } from '@/api/history';
 import { dummyhistories } from '@/assets/dummy';
 import Observable from '@/Core/Observable';
 import { makeDateForm } from '@/utils/helper';
@@ -8,8 +9,9 @@ import {
   typeString,
   PriceAmountType,
 } from '@/utils/types';
+import dayjs from 'dayjs';
 
-class MainModel extends Observable {
+class HistoryModel extends Observable {
   key: string = 'history';
   historyCards: IHistory[];
   historyType: HistoryType;
@@ -31,9 +33,23 @@ class MainModel extends Observable {
     this.historyCardForToday = [];
   }
 
-  getHistoryCard(today: Today) {
-    this.filterHistoryCardsByMonth(today);
-    return this.notify(this.key, { historyCards: this.historyCards });
+  async getHistoryCard(today: Today) {
+    const { year, month } = today;
+    const { data } = await getHistories({ year, month });
+    const { historyList } = data;
+    this.historyCards = historyList;
+    return this.notify(this.key, { historyCards: historyList });
+  }
+
+  getTodaysHistoryCard(today: Today) {
+    this.filterHistoryCardByDay(today);
+    return this.notify(this.key, {
+      historyCardForToday: this.historyCardForToday,
+    });
+  }
+
+  getHistoryPayAmount() {
+    return this.filterHistoryPriceAmount();
   }
 
   addHistory(history: IHistory) {
@@ -55,31 +71,32 @@ class MainModel extends Observable {
     return this.notify(this.key, { historyType: this.historyType });
   }
 
-  filterHistoryCardsByMonth(today: Today): void {
+  private filterHistoryCardsByMonth(today: Today): void {
     this.historyCards = dummyhistories
       .filter((history) => {
-        const [year, month, _] = history.create_time
+        const [year, month, _] = history.createdAt
           .split('-')
           .map((d) => parseInt(d));
         return today.year === year && today.month === month;
       })
       .map((history) => {
         return {
-          date: history.create_time,
+          createdAt: history.createdAt,
           type: history.type,
           category: history.category,
           content: history.content,
           payment: history.payment,
           price: history.price,
+          id: history.id,
         };
       });
   }
 
-  filterHistoryPriceAmount() {
+  private filterHistoryPriceAmount() {
     this.priceAmount = this.historyCards.reduce(
       (sum, history) => {
-        sum.amount += history.type ? history.price : -history.price;
-        sum.income += history.type ? history.price : 0;
+        sum.amount += history.type ? +history.price : -history.price;
+        sum.income += history.type ? +history.price : 0;
         sum.outcome += history.type ? 0 : -history.price;
         return sum;
       },
@@ -89,21 +106,14 @@ class MainModel extends Observable {
     return this.priceAmount;
   }
 
-  filterHistoryCardByDay(today: Today) {
+  private filterHistoryCardByDay(today: Today) {
     const { year, month, day } = today;
     const date = makeDateForm({ year, month, day: day! });
     const historyCardsForToday = this.historyCards.filter(
-      (history) => history.date === date
+      (history) => dayjs(history.createdAt).format('YYYY-MM-DD') === date
     );
     this.historyCardForToday = historyCardsForToday;
   }
-
-  getTodaysHistoryCard(today: Today) {
-    this.filterHistoryCardByDay(today);
-    return this.notify(this.key, {
-      historyCardForToday: this.historyCardForToday,
-    });
-  }
 }
 
-export default new MainModel();
+export default new HistoryModel();

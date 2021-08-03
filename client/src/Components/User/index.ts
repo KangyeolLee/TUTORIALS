@@ -45,7 +45,7 @@ export default class User extends Component<UserState, Props> {
   }
 
   setEvent() {
-    this.addEvent('click', '.logout-btn', this.handleLogOut);
+    this.addEvent('click', '.logout-btn', this.handleLogOut.bind(this));
 
     this.addEvent('dblclick', '.user-payments', (e: Event) => {
       const target = e.target as HTMLElement;

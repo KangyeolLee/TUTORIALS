@@ -1,20 +1,20 @@
 import './styles';
 import Component from '@/Core/Component';
-import { Props, State, MainModelType } from '@/utils/types';
+import { Props, State, HistoryModelType } from '@/utils/types';
 import { html, addComma } from '@/utils/helper';
-import MainModel from '@/Model/MainModel';
+import HistoryModel from '@/Model/HistoryModel';
 
 export default class PriceBar extends Component<State, Props> {
-  model!: MainModelType;
+  model!: HistoryModelType;
 
   setup() {
     this.classIDF = 'PriceBar';
-    this.model = MainModel;
+    this.model = HistoryModel;
     this.model.subscribe(this.model.key, this);
   }
 
   template() {
-    const { amount, income, outcome } = this.model.filterHistoryPriceAmount();
+    const { amount, income, outcome } = this.model.getHistoryPayAmount();
     return html`
       <div class="in-outcome">
         <span class="price-content income"
