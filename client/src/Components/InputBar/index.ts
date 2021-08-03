@@ -41,8 +41,8 @@ export default class InputBar extends Component<State, Props> {
 
   template() {
     return html`
-      <div class="input-bar-content" clicked>
-        ${svgIcons.delete}
+      <div class="input-bar-content">
+        ${svgIcons.add}
         <div class="input-content-wrapper">
           <div class="input-bar-title">
             <span>내역 추가하기</span>
