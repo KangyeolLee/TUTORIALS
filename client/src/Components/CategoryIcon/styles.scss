@@ -43,11 +43,13 @@
     background-color: $line;
     border: 0.1rem solid $placeholder;
     width: 3.5rem;
+    min-width: 3.5rem;
     height: 3.5rem;
   }
 
   .category-type {
     @include bold-medium;
+    width: 100%;
     line-height: 2rem;
     white-space: initial;
     cursor: default;
@@ -56,8 +58,9 @@
     border-radius: 8px;
     word-break: break-all;
 
-    &[editable] {
+    &[contentEditable] {
       cursor: text;
+      background-color: #ddd;
     }
 
     &:hover {
@@ -66,6 +69,7 @@
 
     &:focus {
       outline-style: none;
+      background-color: #ddd;
     }
   }
 }

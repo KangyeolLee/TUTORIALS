@@ -72,9 +72,63 @@ export default class User extends Component<UserState, Props> {
   }
 
   handleAddCategory(target: HTMLElement) {
-    console.log('add');
-    asyncSetState(
-      this.categoryModel.createUserCategories('들어가랏', '#112233')
+    const isEditing = this.$target.querySelector(
+      '.category-icon[data-id="-1"]'
+    );
+    if (isEditing) return;
+
+    const randomColor = `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
+    const paymentsIcon = this.$target.querySelector(
+      '.user-payments-icons'
+    ) as HTMLElement;
+    const icon = document.createElement('div');
+    icon.innerHTML = CategoryIcon({ color: randomColor, type: '', id: -1 });
+    const newCategory = icon.firstElementChild as HTMLElement;
+    paymentsIcon.append(newCategory);
+
+    const categoryType = newCategory.querySelector(
+      '.category-type'
+    ) as HTMLDivElement;
+
+    categoryType.contentEditable = 'true';
+    const selection = window.getSelection() as Selection;
+    const range = document.createRange();
+    range.collapse(true);
+    range.setStart(newCategory as Node, 0);
+    range.setEnd(newCategory as Node, 1);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    // blur: focus가 해제될 때(버블링 X)
+    categoryType.addEventListener(
+      'blur',
+      function handleBlur() {
+        categoryType.removeEventListener('blur', handleBlur);
+        categoryType.removeAttribute('contentEditable');
+
+        const editedText = categoryType.textContent as string;
+
+        if (editedText.length === 0) {
+          newCategory.remove();
+          return;
+        }
+        // TODO category update
+        console.log(editedText);
+
+        asyncSetState(
+          this.categoryModel.createUserCategories(editedText, randomColor)
+        );
+      }.bind(this)
+    );
+
+    categoryType.addEventListener(
+      'keydown',
+      function (e: KeyboardEvent) {
+        if (e.key === 'Enter' || e.key === 'Escape') {
+          e.preventDefault();
+          categoryType.blur();
+        }
+      }.bind(this)
     );
   }
 
@@ -120,9 +174,7 @@ export default class User extends Component<UserState, Props> {
         categoryType.innerHTML = prevText;
         return;
       }
-
       // TODO category update
-      console.log(editedText);
     });
 
     categoryType.addEventListener('keydown', (e) => {
