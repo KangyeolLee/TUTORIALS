@@ -1,4 +1,4 @@
-import { getHistories } from '@/api/history';
+import { getHistories, insertHistory } from '@/api/history';
 import { dummyhistories } from '@/assets/dummy';
 import Observable from '@/Core/Observable';
 import { makeDateForm } from '@/utils/helper';
@@ -73,11 +73,12 @@ class HistoryModel extends Observable {
     return this.filterHistoryPriceAmount();
   }
 
-  addHistory(history: IHistory) {
-    const nextHistory = [...this.historyCards, history];
-    this.historyCards = nextHistory;
+  async addHistory(history: IHistory) {
+    this.historyCards = [...this.historyCards, history];
+    const res = await insertHistory(history);
+    console.log(history);
 
-    return this.notify(this.key, { historyCards: nextHistory });
+    return this.notify(this.key, { historyCards: this.historyCards });
   }
 
   initHistoryForToday() {

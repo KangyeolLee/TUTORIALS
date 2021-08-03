@@ -1,1 +1,205 @@
 @import '@/scss/theme';
+
+.input-bar-content {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 5rem;
+  height: 5rem;
+  margin: 2rem 2rem;
+  border-radius: 10rem;
+  background-color: $primary1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: width 0.2s ease-in-out, height 0.2s ease-in-out,
+    border-radius 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
+    0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    stroke: white;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $primary2;
+    svg {
+      stroke: $primary1;
+    }
+  }
+
+  &[clicked] {
+    background-color: $off-white;
+    width: 35rem;
+    height: 57rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    border-radius: 1rem;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out,
+      border-radius 0.3s ease-in-out, background-color 0.1s ease-in-out;
+    cursor: auto;
+    display: initial;
+
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0 !important;
+    }
+
+    & > svg {
+      display: none;
+    }
+
+    .input-content-wrapper {
+      display: flex;
+      opacity: 1;
+      transition: opacity 0.6s ease-in-out;
+    }
+  }
+
+  .input-content-wrapper {
+    @include body-large;
+    display: none;
+    height: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+
+    .input-bar-title {
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.22);
+      text-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.22);
+      color: $title-active;
+      background-color: $primary2;
+      padding: 1.5rem 2rem;
+
+      .input-submit-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 1rem;
+        width: 3rem;
+        height: 3rem;
+        transition: background-color 0.2s ease-in-out;
+        svg {
+          stroke: $cancel;
+          transition: stroke 0.2s ease-in-out;
+        }
+
+        &:hover {
+          box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.22);
+          background-color: $cancel;
+          transition: background-color 0.2s ease-in-out;
+          svg {
+            stroke: white;
+            transition: stroke 0.2s ease-in-out;
+          }
+        }
+
+        &[active] {
+          box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.22);
+          background-color: white;
+          transition: background-color 0.2s ease-in-out;
+          svg {
+            stroke: $primary1;
+            transition: stroke 0.2s ease-in-out;
+          }
+
+          &:hover {
+            background-color: $primary1;
+            transition: background-color 0.2s ease-in-out;
+            svg {
+              stroke: white;
+              transition: stroke 0.2s ease-in-out;
+            }
+          }
+        }
+      }
+    }
+
+    .input-bar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 1rem;
+
+      .check-btn {
+        @include bold-large;
+        cursor: pointer;
+        display: flex;
+        gap: 1.5rem;
+        text-align: center;
+
+        .input-list-item {
+          transition: box-shadow 0.1s ease-in-out,
+            background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+          &:hover {
+            box-shadow: 0 0.3rem 0.6rem rgb(0 0 0 / 0.22),
+              0 -0.3rem 0.6rem rgb(0 0 0 / 0.22);
+            transition: box-shadow 0.1s ease-in-out;
+          }
+
+          &[active] {
+            transition: background-color 0.1s ease-in-out,
+              color 0.1s ease-in-out;
+            box-shadow: 0 0.3rem 0.6rem rgb(0 0 0 / 0.22),
+              0 -0.3rem 0.6rem rgb(0 0 0 / 0.22);
+            background-color: $primary1;
+            color: white;
+          }
+        }
+      }
+
+      .input-list-item {
+        @include body-regular;
+        box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.22);
+        color: $label;
+        padding: 1rem 2rem;
+        background-color: $off-white;
+        border-radius: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+
+        label {
+          display: block;
+          @include bold-small;
+          font-weight: 700;
+          color: $primary3;
+        }
+
+        input {
+          @include body-regular;
+          display: inline-block;
+          border: 0;
+          width: 100%;
+
+          &.input-date {
+            text-align: center;
+            width: 2rem;
+
+            &[name='date-year'] {
+              width: 4rem;
+            }
+          }
+        }
+
+        #data-input {
+          display: flex;
+          align-items: center;
+          color: black;
+
+          svg {
+            margin-right: 1rem;
+            stroke: black;
+          }
+        }
+      }
+    }
+  }
+}

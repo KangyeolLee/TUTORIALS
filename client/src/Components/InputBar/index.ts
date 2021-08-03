@@ -30,6 +30,7 @@ export default class InputBar extends Component<State, Props> {
       day: new Date().getDate(),
     };
     this.validation = {
+      isExpense: true,
       date: true,
       category: false,
       content: false,
@@ -40,64 +41,95 @@ export default class InputBar extends Component<State, Props> {
 
   template() {
     return html`
-      <ul class="input-bar">
-        <li>
-          <label for="date">일자</label>
-          <input
-            type="text"
-            maxlength="4"
-            name="date-year"
-            placeholder="2021"
-            class="input-date"
-            value=${new Date().getFullYear()}
-          />
-          <span>/</span>
-          <input
-            type="text"
-            maxlength="2"
-            name="date-month"
-            placeholder="08"
-            class="input-date"
-            value=${new Date().getMonth() + 1}
-          />
-          <span>/</span>
-          <input
-            type="text"
-            maxlength="2"
-            name="date-day"
-            placeholder="31"
-            class="input-date"
-            value=${new Date().getDate()}
-          />
-        </li>
-        <li>
-          <label for="category">분류</label>
-          <input name="category" placeholder="선택하세요" />
-        </li>
-        <li>
-          <label for="content">내용</label>
-          <input type="text" name="content" placeholder="입력하세요" />
-        </li>
-        <li>
-          <label for="payment">결제수단</label>
-          <input name="payment" placeholder="선택하세요" />
-        </li>
-        <li>
-          <label for="price">금액</label>
-          <div id="data-input">
-            ${svgIcons.minus}
-            <input type="text" name="price" placeholder="선택하세요" />원
+      <div class="input-bar-content">
+        ${svgIcons.add}
+        <div class="input-content-wrapper">
+          <div class="input-bar-title">
+            <span>내역 추가하기</span>
+            <span class="input-submit-button">${svgIcons.delete}</span>
           </div>
-        </li>
-        <button id="main-input-submit">${svgIcons.check}</button>
-      </ul>
+          <ul class="input-bar">
+            <li class="check-btn">
+              <div class="input-list-item" data-type="0" active>지출</div>
+              <div class="input-list-item" data-type="1">수입</div>
+            </li>
+            <li class="input-list-item">
+              <label for="date">일자</label>
+              <input
+                type="text"
+                maxlength="4"
+                name="date-year"
+                placeholder="2021"
+                class="input-date"
+                value=${new Date().getFullYear()}
+              />
+              <span>/</span>
+              <input
+                type="text"
+                maxlength="2"
+                name="date-month"
+                placeholder="08"
+                class="input-date"
+                value=${new Date().getMonth() + 1}
+              />
+              <span>/</span>
+              <input
+                type="text"
+                maxlength="2"
+                name="date-day"
+                placeholder="31"
+                class="input-date"
+                value=${new Date().getDate()}
+              />
+            </li>
+            <li class="input-list-item">
+              <label for="category">분류</label>
+              <input name="category" placeholder="선택하세요" />
+            </li>
+            <li class="input-list-item">
+              <label for="content">내용</label>
+              <input type="text" name="content" placeholder="입력하세요" />
+            </li>
+            <li class="input-list-item">
+              <label for="payment">결제수단</label>
+              <input name="payment" placeholder="선택하세요" />
+            </li>
+            <li class="input-list-item">
+              <label for="price">금액</label>
+              <div id="data-input">
+                ${svgIcons.minus}
+                <input type="text" name="price" placeholder="선택하세요" />원
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     `;
   }
 
   setEvent() {
+    this.addEvent('click', '.input-bar-content', (e: MouseEvent) => {
+      const target = (<HTMLElement>e.target).closest(
+        '.input-bar-content'
+      ) as HTMLDivElement;
+      target.setAttribute('clicked', '');
+    });
+    this.addEvent('click', '.input-submit-button', (e: MouseEvent) => {
+      const target = (<HTMLElement>e.target).closest(
+        '.input-bar-content'
+      ) as HTMLDivElement;
+      target.removeAttribute('clicked');
+    });
+
     this.addEvent(
       'click',
-      '#main-input-submit',
+      '.check-btn',
+      this.handleHistoryTypeButton.bind(this)
+    );
+
+    this.addEvent(
+      'click',
+      '.input-submit-button',
       this.handleSubmitButton.bind(this)
     );
 
@@ -157,8 +189,8 @@ export default class InputBar extends Component<State, Props> {
     ) as HTMLInputElement;
 
     const newHistory: IHistory = {
-      createAt: `${this.date.year}-${this.date.month}-${this.date.day}`,
-      type: 0,
+      createdAt: `${this.date.year}-${this.date.month}-${this.date.day}`,
+      type: this.validation.isExpense ? 0 : 1,
       category: $categoryInput.value,
       content: $contentInput.value,
       payment: $paymentInput.value,
@@ -174,6 +206,7 @@ export default class InputBar extends Component<State, Props> {
     $priceInput.value = '';
 
     this.validation = {
+      isExpense: true,
       date: true,
       category: false,
       content: false,
@@ -243,10 +276,37 @@ export default class InputBar extends Component<State, Props> {
 
   checkValidated(): void {
     const submitBtn = this.$target.querySelector(
-      '#main-input-submit'
+      '.input-submit-button'
     ) as HTMLElement;
-    if (this.isValidated()) submitBtn.setAttribute('active', '');
-    else submitBtn.removeAttribute('active');
+    if (this.isValidated()) {
+      submitBtn.innerHTML = svgIcons.check;
+      submitBtn.setAttribute('active', '');
+    } else {
+      submitBtn.innerHTML = svgIcons.delete;
+      submitBtn.removeAttribute('active');
+    }
+  }
+
+  handleHistoryTypeButton(e: MouseEvent) {
+    const target = (<HTMLElement>e.target).closest(
+      '.input-list-item'
+    ) as HTMLElement;
+    if (!target) return;
+
+    const type = Number(target.dataset.type);
+    const otherType = target.parentNode?.querySelector(
+      `[data-type="${+type ? 0 : 1}"]`
+    ) as HTMLElement;
+    this.validation.isExpense = +type ? false : true;
+    otherType.removeAttribute('active');
+    target.setAttribute('active', '');
+
+    const priceIcon = this.$target.querySelector(
+      '#data-input>svg'
+    ) as HTMLElement;
+    priceIcon.outerHTML = this.validation.isExpense
+      ? svgIcons.minus
+      : svgIcons.add;
   }
 
   isValidated(): boolean {
