@@ -72,12 +72,16 @@ export default class User extends Component<UserState, Props> {
   }
 
   handleAddCategory(target: HTMLElement) {
+    const randomColor = `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
     const isEditing = this.$target.querySelector(
       '.category-icon[data-id="-1"]'
     );
-    if (isEditing) return;
+    if (isEditing) {
+      const color = isEditing.querySelector('.icon') as HTMLElement;
+      color.style.backgroundColor = randomColor;
+      return;
+    }
 
-    const randomColor = `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
     const paymentsIcon = this.$target.querySelector(
       '.user-payments-icons'
     ) as HTMLElement;
