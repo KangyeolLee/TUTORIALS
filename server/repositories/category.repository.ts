@@ -8,7 +8,7 @@ import Category from '../entities/Category';
 import UserCategory from '../entities/UserCategory';
 import { UserCategoryForRemoval, UserCategoryType } from '../types/types';
 
-const category = [
+const defaultCategories = [
   { id: 1, color: '#817DCE' },
   { id: 2, color: '#4A6CC3' },
   { id: 3, color: '#4CA1DE' },
@@ -52,7 +52,7 @@ export class UserCategoryRepository extends Repository<UserCategory> {
 
   insertDefaultCategory(id: number): Promise<InsertResult> {
     return this.insert(
-      category.map((c) => {
+      defaultCategories.map((c) => {
         return { user: { id }, category: { id: c.id }, color: c.color };
       })
     );
