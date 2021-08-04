@@ -96,9 +96,8 @@ export default class HistoryDayCard extends Component<
   }
 
   setEvent() {
-    document.addEventListener('delete-history', (e: CustomEvent) =>
-      this.handleDeleteHistory(e.detail)
-    );
+    document.addEventListener('delete-history', ((e: CustomEvent) =>
+      this.handleDeleteHistory(e.detail)) as EventListener);
   }
 
   handleDeleteHistory({ historyId }: { historyId: number }) {

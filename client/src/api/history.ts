@@ -23,6 +23,11 @@ export const insertHistory = async (history: IHistory) =>
     }
   );
 
+export const updateHistory = async (history: IHistory) =>
+  axios.put(`${APIENDPOINT}/${history.id}`, history, {
+    withCredentials: true,
+  });
+
 export const deleteHistory = async (historyId: number) =>
   axios.delete(`${APIENDPOINT}/${historyId}`, {
     withCredentials: true,

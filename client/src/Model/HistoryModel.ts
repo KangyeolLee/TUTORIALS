@@ -1,4 +1,9 @@
-import { deleteHistory, getHistories, insertHistory } from '@/api/history';
+import {
+  deleteHistory,
+  getHistories,
+  insertHistory,
+  updateHistory,
+} from '@/api/history';
 import { dummyhistories } from '@/assets/dummy';
 import Observable from '@/Core/Observable';
 import { makeDateForm } from '@/utils/helper';
@@ -48,6 +53,15 @@ class HistoryModel extends Observable {
     const { historyList } = data;
     this.historyCards = historyList;
     return this.notify(this.key, { historyCards: historyList });
+  }
+
+  async updateHistoryCard(history: IHistory) {
+    this.historyCards = [
+      ...this.historyCards.filter((h) => h.id !== history.id),
+      history,
+    ];
+    const res = await updateHistory(history);
+    return this.notify(this.key, { historyCards: this.historyCards });
   }
 
   async deleteHistoryCard(historyId: number) {

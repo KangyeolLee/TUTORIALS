@@ -177,9 +177,8 @@ export default class InputBar extends Component<State, Props> {
       'input[name="price"]',
       this.validatePrice.bind(this)
     );
-    document.addEventListener('edit-history', (e: CustomEvent) =>
-      this.handleEditHistory(e.detail)
-    );
+    document.addEventListener('edit-history', ((e: CustomEvent) =>
+      this.handleEditHistory(e.detail)) as EventListener);
   }
 
   handleEditHistory(detail: IHistory) {
