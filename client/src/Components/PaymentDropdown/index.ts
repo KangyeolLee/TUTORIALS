@@ -26,7 +26,6 @@ export default class PaymentDropdown extends Component<
   }
 
   template() {
-    console.log(this.$state);
     const { paymentList } = this.$state!;
     return html`
       <ul class="payment-dropdown">

@@ -60,3 +60,12 @@ export const makeDateForm = ({
     (day > 9 ? day : '0' + day)
   );
 };
+
+export const extractDate = (dateStr: string) => {
+  const [year, month, day]: string[] = dateStr.substring(0, 10).split('-');
+  return {
+    year: +year,
+    month: +month,
+    day: +day,
+  };
+};

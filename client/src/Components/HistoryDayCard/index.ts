@@ -95,6 +95,16 @@ export default class HistoryDayCard extends Component<
     `;
   }
 
+  setEvent() {
+    document.addEventListener('delete-history', ((e: CustomEvent) =>
+      this.handleDeleteHistory(e.detail)) as EventListener);
+  }
+
+  handleDeleteHistory({ historyId }: { historyId: number }) {
+    console.log('delete', historyId);
+    asyncSetState(this.historyModel.deleteHistoryCard(historyId));
+  }
+
   updateList(onlyToday?: boolean) {
     const { historyCards, historyCardForToday, historyType } = this.$state!;
     const { $totalNum, $incomeSum, $expenseSum } = this.$props!;
