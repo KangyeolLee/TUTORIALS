@@ -92,6 +92,7 @@ export interface HistoryModelType extends Model {
   selectedHistoryForCategory: IHistory[];
   getHistoryCard: ({ year, month }: Today) => Promise<curType>;
   addHistory: (history: IHistory) => Promise<curType>;
+  updateHistory: (history: IHistory) => Promise<curType>;
   deleteHistoryCard: (historyId: number) => Promise<curType>;
   toggleType: (nextType: typeString) => Promise<curType>;
   toggleSelectedType: (type: number) => Promise<curType>;
@@ -126,7 +127,7 @@ export interface IHistory {
   content: string;
   payment: string;
   price: number;
-  id: number;
+  id?: number;
 }
 
 export interface IValidationType {

@@ -20,8 +20,15 @@ import HistoryModel from '@/Model/HistoryModel';
 import CategoryDropdown from '@/Components/CategoryDropdown/index';
 import PaymentDropdown from '@/Components/PaymentDropdown';
 
-export default class InputBar extends Component<State, Props> {
+type editorModeType = 'edit' | 'new';
+interface InputBarState {
+  editorMode: editorModeType;
+  historyId?: number;
+}
+
+export default class InputBar extends Component<InputBarState, Props> {
   model!: HistoryModelType;
+  editorMode!: editorModeType;
   inputCondition: boolean[] = new Array();
   validation!: IValidationType;
   date!: {
@@ -46,6 +53,10 @@ export default class InputBar extends Component<State, Props> {
       payment: false,
       price: false,
     };
+    this.$state = {
+      editorMode: 'new',
+      historyId: -1,
+    };
   }
 
   template() {
@@ -54,7 +65,10 @@ export default class InputBar extends Component<State, Props> {
         ${svgIcons.add}
         <div class="input-content-wrapper">
           <div class="input-bar-title">
-            <span>내역 추가하기</span>
+            <span
+              >내역
+              ${this.$state?.editorMode === 'new' ? '추가' : '수정'}하기</span
+            >
             <span class="input-submit-button">${svgIcons.delete}</span>
           </div>
           <ul class="input-bar">
@@ -157,6 +171,7 @@ export default class InputBar extends Component<State, Props> {
       const target = (<HTMLElement>e.target).closest(
         '.input-bar-content'
       ) as HTMLDivElement;
+      this.handleSubmitButton();
       this.initAllInputValues();
       target.removeAttribute('clicked');
     });
@@ -165,12 +180,6 @@ export default class InputBar extends Component<State, Props> {
       'click',
       '.check-btn',
       this.handleHistoryTypeButton.bind(this)
-    );
-
-    this.addEvent(
-      'click',
-      '.input-submit-button',
-      this.handleSubmitButton.bind(this)
     );
 
     // date
@@ -220,6 +229,20 @@ export default class InputBar extends Component<State, Props> {
   }
 
   handleEditHistory(detail: IHistory) {
+    this.setState({
+      editorMode: 'edit',
+      historyId: detail.id,
+    });
+    console.log(this.$state);
+    this.validation = {
+      isExpense: detail.type ? false : true,
+      date: true,
+      category: true,
+      content: true,
+      payment: true,
+      price: true,
+    };
+    this.checkValidated();
     // TODO 분류와 결제 수단 가져오기
     const inputBar = this.$target.querySelector(
       '.input-bar-content'
@@ -317,11 +340,17 @@ export default class InputBar extends Component<State, Props> {
       payment: false,
       price: false,
     };
+
+    this.setState({
+      editorMode: 'new',
+      historyId: -1,
+    });
   }
 
   handleSubmitButton() {
     if (!this.isValidated()) return;
 
+    const { historyId } = this.$state!;
     const $categoryInput = this.$target.querySelector(
       'input[name="category"]'
     ) as HTMLInputElement;
@@ -352,10 +381,13 @@ export default class InputBar extends Component<State, Props> {
       content: $contentInput.value,
       payment: $paymentInput.value,
       price: parseInt($priceInput.value.replace(/,/g, '')),
-      id: (Math.random() * 10) >> 0,
+      id: historyId !== -1 ? historyId : (Math.random() * 10) >> 0,
     };
 
-    asyncSetState(this.model.addHistory(newHistory));
+    const { editorMode } = this.$state!;
+    if (editorMode === 'new') asyncSetState(this.model.addHistory(newHistory));
+    else if (editorMode === 'edit')
+      asyncSetState(this.model.updateHistory(newHistory));
 
     this.initAllInputValues();
     this.checkValidated();

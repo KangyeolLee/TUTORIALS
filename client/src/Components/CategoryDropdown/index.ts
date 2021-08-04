@@ -33,7 +33,6 @@ export default class CategoryDropdown extends Component<
   }
 
   template() {
-    console.log(this.$state);
     const { categoryList } = this.$state!;
     return html`
       <ul class="category-dropdown">

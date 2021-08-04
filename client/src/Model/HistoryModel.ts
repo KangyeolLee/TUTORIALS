@@ -55,7 +55,7 @@ class HistoryModel extends Observable {
     return this.notify(this.key, { historyCards: historyList });
   }
 
-  async updateHistoryCard(history: IHistory) {
+  async updateHistory(history: IHistory) {
     this.historyCards = [
       ...this.historyCards.filter((h) => h.id !== history.id),
       history,
