@@ -62,7 +62,7 @@ export default class CategoryDropdown extends Component<
     ) as HTMLInputElement;
     input.value = target.innerText;
     console.log(input, input.value);
-    customEventEmitter('inputchange', { value: input.value });
+    customEventEmitter('inputchangeCategory', { value: input.value });
   }
 
   mouseDown(e: PointerEvent) {

@@ -172,6 +172,23 @@
           top: 1rem;
           right: 2rem;
           @include body-regular;
+
+          &.valid {
+            color: $title-active;
+            font-weight: 500;
+          }
+        }
+
+        .selected-payment {
+          position: absolute;
+          top: 1rem;
+          right: 2rem;
+          @include body-regular;
+
+          &.valid {
+            color: $title-active;
+            font-weight: 500;
+          }
         }
 
         label {
