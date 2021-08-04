@@ -17,6 +17,7 @@ import {
   HistoryType,
 } from '@/utils/types';
 import HistoryModel from '@/Model/HistoryModel';
+import CategoryDropdown from './../CategoryDropdown/index';
 
 export default class InputBar extends Component<State, Props> {
   model!: HistoryModelType;
@@ -91,15 +92,17 @@ export default class InputBar extends Component<State, Props> {
             </li>
             <li class="input-list-item">
               <label for="category">분류</label>
-              <input name="category" placeholder="선택하세요" />
-            </li>
-            <li class="input-list-item">
-              <label for="content">내용</label>
-              <input type="text" name="content" placeholder="입력하세요" />
+              <span class="selected-category">미선택</span>
+              <input name="category" type="hidden" />
+              <div class="category-dropdown-wrapper"></div>
             </li>
             <li class="input-list-item">
               <label for="payment">결제수단</label>
               <input name="payment" placeholder="선택하세요" />
+            </li>
+            <li class="input-list-item">
+              <label for="content">내용</label>
+              <input type="text" name="content" placeholder="입력하세요" />
             </li>
             <li class="input-list-item">
               <label for="price">금액</label>
@@ -114,7 +117,21 @@ export default class InputBar extends Component<State, Props> {
     `;
   }
 
+  mounted() {
+    const $categoryDropdown = this.$target.querySelector(
+      '.category-dropdown-wrapper'
+    ) as HTMLElement;
+    new CategoryDropdown($categoryDropdown);
+  }
+
   setEvent() {
+    this.addEvent('click', 'label[for="category"]', (e: MouseEvent) => {
+      const target = <HTMLElement>e.target;
+      const categoryDropdown = target.parentElement?.querySelector(
+        '.category-dropdown-wrapper'
+      ) as HTMLElement;
+      categoryDropdown.classList.toggle('open');
+    });
     this.addEvent('click', '.input-bar-content', (e: MouseEvent) => {
       const target = (<HTMLElement>e.target).closest(
         '.input-bar-content'
@@ -156,12 +173,14 @@ export default class InputBar extends Component<State, Props> {
       'input[name="date-day"]',
       this.validateDay.bind(this)
     );
-
-    this.addEvent(
-      'input',
-      'input[name="category"]',
-      this.validateCategory.bind(this)
+    document.addEventListener('inputchange', (e: Event) =>
+      this.validateCategory(e)
     );
+    // this.addEvent(
+    //   'inputchange',
+    //   'input[name="category"]',
+    //   this.validateCategory.bind(this)
+    // );
     this.addEvent(
       'input',
       'input[name="content"]',
@@ -297,10 +316,16 @@ export default class InputBar extends Component<State, Props> {
     this.date.day = day;
   }
 
-  validateCategory(e: KeyboardEvent) {
-    if ((<HTMLInputElement>e.target).value === '')
-      this.validation.category = false;
-    else this.validation.category = true;
+  validateCategory(e: Event) {
+    const $selectedCategory = this.$target.querySelector(
+      '.selected-category'
+    ) as HTMLElement;
+    const input = (<CustomEvent>e).detail;
+    if (input.value === '') this.validation.category = false;
+    else {
+      this.validation.category = true;
+      $selectedCategory.innerText = input.value;
+    }
     this.checkValidated();
   }
   validateContent(e: KeyboardEvent) {
