@@ -1,6 +1,12 @@
 import Component from '@/Core/Component';
 import './styles';
-import { html, asyncSetState, addComma, makeDateForm } from '@/utils/helper';
+import {
+  html,
+  asyncSetState,
+  addComma,
+  makeDateForm,
+  extractDate,
+} from '@/utils/helper';
 import { svgIcons } from '@/assets/svgIcons';
 import {
   Props,
@@ -8,6 +14,7 @@ import {
   HistoryModelType,
   IValidationType,
   IHistory,
+  HistoryType,
 } from '@/utils/types';
 import HistoryModel from '@/Model/HistoryModel';
 
@@ -170,6 +177,48 @@ export default class InputBar extends Component<State, Props> {
       'input[name="price"]',
       this.validatePrice.bind(this)
     );
+    document.addEventListener('edit-history', (e: CustomEvent) =>
+      this.handleEditHistory(e.detail)
+    );
+  }
+
+  handleEditHistory(detail: IHistory) {
+    // TODO 분류와 결제 수단 가져오기
+    const inputBar = this.$target.querySelector(
+      '.input-bar-content'
+    ) as HTMLDivElement;
+    const historyType = inputBar.querySelector(
+      `.check-btn>[data-type="${detail.type}"]`
+    ) as HTMLDivElement;
+    const anotherHistoryType = inputBar.querySelector(
+      `.check-btn>[data-type="${detail.type ? 0 : 1}"]`
+    ) as HTMLDivElement;
+    // const category = inputBar.querySelector(`[name="category"]`);
+    const dateYear = inputBar.querySelector(
+      `[name="date-year"]`
+    ) as HTMLInputElement;
+    const dateMonth = inputBar.querySelector(
+      `[name="date-month"]`
+    ) as HTMLInputElement;
+    const dateDay = inputBar.querySelector(
+      `[name="date-day"]`
+    ) as HTMLInputElement;
+    const content = inputBar.querySelector(
+      `[name="content"]`
+    ) as HTMLInputElement;
+    // const payment = inputBar.querySelector(`[name="payment"]`);
+    const price = inputBar.querySelector(`[name="price"]`) as HTMLInputElement;
+    const date = extractDate(detail.createdAt);
+
+    historyType?.setAttribute('active', '');
+    anotherHistoryType?.removeAttribute('active');
+    dateYear.value = date.year.toString();
+    dateMonth.value = date.month.toString();
+    dateDay.value = date.day.toString();
+    content.value = detail.content;
+    price.value = addComma(String(detail.price));
+
+    inputBar.setAttribute('clicked', '');
   }
 
   handleSubmitButton() {

@@ -9,9 +9,10 @@ type Style = {
 };
 
 interface DropDownState extends State {
+  handler: Function;
   dropdownList: {
     text: string;
-    handler: Function;
+    type: string;
     style?: Style[];
   }[];
 }
@@ -19,6 +20,7 @@ interface DropDownState extends State {
 export default class DropDown extends Component<DropDownState, Props> {
   setup() {
     this.$state = {
+      handler: this.$state?.handler ?? (() => {}),
       dropdownList: this.$state?.dropdownList ?? [],
     };
   }
@@ -29,7 +31,9 @@ export default class DropDown extends Component<DropDownState, Props> {
         ${this.$state?.dropdownList
           .map(
             (list, i) =>
-              `<li data-id="${i}" class="drop-down-item" style="${list.style
+              `<li data-id="${i}" data-type="${
+                list.type
+              }" class="drop-down-item" style="${list.style
                 ?.map((style) => `${style.attribute}: ${style.value};`)
                 .join(' ')}">${list.text}</li>`
           )
@@ -39,13 +43,8 @@ export default class DropDown extends Component<DropDownState, Props> {
   }
 
   setEvent() {
-    this.$state?.dropdownList.forEach((list, i) => {
-      this.addEvent(
-        'click',
-        `.drop-down-item[data-id="${i}"]`,
-        (e: MouseEvent) => list.handler(e)
-      );
-    });
+    console.log(this.$state);
+    this.addEvent('click', '.drop-down', this.$state!.handler);
 
     document.addEventListener('click', (e: MouseEvent) => {
       const isDropDownClicked = (<HTMLElement>e.target).closest('.drop-down');

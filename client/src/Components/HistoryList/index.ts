@@ -29,7 +29,7 @@ export default function HistoryList(
       .map(
         (history) =>
           `
-        <li class="history-list-item">
+        <li class="history-list-item" data-id="${history.id}">
           <div class="tag-wrapper">${CategoryTag(history.category)}</div>
           <div class="history-text">
             <div class="history-content">${history.content}</div>

@@ -7,7 +7,7 @@ import {
   Today,
   HistoryType,
 } from '@/utils/types';
-import { asyncSetState, html } from '@/utils/helper';
+import { asyncSetState, customEventEmitter, html } from '@/utils/helper';
 import HistoryModel from '@/Model/HistoryModel';
 import { IHistory } from '@/utils/types';
 import { svgIcons } from '@/assets/svgIcons';
@@ -69,11 +69,12 @@ export default class Main extends Component<IMainState, Props> {
     });
 
     new DropDown(dropdown, {
+      handler: this.handleDropDown.bind(this),
       dropdownList: [
-        { text: '수정하기', handler: this.editHistory },
+        { text: '수정하기', type: 'edit' },
         {
           text: '삭제하기',
-          handler: this.deleteHistory,
+          type: 'delete',
           style: [{ attribute: 'color', value: '#f45452' }],
         },
       ],
@@ -116,7 +117,6 @@ export default class Main extends Component<IMainState, Props> {
     e.preventDefault();
     const target = (<HTMLElement>e.target).closest('.history-list-item');
     if (!target) return;
-    console.log(e.clientX, e.clientY);
 
     const dropdown = this.$target.querySelector(
       '.drop-down'
@@ -125,18 +125,43 @@ export default class Main extends Component<IMainState, Props> {
     dropdown.style.top = `${e.clientY}px`;
     dropdown.style.left = `${e.clientX}px`;
     dropdown.style.opacity = '1';
-
-    console.log('click');
+    dropdown.dataset.historyId = (<HTMLUListElement>target).dataset.id;
   }
 
-  editHistory(e: MouseEvent) {
-    const history = (<HTMLElement>e.target).closest('.history-list-item');
-    if (!history) return;
+  handleDropDown(e: MouseEvent) {
+    const dropdown = (<HTMLElement>e.target).closest(
+      '.drop-down'
+    ) as HTMLUListElement;
+    const dropdownTarget = dropdown?.querySelector(
+      '.drop-down-item'
+    ) as HTMLLIElement;
+    const type = dropdownTarget.dataset.type;
+    const historyId = dropdownTarget.parentElement?.dataset.historyId;
+    if (!historyId) return;
 
-    const id = (<HTMLLIElement>history).dataset.id;
+    switch (type) {
+      case 'edit':
+        this.handleEditHistory(+historyId);
+        break;
+      case 'delete':
+        this.handleDeleteHistory(+historyId);
+        break;
+      default:
+        break;
+    }
+
+    // close dropdown
+    dropdown.style.display = 'none';
+    dropdown.style.opacity = '0';
   }
 
-  deleteHistory() {
-    console.log('history');
+  handleEditHistory(historyId: number) {
+    const targetHistory = this.historyModel.historyCards.filter(
+      (history) => history.id === historyId
+    )[0];
+    customEventEmitter('edit-history', targetHistory);
+  }
+  handleDeleteHistory(historyId: number) {
+    console.log('delete', historyId);
   }
 }
