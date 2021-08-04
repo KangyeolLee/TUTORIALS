@@ -40,7 +40,7 @@ export default class CategoryDropdown extends Component<
         ${categoryList
           .map(
             (category) => `
-          <li class="dropdown-list">${CategoryTag(category.type)}</li>
+          <li class="dropdown-list">${CategoryTag(category)}</li>
         `
           )
           .join('')}
