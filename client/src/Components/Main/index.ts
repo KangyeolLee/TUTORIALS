@@ -121,9 +121,10 @@ export default class Main extends Component<IMainState, Props> {
     const dropdown = this.$target.querySelector(
       '.drop-down'
     ) as HTMLUListElement;
+    dropdown.style.display = 'flex';
     dropdown.style.top = `${e.clientY}px`;
     dropdown.style.left = `${e.clientX}px`;
-    // dropdown.setAttribute('style', `left: ${pos.left}px; top: ${pos.top + 20}px; ${transformOrigin}`);
+    dropdown.style.opacity = '1';
 
     console.log('click');
   }
