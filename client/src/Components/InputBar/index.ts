@@ -1,6 +1,6 @@
 import Component from '@/Core/Component';
 import './styles';
-import { html, asyncSetState, addComma } from '@/utils/helper';
+import { html, asyncSetState, addComma, makeDateForm } from '@/utils/helper';
 import { svgIcons } from '@/assets/svgIcons';
 import {
   Props,
@@ -189,7 +189,11 @@ export default class InputBar extends Component<State, Props> {
     ) as HTMLInputElement;
 
     const newHistory: IHistory = {
-      createdAt: `${this.date.year}-${this.date.month}-${this.date.day}`,
+      createdAt: makeDateForm({
+        year: this.date.year,
+        month: this.date.month,
+        day: this.date.day,
+      }),
       type: this.validation.isExpense ? 0 : 1,
       category: $categoryInput.value,
       content: $contentInput.value,
