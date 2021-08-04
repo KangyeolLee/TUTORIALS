@@ -9,11 +9,14 @@ import {
   Today,
   TodayModelType,
   ChartControllerType,
+  CategoryModelType,
+  CategoryType,
 } from '@/utils/types';
 import HistoryModel from '@/Model/HistoryModel';
 import DateModel from '@/Model/DateModel';
 import CategoryTag from '@/Components/CategoryTag';
 import ChartController from '@/Controller/ChartController';
+import CategoryModel from '@/Model/CategoryModel';
 
 const EXPENSE = 0;
 const INCOME = 1;
@@ -22,12 +25,14 @@ interface IListStates extends State {
   historyCards: IHistory[];
   today: Today;
   selectedType: number;
+  categoryList: CategoryType[];
 }
 
 export default class HistoryCategoryCard extends Component<IListStates, Props> {
   historyModel!: HistoryModelType;
   dateModel!: TodayModelType;
   chartController!: ChartControllerType;
+  categoryModel!: CategoryModelType;
 
   setup() {
     this.classIDF = 'HistoryCategoryCard';
@@ -38,13 +43,18 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
     this.dateModel = DateModel;
     this.dateModel.subscribe(this.dateModel.key, this);
 
+    this.categoryModel = CategoryModel;
+    this.categoryModel.subscribe(this.categoryModel.key, this);
+
     this.$state = {
       historyCards: this.historyModel.historyCards,
       today: this.dateModel.today,
       selectedType: this.historyModel.selectedType,
+      categoryList: this.categoryModel.categoryList ?? [],
     };
 
     asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
+    asyncSetState(this.categoryModel.getUserCategories());
   }
 
   template() {
@@ -54,7 +64,6 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
         historyCards,
         selectedType
       );
-
     return html`
       <div class="category-percentage">
         <div class="button-area">
@@ -74,13 +83,27 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
 
         <ul class="category-card-list">
           ${categories
+            .map((category) => {
+              const match = this.$state?.categoryList.filter(
+                (c) => c.type === category
+              )[0];
+              return (
+                match ?? {
+                  id: -1,
+                  type: category,
+                  color: '',
+                }
+              );
+            })
             .map(
               (category) => `
-            <li class="category-card" data-category="${category}">
+            <li class="category-card" data-category="${category.type}">
               <span class="category">${CategoryTag(category)}</span>
-              <span class="percent">${categoryCards[category].percent}%</span>
+              <span class="percent">${
+                categoryCards[category.type].percent
+              }%</span>
               <span class="price">${addComma(
-                categoryCards[category].price + ''
+                categoryCards[category.type].price + ''
               )}</span>
             </li>
           `
@@ -117,5 +140,6 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
 
   setUnmount() {
     this.historyModel.unsubscribe(this.historyModel.key, this);
+    this.categoryModel.unsubscribe(this.categoryModel.key, this);
   }
 }

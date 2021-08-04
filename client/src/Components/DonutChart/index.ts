@@ -1,6 +1,8 @@
 import './styles';
 import Component from '@/Core/Component';
 import {
+  CategoryModelType,
+  CategoryType,
   ChartControllerType,
   HistoryModelType,
   IHistory,
@@ -13,6 +15,7 @@ import { asyncSetState, html } from '@/utils/helper';
 import ChartController from '@/Controller/ChartController';
 import HistoryModel from '@/Model/HistoryModel';
 import DateModel from '@/Model/DateModel';
+import CategoryModel from '@/Model/CategoryModel';
 
 const data = [
   {
@@ -37,12 +40,14 @@ interface IListStates extends State {
   historyCards: IHistory[];
   today: Today;
   selectedType: number;
+  categoryList: CategoryType[];
 }
 
 export default class DonutChart extends Component<IListStates, Props> {
   historyModel!: HistoryModelType;
   dateModel!: TodayModelType;
   chartController!: ChartControllerType;
+  categoryModel!: CategoryModelType;
 
   setup() {
     this.classIDF = 'DonutChart';
@@ -54,13 +59,18 @@ export default class DonutChart extends Component<IListStates, Props> {
     this.dateModel = DateModel;
     this.dateModel.subscribe(this.dateModel.key, this);
 
+    this.categoryModel = CategoryModel;
+    this.categoryModel.subscribe(this.categoryModel.key, this);
+
     this.$state = {
       historyCards: this.historyModel.historyCards,
       today: this.dateModel.today,
       selectedType: this.historyModel.selectedType,
+      categoryList: this.categoryModel.categoryList,
     };
 
     asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
+    asyncSetState(this.categoryModel.getUserCategories());
   }
 
   template() {
@@ -87,7 +97,7 @@ export default class DonutChart extends Component<IListStates, Props> {
   }
 
   mounted() {
-    const { historyCards, selectedType } = this.$state!;
+    const { historyCards, selectedType, categoryList } = this.$state!;
     const { categoryCards, categories } =
       this.chartController.filterHistoryCardByCategory(
         historyCards,
@@ -95,11 +105,17 @@ export default class DonutChart extends Component<IListStates, Props> {
       );
 
     const $svg = document.querySelector('svg#donut-chart') as HTMLElement;
-    this.chartController.makeDonutChart(categories, categoryCards, $svg);
+    this.chartController.makeDonutChart(
+      categories,
+      categoryCards,
+      $svg,
+      categoryList
+    );
   }
 
   setUnmount() {
     this.historyModel.unsubscribe(this.historyModel.key, this);
     this.dateModel.unsubscribe(this.dateModel.key, this);
+    this.categoryModel.unsubscribe(this.categoryModel.key, this);
   }
 }

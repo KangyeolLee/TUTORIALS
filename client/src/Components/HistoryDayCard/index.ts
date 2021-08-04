@@ -9,17 +9,21 @@ import {
   State,
   Today,
   TodayModelType,
+  CategoryModelType,
+  CategoryType,
 } from '@/utils/types';
 import { addComma, asyncSetState, html } from '@/utils/helper';
 import HistoryList from '@/Components/HistoryList';
 import HistoryModel from '@/Model/HistoryModel';
 import DateModel from '@/Model/DateModel';
+import CategoryModel from '@/Model/CategoryModel';
 
 interface IListStates extends State {
   historyCards: IHistory[];
   today: Today;
   historyType: HistoryType;
   historyCardForToday: IHistory[];
+  categoryList: CategoryType[];
 }
 
 export default class HistoryDayCard extends Component<
@@ -28,6 +32,7 @@ export default class HistoryDayCard extends Component<
 > {
   historyModel!: HistoryModelType;
   dateModel!: TodayModelType;
+  categoryModel!: CategoryModelType;
 
   setup() {
     this.classIDF = 'HistoryDayCard';
@@ -37,19 +42,25 @@ export default class HistoryDayCard extends Component<
     this.dateModel = DateModel;
     this.dateModel.subscribe(this.dateModel.key, this);
 
+    this.categoryModel = CategoryModel;
+    this.categoryModel.subscribe(this.categoryModel.key, this);
+
     this.$state = {
       historyCards: this.historyModel.historyCards,
       historyCardForToday: [],
       today: this.dateModel.today,
       historyType: this.historyModel.historyType,
+      categoryList: this.categoryModel.categoryList,
     };
 
     asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
+    asyncSetState(this.categoryModel.getUserCategories());
   }
 
   template() {
     const { onlyToday } = this.$props ?? { onlyToday: false };
     const { dates, histories } = this.updateList(onlyToday);
+    const { categoryList } = this.$state!;
 
     return html`
       ${dates
@@ -72,7 +83,10 @@ export default class HistoryDayCard extends Component<
                 }
               </div>
             </div>
-            <ul class="history-list">${HistoryList(curHistories)}</ul>
+            <ul class="history-list">${HistoryList(
+              curHistories,
+              categoryList
+            )}</ul>
           </section>
         </li>
       `;
@@ -160,5 +174,6 @@ export default class HistoryDayCard extends Component<
   setUnmount() {
     this.historyModel.unsubscribe(this.historyModel.key, this);
     this.dateModel.unsubscribe(this.dateModel.key, this);
+    this.categoryModel.unsubscribe(this.categoryModel.key, this);
   }
 }

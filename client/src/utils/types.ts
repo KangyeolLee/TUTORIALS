@@ -1,5 +1,7 @@
 import Component from '@/Core/Component';
 
+export const DELETE_CATEGORY_COLOR = '#d2d2d2';
+
 /**
  * @example
  * Modal 관련 공통 타입
@@ -230,7 +232,7 @@ export type PaymentType = {
  */
 export interface CategoryModelType extends Model {
   key: string;
-  categoryList: PaymentType[];
+  categoryList: CategoryType[];
   getUserCategories: () => Promise<curType>;
   deleteUserCategories: (id: number) => Promise<curType>;
   createUserCategories: (type: string, color: string) => Promise<curType>;
@@ -265,6 +267,7 @@ export type ChartControllerType = {
   makeDonutChart: (
     categories: string[],
     categoryCards: CategoryCardsType,
-    $svg: HTMLElement
+    $svg: HTMLElement,
+    categoryList: CategoryType[]
   ) => void;
 };
