@@ -24,7 +24,7 @@ export default class HistoryRepository extends Repository<History> {
       price: history.price,
       content: history.content,
       type: history.type,
-      createdAt: history.createAt,
+      createdAt: history.createdAt,
       user: { id: history.userId },
     });
     return this.insert(newHistory);
