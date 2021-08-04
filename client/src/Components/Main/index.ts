@@ -12,7 +12,7 @@ import HistoryModel from '@/Model/HistoryModel';
 import { IHistory } from '@/utils/types';
 import { svgIcons } from '@/assets/svgIcons';
 import HistoryDayCard from '@/Components/HistoryDayCard/index';
-import DropDown from '../DropDown';
+import DropDown from '@/Components/DropDown';
 
 interface IMainState extends State {
   historyCards: IHistory[];

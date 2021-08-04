@@ -211,7 +211,12 @@ export default class InputBar extends Component<State, Props> {
     const anotherHistoryType = inputBar.querySelector(
       `.check-btn>[data-type="${detail.type ? 0 : 1}"]`
     ) as HTMLDivElement;
-    // const category = inputBar.querySelector(`[name="category"]`);
+    const category = inputBar.querySelector(
+      `[name="category"]`
+    ) as HTMLInputElement;
+    const selectedCategory = inputBar.querySelector(
+      `.selected-category`
+    ) as HTMLSpanElement;
     const dateYear = inputBar.querySelector(
       `[name="date-year"]`
     ) as HTMLInputElement;
@@ -230,6 +235,8 @@ export default class InputBar extends Component<State, Props> {
 
     historyType?.setAttribute('active', '');
     anotherHistoryType?.removeAttribute('active');
+    category.value = detail.category;
+    selectedCategory.innerText = detail.category;
     dateYear.value = date.year.toString();
     dateMonth.value = date.month.toString();
     dateDay.value = date.day.toString();
