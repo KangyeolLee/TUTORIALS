@@ -12,6 +12,7 @@ import HistoryModel from '@/Model/HistoryModel';
 import { IHistory } from '@/utils/types';
 import { svgIcons } from '@/assets/svgIcons';
 import HistoryDayCard from '@/Components/HistoryDayCard/index';
+import DropDown from '../DropDown';
 
 interface IMainState extends State {
   historyCards: IHistory[];
@@ -42,6 +43,7 @@ export default class Main extends Component<IMainState, Props> {
         </div>
       </section>
       <ul class="day-card-list"></ul>
+      <div class="dropdown"></div>
     `;
   }
 
@@ -58,11 +60,23 @@ export default class Main extends Component<IMainState, Props> {
     const $expenseSum = this.$target.querySelector(
       '.expense-sum'
     ) as HTMLSpanElement;
+    const dropdown = this.$target.querySelector('.dropdown') as HTMLDivElement;
 
     new HistoryDayCard($daycardList, undefined, {
       $totalNum,
       $incomeSum,
       $expenseSum,
+    });
+
+    new DropDown(dropdown, {
+      dropdownList: [
+        { text: '수정하기', handler: this.editHistory },
+        {
+          text: '삭제하기',
+          handler: this.deleteHistory,
+          style: [{ attribute: 'color', value: '#f45452' }],
+        },
+      ],
     });
   }
 
@@ -76,6 +90,11 @@ export default class Main extends Component<IMainState, Props> {
       'click',
       '#history-select-expense',
       this.toggleExpenseBtn.bind(this)
+    );
+    this.addEvent(
+      'contextmenu',
+      '.day-card-list',
+      this.handleContextMenu.bind(this)
     );
   }
 
@@ -91,5 +110,32 @@ export default class Main extends Component<IMainState, Props> {
       .querySelector('#history-select-expense')
       ?.classList.toggle('active');
     asyncSetState(this.historyModel.toggleType('expense'));
+  }
+
+  handleContextMenu(e: MouseEvent) {
+    e.preventDefault();
+    const target = (<HTMLElement>e.target).closest('.history-list-item');
+    if (!target) return;
+    console.log(e.clientX, e.clientY);
+
+    const dropdown = this.$target.querySelector(
+      '.drop-down'
+    ) as HTMLUListElement;
+    dropdown.style.top = `${e.clientY}px`;
+    dropdown.style.left = `${e.clientX}px`;
+    // dropdown.setAttribute('style', `left: ${pos.left}px; top: ${pos.top + 20}px; ${transformOrigin}`);
+
+    console.log('click');
+  }
+
+  editHistory(e: MouseEvent) {
+    const history = (<HTMLElement>e.target).closest('.history-list-item');
+    if (!history) return;
+
+    const id = (<HTMLLIElement>history).dataset.id;
+  }
+
+  deleteHistory() {
+    console.log('history');
   }
 }
