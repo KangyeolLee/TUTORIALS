@@ -132,23 +132,15 @@ export default class Main extends Component<IMainState, Props> {
     const dropdown = (<HTMLElement>e.target).closest(
       '.drop-down'
     ) as HTMLUListElement;
-    const dropdownTarget = dropdown?.querySelector(
+    const dropdownTarget = (<HTMLElement>e.target).closest(
       '.drop-down-item'
     ) as HTMLLIElement;
     const type = dropdownTarget.dataset.type;
     const historyId = dropdownTarget.parentElement?.dataset.historyId;
     if (!historyId) return;
 
-    switch (type) {
-      case 'edit':
-        this.handleEditHistory(+historyId);
-        break;
-      case 'delete':
-        this.handleDeleteHistory(+historyId);
-        break;
-      default:
-        break;
-    }
+    if (type === 'edit') this.handleEditHistory(+historyId);
+    else if (type === 'delete') this.handleDeleteHistory(+historyId);
 
     // close dropdown
     dropdown.style.display = 'none';
@@ -157,11 +149,11 @@ export default class Main extends Component<IMainState, Props> {
 
   handleEditHistory(historyId: number) {
     const targetHistory = this.historyModel.historyCards.filter(
-      (history) => history.id === historyId
+      (history) => history.id === +historyId
     )[0];
     customEventEmitter('edit-history', targetHistory);
   }
   handleDeleteHistory(historyId: number) {
-    console.log('delete', historyId);
+    customEventEmitter('delete-history', { historyId });
   }
 }

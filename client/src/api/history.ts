@@ -22,3 +22,8 @@ export const insertHistory = async (history: IHistory) =>
       withCredentials: true,
     }
   );
+
+export const deleteHistory = async (historyId: number) =>
+  axios.delete(`${APIENDPOINT}/${historyId}`, {
+    withCredentials: true,
+  });
