@@ -248,7 +248,12 @@ export default class InputBar extends Component<State, Props> {
     const content = inputBar.querySelector(
       `[name="content"]`
     ) as HTMLInputElement;
-    // const payment = inputBar.querySelector(`[name="payment"]`);
+    const payment = inputBar.querySelector(
+      `[name="payment"]`
+    ) as HTMLInputElement;
+    const selectedPayment = inputBar.querySelector(
+      `.selected-payment`
+    ) as HTMLSpanElement;
     const price = inputBar.querySelector(`[name="price"]`) as HTMLInputElement;
     const date = extractDate(detail.createdAt);
 
@@ -260,6 +265,8 @@ export default class InputBar extends Component<State, Props> {
     dateMonth.value = date.month.toString();
     dateDay.value = date.day.toString();
     content.value = detail.content;
+    payment.value = detail.payment;
+    selectedPayment.innerText = detail.payment;
     price.value = addComma(String(detail.price));
 
     inputBar.setAttribute('clicked', '');
