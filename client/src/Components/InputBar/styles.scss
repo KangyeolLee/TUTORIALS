@@ -157,6 +157,7 @@
       }
 
       .input-list-item {
+        position: relative;
         @include body-regular;
         box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.22);
         color: $label;
@@ -166,9 +167,16 @@
         width: 100%;
         box-sizing: border-box;
 
+        .selected-category {
+          position: absolute;
+          top: 1rem;
+          right: 2rem;
+          @include body-regular;
+        }
+
         label {
           display: block;
-          @include bold-small;
+          @include bold-large;
           font-weight: 700;
           color: $primary3;
         }

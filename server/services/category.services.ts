@@ -9,6 +9,7 @@ import {
   ResultRawType,
   UserCategoryForRemoval,
 } from '../types/types';
+import { extractInsertId } from '../utils/helper';
 
 @Service()
 export default class CategoryService {
@@ -38,7 +39,7 @@ export default class CategoryService {
           CategoryRepository
         ).createCategoryForUser(type);
 
-        categoryId = category.raw.insertId.categoryId;
+        categoryId = extractInsertId(category);
       }
 
       const result = await getCustomRepository(
