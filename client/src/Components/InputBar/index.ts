@@ -10,7 +10,8 @@ import {
   IHistory,
 } from '@/utils/types';
 import HistoryModel from '@/Model/HistoryModel';
-import CategoryDropdown from './../CategoryDropdown/index';
+import CategoryDropdown from '@/Components/CategoryDropdown/index';
+import PaymentDropdown from '@/Components/PaymentDropdown';
 
 export default class InputBar extends Component<State, Props> {
   model!: HistoryModelType;
@@ -91,7 +92,9 @@ export default class InputBar extends Component<State, Props> {
             </li>
             <li class="input-list-item">
               <label for="payment">결제수단</label>
-              <input name="payment" placeholder="선택하세요" />
+              <span class="selected-payment">미선택</span>
+              <input name="payment" type="hidden" />
+              <div class="payment-dropdown-wrapper"></div>
             </li>
             <li class="input-list-item">
               <label for="content">내용</label>
@@ -115,6 +118,11 @@ export default class InputBar extends Component<State, Props> {
       '.category-dropdown-wrapper'
     ) as HTMLElement;
     new CategoryDropdown($categoryDropdown);
+
+    const $paymentDropdown = this.$target.querySelector(
+      '.payment-dropdown-wrapper'
+    ) as HTMLElement;
+    new PaymentDropdown($paymentDropdown);
   }
 
   setEvent() {
@@ -124,6 +132,13 @@ export default class InputBar extends Component<State, Props> {
         '.category-dropdown-wrapper'
       ) as HTMLElement;
       categoryDropdown.classList.toggle('open');
+    });
+    this.addEvent('click', 'label[for="payment"]', (e: MouseEvent) => {
+      const target = <HTMLElement>e.target;
+      const paymentDropdown = target.parentElement?.querySelector(
+        '.payment-dropdown-wrapper'
+      ) as HTMLElement;
+      paymentDropdown.classList.toggle('open');
     });
     this.addEvent('click', '.input-bar-content', (e: MouseEvent) => {
       const target = (<HTMLElement>e.target).closest(
@@ -135,6 +150,7 @@ export default class InputBar extends Component<State, Props> {
       const target = (<HTMLElement>e.target).closest(
         '.input-bar-content'
       ) as HTMLDivElement;
+      this.initAllInputValues();
       target.removeAttribute('clicked');
     });
 
@@ -166,7 +182,7 @@ export default class InputBar extends Component<State, Props> {
       'input[name="date-day"]',
       this.validateDay.bind(this)
     );
-    document.addEventListener('inputchange', (e: Event) =>
+    document.addEventListener('inputchangeCategory', (e: Event) =>
       this.validateCategory(e)
     );
     // this.addEvent(
@@ -179,16 +195,66 @@ export default class InputBar extends Component<State, Props> {
       'input[name="content"]',
       this.validateContent.bind(this)
     );
-    this.addEvent(
-      'input',
-      'input[name="payment"]',
-      this.validatePayment.bind(this)
+    document.addEventListener('inputchangePayment', (e: Event) =>
+      this.validatePayment(e)
     );
+    // this.addEvent(
+    //   'input',
+    //   'input[name="payment"]',
+    //   this.validatePayment.bind(this)
+    // );
     this.addEvent(
       'input',
       'input[name="price"]',
       this.validatePrice.bind(this)
     );
+  }
+
+  initAllInputValues() {
+    const $categoryInput = this.$target.querySelector(
+      'input[name="category"]'
+    ) as HTMLInputElement;
+    const $contentInput = this.$target.querySelector(
+      'input[name="content"]'
+    ) as HTMLInputElement;
+    const $paymentInput = this.$target.querySelector(
+      'input[name="payment"]'
+    ) as HTMLInputElement;
+    const $priceInput = this.$target.querySelector(
+      'input[name="price"]'
+    ) as HTMLInputElement;
+    const $selectedPayment = this.$target.querySelector(
+      '.selected-payment'
+    ) as HTMLElement;
+    const $selectedCategory = this.$target.querySelector(
+      '.selected-category'
+    ) as HTMLElement;
+    const categoryDropdown = this.$target.querySelector(
+      '.category-dropdown-wrapper'
+    ) as HTMLElement;
+    const paymentDropdown = this.$target.querySelector(
+      '.payment-dropdown-wrapper'
+    ) as HTMLElement;
+
+    $categoryInput.value = '';
+    $selectedCategory.innerText = '미선택';
+    $selectedCategory.classList.remove('valid');
+    $contentInput.value = '';
+    $paymentInput.value = '';
+    $selectedPayment.innerText = '미선택';
+    $selectedPayment.classList.remove('valid');
+    $priceInput.value = '';
+    categoryDropdown.classList.remove('open');
+    paymentDropdown.classList.remove('open');
+
+    this.validation = {
+      isExpense: true,
+      date: true,
+      category: false,
+      content: false,
+      payment: false,
+      price: false,
+    };
   }
 
   handleSubmitButton() {
@@ -206,6 +272,12 @@ export default class InputBar extends Component<State, Props> {
     const $priceInput = this.$target.querySelector(
       'input[name="price"]'
     ) as HTMLInputElement;
+    const $selectedPayment = this.$target.querySelector(
+      '.selected-payment'
+    ) as HTMLElement;
+    const $selectedCategory = this.$target.querySelector(
+      '.selected-category'
+    ) as HTMLElement;
 
     const newHistory: IHistory = {
       createdAt: makeDateForm({
@@ -223,19 +295,7 @@ export default class InputBar extends Component<State, Props> {
 
     asyncSetState(this.model.addHistory(newHistory));
 
-    $categoryInput.value = '';
-    $contentInput.value = '';
-    $paymentInput.value = '';
-    $priceInput.value = '';
-
-    this.validation = {
-      isExpense: true,
-      date: true,
-      category: false,
-      content: false,
-      payment: false,
-      price: false,
-    };
+    this.initAllInputValues();
     this.checkValidated();
   }
 
@@ -272,11 +332,13 @@ export default class InputBar extends Component<State, Props> {
     const $selectedCategory = this.$target.querySelector(
       '.selected-category'
     ) as HTMLElement;
+    console.log($selectedCategory);
     const input = (<CustomEvent>e).detail;
     if (input.value === '') this.validation.category = false;
     else {
       this.validation.category = true;
       $selectedCategory.innerText = input.value;
+      $selectedCategory.classList.add('valid');
     }
     this.checkValidated();
   }
@@ -286,10 +348,18 @@ export default class InputBar extends Component<State, Props> {
     else this.validation.content = true;
     this.checkValidated();
   }
-  validatePayment(e: KeyboardEvent) {
-    if ((<HTMLInputElement>e.target).value === '')
-      this.validation.payment = false;
-    else this.validation.payment = true;
+  validatePayment(e: Event) {
+    const $selectedPayment = this.$target.querySelector(
+      '.selected-payment'
+    ) as HTMLElement;
+    console.log($selectedPayment);
+    const input = (<CustomEvent>e).detail;
+    if (input.value === '') this.validation.payment = false;
+    else {
+      this.validation.payment = true;
+      $selectedPayment.innerText = input.value;
+      $selectedPayment.classList.add('valid');
+    }
     this.checkValidated();
   }
   validatePrice(e: KeyboardEvent) {

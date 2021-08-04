@@ -1,0 +1,44 @@
+@import '@/scss/theme';
+
+.payment-dropdown-wrapper {
+  position: relative;
+
+  &.open {
+    .payment-dropdown {
+      margin-top: 1rem;
+      visibility: visible;
+      height: 5rem;
+    }
+  }
+
+  .payment-dropdown {
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    position: relative;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    transition: all 0.18s ease-out;
+    gap: 1.5rem;
+    visibility: hidden;
+    height: 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .payment-list {
+      flex: none;
+      user-select: none;
+      scroll-snap-align: center;
+      cursor: pointer;
+      border: 0.1rem solid $line;
+      padding: 1rem;
+      border-radius: 1rem;
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+  }
+}
