@@ -2,6 +2,8 @@ import Component from '@/Core/Component';
 import './styles';
 import { html, asyncSetState } from '@/utils/helper';
 import {
+  CategoryModelType,
+  CategoryType,
   ChartControllerType,
   HistoryModelType,
   IHistory,
@@ -13,17 +15,20 @@ import {
 import HistoryModel from '@/Model/HistoryModel';
 import ChartController from '@/Controller/ChartController';
 import DateModel from '@/Model/DateModel';
+import CategoryModel from '@/Model/CategoryModel';
 
 interface IListStates extends State {
   today: Today;
   selectedCategory: string;
   selectedHistoryForCategory: IHistory[];
+  categoryList: CategoryType[];
 }
 
 export default class LineChart extends Component<IListStates, Props> {
   historyModel!: HistoryModelType;
   dateModel!: TodayModelType;
   chartController!: ChartControllerType;
+  categoryModel!: CategoryModelType;
 
   setup() {
     this.classIDF = 'LineChart';
@@ -35,13 +40,18 @@ export default class LineChart extends Component<IListStates, Props> {
     this.dateModel = DateModel;
     this.dateModel.subscribe(this.dateModel.key, this);
 
+    this.categoryModel = CategoryModel;
+    this.categoryModel.subscribe(this.categoryModel.key, this);
+
     this.$state = {
       selectedHistoryForCategory: [],
       selectedCategory: '',
       today: this.dateModel.today,
+      categoryList: [],
     };
 
     asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
+    asyncSetState(this.categoryModel.getUserCategories());
   }
 
   template() {
@@ -53,5 +63,6 @@ export default class LineChart extends Component<IListStates, Props> {
   setUnmount() {
     this.historyModel.unsubscribe(this.historyModel.key, this);
     this.dateModel.unsubscribe(this.dateModel.key, this);
+    this.categoryModel.unsubscribe(this.categoryModel.key, this);
   }
 }

@@ -1,4 +1,4 @@
-import { CategoryType } from '@/utils/types';
+import { CategoryType, DELETE_CATEGORY_COLOR } from '@/utils/types';
 import './styles';
 
 export default function CategoryTag(category: CategoryType) {
@@ -7,7 +7,7 @@ export default function CategoryTag(category: CategoryType) {
       class="category-tag"
       data-id="${category.id}"
       style="background-color: ${
-        category.id !== -1 ? category.color : '#d2d2d2'
+        category.id !== -1 ? category.color : DELETE_CATEGORY_COLOR
       };"
     >
       ${category.type}

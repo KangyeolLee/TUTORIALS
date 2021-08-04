@@ -1,4 +1,10 @@
-import { CategoryCardsType, HistoryModelType, IHistory } from '@/utils/types';
+import {
+  CategoryCardsType,
+  CategoryType,
+  HistoryModelType,
+  IHistory,
+  DELETE_CATEGORY_COLOR,
+} from '@/utils/types';
 import HistoryModel from '@/Model/HistoryModel';
 import { asyncSetState } from '@/utils/helper';
 
@@ -71,7 +77,8 @@ class ChartController {
   makeDonutChart(
     categories: string[],
     categoryCards: CategoryCardsType,
-    $svg: HTMLElement
+    $svg: HTMLElement,
+    categoryList: CategoryType[]
   ) {
     let totalPercentage = 0;
     const startAngle = -90;
@@ -83,6 +90,7 @@ class ChartController {
     const speedMs = 650;
 
     categories.forEach((category) => {
+      const color = categoryList.filter((c) => c.type === category)[0]?.color;
       const circle = document.createElementNS(
         'http://www.w3.org/2000/svg',
         'circle'
@@ -99,11 +107,7 @@ class ChartController {
       circle.setAttribute('cx', cx.toString());
       circle.setAttribute('cy', cy.toString());
       circle.setAttribute('fill', 'transparent');
-      circle.setAttribute(
-        'stroke',
-        '#' + Math.round(Math.random() * 0xfff).toString(16)
-        // 색깔 카테고리에서 받아와야 함!!
-      );
+      circle.setAttribute('stroke', color ?? DELETE_CATEGORY_COLOR);
       circle.setAttribute('stroke-width', strokeWidth.toString());
       circle.setAttribute('stroke-dasharray', dashArray.toString());
       circle.setAttribute('stroke-dashoffset', dashArray.toString());

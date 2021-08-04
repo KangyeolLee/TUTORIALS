@@ -50,7 +50,7 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
       historyCards: this.historyModel.historyCards,
       today: this.dateModel.today,
       selectedType: this.historyModel.selectedType,
-      categoryList: this.categoryModel.categoryList,
+      categoryList: this.categoryModel.categoryList ?? [],
     };
 
     asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
