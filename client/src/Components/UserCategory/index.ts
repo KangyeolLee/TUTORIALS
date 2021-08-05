@@ -103,11 +103,22 @@ export default class UserCategory extends Component<UserCategoryState, Props> {
           newCategory.remove();
           return;
         }
-        // TODO category update
-        console.log(editedText);
+
+        const colorTarget = this.$target.querySelector(
+          '.category-icon[data-id="-1"] .icon'
+        ) as HTMLElement;
+        const colorString = colorTarget.style.backgroundColor;
+        const [r, g, b] = colorString
+          .replace('rgb(', '')
+          .replace(')', '')
+          .split(',')
+          .map((s) => Number(s));
 
         asyncSetState(
-          this.categoryModel.createUserCategories(editedText, randomColor)
+          this.categoryModel.createUserCategories(
+            editedText,
+            `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
+          )
         );
       }.bind(this)
     );
