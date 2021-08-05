@@ -24,6 +24,4 @@ try {
   }
 
   init();
-} catch (error) {
-  console.error(error);
-}
+} catch (error) {}

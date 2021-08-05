@@ -95,7 +95,7 @@ export interface HistoryModelType extends Model {
   addHistory: (history: IHistory) => Promise<curType>;
   updateHistory: (history: IHistory) => Promise<curType>;
   deleteHistoryCard: (historyId: number) => Promise<curType>;
-  getSumByMonth: (
+  getSumForMonth: (
     year: number,
     category: string,
     type: amountType

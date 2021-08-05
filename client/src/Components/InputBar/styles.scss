@@ -200,6 +200,11 @@
         width: 100%;
         box-sizing: border-box;
 
+        &.income,
+        &.outcome {
+          box-shadow: none;
+        }
+
         &.date-list {
           display: flex;
           align-items: center;

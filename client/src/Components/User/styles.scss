@@ -1,9 +1,11 @@
 @import '@/scss/theme';
+@import '@/scss/animation';
 
 .user {
   display: grid;
   width: 100%;
   column-gap: 4rem;
+  animation: fadein-no-bounce 0.52s ease-in;
 
   .user-info {
     display: flex;
