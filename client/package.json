@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "main.ts",
   "scripts": {
-    "start": "webpack serve",
-    "build": "webpack"
+    "start": "webpack serve --mode=development --env development",
+    "start:prod": "webpack serve --mode=production --host=0.0.0.0 --disable-host-check --env production",
+    "build": "webpack webpack --mode=production --env production"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "clean-webpack-plugin": "*",
     "core-js": "^3.15.2",
     "css-loader": "^6.2.0",
+    "dotenv-webpack": "^7.0.3",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "file-loader": "^6.2.0",
