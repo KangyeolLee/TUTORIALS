@@ -9,6 +9,12 @@
   .month-point {
     opacity: 0;
   }
+  .point-text {
+    @include bold-large;
+    opacity: 0;
+    text-anchor: middle;
+    font-size: 2.7rem;
+  }
 
   &:hover {
     .month-section {
@@ -16,6 +22,9 @@
       opacity: 0.1;
     }
     .month-point {
+      opacity: 1;
+    }
+    .point-text {
       opacity: 1;
     }
   }
@@ -30,5 +39,5 @@
   }
 }
 .line-chart-path {
-  animation: draw 0.6s cubic-bezier(0, 0.55, 0.45, 1);
+  animation: draw 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }

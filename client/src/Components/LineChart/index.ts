@@ -1,6 +1,6 @@
 import Component from '@/Core/Component';
 import './styles';
-import { html, asyncSetState } from '@/utils/helper';
+import { html, asyncSetState, addComma } from '@/utils/helper';
 import {
   CategoryModelType,
   CategoryType,
@@ -36,6 +36,7 @@ const magicNumber = {
   CHART_LEFT: 100,
   CHART_BOTTOM: 0,
   CHART_RIGHT: 100,
+  numY: 6,
 };
 
 export default class LineChart extends Component<IListStates, Props> {
@@ -125,7 +126,12 @@ export default class LineChart extends Component<IListStates, Props> {
     const standYLine = this.getStandYLine(); // y축 가로선
     const xSection = this.getXSection(dataPoint); // month section
     const pointCircle = this.getPointCircle(dataPoint, color); // point
-    const sectionPointGroup = this.makeSectionPointGroup(xSection, pointCircle);
+    const expenseText = this.getExpenseText(dataPoint, statList); // 금액
+    const sectionPointGroup = this.makeSectionPointGroup(
+      xSection,
+      pointCircle,
+      expenseText
+    );
     const defsElem = this.getDefs(color);
     svg.appendChild(defsElem);
     svg.appendChild(standYLine);
@@ -155,7 +161,8 @@ export default class LineChart extends Component<IListStates, Props> {
       magicNumber.HEIGHT - (magicNumber.CHART_TOP + magicNumber.CHART_BOTTOM),
     ];
     const intervalX = graphWidth / (data.length - 1);
-    const max = Math.round((Math.max(...data) + 100000) / 10) * 10;
+    const maxValue = Math.max(...data);
+    const max = maxValue + maxValue / magicNumber.numY;
 
     this.chartInfo = {
       intervalX: intervalX,
@@ -228,10 +235,9 @@ export default class LineChart extends Component<IListStates, Props> {
   }
 
   getStandLineAttribute() {
-    const numY = 6;
-    const intervalY = this.chartInfo.maxValue / numY;
+    const intervalY = this.chartInfo.maxValue / magicNumber.numY;
     const lineY = [];
-    for (let i = 0; i < numY + 1; i++) {
+    for (let i = 0; i < magicNumber.numY + 1; i++) {
       lineY.push(intervalY * i);
     }
     return lineY.map((y) => `M ${0},${y} L ${magicNumber.WIDTH},${y}`).join('');
@@ -281,7 +287,6 @@ export default class LineChart extends Component<IListStates, Props> {
         'http://www.w3.org/2000/svg',
         'circle'
       );
-
       $circle.setAttribute('class', 'month-point');
       $circle.setAttribute('cx', `${data[0]}`);
       $circle.setAttribute('cy', `${data[1]}`);
@@ -298,7 +303,8 @@ export default class LineChart extends Component<IListStates, Props> {
 
   makeSectionPointGroup(
     xSection: SVGPathElement[],
-    pointCircle: SVGCircleElement[]
+    pointCircle: SVGCircleElement[],
+    expenseText: SVGTextElement[]
   ) {
     const groupList: SVGGElement[] = [];
     xSection.forEach((section, idx) => {
@@ -306,11 +312,11 @@ export default class LineChart extends Component<IListStates, Props> {
         'http://www.w3.org/2000/svg',
         'g'
       );
-
       $group.setAttribute('class', 'section-point-group');
       $group.dataset.id = `${idx + 1}`;
       $group.appendChild(section);
       $group.appendChild(pointCircle[idx]);
+      $group.appendChild(expenseText[idx]);
 
       groupList.push($group);
     });
@@ -334,5 +340,20 @@ export default class LineChart extends Component<IListStates, Props> {
       </linearGradient>
     `;
     return defs;
+  }
+
+  getExpenseText(dataPoint: Point[], statList: number[]) {
+    return statList.map((stat, i) => {
+      const text = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'text'
+      );
+      text.setAttribute('class', 'point-text');
+      text.setAttribute('x', `${dataPoint[i][0]}`);
+      text.setAttribute('y', `${-(dataPoint[i][1] + 30)}`);
+      text.innerHTML = addComma(`${stat}`);
+
+      return text;
+    });
   }
 }
