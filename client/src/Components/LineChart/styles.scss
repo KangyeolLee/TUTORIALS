@@ -42,8 +42,14 @@
   animation: draw 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.line-chart-stand-text {
+.line-chart-y-stand-text {
   @include body-large;
   font-size: 2.5rem;
   text-anchor: end;
+}
+
+.line-chart-x-stand-text {
+  @include body-large;
+  font-size: 2.5rem;
+  text-anchor: middle;
 }

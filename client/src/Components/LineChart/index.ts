@@ -37,6 +37,7 @@ const magicNumber = {
   CHART_BOTTOM: 100,
   CHART_RIGHT: 100,
   numY: 5,
+  MONTH_NUM: 12,
 };
 
 export default class LineChart extends Component<IListStates, Props> {
@@ -124,7 +125,11 @@ export default class LineChart extends Component<IListStates, Props> {
     const dataPoint = this.getPoints(statList);
 
     const chart = this.getLineChartPath(dataPoint, color); // line graph
-    const { $path: standYLine, $textGroup: textGroup } = this.getStandYLine(); // y축 가로선
+    const {
+      $path: standYLine,
+      $YtextGroup: YGroup,
+      $XtextGroup: XGroup,
+    } = this.getStandYLine(); // y축 가로선
     const xSection = this.getXSection(dataPoint); // month section
     const pointCircle = this.getPointCircle(dataPoint, color); // point
     const expenseText = this.getExpenseText(dataPoint, statList); // 금액
@@ -134,11 +139,9 @@ export default class LineChart extends Component<IListStates, Props> {
       expenseText
     );
     const defsElem = this.getDefs(color);
-    svg.appendChild(defsElem);
-    svg.appendChild(standYLine);
-    svg.appendChild(textGroup);
-    svg.appendChild(chart);
-    sectionPointGroup.forEach((group) => svg.appendChild(group));
+    [standYLine, YGroup, XGroup, chart, ...sectionPointGroup, defsElem].forEach(
+      (elem) => svg.appendChild(elem)
+    );
   }
 
   // 곡선 그래프
@@ -162,7 +165,7 @@ export default class LineChart extends Component<IListStates, Props> {
       magicNumber.WIDTH - (magicNumber.CHART_LEFT + magicNumber.CHART_RIGHT),
       magicNumber.HEIGHT - (magicNumber.CHART_TOP + magicNumber.CHART_BOTTOM),
     ];
-    const intervalX = graphWidth / (data.length - 1);
+    const intervalX = graphWidth / (magicNumber.MONTH_NUM - 1);
     const maxValue = Math.max(...data);
     const max = Math.round(maxValue + maxValue / magicNumber.numY);
 
@@ -235,16 +238,27 @@ export default class LineChart extends Component<IListStates, Props> {
     $path.setAttribute('stroke-width', '2');
     $path.setAttribute('style', 'transform: scale(1, -1)');
 
-    const $textGroup = document.createElementNS(
+    // y축 기준 금액
+    const $YtextGroup = document.createElementNS(
       'http://www.w3.org/2000/svg',
       'g'
     );
-    $textGroup.setAttribute('class', 'line-chart-stand-text');
-    this.getStandText().forEach((text) => {
-      $textGroup.appendChild(text);
+    $YtextGroup.setAttribute('class', 'line-chart-y-stand-text');
+    this.getStandYText().forEach((text) => {
+      $YtextGroup.appendChild(text);
     });
 
-    return { $path, $textGroup };
+    // x축 기준 월
+    const $XtextGroup = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'g'
+    );
+    $XtextGroup.setAttribute('class', 'line-chart-x-stand-text');
+    this.getStandXText().forEach((text) => {
+      $XtextGroup.appendChild(text);
+    });
+
+    return { $path, $YtextGroup, $XtextGroup };
   }
 
   getStandLineAttribute() {
@@ -260,7 +274,7 @@ export default class LineChart extends Component<IListStates, Props> {
       .join('');
   }
 
-  getStandText() {
+  getStandYText() {
     const { maxExpense } = this.chartInfo;
     const div = 10 ** (String(maxExpense).length - 2);
     const maxBoundExpense = Math.round(maxExpense / div) * div;
@@ -278,6 +292,25 @@ export default class LineChart extends Component<IListStates, Props> {
       standExpenseList.push(text);
     }
     return standExpenseList;
+  }
+
+  getStandXText() {
+    const graphWidth =
+      magicNumber.WIDTH - (magicNumber.CHART_LEFT + magicNumber.CHART_RIGHT);
+    const intervalX = graphWidth / (magicNumber.MONTH_NUM - 1);
+
+    const standMonthList = [];
+    for (let i = 0; i < magicNumber.MONTH_NUM; i++) {
+      const text = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'text'
+      );
+      text.setAttribute('x', `${intervalX * i + magicNumber.CHART_LEFT}`);
+      text.setAttribute('y', `${-(magicNumber.CHART_BOTTOM - 50)}`);
+      text.innerHTML = `${i + 1}월`;
+      standMonthList.push(text);
+    }
+    return standMonthList;
   }
 
   // 마우스 hover시 나타나는 section
