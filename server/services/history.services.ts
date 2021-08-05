@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 import { getCustomRepository } from 'typeorm';
 import History from '../entities/History';
-import { HistoryType } from '../types/types';
+import { HistoryType, ResultRawType } from '../types/types';
 import HistoryRepository from './../repositories/history.repository';
 
 @Service()
@@ -57,6 +57,24 @@ export default class HistoryService {
       ).deleteHistoryById(historyId);
 
       return historyId;
+    } catch (error) {
+      throw new Error('[history 쿼리 에러] ' + error);
+    }
+  }
+
+  async getAverageByMonth(
+    id: number,
+    categoryType: string,
+    year: number
+  ): Promise<{ month: number; average: string }[]> {
+    try {
+      const result = await getCustomRepository(
+        HistoryRepository
+      ).getAverageByMonth(id, categoryType, year);
+
+      return result.map((res) => {
+        return { month: Number(res.month), average: res.average };
+      });
     } catch (error) {
       throw new Error('[history 쿼리 에러] ' + error);
     }

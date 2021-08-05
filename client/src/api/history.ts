@@ -36,3 +36,8 @@ export const deleteHistory = async (historyId: number) =>
   axios.delete(`${APIENDPOINT}/${historyId}`, {
     withCredentials: true,
   });
+
+export const getAverageByMonth = async (year: number, category: string) =>
+  axios.get(`${APIENDPOINT}/stat/${year}/${category}`, {
+    withCredentials: true,
+  });
