@@ -77,6 +77,20 @@ export default class Header extends Component<DateState, Props> {
       $router.push('/user');
       this.headerController.changeMenu(this.$target);
     });
+    // dropdown
+    document.addEventListener('click', (e: MouseEvent) => {
+      const isDropDownClicked = (<HTMLElement>e.target).closest('.drop-down');
+      if (!isDropDownClicked) {
+        const dropdown = (<HTMLUListElement>(
+          document.querySelector('.drop-down')
+        )) as HTMLUListElement;
+
+        if (dropdown) {
+          dropdown.style.display = 'none';
+          dropdown.style.opacity = '0';
+        }
+      }
+    });
   }
 
   removeEvent() {}
