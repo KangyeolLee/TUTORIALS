@@ -76,7 +76,7 @@ export default class HistoryService {
 
       const sumForMonth = [];
       for (let i = 0, j = 0; i < 12; i++) {
-        if (j < result.length && Number(result[j].month) === i) {
+        if (j < result.length && Number(result[j].month) - 1 === i) {
           sumForMonth.push(Number(result[j++].sum));
         } else sumForMonth.push(0);
       }
