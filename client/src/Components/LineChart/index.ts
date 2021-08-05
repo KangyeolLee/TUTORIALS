@@ -32,9 +32,9 @@ type Point = number[];
 const magicNumber = {
   WIDTH: 1920,
   HEIGHT: 700,
-  CHART_TOP: 100,
-  CHART_LEFT: 200,
-  CHART_BOTTOM: 0,
+  CHART_TOP: 0,
+  CHART_LEFT: 220,
+  CHART_BOTTOM: 100,
   CHART_RIGHT: 100,
   numY: 5,
 };
@@ -168,14 +168,15 @@ export default class LineChart extends Component<IListStates, Props> {
 
     this.chartInfo = {
       intervalX: intervalX,
-      maxValue: graphHeight,
+      maxValue:
+        graphHeight - (magicNumber.CHART_BOTTOM + magicNumber.CHART_TOP),
       maxExpense: max,
     };
 
     return data.reduce((acc: Point[], cur: number, i) => {
       const point: Point = [
         intervalX * i + magicNumber.CHART_LEFT,
-        (cur / max) * graphHeight,
+        (cur / max) * this.chartInfo.maxValue + magicNumber.CHART_BOTTOM,
       ];
       return [...acc, point];
     }, []);
@@ -200,8 +201,8 @@ export default class LineChart extends Component<IListStates, Props> {
 
     return [
       pointLine,
-      `L ${points[points.length - 1][0]}, ${0}`,
-      `L ${points[0][0]}, ${0}`,
+      `L ${points[points.length - 1][0]}, ${magicNumber.CHART_BOTTOM}`,
+      `L ${points[0][0]}, ${magicNumber.CHART_BOTTOM}`,
       `L ${points[0][0]}, ${points[0][1]}`,
     ].join('');
   }
@@ -238,6 +239,7 @@ export default class LineChart extends Component<IListStates, Props> {
       'http://www.w3.org/2000/svg',
       'g'
     );
+    $textGroup.setAttribute('class', 'line-chart-stand-text');
     this.getStandText().forEach((text) => {
       $textGroup.appendChild(text);
     });
@@ -249,7 +251,7 @@ export default class LineChart extends Component<IListStates, Props> {
     const intervalY = this.chartInfo.maxValue / magicNumber.numY;
     const lineY = [];
     for (let i = 0; i < magicNumber.numY + 1; i++) {
-      lineY.push(intervalY * i);
+      lineY.push(intervalY * i + magicNumber.CHART_BOTTOM);
     }
     return lineY
       .map(
@@ -270,9 +272,8 @@ export default class LineChart extends Component<IListStates, Props> {
         'http://www.w3.org/2000/svg',
         'text'
       );
-      text.setAttribute('class', 'line-chart-stand-text');
-      text.setAttribute('x', `${10}`);
-      text.setAttribute('y', `${-intervalY * i}`);
+      text.setAttribute('x', `${magicNumber.CHART_LEFT / 2}`);
+      text.setAttribute('y', `${-(intervalY * i + magicNumber.CHART_BOTTOM)}`);
       text.innerHTML = addComma(`${intervalExpense * i}`);
       standExpenseList.push(text);
     }
@@ -306,11 +307,11 @@ export default class LineChart extends Component<IListStates, Props> {
       const right = data[0] + halfInterval;
 
       return `      
-      M ${left},${0}
-      L ${right}, ${0}
-      L ${right}, ${this.chartInfo.maxValue}
-      L ${left}, ${this.chartInfo.maxValue}
-      L ${left}, ${0}
+      M ${left},${magicNumber.CHART_BOTTOM}
+      L ${right}, ${magicNumber.CHART_BOTTOM}
+      L ${right}, ${this.chartInfo.maxValue + magicNumber.CHART_BOTTOM}
+      L ${left}, ${this.chartInfo.maxValue + magicNumber.CHART_BOTTOM}
+      L ${left}, ${magicNumber.CHART_BOTTOM}
     `;
     });
   }

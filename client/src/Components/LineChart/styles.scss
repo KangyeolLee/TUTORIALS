@@ -44,5 +44,6 @@
 
 .line-chart-stand-text {
   @include body-large;
-  font-size: 2.7rem;
+  font-size: 2.5rem;
+  text-anchor: end;
 }
