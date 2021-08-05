@@ -17,10 +17,14 @@ export default class UserView extends Component<UserViewState, Props> {
   setup() {
     getUserInfo()
       .then((res) => {
-        this.setState({
-          id: res.data.user.id,
-          githubUser: res.data.user.githubUser,
-        });
+        setTimeout(
+          () =>
+            this.setState({
+              id: res.data.user.id,
+              githubUser: res.data.user.githubUser,
+            }),
+          600
+        );
       })
       .catch((err) => {
         // TODO 로그인 실패 알림

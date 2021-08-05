@@ -48,5 +48,6 @@ export default class User extends Component<UserState, Props> {
   async handleLogOut() {
     const res = await apiLogout();
     $router.push('/main');
+    location.reload();
   }
 }
