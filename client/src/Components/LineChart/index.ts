@@ -100,6 +100,7 @@ export default class LineChart extends Component<IListStates, Props> {
         category ? category.color : DELETE_CATEGORY_COLOR
       );
 
+      // 카테고리 클릭 시에만 lineChart 출력
       const lineChartView = document.querySelector(
         '#line-chart-view'
       ) as HTMLDivElement;
@@ -124,6 +125,8 @@ export default class LineChart extends Component<IListStates, Props> {
     const xSection = this.getXSection(dataPoint); // month section
     const pointCircle = this.getPointCircle(dataPoint, color); // point
     const sectionPointGroup = this.makeSectionPointGroup(xSection, pointCircle);
+    const defsElem = this.getDefs(color);
+    svg.appendChild(defsElem);
     svg.appendChild(standYLine);
     svg.appendChild(chart);
     sectionPointGroup.forEach((group) => svg.appendChild(group));
@@ -137,10 +140,10 @@ export default class LineChart extends Component<IListStates, Props> {
     );
     $path.setAttribute('class', 'line-chart-path');
     $path.setAttribute('d', this.getPathAttribute(dataPoint));
-    $path.setAttribute('fill', color);
+    $path.setAttribute('fill', `url('#myGradient')`); //, color);
     $path.setAttribute('stroke', color);
     $path.setAttribute('stroke-width', '4');
-    $path.setAttribute('style', 'transform: scale(1, -1); fill-opacity: 0.3;');
+    $path.setAttribute('style', 'transform: scale(1, -1);');
 
     return $path;
   }
@@ -312,5 +315,23 @@ export default class LineChart extends Component<IListStates, Props> {
     });
 
     return groupList;
+  }
+
+  getDefs(color: string) {
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const [r, g, b] = [
+      parseInt(color.substr(1, 2), 16),
+      parseInt(color.substr(3, 2), 16),
+      parseInt(color.substr(5, 2), 16),
+    ];
+    defs.innerHTML = `
+      <linearGradient id="myGradient" gradientTransform="rotate(90)">
+        <stop offset="0%"  stop-color="rgba(${r},${g},${b},0.05)" />
+        <stop offset="40%" stop-color="rgba(${r},${g},${b},0.4)" />
+        <stop offset="70%" stop-color="rgba(${r},${g},${b},0.5)" />
+        <stop offset="100%" stop-color="rgba(${r},${g},${b},0.6)" />
+      </linearGradient>
+    `;
+    return defs;
   }
 }
