@@ -85,7 +85,13 @@ export default class Header extends Component<DateState, Props> {
           document.querySelector('.drop-down')
         )) as HTMLUListElement;
 
+        const historyListItems =
+          document.querySelectorAll('.history-list-item');
+
         if (dropdown) {
+          historyListItems.forEach(
+            (item) => ((<HTMLElement>item).style.backgroundColor = '#fcfcfc')
+          );
           dropdown.style.display = 'none';
           dropdown.style.opacity = '0';
         }
