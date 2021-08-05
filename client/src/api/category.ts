@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const APIENDPOINT = `http://localhost:3000/api/categories`;
+const APIENDPOINT = process.env.CLIENT_API_BASE + '/categories';
 
 export const getCategories = async () =>
   await axios.get(`${APIENDPOINT}`, { withCredentials: true });
@@ -23,5 +23,3 @@ export const createCategory = async ({
 
 export const deleteCategory = async (categoryId: number) =>
   await axios.delete(`${APIENDPOINT}/${categoryId}`, { withCredentials: true });
-
-//ByeBYE~!

@@ -1,6 +1,8 @@
 import axios from 'axios';
 
+const APIENDPOINT = process.env.CLIENT_API_BASE;
+
 export const apiLogout = async () =>
-  await axios.post(`http://localhost:3000/api/user/logout`, null, {
+  await axios.post(`${APIENDPOINT}/user/logout`, null, {
     withCredentials: true,
   });
