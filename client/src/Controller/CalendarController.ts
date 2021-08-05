@@ -126,12 +126,16 @@ class CalendarController {
         ? html`
             <div class="history">
               ${income
-                ? `<div class="income">+${addComma(income + '')}</div>`
+                ? `<div class="income"><span>+${addComma(
+                    income + ''
+                  )}</span></div>`
                 : null}
               ${outcome
-                ? `<div class="outcome">${addComma(outcome + '')}</div>`
+                ? `<div class="outcome"><span>${addComma(
+                    outcome + ''
+                  )}</span></div>`
                 : null}
-              <div class="amount">${addComma(amount + '')}</div>
+              <div class="amount"><span>${addComma(amount + '')}</span></div>
             </div>
             <div class="day">${date}</div>
           `
