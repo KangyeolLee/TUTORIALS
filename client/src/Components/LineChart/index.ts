@@ -17,6 +17,7 @@ import HistoryModel from '@/Model/HistoryModel';
 import ChartController from '@/Controller/ChartController';
 import DateModel from '@/Model/DateModel';
 import CategoryModel from '@/Model/CategoryModel';
+import { isHeritageClause } from 'typescript';
 
 interface IListStates extends State {
   today: Today;
@@ -104,10 +105,10 @@ export default class LineChart extends Component<IListStates, Props> {
       const lineChartView = document.querySelector(
         '#line-chart-view'
       ) as HTMLDivElement;
+      const isShowed = lineChartView.className.indexOf('show');
       const prevCategory = lineChartView.dataset.category;
       lineChartView.dataset.category = selectedCategory;
-
-      if (!prevCategory || prevCategory === selectedCategory)
+      if (isShowed === -1 || (isShowed && prevCategory === selectedCategory))
         lineChartView.classList.toggle('show');
     }
   }
