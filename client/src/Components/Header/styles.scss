@@ -5,12 +5,10 @@ header {
 
   .header-wrapper {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
-    width: 100%;
-    max-width: 100rem;
-    padding: 4rem 0 6rem 0;
-    margin: auto;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
     color: white;
 
     .header-title {
@@ -77,5 +75,48 @@ header {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .container {
+    padding: 2.5rem !important;
+  }
+
+  .switch {
+    margin: 0 !important;
+    align-items: center;
+
+    .switch-text.month {
+      font-size: 4rem !important;
+    }
+    // .switch-text.month {
+    //   font-size:
+    // }
+  }
+
+  .header-wrapper.container {
+    grid-template-columns: 1fr auto;
+
+    .header-title {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .switch {
+    gap: 2rem !important;
+    .switch-text.month {
+      font-size: 3.5rem !important;
+    }
+    .switch-text.year {
+      font-size: 2rem !important;
+    }
+  }
+  .menu {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(2, 1fr) !important;
+    grid-gap: 3rem 1rem;
   }
 }
