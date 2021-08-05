@@ -1,3 +1,4 @@
+import { amountType } from '@/Model/HistoryModel';
 import { IHistory } from '@/utils/types';
 import axios from 'axios';
 
@@ -37,7 +38,15 @@ export const deleteHistory = async (historyId: number) =>
     withCredentials: true,
   });
 
-export const getAverageByMonth = async (year: number, category: string) =>
-  axios.get(`${APIENDPOINT}/stat/${year}/${category.replace('/', '%2F')}`, {
-    withCredentials: true,
-  });
+export const getSumByMonth = async (
+  year: number,
+  category: string,
+  type: amountType
+) =>
+  axios.post(
+    `${APIENDPOINT}/stat/`,
+    { year, categoryType: category, type },
+    {
+      withCredentials: true,
+    }
+  );
