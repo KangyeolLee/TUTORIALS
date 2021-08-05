@@ -8,3 +8,14 @@
     opacity: 1;
   }
 }
+
+@keyframes fadein-left {
+  from {
+    left: 0;
+    opacity: 0;
+  }
+  to {
+    left: 50%;
+    opacity: 1;
+  }
+}
