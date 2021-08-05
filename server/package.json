@@ -5,7 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "start": "tsc && cross-env NODE_ENV=production node build/app.js",
-    "start:pm2": "tsc && cross-env NODE_ENV=production pm2 restart build/app.js --update-env",
+    "start:pm2": "tsc && cross-env NODE_ENV=production pm2 restart server --update-env",
     "dev": "cross-env NODE_ENV=development nodemon --watch \"**\" --ext \"ts\" --exec \"ts-node --files\" app",
     "prod": "cross-env NODE_ENV=production nodemon --watch \"**\" --ext \"ts\" --exec \"ts-node --files\" app"
   },

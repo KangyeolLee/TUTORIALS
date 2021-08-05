@@ -18,6 +18,10 @@ if [ $local != $target ]; then
     sudo npm install && npm run build
     cp -r ./dist/* /var/www/html
 
+    echo '---server build---'
+    cd ../server
+    sudo npm install && npm run start:pm2
+
     # 기존 커밋 덮어쓰기
     echo '---update lastCommit.info---'
     echo $target > /home/ubuntu/last-commit.info
