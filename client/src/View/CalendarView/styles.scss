@@ -1,7 +1,9 @@
 @import '@/scss/theme';
+@import '@/scss/animation';
 
 .calendar-wrapper {
   position: relative;
+  animation: fadein-low 0.52s ease-in;
 
   .weeks-bar {
     position: absolute;
