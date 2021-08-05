@@ -12,7 +12,12 @@ import {
   CategoryModelType,
   CategoryType,
 } from '@/utils/types';
-import { addComma, asyncSetState, html } from '@/utils/helper';
+import {
+  addComma,
+  asyncSetState,
+  customEventEmitter,
+  html,
+} from '@/utils/helper';
 import HistoryList from '@/Components/HistoryList';
 import HistoryModel from '@/Model/HistoryModel';
 import DateModel from '@/Model/DateModel';
@@ -96,12 +101,41 @@ export default class HistoryDayCard extends Component<
   }
 
   setEvent() {
-    document.addEventListener('delete-history', ((e: CustomEvent) =>
-      this.handleDeleteHistory(e.detail)) as EventListener);
+    this.addEvent(
+      'delete-history',
+      this.$target.className,
+      (e: CustomEvent) => this.handleDeleteHistory(e.detail),
+      true
+    );
+
+    this.addEvent('click', '.list-control-box', (e: MouseEvent) => {
+      const target = <HTMLElement>e.target;
+      const historyId = Number(
+        (<HTMLElement>target.closest('.history-list-item')).dataset.id
+      );
+      if (target.className.includes('update')) {
+        this.handleEditHistory({ historyId });
+      } else if (target.className.includes('delete')) {
+        this.handleDeleteHistory({
+          historyId,
+        });
+      }
+    });
   }
 
   handleDeleteHistory({ historyId }: { historyId: number }) {
     asyncSetState(this.historyModel.deleteHistoryCard(historyId));
+  }
+
+  handleEditHistory({ historyId }: { historyId: number }) {
+    const inputbarWrapper = document.querySelector(
+      '.input-bar-wrapper'
+    ) as HTMLElement;
+    const targetHistory = this.historyModel.historyCards.filter(
+      (history) => history.id === +historyId
+    )[0];
+
+    customEventEmitter('edit-history', targetHistory, inputbarWrapper);
   }
 
   updateList(onlyToday?: boolean) {

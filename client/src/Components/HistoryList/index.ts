@@ -3,10 +3,6 @@ import { CategoryType, IHistory } from '@/utils/types';
 import { addComma } from '@/utils/helper';
 import CategoryTag from '@/Components/CategoryTag';
 
-// interface IListStates extends State {
-//   history: IHistory;
-// }
-
 export default function HistoryList(
   historyList: IHistory[],
   categoryList: CategoryType[]
@@ -37,6 +33,10 @@ export default function HistoryList(
             <div class="history-price">
               ${!history.type ? '-' : ''}${addComma(history.price.toString())}원
             </div>
+          </div>
+          <div class="list-control-box">
+            <div class="button update">수정하기</div>
+            <div class="button delete">삭제하기</div>
           </div>
         </li>
       `
