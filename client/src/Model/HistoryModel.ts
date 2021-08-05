@@ -108,7 +108,7 @@ class HistoryModel extends Observable {
   async getAverageByMonth(year: number, category: string) {
     const res = await getAverageByMonth(year, category);
 
-    return this.notify(this.key, { statList: res.data.result });
+    return { statList: res.data.result };
   }
 
   initHistoryForToday() {

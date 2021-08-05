@@ -68,10 +68,10 @@ export default class LineChart extends Component<IListStates, Props> {
 
     asyncSetState(this.historyModel.getHistoryCard(this.$state.today));
     asyncSetState(this.categoryModel.getUserCategories());
-    asyncSetState(this.historyModel.getAverageByMonth(2021, '식비'));
   }
 
   template() {
+    console.log(this.$state);
     return html`
       <svg
         version="1.1"
@@ -87,10 +87,16 @@ export default class LineChart extends Component<IListStates, Props> {
     `;
   }
 
-  mounted() {
-    const svg = this.$target.querySelector('#line-chart') as SVGElement;
-    if (this.$state?.statList) {
-      const dataPoint = this.getPoints(this.$state?.statList);
+  async mounted() {
+    const { selectedCategory } = this.$state!;
+
+    if (selectedCategory) {
+      const { statList } = await this.historyModel.getAverageByMonth(
+        2021,
+        selectedCategory
+      );
+      const svg = this.$target.querySelector('#line-chart') as SVGElement;
+      const dataPoint = this.getPoints(statList);
 
       const chart = this.getLineChartPath(dataPoint); // line graph
       const standYLine = this.getStandYLine(); // y축 가로선
@@ -280,7 +286,7 @@ export default class LineChart extends Component<IListStates, Props> {
       );
 
       $group.setAttribute('class', 'section-point-group');
-      $group.dataset.id = `${idx}`;
+      $group.dataset.id = `${idx + 1}`;
       $group.appendChild(section);
       $group.appendChild(pointCircle[idx]);
 
