@@ -83,6 +83,7 @@ export interface HistoryType {
   income?: boolean;
 }
 export interface HistoryModelType extends Model {
+  getAverageByMonth(arg0: number, arg1: string): Promise<curType>;
   key: string;
   historyCards: IHistory[];
   historyType: HistoryType;
@@ -94,6 +95,7 @@ export interface HistoryModelType extends Model {
   addHistory: (history: IHistory) => Promise<curType>;
   updateHistory: (history: IHistory) => Promise<curType>;
   deleteHistoryCard: (historyId: number) => Promise<curType>;
+  getAverageByMonth: (year: number, category: string) => Promise<curType>;
   toggleType: (nextType: typeString) => Promise<curType>;
   toggleSelectedType: (type: number) => Promise<curType>;
   getTodaysHistoryCard: (today: Today) => Promise<curType>;

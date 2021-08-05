@@ -1,5 +1,6 @@
 import {
   deleteHistory,
+  getAverageByMonth,
   getHistories,
   insertHistory,
   updateHistory,
@@ -28,6 +29,7 @@ class HistoryModel extends Observable {
   selectedType: number;
   selectedCategory: string;
   selectedHistoryForCategory: IHistory[];
+  statList?: number[];
 
   constructor() {
     super();
@@ -101,6 +103,12 @@ class HistoryModel extends Observable {
     console.log(history);
 
     return this.notify(this.key, { historyCards: this.historyCards });
+  }
+
+  async getAverageByMonth(year: number, category: string) {
+    const res = await getAverageByMonth(year, category);
+
+    return this.notify(this.key, { statList: res.data.result });
   }
 
   initHistoryForToday() {
