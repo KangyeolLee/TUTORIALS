@@ -1,4 +1,5 @@
 @import '@/scss/theme';
+@import '@/scss/animation';
 
 .chart-wrapper {
   position: relative;
@@ -8,6 +9,7 @@
     position: absolute;
     width: 100%;
     top: -2.5rem;
+    animation: fadein-low 0.52s ease-in;
 
     .chart-background {
       width: 100%;

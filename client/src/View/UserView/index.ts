@@ -6,6 +6,7 @@ import { svgIcons } from '@/assets/svgIcons';
 import User from '@/Components/User';
 import { getUserInfo } from '@/api/user';
 import { docgo } from '@/assets';
+import Loading from '@/Components/Loading';
 
 interface UserViewState extends State {
   id: number;
@@ -29,7 +30,7 @@ export default class UserView extends Component<UserViewState, Props> {
 
   template() {
     // 로딩 중
-    if (!this.$state!.hasOwnProperty('id')) return html`Loading...`;
+    if (!this.$state!.hasOwnProperty('id')) return Loading();
 
     return html`
       <section class="user-wrapper container">

@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 import { getCustomRepository } from 'typeorm';
 import History from '../entities/History';
-import { HistoryType, ResultRawType } from '../types/types';
+import { amountType, HistoryType, ResultRawType } from '../types/types';
 import HistoryRepository from './../repositories/history.repository';
 
 @Service()
@@ -65,13 +65,15 @@ export default class HistoryService {
   async getSumByMonth(
     id: number,
     categoryType: string,
-    year: number
+    year: number,
+    number: amountType
   ): Promise<number[]> {
     try {
       const result = await getCustomRepository(HistoryRepository).getSumByMonth(
         id,
         categoryType,
-        year
+        year,
+        number
       );
 
       const sumForMonth = [];
