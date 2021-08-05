@@ -17,7 +17,7 @@ export default class ChartsView extends Component<State, Props> {
               <div class="history-category-list-wrapper"></div>
             </atricle>
           </div>
-          <div class="chart-background">
+          <div class="chart-background" id="line-chart-view">
             <article class="chart-view">
               <div class="line-chart-view"></div>
             </article>

@@ -109,6 +109,15 @@ export default class LineChart extends Component<IListStates, Props> {
       svg.appendChild(standYLine);
       svg.appendChild(chart);
       sectionPointGroup.forEach((group) => svg.appendChild(group));
+
+      const lineChartView = document.querySelector(
+        '#line-chart-view'
+      ) as HTMLDivElement;
+      const prevCategory = lineChartView.dataset.category;
+      lineChartView.dataset.category = selectedCategory;
+
+      if (!prevCategory || prevCategory === selectedCategory)
+        lineChartView.classList.toggle('show');
     }
   }
 
