@@ -1,4 +1,5 @@
 @import '@/scss/theme';
+@import '@/scss/animation';
 
 .user-wrapper {
   margin-top: 5rem;
@@ -19,6 +20,7 @@
     .inner-box {
       img {
         width: 30rem;
+        animation: scaleup 0.22s ease-in;
       }
       h1 {
         @include display-large;

@@ -43,3 +43,12 @@
     transform: translateY(10%);
   }
 }
+
+@keyframes scaleup {
+  from {
+    transform: scale(0.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}

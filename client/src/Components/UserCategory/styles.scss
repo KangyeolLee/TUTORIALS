@@ -45,3 +45,30 @@
   color: $title-active;
   margin-bottom: 3rem;
 }
+
+@media screen and (max-width: 880px) {
+  .user-category-icons {
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .user-category-icons {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .user-category-icons {
+    grid-template-columns: repeat(1, 1fr) !important;
+    grid-gap: 1.5rem;
+
+    .category-icon {
+      width: 100% !important;
+      max-width: unset !important;
+      box-sizing: border-box;
+    }
+  }
+}
