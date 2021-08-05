@@ -116,11 +116,15 @@ export default class HistoryDayCard extends Component<
       if (target.className.includes('update')) {
         this.handleEditHistory({ historyId });
       } else if (target.className.includes('delete')) {
-        this.handleDeleteHistory({
-          historyId,
-        });
+        this.openAlertMessage(historyId);
       }
     });
+  }
+
+  openAlertMessage(historyId: number) {
+    const $alert = document.querySelector('.alert') as HTMLElement;
+    $alert.style.display = 'block';
+    customEventEmitter('open-alert', { historyId }, $alert);
   }
 
   handleDeleteHistory({ historyId }: { historyId: number }) {

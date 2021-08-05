@@ -1,0 +1,70 @@
+@import '@/scss/theme';
+
+.alert {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 10, 10, 0.5);
+  z-index: 500;
+
+  .alert-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.5rem;
+    overflow: hidden;
+
+    .alert-header {
+      display: flex;
+      align-items: center;
+      background-color: $red;
+      padding: 2rem;
+      height: 5rem;
+      box-sizing: border-box;
+      color: $white;
+      @include bold-large;
+    }
+    .alert-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: $white;
+      padding: 2rem;
+      box-sizing: border-box;
+      @include body-regular;
+
+      text {
+        color: $title-active;
+      }
+
+      .button-area {
+        display: flex;
+        justify-content: space-between;
+
+        .button {
+          cursor: pointer;
+
+          &.cancel {
+            color: $label;
+          }
+          &.confirm {
+            color: $red;
+          }
+
+          &:hover {
+            opacity: 0.75;
+          }
+        }
+      }
+    }
+  }
+}

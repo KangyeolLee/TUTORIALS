@@ -60,7 +60,7 @@ export default class Main extends Component<IMainState, Props> {
     const $expenseSum = this.$target.querySelector(
       '.expense-sum'
     ) as HTMLSpanElement;
-    const dropdown = this.$target.querySelector('.dropdown') as HTMLDivElement;
+    const $dropdown = this.$target.querySelector('.dropdown') as HTMLDivElement;
 
     new HistoryDayCard($daycardList, undefined, {
       $totalNum,
@@ -68,7 +68,7 @@ export default class Main extends Component<IMainState, Props> {
       $expenseSum,
     });
 
-    new DropDown(dropdown, {
+    new DropDown($dropdown, {
       handler: this.handleDropDown.bind(this),
       dropdownList: [
         { text: '수정하기', type: 'edit' },
@@ -148,7 +148,7 @@ export default class Main extends Component<IMainState, Props> {
     if (!historyId) return;
 
     if (type === 'edit') this.handleEditHistory(+historyId);
-    else if (type === 'delete') this.handleDeleteHistory(+historyId);
+    else if (type === 'delete') this.openAlertMessage(+historyId);
 
     // close dropdown
     dropdown.style.display = 'none';
@@ -164,10 +164,10 @@ export default class Main extends Component<IMainState, Props> {
     )[0];
     customEventEmitter('edit-history', targetHistory, inputbarWrapper);
   }
-  handleDeleteHistory(historyId: number) {
-    const $dayCardList = document.querySelector(
-      '.day-card-list'
-    ) as HTMLElement;
-    customEventEmitter('delete-history', { historyId }, $dayCardList);
+
+  openAlertMessage(historyId: number) {
+    const $alert = document.querySelector('.alert') as HTMLElement;
+    $alert.style.display = 'block';
+    customEventEmitter('open-alert', { historyId }, $alert);
   }
 }
