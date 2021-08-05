@@ -46,9 +46,15 @@ export default class PaymentDropdown extends Component<
     const input = document.querySelector(
       'input[name="payment"]'
     ) as HTMLInputElement;
+    const inputbarWrapper = document.querySelector(
+      '.input-bar-wrapper'
+    ) as HTMLElement;
     input.value = target.innerText;
-    console.log(input, input.value);
-    customEventEmitter('inputchangePayment', { value: input.value });
+    customEventEmitter(
+      'inputchangePayment',
+      { value: input.value },
+      inputbarWrapper
+    );
   }
 
   setEvent() {

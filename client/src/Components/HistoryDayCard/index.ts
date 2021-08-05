@@ -101,18 +101,24 @@ export default class HistoryDayCard extends Component<
   }
 
   handleDeleteHistory({ historyId }: { historyId: number }) {
-    console.log('delete', historyId);
     asyncSetState(this.historyModel.deleteHistoryCard(historyId));
   }
 
   updateList(onlyToday?: boolean) {
-    const { historyCards, historyCardForToday, historyType } = this.$state!;
+    const { historyCards, historyCardForToday, historyType, today } =
+      this.$state!;
     const { $totalNum, $incomeSum, $expenseSum } = this.$props!;
+    const { year, month } = today;
 
     const targetHistories = onlyToday ? historyCardForToday : historyCards;
+    const date = dayjs(`${year}-${month}`).format('YYYY-MM');
+
+    const historiesForTargetMonth = targetHistories.filter(
+      (history) => dayjs(history.createdAt).format('YYYY-MM') === date
+    );
 
     // 수입/지출 선택에 따른 historyList 추출
-    const historyList = targetHistories.filter((history) => {
+    const historyList = historiesForTargetMonth.filter((history) => {
       if (historyType.expense && historyType.income) return true;
       else if (historyType.expense && !historyType.income)
         return history.type === 0;

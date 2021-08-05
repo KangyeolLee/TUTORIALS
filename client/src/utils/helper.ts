@@ -8,8 +8,12 @@ export const html = (str: TemplateStringsArray, ...args: unknown[]) => {
   return doc.body;
 };
 
-export const customEventEmitter = (eventType: string, detail?: object) => {
-  document.dispatchEvent(
+export const customEventEmitter = (
+  eventType: string,
+  detail?: object,
+  $target?: HTMLElement
+) => {
+  ($target ? $target : document).dispatchEvent(
     new CustomEvent(eventType, {
       detail,
     })

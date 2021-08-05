@@ -54,14 +54,29 @@ export default class CategoryDropdown extends Component<
   }
 
   handleClickOnList(e: MouseEvent) {
-    const target = <HTMLElement>e.target;
+    const target = (<HTMLElement>e.target).closest(
+      '.dropdown-list'
+    ) as HTMLElement;
     target.scrollIntoView();
+    this.focusoutOtherLists();
+    target.classList.add('clicked');
     const input = document.querySelector(
       'input[name="category"]'
     ) as HTMLInputElement;
+    const inputbarWrapper = document.querySelector(
+      '.input-bar-wrapper'
+    ) as HTMLElement;
     input.value = target.innerText;
-    console.log(input, input.value);
-    customEventEmitter('inputchangeCategory', { value: input.value });
+    customEventEmitter(
+      'inputchangeCategory',
+      { value: input.value },
+      inputbarWrapper
+    );
+  }
+
+  focusoutOtherLists() {
+    const others = this.$target.querySelectorAll('.dropdown-list');
+    others.forEach((list) => list.classList.remove('clicked'));
   }
 
   mouseDown(e: PointerEvent) {
@@ -101,23 +116,6 @@ export default class CategoryDropdown extends Component<
       this.posX = e.pageX;
     }
   }
-
-  // mouseMove(e: PointerEvent) {
-  //   if (!this.pressed) return;
-  //   e.preventDefault();
-  //   this.posX = e.clientX;
-
-  //   this.$dropdownSlider.style.left = this.posX - this.startX + 'px';
-
-  //   const outer = this.$dropdownSlider.parentElement!.getBoundingClientRect();
-  //   const inner = this.$dropdownSlider.getBoundingClientRect();
-
-  //   if (parseInt(this.$dropdownSlider.style.left) > 0) {
-  //     this.$dropdownSlider.style.left = '0px';
-  //   } else if (inner.right < outer.right) {
-  //     this.$dropdownSlider.style.left = `-${inner.width - outer.width}px`;
-  //   }
-  // }
 
   setEvent() {
     this.addEvent('pointerdown', '.category-dropdown', (e: PointerEvent) =>
