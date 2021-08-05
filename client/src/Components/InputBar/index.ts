@@ -65,7 +65,7 @@ export default class InputBar extends Component<InputBarState, Props> {
         ${svgIcons.add}
         <div class="input-content-wrapper">
           <div class="input-bar-title">
-            <span
+            <span class="title"
               >내역
               ${this.$state!.editorMode === 'new' ? '추가' : '수정'}하기</span
             >
@@ -149,6 +149,7 @@ export default class InputBar extends Component<InputBarState, Props> {
                   <input
                     class="price-input"
                     type="text"
+                    maxlength="11"
                     name="price"
                     placeholder="가격을 입력하세요..."
                   />
@@ -214,6 +215,7 @@ export default class InputBar extends Component<InputBarState, Props> {
       }
     );
 
+    this.addEvent('click', '.title', this.initAllInputValues.bind(this));
     this.addEvent(
       'click',
       '.check-btn',
@@ -275,8 +277,6 @@ export default class InputBar extends Component<InputBarState, Props> {
       (e: CustomEvent) => this.handleEditHistory(e.detail),
       true
     );
-    // document.addEventListener('edit-history', ((e: CustomEvent) =>
-    //   this.handleEditHistory(e.detail)) as EventListener);
   }
 
   handleEditHistory(detail: IHistory) {
@@ -373,6 +373,9 @@ export default class InputBar extends Component<InputBarState, Props> {
     const dateDay = this.$target.querySelector(
       `[name="date-day"]`
     ) as HTMLInputElement;
+    const datepicker = this.$target.querySelector(
+      `input[type="date"]`
+    ) as HTMLInputElement;
     const $selectedPayment = this.$target.querySelector(
       '.selected-payment'
     ) as HTMLElement;
@@ -404,6 +407,7 @@ export default class InputBar extends Component<InputBarState, Props> {
     dateYear.value = `${new Date().getFullYear()}`;
     dateMonth.value = `${new Date().getMonth() + 1}`;
     dateDay.value = `${new Date().getDate()}`;
+    datepicker.value = dayjs(new Date()).format('YYYY-MM-DD');
     $contentInput.value = '';
     $paymentInput.value = '';
     $selectedPayment.innerText = '미선택';
@@ -549,11 +553,15 @@ export default class InputBar extends Component<InputBarState, Props> {
     this.checkValidated();
   }
   validatePrice(e: KeyboardEvent) {
-    if ((<HTMLInputElement>e.target).value === '')
-      this.validation.price = false;
+    const input = <HTMLInputElement>e.target;
+    if (/[^0-9|,]/gi.test(input.value)) {
+      input.value = input.value.slice(0, -1);
+      return;
+    }
+    if (input.value === '') this.validation.price = false;
     else {
-      const price = (<HTMLInputElement>e.target).value.replace(/,/g, '');
-      (<HTMLInputElement>e.target).value = addComma(price);
+      const price = input.value.replace(/,/g, '');
+      input.value = addComma(price);
       this.validation.price = true;
     }
     this.checkValidated();

@@ -2,6 +2,7 @@
 
 .input-bar-content {
   position: fixed;
+  z-index: 100;
   right: 0;
   bottom: 0;
   width: 6rem;
@@ -78,8 +79,13 @@
       padding: 1.5rem 2rem;
       @include bold-xlarge;
 
-      span {
+      span.title {
+        cursor: pointer;
         vertical-align: middle;
+
+        &:hover {
+          opacity: 0.95;
+        }
       }
 
       .input-submit-button {
