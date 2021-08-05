@@ -10,7 +10,7 @@ export default (app: Router) => {
   router.get(
     `/stat/:year/:categoryType`,
     authMiddleware,
-    historyController.getAverageByMonth
+    historyController.getSumByMonth
   );
   router.get(`/`, authMiddleware, historyController.selectHistory);
   router.post(`/`, authMiddleware, historyController.insertHistory);

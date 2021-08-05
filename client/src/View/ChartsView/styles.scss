@@ -11,7 +11,7 @@
 
     .chart-background {
       width: 100%;
-      min-height: 60rem;
+      // min-height: 60rem;
       padding: 3.5rem 5rem;
       box-sizing: border-box;
       display: flex;
@@ -21,6 +21,7 @@
       box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
         0 0.4rem 2rem rgba(0, 0, 0, 0.1);
       border-radius: 1rem;
+      margin-bottom: 5rem;
 
       .chart-view {
         display: flex;
@@ -37,11 +38,21 @@
           width: 50%;
           height: 100%;
         }
+
+        .line-chart-view {
+          width: 100%;
+        }
       }
     }
+  }
+}
 
-    .chart-background + .chart-background {
-      margin-top: 5rem;
-    }
+#line-chart-view {
+  display: none;
+  height: 0;
+
+  &.show {
+    display: flex;
+    height: fit-content;
   }
 }
