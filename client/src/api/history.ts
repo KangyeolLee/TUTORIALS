@@ -1,7 +1,7 @@
 import { IHistory } from '@/utils/types';
 import axios from 'axios';
 
-const APIENDPOINT = `http://localhost:3000/api/histories`;
+const APIENDPOINT = process.env.CLIENT_API_BASE + `/histories`;
 
 export const getHistories = async ({
   year,

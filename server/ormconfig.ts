@@ -9,7 +9,7 @@ export default {
   password: config.dbPW,
   database: config.dbName,
   synchronize: false,
-  logging: true,
+  logging: process.env.NODE_ENV === 'development' ? true : false,
   entities: [`${__dirname}/**/entities/**/*{.ts,.js}`],
   extra: {
     charset: 'utf8mb4_general_ci',

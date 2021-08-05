@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const APIENDPOINT = `http://localhost:3000/api/payments`;
+const APIENDPOINT = process.env.CLIENT_API_BASE + `/payments`;
 
 export const getPayments = async () =>
   await axios.get(`${APIENDPOINT}`, { withCredentials: true });

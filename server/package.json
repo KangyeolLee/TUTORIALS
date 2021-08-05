@@ -1,11 +1,13 @@
 {
-  "name": "boilerplate-server",
+  "name": "woowa-chahbook18-server",
   "version": "1.0.0",
   "description": "",
   "main": "app.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch \"**\" --ext \"ts\" --exec \"ts-node --files\" app"
+    "start": "tsc && cross-env NODE_ENV=production node build/app.js",
+    "start:pm2": "tsc && cross-env NODE_ENV=production pm2 restart build/app.js --update-env",
+    "dev": "cross-env NODE_ENV=development nodemon --watch \"**\" --ext \"ts\" --exec \"ts-node --files\" app",
+    "prod": "cross-env NODE_ENV=production nodemon --watch \"**\" --ext \"ts\" --exec \"ts-node --files\" app"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +30,7 @@
     "@types/node-fetch": "^2.5.12",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.12",
     "typedi": "^0.10.0",
     "typescript": "^4.3.5"
