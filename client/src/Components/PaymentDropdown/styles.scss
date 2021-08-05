@@ -36,6 +36,7 @@
       padding: 0.5rem 1.5rem;
       border-radius: 1rem;
       transition: all 0.15s ease-in;
+      @include bold-small;
 
       &:hover {
         opacity: 0.75;

@@ -44,14 +44,5 @@ export default class DropDown extends Component<DropDownState, Props> {
 
   setEvent() {
     this.addEvent('click', '.drop-down', this.$state!.handler);
-    this.addEvent('click', '.drop-down', this.toggleDropdown.bind(this));
-  }
-
-  toggleDropdown() {
-    const dropdown = (<HTMLUListElement>(
-      document.querySelector('.drop-down')
-    )) as HTMLUListElement;
-    dropdown.style.display = 'none';
-    dropdown.style.opacity = '0';
   }
 }

@@ -66,18 +66,21 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
       );
     return html`
       <div class="category-percentage">
-        <div class="button-area">
-          <div
-            class="button ${selectedType === INCOME && 'active'}"
-            id="income"
-          >
-            수입
-          </div>
-          <div
-            class="button ${selectedType === EXPENSE && 'active'}"
-            id="outcome"
-          >
-            지출
+        <div class="list-header">
+          <p class="warning-text">오차범위: ± 0.5%</p>
+          <div class="button-area">
+            <div
+              class="button ${selectedType === INCOME && 'active'}"
+              id="income"
+            >
+              수입
+            </div>
+            <div
+              class="button ${selectedType === EXPENSE && 'active'}"
+              id="outcome"
+            >
+              지출
+            </div>
           </div>
         </div>
 
@@ -112,7 +115,6 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
             )
             .join('')}
         </ul>
-        <p class="warning-text">오차범위: ± 0.5%</p>
       </div>
     `;
   }
