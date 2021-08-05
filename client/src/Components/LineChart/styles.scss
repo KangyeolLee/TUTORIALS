@@ -1,1 +1,63 @@
 @import '@/scss/theme';
+
+.section-point-group {
+  .month-section {
+    fill: rgba(0, 0, 0, 0);
+    stroke: none;
+    opacity: 0;
+  }
+  .month-point {
+    opacity: 0;
+  }
+  .point-text {
+    @include bold-large;
+    opacity: 0;
+    text-anchor: middle;
+    font-size: 2.7rem;
+  }
+
+  &.line-chart-today-line {
+    .month-section,
+    .month-point,
+    .point-text {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    .month-section {
+      fill: $grey1;
+      opacity: 0.1;
+    }
+    .month-point {
+      opacity: 1;
+    }
+    .point-text {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes draw {
+  to {
+    transform: scaleY(-1);
+  }
+  from {
+    transform: scaleY(0);
+  }
+}
+.line-chart-path {
+  animation: draw 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.line-chart-y-stand-text {
+  @include body-large;
+  font-size: 2.5rem;
+  text-anchor: end;
+}
+
+.line-chart-x-stand-text {
+  @include body-large;
+  font-size: 2.5rem;
+  text-anchor: middle;
+}
