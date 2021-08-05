@@ -37,4 +37,29 @@ export default class HistoryRepository extends Repository<History> {
   deleteHistoryById(id: number): Promise<DeleteResult> {
     return this.delete(id);
   }
+  /**
+   * select date_format(createdAt, '%m') as month, avg(price) from history
+where userId=1 and date_format(createdAt, '%Y')='2021' and category='식비'
+group by month
+   */
+
+  async getAverageByMonth(
+    id: number,
+    categoryType: string,
+    year: number
+  ): Promise<{ month: string; average: string }[]> {
+    const result = await this.createQueryBuilder()
+      .select([
+        `date_format(createdAt, '%m') AS month`,
+        `round(avg(price)) AS average`,
+      ])
+      .where('userId=:id', { id })
+      .andWhere('category=:categoryType', { categoryType })
+      .andWhere(`date_format(createdAt, '%Y')=:year`, { year })
+      .andWhere('type=0')
+      .groupBy('month')
+      .orderBy('month')
+      .getRawMany();
+    return result;
+  }
 }

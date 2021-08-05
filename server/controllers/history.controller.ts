@@ -68,6 +68,28 @@ class HistoryController {
       res.json({ ok: false, message: '내역 삭제에 실패했습니다.' }).status(200);
     }
   }
+
+  async getAverageByMonth(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userId = getPayload(req);
+      const { categoryType, year } = req.params;
+      const result = await HistoryServices.getAverageByMonth(
+        userId,
+        categoryType,
+        +year
+      );
+
+      res
+        .json({
+          ok: true,
+          message: '카테고리&월별 내역 평균이 조회되었습니다.',
+          result,
+        })
+        .status(200);
+    } catch (error) {
+      res.json({ ok: false, message: '내역 조회에 실패했습니다.' }).status(200);
+    }
+  }
 }
 
 export default new HistoryController();

@@ -7,6 +7,11 @@ const router = Router();
 export default (app: Router) => {
   app.use('/histories', router);
 
+  router.get(
+    `/stat/:year/:categoryType`,
+    authMiddleware,
+    historyController.getAverageByMonth
+  );
   router.get(`/`, authMiddleware, historyController.selectHistory);
   router.post(`/`, authMiddleware, historyController.insertHistory);
   router.put(`/:historyId`, authMiddleware, historyController.updateHistory);
