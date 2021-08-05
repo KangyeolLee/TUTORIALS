@@ -17,5 +17,15 @@
   .total {
     @include bold-medium;
     color: $body;
+    display: flex;
+    gap: 1.5rem;
+
+    .income {
+      color: $primary3;
+    }
+
+    .outcome {
+      color: $red;
+    }
   }
 }

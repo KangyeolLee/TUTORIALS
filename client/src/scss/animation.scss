@@ -20,6 +20,17 @@
   }
 }
 
+@keyframes fadein-no-bounce {
+  from {
+    transform: translateY(5%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @keyframes fadein-left {
   from {
     left: 0;

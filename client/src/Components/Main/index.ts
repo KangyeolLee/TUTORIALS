@@ -35,11 +35,13 @@ export default class Main extends Component<IMainState, Props> {
           <button class="history-select-btn active" id="history-select-income">
             ${svgIcons.checkSmall}
           </button>
-          <span class="text">수입 <span class="income-sum"></span></span>
+          <span class="text income">수입 <span class="income-sum"></span></span>
           <button class="history-select-btn active" id="history-select-expense">
             ${svgIcons.checkSmall}
           </button>
-          <span class="text">지출 <span class="expense-sum"></span></span>
+          <span class="text outcome"
+            >지출 <span class="expense-sum"></span
+          ></span>
         </div>
       </section>
       <ul class="day-card-list"></ul>

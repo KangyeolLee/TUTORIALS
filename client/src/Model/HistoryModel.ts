@@ -100,12 +100,11 @@ class HistoryModel extends Observable {
   async addHistory(history: IHistory) {
     this.historyCards = [...this.historyCards, history];
     const res = await insertHistory(history);
-    console.log(history);
 
     return this.notify(this.key, { historyCards: this.historyCards });
   }
 
-  async getSumByMonth(year: number, category: string, type: amountType) {
+  async getSumForMonth(year: number, category: string, type: amountType) {
     const res = await getSumByMonth(year, category, type);
 
     return { statList: res.data.result };

@@ -99,7 +99,6 @@ export default class UserPayment extends Component<UserPaymentState, Props> {
           return;
         }
         // TODO category update
-        console.log(editedText);
 
         asyncSetState(this.paymentModel.createUserPayment(editedText));
       }.bind(this)

@@ -81,12 +81,14 @@ export default class HistoryDayCard extends Component<
             <div class="history-date">
               <div class="date">${date} (${dayOfWeek})</div>
               <div class="total">
-                ${incomeTotal ? '수입 ' + addComma(incomeTotal.toString()) : ''}
-                ${
+                <span class="income">${
+                  incomeTotal ? '수입 ' + addComma(incomeTotal.toString()) : ''
+                }</span>
+                <span class="outcome">${
                   expenseTotal
                     ? '지출 ' + addComma(expenseTotal.toString())
                     : ''
-                }
+                }</span>
               </div>
             </div>
             <ul class="history-list">${HistoryList(

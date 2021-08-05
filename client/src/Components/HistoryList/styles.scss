@@ -75,6 +75,11 @@
       z-index: 50;
       transform: translate(-50%, -50%);
 
+      @media screen and (max-width: 560px) {
+        width: 20rem !important;
+        justify-content: space-between !important;
+      }
+
       .button {
         border: 0.1rem solid $line;
         padding: 1rem 1.5rem;

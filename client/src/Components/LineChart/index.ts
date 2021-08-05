@@ -17,7 +17,6 @@ import HistoryModel, { amountType } from '@/Model/HistoryModel';
 import ChartController from '@/Controller/ChartController';
 import DateModel from '@/Model/DateModel';
 import CategoryModel from '@/Model/CategoryModel';
-import { isHeritageClause } from 'typescript';
 
 interface IListStates extends State {
   today: Today;
@@ -77,8 +76,6 @@ export default class LineChart extends Component<IListStates, Props> {
   }
 
   template() {
-    console.log(this.$state);
-
     return html`
       <svg
         version="1.1"
@@ -120,7 +117,7 @@ export default class LineChart extends Component<IListStates, Props> {
   }
 
   async drawChart(selectedCategory: string, color: string, type: amountType) {
-    const { statList } = await this.historyModel.getSumByMonth(
+    const { statList } = await this.historyModel.getSumForMonth(
       2021,
       selectedCategory,
       type
