@@ -32,7 +32,7 @@ export default class UserView extends Component<UserViewState, Props> {
 
     return html`
       <section class="user-wrapper container">
-        <a href="http://${location.hostname}:3000/api/user/login">
+        <a href="${process.env.CLIENT_API_BASE}/user/login">
           <button class="github-btn">
             ${svgIcons.github}
             <span>Github로 로그인</span>

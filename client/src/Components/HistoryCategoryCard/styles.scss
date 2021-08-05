@@ -85,4 +85,8 @@
     margin-top: 1rem;
     @include bold-small;
   }
+
+  .no-found-data {
+    height: auto !important;
+  }
 }
