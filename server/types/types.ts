@@ -58,3 +58,5 @@ export type Payload = {
   ok: boolean;
   id: number;
 };
+
+export type amountType = 0 | 1;

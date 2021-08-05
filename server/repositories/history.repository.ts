@@ -5,7 +5,7 @@ import {
   Repository,
   UpdateResult,
 } from 'typeorm';
-import { HistoryType } from '../types/types';
+import { amountType, HistoryType } from '../types/types';
 import History from '../entities/History';
 
 @EntityRepository(History)
@@ -46,7 +46,8 @@ group by month
   async getSumByMonth(
     id: number,
     categoryType: string,
-    year: number
+    year: number,
+    type: amountType
   ): Promise<{ month: string; sum: string }[]> {
     const result = await this.createQueryBuilder()
       .select([
@@ -56,7 +57,7 @@ group by month
       .where('userId=:id', { id })
       .andWhere('category=:categoryType', { categoryType })
       .andWhere(`date_format(createdAt, '%Y')=:year`, { year })
-      .andWhere('type=0')
+      .andWhere('type=:type', { type })
       .groupBy('month')
       .orderBy('month')
       .getRawMany();
