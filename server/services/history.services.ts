@@ -72,7 +72,14 @@ export default class HistoryService {
         HistoryRepository
       ).getAverageByMonth(id, categoryType, year);
 
-      return result.map((res) => Number(res.average));
+      const averageForMonth = [];
+      for (let i = 0, j = 0; i < 12; i++) {
+        if (j < result.length && Number(result[j].month) === i) {
+          averageForMonth.push(Number(result[j++].average));
+        } else averageForMonth.push(0);
+      }
+
+      return averageForMonth;
     } catch (error) {
       throw new Error('[history 쿼리 에러] ' + error);
     }
