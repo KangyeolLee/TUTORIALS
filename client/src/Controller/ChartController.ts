@@ -43,9 +43,7 @@ class ChartController {
 
     Object.entries(categoryCards).forEach((card) => {
       const [key, value] = card;
-      categoryCards[key].percent = Math.round(
-        (value.price / priceAmount) * 100
-      );
+      categoryCards[key].percent = (value.price / priceAmount) * 100;
     });
 
     const categories = Object.entries(categoryCards)
