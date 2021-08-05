@@ -66,14 +66,14 @@ export default class HistoryService {
     id: number,
     categoryType: string,
     year: number
-  ): Promise<{ month: number; average: string }[]> {
+  ): Promise<{ month: number; average: number }[]> {
     try {
       const result = await getCustomRepository(
         HistoryRepository
       ).getAverageByMonth(id, categoryType, year);
 
       return result.map((res) => {
-        return { month: Number(res.month), average: res.average };
+        return { month: Number(res.month), average: Number(res.average) };
       });
     } catch (error) {
       throw new Error('[history 쿼리 에러] ' + error);
