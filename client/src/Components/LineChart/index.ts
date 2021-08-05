@@ -280,13 +280,15 @@ export default class LineChart extends Component<IListStates, Props> {
     const maxBoundExpense = Math.round(maxExpense / div) * div;
     const intervalExpense = maxBoundExpense / magicNumber.numY;
     const intervalY = this.chartInfo.maxValue / magicNumber.numY;
+    console.log(maxExpense, div, maxBoundExpense, intervalExpense, intervalY);
+
     const standExpenseList = [];
     for (let i = 0; i <= magicNumber.numY; i++) {
       const text = document.createElementNS(
         'http://www.w3.org/2000/svg',
         'text'
       );
-      text.setAttribute('x', `${magicNumber.CHART_LEFT / 2}`);
+      text.setAttribute('x', `${magicNumber.CHART_LEFT - 50}`);
       text.setAttribute('y', `${-(intervalY * i + magicNumber.CHART_BOTTOM)}`);
       text.innerHTML = addComma(`${intervalExpense * i}`);
       standExpenseList.push(text);
