@@ -1,0 +1,88 @@
+@import '@/scss/theme';
+
+@keyframes loading-content-r {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.2 0 0.8 0.8);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.2 0.2 0.8 1);
+  }
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-content-s {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.2 0 0.8 0.8);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.2 0.2 0.8 1);
+  }
+  0% {
+    transform: translate(-30px, -30px) scale(0);
+  }
+  50% {
+    transform: translate(-30px, -30px) scale(1);
+  }
+  100% {
+    transform: translate(-30px, -30px) scale(0);
+  }
+}
+.loading-component {
+  width: 100%;
+  display: flex;
+  padding-top: 13rem;
+
+  .loading-wrapper {
+    margin: auto;
+    width: 20rem;
+    height: 20rem;
+    display: inline-block;
+    overflow: hidden;
+    transform: scale(1.4);
+  }
+  .loading-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+    div {
+      box-sizing: content-box;
+    }
+    & > div {
+      transform: translate(0px, -1.5rem);
+      & > div {
+        animation: loading-content-r 1s linear infinite;
+        transform-origin: 10rem 10rem;
+        &:last-child {
+          animation-delay: -0.5s;
+          & > div > div {
+            animation-delay: -0.5s;
+            background: $primary1;
+          }
+        }
+        & > div {
+          position: absolute;
+          transform: translate(10rem, 8.2rem);
+          & > div {
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            background: #fe718d;
+            animation: loading-content-s 1s linear infinite;
+          }
+        }
+      }
+    }
+  }
+}
