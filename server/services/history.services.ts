@@ -62,24 +62,26 @@ export default class HistoryService {
     }
   }
 
-  async getAverageByMonth(
+  async getSumByMonth(
     id: number,
     categoryType: string,
     year: number
   ): Promise<number[]> {
     try {
-      const result = await getCustomRepository(
-        HistoryRepository
-      ).getAverageByMonth(id, categoryType, year);
+      const result = await getCustomRepository(HistoryRepository).getSumByMonth(
+        id,
+        categoryType,
+        year
+      );
 
-      const averageForMonth = [];
+      const sumForMonth = [];
       for (let i = 0, j = 0; i < 12; i++) {
         if (j < result.length && Number(result[j].month) === i) {
-          averageForMonth.push(Number(result[j++].average));
-        } else averageForMonth.push(0);
+          sumForMonth.push(Number(result[j++].sum));
+        } else sumForMonth.push(0);
       }
 
-      return averageForMonth;
+      return sumForMonth;
     } catch (error) {
       throw new Error('[history 쿼리 에러] ' + error);
     }

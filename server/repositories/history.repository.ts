@@ -43,15 +43,15 @@ where userId=1 and date_format(createdAt, '%Y')='2021' and category='식비'
 group by month
    */
 
-  async getAverageByMonth(
+  async getSumByMonth(
     id: number,
     categoryType: string,
     year: number
-  ): Promise<{ month: string; average: string }[]> {
+  ): Promise<{ month: string; sum: string }[]> {
     const result = await this.createQueryBuilder()
       .select([
         `date_format(createdAt, '%m') AS month`,
-        `round(avg(price)) AS average`,
+        `round(sum(price)) AS sum`,
       ])
       .where('userId=:id', { id })
       .andWhere('category=:categoryType', { categoryType })

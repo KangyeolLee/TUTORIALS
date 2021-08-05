@@ -69,11 +69,11 @@ class HistoryController {
     }
   }
 
-  async getAverageByMonth(req: Request, res: Response, next: NextFunction) {
+  async getSumByMonth(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = getPayload(req);
       const { categoryType, year } = req.params;
-      const result = await HistoryServices.getAverageByMonth(
+      const result = await HistoryServices.getSumByMonth(
         userId,
         categoryType,
         +year
