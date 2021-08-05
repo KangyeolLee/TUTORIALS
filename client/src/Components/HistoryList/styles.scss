@@ -35,6 +35,7 @@
 .main {
   .history-list-item {
     cursor: pointer;
+    animation: fadein 0.52s ease-in;
 
     .list-control-box {
       display: none;
