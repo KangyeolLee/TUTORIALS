@@ -5,6 +5,7 @@ import {
   CategoryModelType,
   CategoryType,
   ChartControllerType,
+  DELETE_CATEGORY_COLOR,
   HistoryModelType,
   IHistory,
   Props,
@@ -88,27 +89,16 @@ export default class LineChart extends Component<IListStates, Props> {
   }
 
   async mounted() {
-    const { selectedCategory } = this.$state!;
+    const { selectedCategory, categoryList } = this.$state!;
 
-    if (selectedCategory) {
-      const { statList } = await this.historyModel.getAverageByMonth(
-        2021,
-        selectedCategory
+    if (selectedCategory && categoryList) {
+      const category = categoryList.filter(
+        (c) => c.type === selectedCategory
+      )[0];
+      await this.drawChart(
+        selectedCategory,
+        category ? category.color : DELETE_CATEGORY_COLOR
       );
-      const svg = this.$target.querySelector('#line-chart') as SVGElement;
-      const dataPoint = this.getPoints(statList);
-
-      const chart = this.getLineChartPath(dataPoint); // line graph
-      const standYLine = this.getStandYLine(); // y축 가로선
-      const xSection = this.getXSection(dataPoint); // month section
-      const pointCircle = this.getPointCircle(dataPoint);
-      const sectionPointGroup = this.makeSectionPointGroup(
-        xSection,
-        pointCircle
-      );
-      svg.appendChild(standYLine);
-      svg.appendChild(chart);
-      sectionPointGroup.forEach((group) => svg.appendChild(group));
 
       const lineChartView = document.querySelector(
         '#line-chart-view'
@@ -121,18 +111,36 @@ export default class LineChart extends Component<IListStates, Props> {
     }
   }
 
+  async drawChart(selectedCategory: string, color: string) {
+    const { statList } = await this.historyModel.getAverageByMonth(
+      2021,
+      selectedCategory
+    );
+    const svg = this.$target.querySelector('#line-chart') as SVGElement;
+    const dataPoint = this.getPoints(statList);
+
+    const chart = this.getLineChartPath(dataPoint, color); // line graph
+    const standYLine = this.getStandYLine(); // y축 가로선
+    const xSection = this.getXSection(dataPoint); // month section
+    const pointCircle = this.getPointCircle(dataPoint, color); // point
+    const sectionPointGroup = this.makeSectionPointGroup(xSection, pointCircle);
+    svg.appendChild(standYLine);
+    svg.appendChild(chart);
+    sectionPointGroup.forEach((group) => svg.appendChild(group));
+  }
+
   // 곡선 그래프
-  getLineChartPath(dataPoint: Point[]) {
+  getLineChartPath(dataPoint: Point[], color: string) {
     const $path = document.createElementNS(
       'http://www.w3.org/2000/svg',
       'path'
     );
+    $path.setAttribute('class', 'line-chart-path');
     $path.setAttribute('d', this.getPathAttribute(dataPoint));
-    // $path.setAttribute('d', this.getLine(dataPoint));
-    $path.setAttribute('fill', '#5758bb');
-    $path.setAttribute('stroke', '#143794');
+    $path.setAttribute('fill', color);
+    $path.setAttribute('stroke', color);
     $path.setAttribute('stroke-width', '4');
-    $path.setAttribute('style', 'transform: scale(1, -1)');
+    $path.setAttribute('style', 'transform: scale(1, -1); fill-opacity: 0.3;');
 
     return $path;
   }
@@ -261,7 +269,7 @@ export default class LineChart extends Component<IListStates, Props> {
     });
   }
 
-  getPointCircle(dataPoint: Point[]) {
+  getPointCircle(dataPoint: Point[], color: string) {
     const pointList: SVGCircleElement[] = [];
 
     dataPoint.forEach((data, idx) => {
@@ -270,10 +278,11 @@ export default class LineChart extends Component<IListStates, Props> {
         'circle'
       );
 
+      $circle.setAttribute('class', 'month-point');
       $circle.setAttribute('cx', `${data[0]}`);
       $circle.setAttribute('cy', `${data[1]}`);
       $circle.setAttribute('r', `${10}`);
-      $circle.setAttribute('class', 'month-point');
+      $circle.setAttribute('fill', color);
       $circle.dataset.id = `${idx}`;
       $circle.setAttribute('style', 'transform: scale(1, -1);');
 
