@@ -2,20 +2,14 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "rootDir": "./",
     "outDir": "./build",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-    "noEmit": true,
     "strict": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2020"],
-    "typeRoots": ["./types/express.d.ts", "./node_modules/@types"]
-  },
-  "include": ["./**/*"],
-  "exclude": ["node_modules"],
-  "files": ["types/express.d.ts"]
+    "typeRoots": ["./node_modules/@types", "./types/express.d.ts"]
+  }
 }
