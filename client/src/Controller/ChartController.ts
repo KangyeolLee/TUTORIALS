@@ -80,7 +80,7 @@ class ChartController {
   ) {
     let totalPercentage = 0;
     const startAngle = -90;
-    const radius = 30;
+    const radius = 35;
     const cx = 50,
       cy = 50;
     const strokeWidth = 15;

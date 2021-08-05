@@ -3,15 +3,17 @@
 .user {
   display: grid;
   width: 100%;
-  grid-template-columns: 23rem auto;
   column-gap: 4rem;
 
   .user-info {
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
     align-items: center;
     padding: 1.9rem;
     height: fit-content;
+    margin-bottom: 4rem;
+    max-width: 25rem;
 
     .github-user {
       @include bold-large;
@@ -20,12 +22,19 @@
 
     .logout-btn {
       @include bold-small;
+      font-size: 1.5rem !important;
+      font-weight: bold !important;
       cursor: pointer;
       padding: 0.5rem 1.2rem;
       background-color: $primary1;
       border: 0;
       border-radius: 1rem;
       color: white;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.75;
+      }
     }
   }
 
