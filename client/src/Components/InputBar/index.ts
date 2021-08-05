@@ -10,15 +10,14 @@ import {
 import { svgIcons } from '@/assets/svgIcons';
 import {
   Props,
-  State,
   HistoryModelType,
   IValidationType,
   IHistory,
-  HistoryType,
 } from '@/utils/types';
 import HistoryModel from '@/Model/HistoryModel';
 import CategoryDropdown from '@/Components/CategoryDropdown/index';
 import PaymentDropdown from '@/Components/PaymentDropdown';
+import dayjs from 'dayjs';
 
 type editorModeType = 'edit' | 'new';
 interface InputBarState {
@@ -31,6 +30,7 @@ export default class InputBar extends Component<InputBarState, Props> {
   editorMode!: editorModeType;
   inputCondition: boolean[] = new Array();
   validation!: IValidationType;
+  editState!: InputBarState;
   date!: {
     year: number;
     month: number;
@@ -67,65 +67,94 @@ export default class InputBar extends Component<InputBarState, Props> {
           <div class="input-bar-title">
             <span
               >내역
-              ${this.$state?.editorMode === 'new' ? '추가' : '수정'}하기</span
+              ${this.$state!.editorMode === 'new' ? '추가' : '수정'}하기</span
             >
             <span class="input-submit-button">${svgIcons.delete}</span>
           </div>
           <ul class="input-bar">
             <li class="check-btn">
-              <div class="input-list-item" data-type="0" active>지출</div>
-              <div class="input-list-item" data-type="1">수입</div>
+              <div class="input-list-item outcome" data-type="0" active>
+                지출
+              </div>
+              <div class="input-list-item income" data-type="1">수입</div>
             </li>
-            <li class="input-list-item">
+            <li class="input-list-item date-list">
               <label for="date">일자</label>
-              <input
-                type="text"
-                maxlength="4"
-                name="date-year"
-                placeholder="2021"
-                class="input-date"
-                value=${new Date().getFullYear()}
-              />
-              <span>/</span>
-              <input
-                type="text"
-                maxlength="2"
-                name="date-month"
-                placeholder="08"
-                class="input-date"
-                value=${new Date().getMonth() + 1}
-              />
-              <span>/</span>
-              <input
-                type="text"
-                maxlength="2"
-                name="date-day"
-                placeholder="31"
-                class="input-date"
-                value=${new Date().getDate()}
-              />
+              <div class="input-wrapper">
+                <input
+                  class="date-picker"
+                  value=${dayjs(new Date()).format('YYYY-MM-DD')}
+                  type="date"
+                  min="2000-01-01"
+                  max="2050-12-31"
+                />
+                <input
+                  type="hidden"
+                  type="text"
+                  maxlength="4"
+                  name="date-year"
+                  placeholder="2021"
+                  class="input-date"
+                  value=${new Date().getFullYear()}
+                />
+                <input
+                  type="hidden"
+                  type="text"
+                  maxlength="2"
+                  name="date-month"
+                  placeholder="08"
+                  class="input-date"
+                  value=${new Date().getMonth() + 1}
+                />
+                <input
+                  type="hidden"
+                  type="text"
+                  maxlength="2"
+                  name="date-day"
+                  placeholder="31"
+                  class="input-date"
+                  value=${new Date().getDate()}
+                />
+              </div>
             </li>
             <li class="input-list-item">
-              <label for="category">분류</label>
+              <label for="category" class="dropdown-selector">분류</label>
               <span class="selected-category">미선택</span>
               <input name="category" type="hidden" />
               <div class="category-dropdown-wrapper"></div>
             </li>
             <li class="input-list-item">
-              <label for="payment">결제수단</label>
+              <label for="payment" class="dropdown-selector">결제수단</label>
               <span class="selected-payment">미선택</span>
               <input name="payment" type="hidden" />
               <div class="payment-dropdown-wrapper"></div>
             </li>
-            <li class="input-list-item">
+            <li class="input-list-item content-list">
               <label for="content">내용</label>
-              <input type="text" name="content" placeholder="입력하세요" />
+              <div class="input-wrapper">
+                <input
+                  class="content-input"
+                  type="text"
+                  name="content"
+                  placeholder="내용을 입력하세요..."
+                />
+                <span class="focus-border"></span>
+              </div>
             </li>
-            <li class="input-list-item">
+            <li class="input-list-item price-list">
               <label for="price">금액</label>
               <div id="data-input">
                 ${svgIcons.minus}
-                <input type="text" name="price" placeholder="선택하세요" />원
+                <div class="input-wrapper">
+                  <input
+                    class="price-input"
+                    type="text"
+                    name="price"
+                    placeholder="가격을 입력하세요..."
+                  />
+                  <span class="focus-border"></span>
+                </div>
+                <span>원</span>
               </div>
             </li>
           </ul>
@@ -147,6 +176,18 @@ export default class InputBar extends Component<InputBarState, Props> {
   }
 
   setEvent() {
+    this.addEvent('click', 'label[for="price"]', () => {
+      const target = this.$target.querySelector(
+        '.input-list-item.price-list'
+      ) as HTMLElement;
+      target.classList.add('open');
+    });
+    this.addEvent('click', 'label[for="content"]', () => {
+      const target = this.$target.querySelector(
+        '.input-list-item.content-list'
+      ) as HTMLElement;
+      target.classList.add('open');
+    });
     this.addEvent('click', 'label[for="category"]', (e: MouseEvent) => {
       const target = <HTMLElement>e.target;
       const categoryDropdown = target.parentElement?.querySelector(
@@ -161,25 +202,28 @@ export default class InputBar extends Component<InputBarState, Props> {
       ) as HTMLElement;
       paymentDropdown.classList.toggle('open');
     });
-    this.addEvent('click', '.input-bar-content', (e: MouseEvent) => {
-      const target = (<HTMLElement>e.target).closest(
-        '.input-bar-content'
-      ) as HTMLDivElement;
-      target.setAttribute('clicked', '');
-    });
-    this.addEvent('click', '.input-submit-button', (e: MouseEvent) => {
-      const target = (<HTMLElement>e.target).closest(
-        '.input-bar-content'
-      ) as HTMLDivElement;
-      this.handleSubmitButton();
-      this.initAllInputValues();
-      target.removeAttribute('clicked');
-    });
+    this.addEvent(
+      'click',
+      '.input-bar-content:not([clicked])',
+      (e: MouseEvent) => {
+        const target = (<HTMLElement>e.target).closest(
+          '.input-bar-content'
+        ) as HTMLDivElement;
+        this.initAllInputValues();
+        target.setAttribute('clicked', '');
+      }
+    );
 
     this.addEvent(
       'click',
       '.check-btn',
       this.handleHistoryTypeButton.bind(this)
+    );
+
+    this.addEvent(
+      'click',
+      '.input-submit-button',
+      this.handleSubmitButton.bind(this)
     );
 
     // date
@@ -198,34 +242,41 @@ export default class InputBar extends Component<InputBarState, Props> {
       'input[name="date-day"]',
       this.validateDay.bind(this)
     );
-    document.addEventListener('inputchangeCategory', (e: Event) =>
-      this.validateCategory(e)
+
+    this.addEvent(
+      'inputchangeCategory',
+      this.$target.className,
+      this.validateCategory.bind(this),
+      true
     );
-    // this.addEvent(
-    //   'inputchange',
-    //   'input[name="category"]',
-    //   this.validateCategory.bind(this)
-    // );
+
     this.addEvent(
       'input',
       'input[name="content"]',
       this.validateContent.bind(this)
     );
-    document.addEventListener('inputchangePayment', (e: Event) =>
-      this.validatePayment(e)
+
+    this.addEvent(
+      'inputchangePayment',
+      this.$target.className,
+      this.validatePayment.bind(this),
+      true
     );
-    // this.addEvent(
-    //   'input',
-    //   'input[name="payment"]',
-    //   this.validatePayment.bind(this)
-    // );
+
     this.addEvent(
       'input',
       'input[name="price"]',
       this.validatePrice.bind(this)
     );
-    document.addEventListener('edit-history', ((e: CustomEvent) =>
-      this.handleEditHistory(e.detail)) as EventListener);
+
+    this.addEvent(
+      'edit-history',
+      this.$target.className,
+      (e: CustomEvent) => this.handleEditHistory(e.detail),
+      true
+    );
+    // document.addEventListener('edit-history', ((e: CustomEvent) =>
+    //   this.handleEditHistory(e.detail)) as EventListener);
   }
 
   handleEditHistory(detail: IHistory) {
@@ -233,7 +284,6 @@ export default class InputBar extends Component<InputBarState, Props> {
       editorMode: 'edit',
       historyId: detail.id,
     });
-    console.log(this.$state);
     this.validation = {
       isExpense: detail.type ? false : true,
       date: true,
@@ -277,6 +327,9 @@ export default class InputBar extends Component<InputBarState, Props> {
     const selectedPayment = inputBar.querySelector(
       `.selected-payment`
     ) as HTMLSpanElement;
+    const datepicker = inputBar.querySelector(
+      '[type="date"]'
+    ) as HTMLInputElement;
     const price = inputBar.querySelector(`[name="price"]`) as HTMLInputElement;
     const date = extractDate(detail.createdAt);
 
@@ -287,6 +340,9 @@ export default class InputBar extends Component<InputBarState, Props> {
     dateYear.value = date.year.toString();
     dateMonth.value = date.month.toString();
     dateDay.value = date.day.toString();
+    datepicker.value = dayjs(`${date.year}-${date.month}-${date.day}`).format(
+      'YYYY-MM-DD'
+    );
     content.value = detail.content;
     payment.value = detail.payment;
     selectedPayment.innerText = detail.payment;
@@ -308,6 +364,15 @@ export default class InputBar extends Component<InputBarState, Props> {
     const $priceInput = this.$target.querySelector(
       'input[name="price"]'
     ) as HTMLInputElement;
+    const dateYear = this.$target.querySelector(
+      `[name="date-year"]`
+    ) as HTMLInputElement;
+    const dateMonth = this.$target.querySelector(
+      `[name="date-month"]`
+    ) as HTMLInputElement;
+    const dateDay = this.$target.querySelector(
+      `[name="date-day"]`
+    ) as HTMLInputElement;
     const $selectedPayment = this.$target.querySelector(
       '.selected-payment'
     ) as HTMLElement;
@@ -320,10 +385,25 @@ export default class InputBar extends Component<InputBarState, Props> {
     const paymentDropdown = this.$target.querySelector(
       '.payment-dropdown-wrapper'
     ) as HTMLElement;
+    const target = this.$target.querySelector(
+      '.input-bar-content'
+    ) as HTMLDivElement;
+    const submitBtn = this.$target.querySelector(
+      '.input-submit-button'
+    ) as HTMLElement;
+    const historyType = this.$target.querySelector(
+      `.input-list-item.outcome`
+    ) as HTMLDivElement;
+    const anotherHistoryType = this.$target.querySelector(
+      `.input-list-item.income`
+    ) as HTMLDivElement;
 
     $categoryInput.value = '';
     $selectedCategory.innerText = '미선택';
     $selectedCategory.classList.remove('valid');
+    dateYear.value = `${new Date().getFullYear()}`;
+    dateMonth.value = `${new Date().getMonth() + 1}`;
+    dateDay.value = `${new Date().getDate()}`;
     $contentInput.value = '';
     $paymentInput.value = '';
     $selectedPayment.innerText = '미선택';
@@ -331,6 +411,10 @@ export default class InputBar extends Component<InputBarState, Props> {
     $priceInput.value = '';
     categoryDropdown.classList.remove('open');
     paymentDropdown.classList.remove('open');
+    target.removeAttribute('clicked');
+    submitBtn.removeAttribute('active');
+    historyType.setAttribute('active', '');
+    anotherHistoryType.removeAttribute('active');
 
     this.validation = {
       isExpense: true,
@@ -348,7 +432,10 @@ export default class InputBar extends Component<InputBarState, Props> {
   }
 
   handleSubmitButton() {
-    if (!this.isValidated()) return;
+    if (!this.isValidated()) {
+      this.initAllInputValues();
+      return;
+    }
 
     const { historyId } = this.$state!;
     const $categoryInput = this.$target.querySelector(
@@ -363,19 +450,26 @@ export default class InputBar extends Component<InputBarState, Props> {
     const $priceInput = this.$target.querySelector(
       'input[name="price"]'
     ) as HTMLInputElement;
-    const $selectedPayment = this.$target.querySelector(
-      '.selected-payment'
-    ) as HTMLElement;
-    const $selectedCategory = this.$target.querySelector(
-      '.selected-category'
-    ) as HTMLElement;
+    const dateYear = this.$target.querySelector(
+      `[name="date-year"]`
+    ) as HTMLInputElement;
+    const dateMonth = this.$target.querySelector(
+      `[name="date-month"]`
+    ) as HTMLInputElement;
+    const dateDay = this.$target.querySelector(
+      `[name="date-day"]`
+    ) as HTMLInputElement;
+    const datepicker = this.$target.querySelector(
+      'input[type="date"]'
+    ) as HTMLInputElement;
 
     const newHistory: IHistory = {
-      createdAt: makeDateForm({
-        year: this.date.year,
-        month: this.date.month,
-        day: this.date.day,
-      }),
+      // createdAt: makeDateForm({
+      //   year: +dateYear.value,
+      //   month: +dateMonth.value,
+      //   day: +dateDay.value,
+      // }),
+      createdAt: datepicker.value,
       type: this.validation.isExpense ? 0 : 1,
       category: $categoryInput.value,
       content: $contentInput.value,
@@ -408,7 +502,7 @@ export default class InputBar extends Component<InputBarState, Props> {
 
     if (month > 12) month = 12;
     else if (month < 1) month = 1;
-    (<HTMLInputElement>e.target).value = String(month);
+    (<HTMLInputElement>e.target).value = dayjs(month).format('MM');
     this.date.month = month;
   }
   validateDay(e: KeyboardEvent) {
@@ -426,7 +520,6 @@ export default class InputBar extends Component<InputBarState, Props> {
     const $selectedCategory = this.$target.querySelector(
       '.selected-category'
     ) as HTMLElement;
-    console.log($selectedCategory);
     const input = (<CustomEvent>e).detail;
     if (input.value === '') this.validation.category = false;
     else {
@@ -446,7 +539,6 @@ export default class InputBar extends Component<InputBarState, Props> {
     const $selectedPayment = this.$target.querySelector(
       '.selected-payment'
     ) as HTMLElement;
-    console.log($selectedPayment);
     const input = (<CustomEvent>e).detail;
     if (input.value === '') this.validation.payment = false;
     else {
@@ -471,6 +563,7 @@ export default class InputBar extends Component<InputBarState, Props> {
     const submitBtn = this.$target.querySelector(
       '.input-submit-button'
     ) as HTMLElement;
+
     if (this.isValidated()) {
       submitBtn.innerHTML = svgIcons.check;
       submitBtn.setAttribute('active', '');

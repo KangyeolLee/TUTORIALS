@@ -88,6 +88,13 @@ $category10: #e2b765;
   line-height: 2.4rem;
 }
 
+@mixin bold-xlarge {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.2rem;
+  line-height: 2.4rem;
+}
+
 @mixin content-box {
   box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
     0 0.4rem 2rem rgba(0, 0, 0, 0.1);

@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { ClassElement } from 'typescript';
 import { accType, curType } from './types';
 
@@ -8,8 +9,12 @@ export const html = (str: TemplateStringsArray, ...args: unknown[]) => {
   return doc.body;
 };
 
-export const customEventEmitter = (eventType: string, detail?: object) => {
-  document.dispatchEvent(
+export const customEventEmitter = (
+  eventType: string,
+  detail?: object,
+  $target?: HTMLElement
+) => {
+  ($target ? $target : document).dispatchEvent(
     new CustomEvent(eventType, {
       detail,
     })
@@ -62,7 +67,11 @@ export const makeDateForm = ({
 };
 
 export const extractDate = (dateStr: string) => {
-  const [year, month, day]: string[] = dateStr.substring(0, 10).split('-');
+  const [year, month, day]: string[] = dayjs(dateStr)
+    .format('YYYY-MM-DD')
+    .substring(0, 10)
+    .split('-');
+
   return {
     year: +year,
     month: +month,

@@ -43,10 +43,17 @@ export default class Component<S extends State, P extends Props> {
     );
   }
 
-  addEvent(eventType: string, selector: string, callback: Function) {
+  addEvent(
+    eventType: string,
+    selector: string,
+    callback: Function,
+    custom?: boolean
+  ) {
     const children: Element[] = [...this.$target.querySelectorAll(selector)];
     const isTarget = (target: Element) =>
-      children.includes(target) || target.closest(selector);
+      children.includes(target) ||
+      target.closest(selector) ||
+      (custom && this.$target.className === selector);
 
     const listener = (event: Event) => {
       if (!isTarget(event.target as Element)) return false;

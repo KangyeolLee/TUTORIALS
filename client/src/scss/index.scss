@@ -27,3 +27,35 @@ svg {
   max-width: 102.4rem; // 1024px
   margin: auto;
 }
+
+input[type='date'] {
+  font-family: normal;
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% 50% no-repeat;
+}
+::-webkit-calendar-picker-indicator {
+  margin: 0 0 0 1rem;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+::-webkit-datetime-edit-month-field {
+  &:focus {
+    background-color: transparent;
+    color: $primary1;
+  }
+}
+::-webkit-datetime-edit-day-field {
+  &:focus {
+    background-color: transparent;
+    color: $primary1;
+  }
+}
+::-webkit-datetime-edit-year-field {
+  &:focus {
+    background-color: transparent;
+    color: $primary1;
+  }
+}

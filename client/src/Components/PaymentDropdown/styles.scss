@@ -33,11 +33,18 @@
       scroll-snap-align: center;
       cursor: pointer;
       border: 0.1rem solid $line;
-      padding: 1rem;
+      padding: 0.5rem 1.5rem;
       border-radius: 1rem;
+      transition: all 0.15s ease-in;
 
       &:hover {
         opacity: 0.75;
+      }
+
+      &.clicked {
+        color: $white;
+        border-color: $primary1;
+        background-color: $primary1;
       }
     }
   }

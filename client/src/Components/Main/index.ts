@@ -148,10 +148,13 @@ export default class Main extends Component<IMainState, Props> {
   }
 
   handleEditHistory(historyId: number) {
+    const inputbarWrapper = document.querySelector(
+      '.input-bar-wrapper'
+    ) as HTMLElement;
     const targetHistory = this.historyModel.historyCards.filter(
       (history) => history.id === +historyId
     )[0];
-    customEventEmitter('edit-history', targetHistory);
+    customEventEmitter('edit-history', targetHistory, inputbarWrapper);
   }
   handleDeleteHistory(historyId: number) {
     customEventEmitter('delete-history', { historyId });

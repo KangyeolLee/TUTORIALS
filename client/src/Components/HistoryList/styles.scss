@@ -13,6 +13,7 @@
     display: grid;
     flex: 1;
     grid-template-columns: 2fr 1fr 1fr;
+    align-items: center;
 
     .history-content {
       color: black;
