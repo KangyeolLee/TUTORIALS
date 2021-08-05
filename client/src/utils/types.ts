@@ -1,4 +1,5 @@
 import Component from '@/Core/Component';
+import { amountType } from '@/Model/HistoryModel';
 
 export const DELETE_CATEGORY_COLOR = '#d2d2d2';
 
@@ -94,7 +95,11 @@ export interface HistoryModelType extends Model {
   addHistory: (history: IHistory) => Promise<curType>;
   updateHistory: (history: IHistory) => Promise<curType>;
   deleteHistoryCard: (historyId: number) => Promise<curType>;
-  getAverageByMonth: (year: number, category: string) => Promise<any>;
+  getSumByMonth: (
+    year: number,
+    category: string,
+    type: amountType
+  ) => Promise<any>;
   toggleType: (nextType: typeString) => Promise<curType>;
   toggleSelectedType: (type: number) => Promise<curType>;
   getTodaysHistoryCard: (today: Today) => Promise<curType>;

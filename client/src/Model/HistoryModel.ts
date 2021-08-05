@@ -1,11 +1,10 @@
 import {
   deleteHistory,
-  getAverageByMonth,
+  getSumByMonth,
   getHistories,
   insertHistory,
   updateHistory,
 } from '@/api/history';
-import { dummyhistories } from '@/assets/dummy';
 import Observable from '@/Core/Observable';
 import { makeDateForm } from '@/utils/helper';
 import {
@@ -19,6 +18,7 @@ import dayjs from 'dayjs';
 
 const INCOME = 1;
 const EXPENSE = 0;
+export type amountType = 0 | 1;
 
 class HistoryModel extends Observable {
   key: string = 'history';
@@ -105,8 +105,8 @@ class HistoryModel extends Observable {
     return this.notify(this.key, { historyCards: this.historyCards });
   }
 
-  async getAverageByMonth(year: number, category: string) {
-    const res = await getAverageByMonth(year, category);
+  async getSumByMonth(year: number, category: string, type: amountType) {
+    const res = await getSumByMonth(year, category, type);
 
     return { statList: res.data.result };
   }

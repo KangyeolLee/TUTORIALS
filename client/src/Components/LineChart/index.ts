@@ -13,7 +13,7 @@ import {
   Today,
   TodayModelType,
 } from '@/utils/types';
-import HistoryModel from '@/Model/HistoryModel';
+import HistoryModel, { amountType } from '@/Model/HistoryModel';
 import ChartController from '@/Controller/ChartController';
 import DateModel from '@/Model/DateModel';
 import CategoryModel from '@/Model/CategoryModel';
@@ -25,6 +25,7 @@ interface IListStates extends State {
   selectedHistoryForCategory: IHistory[];
   categoryList: CategoryType[];
   statList?: number[];
+  selectedType?: amountType;
 }
 
 type Point = number[];
@@ -76,6 +77,8 @@ export default class LineChart extends Component<IListStates, Props> {
   }
 
   template() {
+    console.log(this.$state);
+
     return html`
       <svg
         version="1.1"
@@ -92,7 +95,7 @@ export default class LineChart extends Component<IListStates, Props> {
   }
 
   async mounted() {
-    const { selectedCategory, categoryList } = this.$state!;
+    const { selectedType, selectedCategory, categoryList } = this.$state!;
 
     if (selectedCategory && categoryList) {
       const category = categoryList.filter(
@@ -100,7 +103,8 @@ export default class LineChart extends Component<IListStates, Props> {
       )[0];
       await this.drawChart(
         selectedCategory,
-        category ? category.color : DELETE_CATEGORY_COLOR
+        category ? category.color : DELETE_CATEGORY_COLOR,
+        selectedType ?? 0
       );
 
       // 카테고리 클릭 시에만 lineChart 출력
@@ -115,10 +119,11 @@ export default class LineChart extends Component<IListStates, Props> {
     }
   }
 
-  async drawChart(selectedCategory: string, color: string) {
-    const { statList } = await this.historyModel.getAverageByMonth(
+  async drawChart(selectedCategory: string, color: string, type: amountType) {
+    const { statList } = await this.historyModel.getSumByMonth(
       2021,
-      selectedCategory
+      selectedCategory,
+      type
     );
     const svg = this.$target.querySelector('#line-chart') as SVGElement;
     const dataPoint = this.getPoints(statList);
