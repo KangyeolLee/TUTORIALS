@@ -100,8 +100,10 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
             <li class="category-card" data-category="${category.type}">
               <span class="category">${CategoryTag(category)}</span>
               <span class="percent">${
-                categoryCards[category.type].percent
-              }%</span>
+                Math.round(categoryCards[category.type].percent) === 0
+                  ? '1% 이하'
+                  : Math.round(categoryCards[category.type].percent) + '%'
+              }</span>
               <span class="price">${addComma(
                 categoryCards[category.type].price + ''
               )}</span>
@@ -110,6 +112,7 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
             )
             .join('')}
         </ul>
+        <p class="warning-text">오차범위: ± 0.5%</p>
       </div>
     `;
   }
@@ -141,5 +144,6 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
   setUnmount() {
     this.historyModel.unsubscribe(this.historyModel.key, this);
     this.categoryModel.unsubscribe(this.categoryModel.key, this);
+    this.dateModel.unsubscribe(this.dateModel.key, this);
   }
 }
