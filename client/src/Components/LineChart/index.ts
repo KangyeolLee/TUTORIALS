@@ -76,7 +76,6 @@ export default class LineChart extends Component<IListStates, Props> {
   }
 
   template() {
-    console.log(this.$state);
     return html`
       <svg
         version="1.1"
@@ -358,7 +357,6 @@ export default class LineChart extends Component<IListStates, Props> {
   getPointCircle(dataPoint: Point[], color: string) {
     const pointList: SVGCircleElement[] = [];
 
-    console.log(dataPoint);
     dataPoint.forEach((data, idx) => {
       const $circle = document.createElementNS(
         'http://www.w3.org/2000/svg',
@@ -416,7 +414,6 @@ export default class LineChart extends Component<IListStates, Props> {
       'http://www.w3.org/2000/svg',
       'path'
     );
-    console.log(point);
 
     const d = `
       M ${point[0]},${magicNumber.CHART_BOTTOM}
