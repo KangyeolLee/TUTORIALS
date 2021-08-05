@@ -122,8 +122,8 @@ export default class Main extends Component<IMainState, Props> {
       '.drop-down'
     ) as HTMLUListElement;
     dropdown.style.display = 'flex';
-    dropdown.style.top = `${e.clientY}px`;
-    dropdown.style.left = `${e.clientX}px`;
+    dropdown.style.top = `${e.pageY}px`;
+    dropdown.style.left = `${e.pageX}px`;
     dropdown.style.opacity = '1';
     dropdown.dataset.historyId = (<HTMLUListElement>target).dataset.id;
   }
