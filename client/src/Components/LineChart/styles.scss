@@ -1,1 +1,24 @@
 @import '@/scss/theme';
+
+.section-point-group {
+  .month-section {
+    fill: rgba(0, 0, 0, 0);
+    stroke: none;
+  }
+
+  .month-point {
+    fill: $primary1;
+    opacity: 0;
+  }
+
+  &:hover {
+    .month-section {
+      fill: $grey1;
+      opacity: 0.15;
+    }
+    .month-point {
+      fill: $primary1;
+      opacity: 1;
+    }
+  }
+}
