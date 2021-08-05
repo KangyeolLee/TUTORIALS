@@ -22,6 +22,7 @@ import HistoryList from '@/Components/HistoryList';
 import HistoryModel from '@/Model/HistoryModel';
 import DateModel from '@/Model/DateModel';
 import CategoryModel from '@/Model/CategoryModel';
+import NoFound from './../NoFound/index';
 
 interface IListStates extends State {
   historyCards: IHistory[];
@@ -97,6 +98,7 @@ export default class HistoryDayCard extends Component<
       `;
         })
         .join('')}
+      ${!dates.length && location.pathname === '/main' && NoFound()}
     `;
   }
 

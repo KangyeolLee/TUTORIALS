@@ -17,6 +17,7 @@ import DateModel from '@/Model/DateModel';
 import CategoryTag from '@/Components/CategoryTag';
 import ChartController from '@/Controller/ChartController';
 import CategoryModel from '@/Model/CategoryModel';
+import NoFound from './../NoFound/index';
 
 const EXPENSE = 0;
 const INCOME = 1;
@@ -115,6 +116,7 @@ export default class HistoryCategoryCard extends Component<IListStates, Props> {
             )
             .join('')}
         </ul>
+        ${!categories.length && NoFound()}
       </div>
     `;
   }
