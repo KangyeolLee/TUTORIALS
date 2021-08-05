@@ -67,3 +67,65 @@
     border-top: 1px solid $line;
   }
 }
+
+@media screen and (max-width: 920px) {
+  .calendar-table {
+    .history {
+      flex-direction: row !important;
+      gap: 0.4rem;
+      .income {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 10rem;
+        background-color: $primary3;
+        span {
+          display: none;
+        }
+      }
+      .outcome {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 10rem;
+        background-color: $red;
+        span {
+          display: none;
+        }
+      }
+      .amount {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 10rem;
+        background-color: black;
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .calendar {
+    padding-top: 3rem !important;
+    .calendar-table {
+      tr {
+        height: 8rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .calendar-wrapper {
+    .calendar {
+      padding-top: 2rem !important;
+      .history {
+        flex-direction: column !important;
+      }
+    }
+    .price-bar {
+      margin-top: 2rem;
+      flex-direction: column;
+    }
+  }
+}

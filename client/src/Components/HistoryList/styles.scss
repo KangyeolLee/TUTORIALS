@@ -29,6 +29,35 @@
       color: black;
       margin-left: auto;
     }
+
+    @media screen and (max-width: 770px) {
+      & {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    @media screen and (max-width: 560px) {
+      .history-content {
+        grid-area: history-content;
+      }
+      .history-price {
+        grid-area: history-price;
+        text-align: right;
+      }
+      .history-payment {
+        font-size: 1.3rem;
+        grid-area: history-payment;
+      }
+
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        'history-content history-price'
+        'history-payment history-price';
+      .history-price {
+        order: 2;
+        margin-left: 0;
+      }
+    }
   }
 }
 
