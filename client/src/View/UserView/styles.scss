@@ -1,28 +1,58 @@
 @import '@/scss/theme';
 
 .user-wrapper {
+  margin-top: 5rem;
   padding-top: 5rem;
   display: flex;
   justify-content: center;
 
-  .github-btn {
-    @include bold-large;
-    box-shadow: 0 0.1rem 1.23rem rgb(0 0 0 / 0.6);
-    cursor: pointer;
+  .login-box {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 1.4rem 2rem;
-    background-color: #222;
-    border: 0;
-    border-radius: 1rem;
-    color: white;
-    text-align: center;
-    font-size: 2rem;
+    border-radius: 2.5rem;
+    overflow: hidden;
+    background-color: #eaf0f0;
+    box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
+      0 0.4rem 2rem rgba(0, 0, 0, 0.1);
 
-    svg {
-      stroke: none;
-      fill: white;
-      margin-right: 1rem;
+    .inner-box {
+      img {
+        width: 30rem;
+      }
+      h1 {
+        @include display-large;
+        color: $primary1;
+        padding: 2rem;
+      }
+    }
+
+    .login-button-area {
+      padding: 2rem;
+      .github-btn {
+        @include bold-large;
+        box-shadow: 0 0.1rem 1.23rem rgb(0 0 0 / 0.6);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 1.4rem 2rem;
+        background-color: #222;
+        border: 0;
+        border-radius: 1rem;
+        color: white;
+        text-align: center;
+        font-size: 2rem;
+
+        svg {
+          stroke: none;
+          fill: white;
+          margin-right: 1rem;
+        }
+
+        &:hover {
+          opacity: 0.75;
+        }
+      }
     }
   }
 }
