@@ -115,12 +115,20 @@ export default class Main extends Component<IMainState, Props> {
 
   handleContextMenu(e: MouseEvent) {
     e.preventDefault();
-    const target = (<HTMLElement>e.target).closest('.history-list-item');
+    const target = (<HTMLElement>e.target).closest(
+      '.history-list-item'
+    ) as HTMLElement;
     if (!target) return;
+
+    const historyListItems = document.querySelectorAll('.history-list-item');
+    historyListItems.forEach(
+      (item) => ((<HTMLElement>item).style.backgroundColor = '#fcfcfc')
+    );
 
     const dropdown = this.$target.querySelector(
       '.drop-down'
     ) as HTMLUListElement;
+    target.style.backgroundColor = '#f5f5f5';
     dropdown.style.display = 'flex';
     dropdown.style.top = `${e.pageY}px`;
     dropdown.style.left = `${e.pageX}px`;
@@ -157,6 +165,9 @@ export default class Main extends Component<IMainState, Props> {
     customEventEmitter('edit-history', targetHistory, inputbarWrapper);
   }
   handleDeleteHistory(historyId: number) {
-    customEventEmitter('delete-history', { historyId });
+    const $dayCardList = document.querySelector(
+      '.day-card-list'
+    ) as HTMLElement;
+    customEventEmitter('delete-history', { historyId }, $dayCardList);
   }
 }
