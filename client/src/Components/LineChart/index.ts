@@ -33,10 +33,10 @@ const magicNumber = {
   WIDTH: 1920,
   HEIGHT: 700,
   CHART_TOP: 100,
-  CHART_LEFT: 100,
+  CHART_LEFT: 200,
   CHART_BOTTOM: 0,
   CHART_RIGHT: 100,
-  numY: 6,
+  numY: 5,
 };
 
 export default class LineChart extends Component<IListStates, Props> {
@@ -47,6 +47,7 @@ export default class LineChart extends Component<IListStates, Props> {
   chartInfo!: {
     intervalX: number;
     maxValue: number;
+    maxExpense: number;
   };
 
   async setup() {
@@ -123,7 +124,7 @@ export default class LineChart extends Component<IListStates, Props> {
     const dataPoint = this.getPoints(statList);
 
     const chart = this.getLineChartPath(dataPoint, color); // line graph
-    const standYLine = this.getStandYLine(); // y축 가로선
+    const { $path: standYLine, $textGroup: textGroup } = this.getStandYLine(); // y축 가로선
     const xSection = this.getXSection(dataPoint); // month section
     const pointCircle = this.getPointCircle(dataPoint, color); // point
     const expenseText = this.getExpenseText(dataPoint, statList); // 금액
@@ -135,6 +136,7 @@ export default class LineChart extends Component<IListStates, Props> {
     const defsElem = this.getDefs(color);
     svg.appendChild(defsElem);
     svg.appendChild(standYLine);
+    svg.appendChild(textGroup);
     svg.appendChild(chart);
     sectionPointGroup.forEach((group) => svg.appendChild(group));
   }
@@ -162,11 +164,12 @@ export default class LineChart extends Component<IListStates, Props> {
     ];
     const intervalX = graphWidth / (data.length - 1);
     const maxValue = Math.max(...data);
-    const max = maxValue + maxValue / magicNumber.numY;
+    const max = Math.round(maxValue + maxValue / magicNumber.numY);
 
     this.chartInfo = {
       intervalX: intervalX,
       maxValue: graphHeight,
+      maxExpense: max,
     };
 
     return data.reduce((acc: Point[], cur: number, i) => {
@@ -231,7 +234,15 @@ export default class LineChart extends Component<IListStates, Props> {
     $path.setAttribute('stroke-width', '2');
     $path.setAttribute('style', 'transform: scale(1, -1)');
 
-    return $path;
+    const $textGroup = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'g'
+    );
+    this.getStandText().forEach((text) => {
+      $textGroup.appendChild(text);
+    });
+
+    return { $path, $textGroup };
   }
 
   getStandLineAttribute() {
@@ -240,7 +251,32 @@ export default class LineChart extends Component<IListStates, Props> {
     for (let i = 0; i < magicNumber.numY + 1; i++) {
       lineY.push(intervalY * i);
     }
-    return lineY.map((y) => `M ${0},${y} L ${magicNumber.WIDTH},${y}`).join('');
+    return lineY
+      .map(
+        (y) => `M ${magicNumber.CHART_LEFT},${y} L ${magicNumber.WIDTH},${y}`
+      )
+      .join('');
+  }
+
+  getStandText() {
+    const { maxExpense } = this.chartInfo;
+    const div = 10 ** (String(maxExpense).length - 2);
+    const maxBoundExpense = Math.round(maxExpense / div) * div;
+    const intervalExpense = maxBoundExpense / magicNumber.numY;
+    const intervalY = this.chartInfo.maxValue / magicNumber.numY;
+    const standExpenseList = [];
+    for (let i = 0; i <= magicNumber.numY; i++) {
+      const text = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'text'
+      );
+      text.setAttribute('class', 'line-chart-stand-text');
+      text.setAttribute('x', `${10}`);
+      text.setAttribute('y', `${-intervalY * i}`);
+      text.innerHTML = addComma(`${intervalExpense * i}`);
+      standExpenseList.push(text);
+    }
+    return standExpenseList;
   }
 
   // 마우스 hover시 나타나는 section

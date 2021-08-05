@@ -41,3 +41,8 @@
 .line-chart-path {
   animation: draw 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.line-chart-stand-text {
+  @include body-large;
+  font-size: 2.7rem;
+}
