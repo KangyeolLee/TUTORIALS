@@ -133,10 +133,15 @@ export default class LineChart extends Component<IListStates, Props> {
     const xSection = this.getXSection(dataPoint); // month section
     const pointCircle = this.getPointCircle(dataPoint, color); // point
     const expenseText = this.getExpenseText(dataPoint, statList); // 금액
+    const todayLine = this.getTodayLine(
+      dataPoint[this.$state!.today.month - 1],
+      color
+    );
     const sectionPointGroup = this.makeSectionPointGroup(
       xSection,
       pointCircle,
-      expenseText
+      expenseText,
+      todayLine
     );
     const defsElem = this.getDefs(color);
     [standYLine, YGroup, XGroup, chart, ...sectionPointGroup, defsElem].forEach(
@@ -280,7 +285,6 @@ export default class LineChart extends Component<IListStates, Props> {
     const maxBoundExpense = Math.round(maxExpense / div) * div;
     const intervalExpense = maxBoundExpense / magicNumber.numY;
     const intervalY = this.chartInfo.maxValue / magicNumber.numY;
-    console.log(maxExpense, div, maxBoundExpense, intervalExpense, intervalY);
 
     const standExpenseList = [];
     for (let i = 0; i <= magicNumber.numY; i++) {
@@ -354,6 +358,7 @@ export default class LineChart extends Component<IListStates, Props> {
   getPointCircle(dataPoint: Point[], color: string) {
     const pointList: SVGCircleElement[] = [];
 
+    console.log(dataPoint);
     dataPoint.forEach((data, idx) => {
       const $circle = document.createElementNS(
         'http://www.w3.org/2000/svg',
@@ -376,15 +381,24 @@ export default class LineChart extends Component<IListStates, Props> {
   makeSectionPointGroup(
     xSection: SVGPathElement[],
     pointCircle: SVGCircleElement[],
-    expenseText: SVGTextElement[]
+    expenseText: SVGTextElement[],
+    todayLine: SVGPathElement
   ) {
+    const { month } = this.$state!.today;
     const groupList: SVGGElement[] = [];
     xSection.forEach((section, idx) => {
       const $group = document.createElementNS(
         'http://www.w3.org/2000/svg',
         'g'
       );
-      $group.setAttribute('class', 'section-point-group');
+
+      if (idx + 1 === month) {
+        $group.setAttribute(
+          'class',
+          'section-point-group line-chart-today-line'
+        );
+        $group.append(todayLine);
+      } else $group.setAttribute('class', 'section-point-group');
       $group.dataset.id = `${idx + 1}`;
       $group.appendChild(section);
       $group.appendChild(pointCircle[idx]);
@@ -394,6 +408,26 @@ export default class LineChart extends Component<IListStates, Props> {
     });
 
     return groupList;
+  }
+
+  getTodayLine(point: Point, color: string) {
+    const halfInterval = this.chartInfo.intervalX / 2;
+    const todayLine = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'path'
+    );
+    console.log(point);
+
+    const d = `
+      M ${point[0]},${magicNumber.CHART_BOTTOM}
+      L ${point[0]},${point[1]}
+    `;
+    todayLine.setAttribute('d', d);
+    todayLine.setAttribute('stroke', color);
+    todayLine.setAttribute('stroke-width', '3');
+    todayLine.setAttribute('style', 'transform: scale(1, -1);');
+
+    return todayLine;
   }
 
   getDefs(color: string) {
