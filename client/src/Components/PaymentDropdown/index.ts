@@ -13,6 +13,11 @@ export default class PaymentDropdown extends Component<
   Props
 > {
   paymentModel!: PaymentsModelType;
+  $dropdownSlider!: HTMLElement;
+  startX!: number;
+  posX!: number;
+  offsetLeft = 0;
+  pressed: boolean = false;
 
   setup() {
     this.paymentModel = PaymentsModel;
@@ -40,9 +45,17 @@ export default class PaymentDropdown extends Component<
     `;
   }
 
+  mounted() {
+    this.$dropdownSlider = this.$target.querySelector(
+      '.payment-dropdown'
+    ) as HTMLElement;
+  }
+
   handleClickOnList(e: MouseEvent) {
     const target = <HTMLElement>e.target;
     target.scrollIntoView();
+    this.focusoutOtherLists();
+    target.classList.add('clicked');
     const input = document.querySelector(
       'input[name="payment"]'
     ) as HTMLInputElement;
@@ -57,10 +70,62 @@ export default class PaymentDropdown extends Component<
     );
   }
 
+  focusoutOtherLists() {
+    const others = this.$target.querySelectorAll('.payment-list');
+    others.forEach((list) => list.classList.remove('clicked'));
+  }
+
+  mouseDown(e: PointerEvent) {
+    this.pressed = true;
+    this.startX = e.pageX - this.$dropdownSlider.offsetLeft;
+    this.$dropdownSlider.style.cursor = 'grabbing';
+  }
+
+  mouseEnter() {
+    this.$dropdownSlider.style.cursor = 'grab';
+  }
+
+  mouseUp() {
+    this.pressed = false;
+    this.$dropdownSlider.style.cursor = 'grab';
+    this.offsetLeft += this.startX - (this.posX ?? this.startX);
+    const count = this.$dropdownSlider.childElementCount;
+    const offsetWidth =
+      this.$dropdownSlider.firstElementChild!.getBoundingClientRect().width;
+    const totalWidth = count * offsetWidth;
+
+    if (this.offsetLeft >= totalWidth / 2 - 150) {
+      this.offsetLeft = totalWidth / 2 - 150;
+    } else if (this.offsetLeft < 0) {
+      this.offsetLeft = 0;
+    }
+
+    this.$dropdownSlider.scrollLeft = this.offsetLeft * 3;
+  }
+
+  mouseLeave() {
+    this.pressed = false;
+  }
+
+  mouseMove(e: PointerEvent) {
+    if (this.pressed) {
+      this.posX = e.pageX;
+    }
+  }
+
   setEvent() {
     this.addEvent('click', '.payment-list', (e: MouseEvent) =>
       this.handleClickOnList(e)
     );
+    this.addEvent('pointerdown', '.payment-dropdown', (e: PointerEvent) =>
+      this.mouseDown(e)
+    );
+    this.addEvent('pointerup', '.payment-dropdown', () => this.mouseUp());
+    this.addEvent('pointermove', '.payment-dropdown', (e: PointerEvent) =>
+      this.mouseMove(e)
+    );
+    this.addEvent('pointerenter', '.payment-dropdown', () => this.mouseEnter());
+    this.addEvent('pointerleave', '.payment-dropdown', () => this.mouseLeave());
   }
 
   setUnmount() {
