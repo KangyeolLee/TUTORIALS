@@ -22,18 +22,15 @@
 
     .history-content {
       color: black;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .history-price {
       @include bold-large;
       color: black;
       margin-left: auto;
-    }
-
-    @media screen and (max-width: 770px) {
-      & {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
     }
 
     @media screen and (max-width: 560px) {
@@ -49,7 +46,7 @@
         grid-area: history-payment;
       }
 
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto;
       grid-template-areas:
         'history-content history-price'
         'history-payment history-price';
