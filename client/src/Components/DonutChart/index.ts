@@ -17,25 +17,6 @@ import HistoryModel from '@/Model/HistoryModel';
 import DateModel from '@/Model/DateModel';
 import CategoryModel from '@/Model/CategoryModel';
 
-const data = [
-  {
-    percent: 15,
-    color: '#80e080',
-  },
-  {
-    percent: 35,
-    color: '#4fc3f7',
-  },
-  {
-    percent: 20,
-    color: '#9575cd',
-  },
-  {
-    percent: 30,
-    color: '#f06292',
-  },
-];
-
 interface IListStates extends State {
   historyCards: IHistory[];
   today: Today;
