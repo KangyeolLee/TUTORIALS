@@ -1,6 +1,8 @@
 # cashbook-18
 > 👉 [18팀 | 우아한 가계부](http://13.124.211.180/main) 
 
+<img src="https://user-images.githubusercontent.com/49540564/128457986-49fa5657-f5ca-41ad-99d3-88d1ebfaa22b.png"/>
+
 ## 팀원
 |이름|Github|
 |---|---|
