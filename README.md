@@ -13,33 +13,12 @@
 
 
 ## 데모 영상
-> 메인 화면
 
-<img src="https://user-images.githubusercontent.com/49540564/128455324-98b97b51-3b56-4848-bae4-8cb816abea1e.gif">
-
-</br>
-
-> 달력 화면
-
-<img src="https://user-images.githubusercontent.com/49540564/128455310-c67f23b1-7b86-4a8f-8c53-f38be611d112.gif">
-
-</br>
-
-
-> 차트 화면
-
-<img src="https://user-images.githubusercontent.com/49540564/128455320-66617bd5-aace-48ad-be7c-5d849b7e73ec.gif">
-
-</br>
-
-
-> 유저 화면
-
-<img src="https://user-images.githubusercontent.com/49540564/128455326-e8e02829-edd1-4efd-ac2b-b72e9d7989a3.gif">
-
-
-
-
+|메인|달력|
+|:---:|:---:|
+|<img src="https://user-images.githubusercontent.com/49540564/128455324-98b97b51-3b56-4848-bae4-8cb816abea1e.gif">|<img src="https://user-images.githubusercontent.com/49540564/128455310-c67f23b1-7b86-4a8f-8c53-f38be611d112.gif">|
+|**차트**|**유저**|
+|<img src="https://user-images.githubusercontent.com/49540564/128455320-66617bd5-aace-48ad-be7c-5d849b7e73ec.gif">|<img src="https://user-images.githubusercontent.com/49540564/128455326-e8e02829-edd1-4efd-ac2b-b72e9d7989a3.gif">|
 
 
 
