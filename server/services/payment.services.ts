@@ -9,6 +9,7 @@ import {
   ResultRawType,
   UserPaymentForRemoval,
 } from '../types/types';
+import { extractInsertId } from '../utils/helper';
 
 @Service()
 export default class PaymentService {
@@ -29,15 +30,16 @@ export default class PaymentService {
         PaymentRepository
       ).findPaymentByType(type);
 
+      console.log(existedPayment);
       // ID가 있는 경우에는 추가하지 않고 해당 페이먼트ID로 유저페이먼트에 추가
       let paymentId;
       if (existedPayment) {
         paymentId = existedPayment.id;
       } else {
-        const category = await getCustomRepository(
+        const payment = await getCustomRepository(
           PaymentRepository
         ).createPaymentForUser(type);
-        paymentId = category.raw.insertId.paymentId;
+        paymentId = extractInsertId(payment);
       }
 
       const result = await getCustomRepository(
