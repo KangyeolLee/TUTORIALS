@@ -185,7 +185,9 @@ export default class LineChart extends Component<IListStates, Props> {
     return data.reduce((acc: Point[], cur: number, i) => {
       const point: Point = [
         intervalX * i + magicNumber.CHART_LEFT,
-        (cur / max) * this.chartInfo.maxValue + magicNumber.CHART_BOTTOM,
+        cur !== 0
+          ? (cur / max) * this.chartInfo.maxValue + magicNumber.CHART_BOTTOM
+          : magicNumber.CHART_BOTTOM,
       ];
       return [...acc, point];
     }, []);
