@@ -1,0 +1,131 @@
+@import '@/scss/theme';
+
+.calendar-table {
+  width: 100%;
+  background-color: $off-white;
+  border: 1px solid $line;
+  border-collapse: unset;
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
+    0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+
+  tr {
+    height: 12rem;
+    display: flex;
+
+    td {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      padding: 1rem;
+      box-sizing: border-box;
+      @include bold-small;
+      color: $label;
+
+      .history {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        @include bold-medium;
+
+        .income {
+          color: $primary3;
+        }
+        .outcome {
+          color: $red;
+        }
+        .amount {
+          color: $title-active;
+        }
+      }
+
+      .day {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+      }
+
+      &.today {
+        background-color: $backgrond;
+      }
+
+      &.history-data {
+        cursor: pointer;
+      }
+      &.history-data:hover {
+        // transition: opacity 0.35s ease-in-out;
+        opacity: 0.75;
+      }
+    }
+
+    td + td {
+      border-left: 1px solid $line;
+    }
+  }
+
+  tr + tr {
+    border-top: 1px solid $line;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .calendar-table {
+    .history {
+      flex-direction: row !important;
+      gap: 0.4rem;
+      .income {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 10rem;
+        background-color: $primary3;
+        span {
+          display: none;
+        }
+      }
+      .outcome {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 10rem;
+        background-color: $red;
+        span {
+          display: none;
+        }
+      }
+      .amount {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 10rem;
+        background-color: black;
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .calendar {
+    padding-top: 3rem !important;
+    .calendar-table {
+      tr {
+        height: 8rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .calendar-wrapper {
+    .calendar {
+      padding-top: 2rem !important;
+      .history {
+        flex-direction: column !important;
+      }
+    }
+    .price-bar {
+      margin-top: 2rem;
+      flex-direction: column;
+    }
+  }
+}

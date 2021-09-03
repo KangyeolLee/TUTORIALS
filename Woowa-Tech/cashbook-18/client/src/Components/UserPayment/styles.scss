@@ -1,0 +1,66 @@
+@import '@/scss/theme';
+
+.user-payments {
+  padding: 3rem;
+  box-sizing: border-box;
+
+  &:hover {
+    .add-button {
+      opacity: 1;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+  }
+
+  .add-button {
+    opacity: 0;
+    transition: opacity 200ms ease, transform 200ms ease;
+    cursor: pointer;
+    svg {
+      stroke: $primary3;
+    }
+  }
+
+  .user-payment-title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .user-payments-icons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    // flex-direction: column;
+    row-gap: 4rem;
+    // align-items: center;
+  }
+}
+
+.content-box {
+  @include content-box;
+  width: auto;
+}
+
+.content-box-title {
+  @include bold-large;
+  font-size: 2rem;
+  color: $title-active;
+  margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 880px) {
+  .user-payments-icons {
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .user-payments-icons {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .user-payments-icons {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

@@ -1,0 +1,92 @@
+@import '@/scss/theme';
+@import '@/scss/animation';
+
+.category-percentage {
+  display: flex;
+  flex-direction: column;
+
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    float: right;
+    gap: 1rem;
+    @include body-medium;
+
+    .button-area {
+      display: flex;
+      gap: 1rem;
+      .button {
+        cursor: pointer;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        transition: all 0.2s ease-in;
+
+        &#income {
+          color: $primary3;
+          border: 0.1rem solid $primary3;
+          &.active {
+            background-color: $primary3;
+            color: $white;
+          }
+        }
+        &#outcome {
+          color: $red;
+          border: 0.1rem solid $red;
+          &.active {
+            background-color: $red;
+            color: $white;
+          }
+        }
+
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+
+  .category-card-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    .category-card {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 0.1rem solid $line;
+      cursor: pointer;
+      animation: fadein 1s forwards;
+
+      &:hover {
+        background-color: $backgrond;
+      }
+
+      .percent {
+        @include body-medium;
+      }
+
+      .price {
+        @include body-medium;
+        flex: 1;
+        text-align: right;
+        font-weight: 500;
+        color: $title-active;
+      }
+    }
+  }
+
+  .warning-text {
+    color: $red;
+    text-align: right;
+    margin-top: 1rem;
+    @include bold-small;
+  }
+
+  .no-found-data {
+    height: auto !important;
+  }
+}

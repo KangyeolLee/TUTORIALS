@@ -1,0 +1,111 @@
+@import '@/scss/theme';
+@import '@/scss/animation';
+
+.chart-wrapper {
+  position: relative;
+
+  .chart-view-area {
+    width: 100%;
+    transform: translateY(-2.5rem);
+    animation: fadein-low 0.52s ease-in;
+
+    .chart-background {
+      width: 100%;
+      padding: 3.5rem 5rem;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      border: 0.1rem solid $line2;
+      background-color: $white;
+      box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
+        0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+      border-radius: 1rem;
+      margin-bottom: 5rem;
+
+      .chart-view {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        .donut-chart-view {
+          width: 50%;
+          height: 100%;
+        }
+
+        .history-category-list-wrapper {
+          width: 50%;
+          height: 100%;
+        }
+
+        .line-chart-view {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+#line-chart-view {
+  display: none;
+  height: 0;
+
+  &.show {
+    display: flex;
+    height: 40rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .chart-background {
+    padding: 2rem 2rem !important;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .chart-view {
+    .donut-chart-view {
+      width: 60% !important;
+    }
+    .history-category-list-wrapper {
+      width: unset !important;
+    }
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .chart-view {
+    flex-direction: column !important;
+
+    .donut-chart-view {
+      width: 100% !important;
+    }
+
+    .history-category-list-wrapper {
+      width: 100% !important;
+    }
+  }
+
+  #line-chart-view {
+    overflow: scroll;
+
+    .chart-view {
+      height: 100%;
+
+      .line-chart-view {
+        height: 100%;
+
+        #line-chart {
+          height: 100%;
+          padding-right: 4rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #donut-chart {
+    min-width: unset !important;
+  }
+}

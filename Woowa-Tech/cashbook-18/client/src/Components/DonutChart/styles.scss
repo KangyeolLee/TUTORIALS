@@ -1,0 +1,17 @@
+@import '@/scss/theme';
+
+#donut-chart {
+  min-width: 40rem;
+  .svg-text {
+    &.income {
+      stroke: $primary3 !important;
+    }
+
+    &.outcome {
+      stroke: $red !important;
+    }
+  }
+  circle {
+    filter: drop-shadow(0.2rem 0.2rem 0.1rem rgba(0, 0, 0, 0.1));
+  }
+}

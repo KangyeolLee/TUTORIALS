@@ -1,0 +1,48 @@
+@import '@/scss/theme';
+
+.category-dropdown-wrapper {
+  position: relative;
+
+  &.open {
+    .category-dropdown {
+      visibility: visible;
+      margin-top: 1rem;
+      height: 4rem;
+    }
+  }
+
+  .category-dropdown {
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+    height: 0;
+    transition: all 0.18s ease-out;
+    overflow: auto;
+    position: relative;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dropdown-list {
+      position: relative;
+      flex: none;
+      user-select: none;
+      scroll-snap-align: center;
+      cursor: pointer;
+
+      &.clicked::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 1rem;
+        width: 1rem;
+        height: 1rem;
+        background-color: $primary1;
+        border-radius: 1rem;
+      }
+    }
+  }
+}

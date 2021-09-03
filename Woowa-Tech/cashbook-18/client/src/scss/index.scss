@@ -1,0 +1,62 @@
+@import 'reset';
+@import 'theme';
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap');
+
+@font-face {
+  font-family: 'BMDOHYEON';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  font-size: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: $body;
+  padding-bottom: 10rem;
+  background-color: $off-white;
+}
+
+svg {
+  stroke: $btn-deactive;
+}
+
+.container {
+  max-width: 102.4rem; // 1024px
+  padding: 0 6rem;
+  margin: auto;
+}
+
+input[type='date'] {
+  font-family: normal;
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% 50% no-repeat;
+}
+::-webkit-calendar-picker-indicator {
+  margin: 0 0 0 1rem;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+::-webkit-datetime-edit-month-field {
+  &:focus {
+    background-color: transparent;
+    color: $primary1;
+  }
+}
+::-webkit-datetime-edit-day-field {
+  &:focus {
+    background-color: transparent;
+    color: $primary1;
+  }
+}
+::-webkit-datetime-edit-year-field {
+  &:focus {
+    background-color: transparent;
+    color: $primary1;
+  }
+}

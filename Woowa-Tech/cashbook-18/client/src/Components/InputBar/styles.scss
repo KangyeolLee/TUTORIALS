@@ -1,0 +1,331 @@
+@import '@/scss/theme';
+
+.input-bar-content {
+  position: fixed;
+  z-index: 100;
+  right: 0;
+  bottom: 0;
+  width: 6rem;
+  height: 6rem;
+  margin: 2rem 2rem;
+  border-radius: 10rem;
+  background-color: $primary1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: width 0.2s ease-in-out, height 0.2s ease-in-out,
+    border-radius 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1),
+    0 0.4rem 2rem rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    stroke: white;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $primary2;
+    svg {
+      stroke: $primary1;
+    }
+  }
+
+  &[clicked] {
+    background-color: $off-white;
+    width: 45rem;
+    height: 62rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    border-radius: 1rem;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out,
+      border-radius 0.3s ease-in-out, background-color 0.1s ease-in-out;
+    cursor: auto;
+    display: initial;
+
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0 !important;
+    }
+
+    & > svg {
+      display: none;
+    }
+
+    .input-content-wrapper {
+      display: flex;
+      opacity: 1;
+      transition: opacity 0.6s ease-in-out;
+    }
+  }
+
+  .input-content-wrapper {
+    @include body-large;
+    display: none;
+    height: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+
+    .input-bar-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.22);
+      text-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.22);
+      color: $white;
+      background-color: $primary1;
+      padding: 1.5rem 2rem;
+      @include bold-xlarge;
+
+      span.title {
+        cursor: pointer;
+        vertical-align: middle;
+
+        &:hover {
+          opacity: 0.95;
+        }
+      }
+
+      .input-submit-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 1rem;
+        width: 3rem;
+        height: 3rem;
+        transition: background-color 0.2s ease-in-out;
+        svg {
+          stroke: $white;
+          transition: stroke 0.2s ease-in-out;
+        }
+
+        &:hover {
+          box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.22);
+          background-color: $cancel;
+          transition: background-color 0.2s ease-in-out;
+          svg {
+            stroke: white;
+            transition: stroke 0.2s ease-in-out;
+          }
+        }
+
+        &[active] {
+          background-color: $primary1;
+          transition: background-color 0.2s ease-in-out;
+          svg {
+            stroke: $white;
+            transition: stroke 0.2s ease-in-out;
+          }
+
+          &:hover {
+            background-color: $white;
+            box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.22);
+
+            transition: background-color 0.2s ease-in-out;
+            svg {
+              stroke: $primary1;
+              transition: stroke 0.2s ease-in-out;
+            }
+          }
+        }
+      }
+    }
+
+    .input-bar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 1.5rem 2rem;
+      background-color: $off-white;
+
+      .check-btn {
+        @include bold-large;
+        cursor: pointer;
+        display: flex;
+        gap: 1.5rem;
+        text-align: center;
+
+        .input-list-item {
+          transition: box-shadow 0.1s ease-in-out,
+            background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+          &:hover {
+            box-shadow: 0 0.3rem 0.6rem rgb(0 0 0 / 0.22),
+              0 -0.3rem 0.6rem rgb(0 0 0 / 0.22);
+            transition: box-shadow 0.1s ease-in-out;
+          }
+
+          &.income {
+            color: $primary3;
+            border: 0.1rem solid $primary3;
+          }
+
+          &.outcome {
+            color: $red;
+            border: 0.1rem solid $red;
+          }
+
+          &[active] {
+            transition: background-color 0.1s ease-in-out,
+              color 0.1s ease-in-out;
+            box-shadow: 0 0.1rem 0.2rem rgb(0 0 0 / 0.22),
+              0 -0.1rem 0.2rem rgb(0 0 0 / 0.22);
+
+            &.income {
+              color: $white;
+              background-color: $primary3;
+            }
+
+            &.outcome {
+              color: $white;
+              background-color: $red;
+            }
+          }
+        }
+      }
+
+      .input-list-item {
+        position: relative;
+        @include bold-large;
+        box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.22);
+        color: $label;
+        padding: 1rem 2rem;
+        background-color: $off-white;
+        border-radius: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+
+        &.income,
+        &.outcome {
+          box-shadow: none;
+        }
+
+        &.date-list {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .input-wrapper {
+            flex: none;
+          }
+        }
+
+        .dropdown-selector {
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.75;
+          }
+        }
+
+        .selected-category {
+          position: absolute;
+          top: 1rem;
+          right: 2rem;
+          @include body-regular;
+
+          &.valid {
+            color: $title-active;
+            font-weight: 500;
+          }
+        }
+
+        .selected-payment {
+          position: absolute;
+          top: 1rem;
+          right: 2rem;
+          @include body-regular;
+
+          &.valid {
+            color: $title-active;
+            font-weight: 500;
+          }
+        }
+
+        label {
+          display: block;
+          @include bold-large;
+          font-weight: 700;
+          color: $primary3;
+        }
+
+        input {
+          @include body-regular;
+          display: inline-block;
+          border: 0;
+          width: 100%;
+
+          &.date-picker {
+            color: $title-active;
+          }
+
+          &.input-date {
+            text-align: center;
+            width: 2rem;
+
+            &[name='date-year'] {
+              width: 4rem;
+            }
+          }
+        }
+
+        .input-wrapper {
+          position: relative;
+          flex: 1;
+
+          .content-input,
+          .price-input {
+            visibility: visible;
+            margin-top: 1rem;
+            height: 2.4rem;
+            width: 100%;
+
+            &:focus ~ .focus-border {
+              width: 100%;
+              transition: 0.4s;
+              left: 0;
+            }
+          }
+
+          .focus-border {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0.2rem;
+            background-color: $primary1;
+            transition: 0.4s;
+          }
+        }
+
+        #data-input {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: $title-active;
+
+          svg {
+            margin-right: 1rem;
+            stroke: $title-active;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .input-bar-content[clicked] {
+    margin: auto 0;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100vw;
+    height: 98vh;
+    box-shadow: 0 -0.4rem 0.5rem rgba(0, 0, 0, 0.3);
+  }
+}

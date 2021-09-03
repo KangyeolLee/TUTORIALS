@@ -1,0 +1,75 @@
+@import '@/scss/theme';
+
+.category-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 12rem;
+  min-width: 4.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.22);
+
+  &:hover {
+    .delete-icon {
+      opacity: 1;
+    }
+  }
+
+  .delete-icon {
+    opacity: 0;
+    transition: opacity 200ms ease, transform 200ms ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -0.7rem;
+    right: -0.7rem;
+    background-color: $red;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 10rem;
+    cursor: pointer;
+
+    svg {
+      width: 45%;
+      stroke: white;
+    }
+  }
+
+  .icon {
+    margin-right: 0.7rem;
+    border-radius: 1rem;
+    background-color: $line;
+    border: 0.1rem solid $placeholder;
+    width: 3.5rem;
+    min-width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .category-type {
+    @include bold-medium;
+    width: 100%;
+    line-height: 2rem;
+    white-space: initial;
+    cursor: default;
+    padding: 0.3rem 0.8rem;
+    transition: background-color ease 200ms;
+    border-radius: 8px;
+    word-break: break-all;
+
+    &[contentEditable] {
+      cursor: text;
+      background-color: #ddd;
+    }
+
+    &:hover {
+      background-color: #ddd;
+    }
+
+    &:focus {
+      outline-style: none;
+      background-color: #ddd;
+    }
+  }
+}
